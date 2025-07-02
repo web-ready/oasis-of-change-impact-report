@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tree‑Planting Locations</title>
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <!-- svgMap styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/StephanWagner/svgMap@v2.10.1/dist/svgMap.min.css">
+  <style>
+    #map-container { height: 500px; }
+    .animate-fade-in { animation: fadeIn 0.2s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+  </style>
+</head>
+<body class="bg-gray-50 p-6">
+  <h1 class="text-2xl font-bold mb-4">Tree‑Planting Locations</h1>
+
+  <!-- Map wrapper -->
+  <div id="map-container" class="w-full"></div>
+
+  <!-- Modal for country details -->
+  <div id="countryModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl shadow-xl p-6 max-w-md w-11/12 animate-fade-in">
+      <h2 id="modalTitle" class="text-xl font-semibold mb-3"></h2>
+      <p id="modalBody" class="mb-4 whitespace-pre-line text-sm"></p>
+      <button id="closeModal" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">Close</button>
+    </div>
+  </div>
+
+  <!-- Dependencies (order matters!) -->
+  <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/StephanWagner/svgMap@v2.10.1/dist/svgMap.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      /* ------------- DATA ------------- */
+      const plantingData = {
+        'US': { projects: ['National Forest Recovery'], trees: 0 },
+        'MG': { projects: ['Eden Reforestation Projects'], trees: 0 },
+        'TZ': { projects: ['Usambara Biodiversity Conservation', 'Plant to Stop Poverty'], trees: 0 },
+        'NP': { projects: ['Eden Reforestation Projects'], trees: 0 },
+        'SN': { projects: ['Forest Garden Program'], trees: 0 },
+        'CM': { projects: ['Cocoa Farmer Agroforestry'], trees: 0 },
+        'IN': { projects: ['Community Forest Restoration'], trees: 0 },
+        'KE': { projects: ['Bore'], trees: 0 }
+      };
+
+      /* Highlight: use at least 1 so the country is visible */
+      const values = Object.fromEntries(
+        Object.entries(plantingData).map(([code, info]) => [
+          code, { plantedTrees: info.trees && info.trees > 0 ? info.trees : 1 }
+        ])
+      );
+
+      /* ------------- MAP ------------- */
+      const map = new svgMap({
+        targetElementID: 'map-container',
+        data: {
+          data: {
+            plantedTrees: {
+              name: 'Trees Planted',
+              format: '{0}'
+            }
+          },
+          applyData: 'plantedTrees',
+          values
+        },
+        colorMin: '#e0f2fe',
+        colorMax: '#0284c7'
+      });
+
+      /* ------------- EVENTS ------------- */
+      document.getElementById('map-container').addEventListener('click', e => {
+        const countryCode = e.target?.getAttribute('data-id');
+        if (!countryCode || !plantingData[countryCode]) return;
+        const info = plantingData[countryCode];
+
+        document.getElementById('modalTitle').textContent = map.getCountryName(countryCode) ?? countryCode;
+        document.getElementById('modalBody').textContent =
+          `Projects:\n- ${info.projects.join('\n- ')}\n\nTrees planted: ${info.trees || 'TBD'}`;
+
+        document.getElementById('countryModal').classList.remove('hidden');
+      });
+
+      document.getElementById('closeModal').addEventListener('click', () => {
+        document.getElementById('countryModal').classList.add('hidden');
+      });
+    });
+  </script>
+</body>
+</html>
