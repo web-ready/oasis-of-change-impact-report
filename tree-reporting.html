@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-50">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Oasis of Change | Tree-Planting Impact</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .bar {
+      height: 1.25rem;
+      border-radius: 0.25rem;
+    }
+  </style>
+</head>
+
+<body class="font-sans leading-relaxed text-gray-800">
+  <main class="max-w-5xl mx-auto my-12 p-6 space-y-8 bg-white shadow rounded-lg">
+
+    <!-- Header -->
+    <header class="text-center">
+      <h1 class="text-3xl font-semibold">Tree-Planting Impact Audit</h1>
+      <p class="mt-2 text-sm text-gray-600">
+        Last updated July 2nd, 2025 • Vancouver, Canada<br><br>
+        Published under the Oasis of Change Inc., Sustainability Charter and overseen by our ESG Governance Committee.
+      </p>
+    </header>
+
+    <!-- Executive summary -->
+    <section class="bg-gray-50 p-6 rounded-lg">
+      <h2 class="text-xl font-medium mb-4">Executive Summary</h2>
+
+      <div class="grid grid-cols-2 gap-4">
+        <!-- Verified -->
+        <div>
+          <p class="text-sm text-gray-500">Verified&nbsp;(Tree-Nation)</p>
+          <p class="text-2xl font-bold">1,602</p>
+          <div class="bg-green-100 bar" style="width:22%"></div>
+        </div>
+
+        <!-- Legacy -->
+        <div>
+          <p class="text-sm text-gray-500">Legacy partner totals*</p>
+          <p class="text-2xl font-bold">7,338</p>
+          <div class="bg-yellow-100 bar" style="width:100%"></div>
+        </div>
+      </div>
+
+      <div class="mt-4 border-t pt-4">
+        <p class="font-semibold">
+          Total impact:&nbsp;<span class="text-green-700">8,940&nbsp;trees</span>
+        </p>
+        <p class="text-xs text-gray-500">
+          *Legacy counts come from historic Tero and Refoorest dashboards (2022-2024).
+          These programmes are now closed; all future planting is executed via Tree-Nation certificates only.
+        </p>
+      </div>
+    </section>
+
+    <!-- Tabs -->
+    <div class="flex space-x-2 border-b">
+      <button id="tabVerified"
+              class="px-3 py-2 text-sm font-medium text-green-700 border-b-2 border-green-600 focus:outline-none">
+        Verified
+      </button>
+      <button id="tabLegacy"
+              class="px-3 py-2 text-sm font-medium text-gray-500 focus:outline-none">
+        Legacy
+      </button>
+    </div>
+
+    <!-- Verified table -->
+    <section id="panelVerified" class="mt-4">
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="px-3 py-2 text-left">Forest / Project</th>
+              <th class="px-3 py-2 text-left">Country</th>
+              <th class="px-3 py-2 text-right">Trees</th>
+              <th class="px-3 py-2 text-left">Certificate&nbsp;#</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="even:bg-gray-50">
+              <td class="px-3 py-2">Mittler Senior Technology (MST)</td>
+              <td class="px-3 py-2">United States</td>
+              <td class="px-3 py-2 text-right">123</td>
+              <td class="px-3 py-2">TN-MST-2025-Q2-001</td>
+            </tr>
+            <tr class="even:bg-gray-50">
+              <td class="px-3 py-2">Stanley Park Ecology Society</td>
+              <td class="px-3 py-2">Canada</td>
+              <td class="px-3 py-2 text-right">228</td>
+              <td class="px-3 py-2">TN-SPES-2025-06-15</td>
+            </tr>
+            <tr class="even:bg-gray-50">
+              <td class="px-3 py-2">Web-Ready</td>
+              <td class="px-3 py-2">Canada</td>
+              <td class="px-3 py-2 text-right">921</td>
+              <td class="px-3 py-2">TN-WEB-2025-06-10</td>
+            </tr>
+            <tr class="even:bg-gray-50">
+              <td class="px-3 py-2">Sustainable WWW</td>
+              <td class="px-3 py-2">Sweden</td>
+              <td class="px-3 py-2 text-right">159</td>
+              <td class="px-3 py-2">TN-SWWW-2025-05-30</td>
+            </tr>
+            <tr class="even:bg-gray-50">
+              <td class="px-3 py-2">EcoSearch</td>
+              <td class="px-3 py-2">Canada</td>
+              <td class="px-3 py-2 text-right">101</td>
+              <td class="px-3 py-2">TN-ECO-2025-06-20</td>
+            </tr>
+            <tr class="even:bg-gray-50">
+              <td class="px-3 py-2">Tree-Nation Gifts (Mother’s & Father’s Day)</td>
+              <td class="px-3 py-2">Global</td>
+              <td class="px-3 py-2 text-right">70</td>
+              <td class="px-3 py-2">TN-GIFTS-2025-H1</td>
+            </tr>
+          </tbody>
+          <tfoot class="bg-gray-100">
+            <tr>
+              <th class="px-3 py-2 text-right" colspan="2">Subtotal</th>
+              <th class="px-3 py-2 text-right">1,602</th>
+              <th></th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- Legacy table -->
+    <section id="panelLegacy" class="hidden mt-4">
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="px-3 py-4 text-left">Legacy partner&nbsp;(closed)</th>
+              <th class="px-3 py-4 text-right">Trees</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="even:bg-gray-50">
+              <td class="px-3 py-2">Tero Partner</td>
+              <td class="px-3 py-2 text-right">4,567</td>
+            </tr>
+            <tr class="even:bg-gray-50">
+              <td class="px-3 py-2">Refoorest Partner</td>
+              <td class="px-3 py-2 text-right">2,771</td>
+            </tr>
+          </tbody>
+          <tfoot class="bg-gray-100">
+            <tr>
+              <th class="px-3 py-2 text-right">Subtotal</th>
+              <th class="px-3 py-2 text-right">7,338</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <p class="mt-6 text-xs text-gray-500">
+      From July 2025 onward Oasis of Change funds trees exclusively through Tree-Nation,
+      ensuring every new tree is backed by a third-party certificate.
+    </p>
+  </main>
+
+  <!-- Tab toggle script -->
+  <script>
+    const tabVerified   = document.getElementById('tabVerified');
+    const tabLegacy     = document.getElementById('tabLegacy');
+    const panelVerified = document.getElementById('panelVerified');
+    const panelLegacy   = document.getElementById('panelLegacy');
+
+    tabVerified.addEventListener('click', () => {
+      panelVerified.classList.remove('hidden');
+      panelLegacy.classList.add('hidden');
+      tabVerified.classList.add('text-green-700','border-green-600','border-b-2');
+      tabLegacy.classList.remove('text-green-700','border-green-600','border-b-2');
+      tabLegacy.classList.add('text-gray-500');
+    });
+
+    tabLegacy.addEventListener('click', () => {
+      panelVerified.classList.add('hidden');
+      panelLegacy.classList.remove('hidden');
+      tabLegacy.classList.add('text-green-700','border-green-600','border-b-2');
+      tabLegacy.classList.remove('text-gray-500');
+      tabVerified.classList.remove('text-green-700','border-green-600','border-b-2');
+      tabVerified.classList.add('text-gray-500');
+    });
+  </script>
+</body>
+</html>
