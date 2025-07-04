@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tree‑Planting Locations – Oasis of Change Inc.</title>
+
+    <!-- Fonts & Leaflet assets -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+    <!-- Basic styles (unchanged) -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f1f5f9;
+        color: #0f172a;
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+      .hero {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      .hero h1 {
+        font-family: "DM Serif Display", serif;
+        font-size: clamp(28px, 5vw, 40px);
+        color: #0f172a;
+        margin-bottom: 0.5rem;
+      }
+      .hero p {
+        font-size: 16px;
+        color: #64748b;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .map-section {
+        position: relative;
+        margin-bottom: 2rem;
+      }
+      #map {
+        width: 100%;
+        height: 540px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+      }
+      .control-panel {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+        min-width: 280px;
+        transition: all 0.3s ease;
+      }
+      .control-panel h3 {
+        font-family: "DM Serif Display", serif;
+        font-size: 18px;
+        margin-bottom: 1rem;
+        color: #0f172a;
+      }
+      .legend {
+        margin-bottom: 1.5rem;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        font-size: 14px;
+      }
+      .legend-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 0.75rem;
+        flex-shrink: 0;
+      }
+      .legend-dot.confirmed {
+        background-color: #16a34a;
+      }
+      .legend-dot.partner {
+        background-color: #ca8a04;
+      }
+      .filters {
+        margin-bottom: 1.5rem;
+      }
+      .filter-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.75rem;
+      }
+      .filter-item input[type="checkbox"] {
+        margin-right: 0.75rem;
+        width: 16px;
+        height: 16px;
+        accent-color: #16a34a;
+      }
+      .filter-item label {
+        font-size: 14px;
+        cursor: pointer;
+        user-select: none;
+      }
+      .search-box {
+        position: relative;
+      }
+      .search-box input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: border-color 0.2s ease;
+      }
+      .search-box input:focus {
+        outline: none;
+        border-color: #16a34a;
+      }
+      .search-box::before {
+        content: "\1F50D"; /* magnifier */
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+      .kpi-strip {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        background: #ffffff;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      }
+      .kpi-item {
+        text-align: center;
+      }
+      .kpi-number {
+        font-family: "DM Serif Display", serif;
+        font-size: 2rem;
+        font-weight: 400;
+        color: #16a34a;
+        display: block;
+      }
+      .kpi-label {
+        font-size: 14px;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .mobile-toggle {
+        display: none;
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        background: #16a34a;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 56px;
+        height: 56px;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+        z-index: 1001;
+      }
+      @media (max-width: 640px) {
+        #map {
+          height: 380px;
+        }
+        .control-panel {
+          position: fixed;
+          bottom: -300px;
+          left: 1rem;
+          right: 1rem;
+          top: auto;
+          transition: bottom 0.3s ease;
+        }
+        .control-panel.active {
+          bottom: 1rem;
+        }
+        .mobile-toggle {
+          display: block;
+        }
+        .kpi-strip {
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .hero h1 {
+          font-size: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Hero -->
+      <header class="hero" aria-label="Page header">
+        <h1>Tree‑Planting Locations (Site‑Level)</h1>
+        <p>Visualising confirmed and partner planting sites for Oasis of Change Inc. worldwide</p>
+      </header>
+
+      <!-- Map + controls -->
+      <section class="map-section" aria-label="Interactive map of planting sites">
+        <div id="map" role="region" aria-label="Planting map"></div>
+
+        <aside class="control-panel" id="controlPanel">
+          <h3>Map controls</h3>
+          <!-- Legend -->
+          <div class="legend" role="list" aria-label="Legend">
+            <div class="legend-item" role="listitem">
+              <div class="legend-dot confirmed"></div>Confirmed site
+            </div>
+            <div class="legend-item" role="listitem">
+              <div class="legend-dot partner"></div>Partner / legacy site
+            </div>
+          </div>
+          <!-- Filters -->
+          <div class="filters" aria-label="Layer filters">
+            <div class="filter-item">
+              <input type="checkbox" id="confirmedFilter" checked />
+              <label for="confirmedFilter">Confirmed sites</label>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox" id="partnerFilter" checked />
+              <label for="partnerFilter">Partner sites</label>
+            </div>
+          </div>
+          <!-- Search -->
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search locations…" aria-label="Search planting locations" />
+          </div>
+        </aside>
+
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle map controls">⚙️</button>
+      </section>
+
+      <!-- KPIs -->
+      <section class="kpi-strip" aria-live="polite">
+        <div class="kpi-item"><span class="kpi-number" id="totalSites">0</span><span class="kpi-label">Total sites</span></div>
+        <div class="kpi-item"><span class="kpi-number" id="totalCountries">0</span><span class="kpi-label">Countries</span></div>
+      </section>
+    </div>
+
+    <!-- Script: build map + data -->
+    <script>
+      /* --------------------------------------------------
+       * 1. Raw site lists (name & country only)
+       * -------------------------------------------------- */
+      const confirmedSiteNames = {
+        Madagascar: [
+          "Kandrany 1",
+          "Akalamboro",
+          "Ampasimarine",
+          "Akalamboro Dry Deciduous",
+          "Analamandreky",
+          "Ankarafantsika",
+          "Antsanitia Dry Deciduous",
+          "Antanamarina",
+          "Antsanitia Mangrove",
+          "Aranta",
+          "Akotorery",
+          "Farabe Lighthouse",
+          "Mahabana",
+          "Mariarano",
+          "Mataitraomby",
+          "Mbararata",
+          "Namakia",
+          "Morangobe",
+          "Papamena 1",
+          "Sakoany",
+          "RN4",
+          "Papamena 2",
+          "Vilamatsa",
+          "Marotaola",
+          "Ambonio 1",
+          "Boanamary 1",
+          "Ankalahila Mangrove",
+          "Bemangoraka 1",
+          "Bestiboka Island 1",
+          "Marotia 1",
+          "Bestiboka River – Island 2",
+          "Ambonio 2",
+        ],
+        Nepal: [
+          "Amaltari",
+          "Attarpur",
+          "Bachhauli",
+          "Bhadaure",
+          "Boch",
+          "Budhi Rapti",
+          "Chetnagar",
+          "Deurali",
+          "Deuralitar",
+          "Dolansa",
+          "Hindi",
+          "Indrawati",
+          "Jodhipur",
+          "Kamal Dhaap",
+          "Karthali",
+          "Lamahi",
+          "Lape",
+          "Lawati",
+          "Laxmisthan",
+          "Mude",
+          "Paschim Deurali",
+          "Pokhara",
+          "Prasauni",
+          "Udayapur",
+          "Ruchang",
+          "Shaktikhor",
+          "Sildhunga",
+          "Sirujhar",
+          "Sundarpur",
+        ],
+        Kenya: [
+          "Kilifi",
+          "Kiongwe",
+          "Kipini",
+          "Kwasasi/Magumba",
+          "Manda – Matondoni",
+          "Manda Uwanjani",
+          "Marerenni & Kurawa",
+          "Mida Creek",
+          "Milihoi/Kichwa cha Nyoka",
+          "Mokowe Mama",
+          "Mtwapa Creek",
+          "Mwamdudu",
+          "Ngomeni",
+          "Pate Island",
+          "Port Reitz",
+          "Tsunza",
+          "Tudor Creek",
+          "Amu Ranch Cut Line",
+          "Big Fig",
+          "Gatamaiyu",
+          "Gwasi",
+          "Imenti Forest",
+          "Kass FM",
+          "Kenton Planting Site",
+          "Kitiligini",
+          "Monkey Corner",
+          "Monkey Corner Expansion",
+          "Ngaya",
+          "Nyambene",
+          "Ol Mariko",
+          "Old Kijabe Town – Arbor Day",
+          "Old Kijabe Town – Aspiration 1",
+          "Old Kijabe Town – Aspiration 2",
+          "Old Kijabe Town – Verizon",
+          "Olokurto",
+          "Turasha",
+        ],
+        Tanzania: ["Tanzania (sites TBD)"],
+        Senegal: ["Senegal (sites TBD)"],
+        "United States": ["United States (sites TBD)"],
+        Cameroon: ["Cameroon (sites TBD)"],
+        India: ["India (sites TBD)"],
+      };
+
+      const partnerSiteNames = {
+        Mozambique: ["Mozambique (partner)"],
+        "Central African Republic": ["Central African Republic (partner)"],
+        Laos: ["Laos (partner)"],
+        "Democratic Republic of the Congo": ["DR Congo (partner)"],
+        Thailand: ["Thailand (partner)"],
+        Peru: ["Peru (partner)"],
+        Indonesia: ["Indonesia (partner)"],
+      };
+
+      /* --------------------------------------------------
+       * 2. Country centroids (fallback / placeholder)
+       * -------------------------------------------------- */
+      const countryCentroids = {
+        Madagascar: [-18.7669, 46.8691],
+        Nepal: [28.3949, 84.1240],
+        Kenya: [-0.0236, 37.9062],
+        Tanzania: [-6.3690, 34.8888],
+        Senegal: [14.4974, -14.4524],
+        "United States": [39.78373, -100.44588],
+        Cameroon: [7.3697, 12.3547],
+        India: [21.0000, 78.0000],
+        Mozambique: [-18.6657, 35.5296],
+        "Central African Republic": [6.6111, 20.9394],
+        Laos: [19.8563, 102.4955],
+        "Democratic Republic of the Congo": [-2.9814, 23.8223],
+        Thailand: [15.8700, 100.9925],
+        Peru: [-9.1900, -75.0152],
+        Indonesia: [-0.7893, 113.9213],
+      };
+
+      /* --------------------------------------------------
+       * 3. Build plantingData with coordinates
+       * -------------------------------------------------- */
+      function jitter() {
+        return (Math.random() - 0.5) * 0.8; // ~±0.4°
+      }
+
+      function makeSiteObjects(siteDict, category) {
+        const arr = [];
+        for (const [country, names] of Object.entries(siteDict)) {
+          const [baseLat, baseLng] = countryCentroids[country] || [0, 0];
+          names.forEach((name) => {
+            arr.push({
+              name,
+              country,
+              category,
+              lat: baseLat + jitter(),
+              lng: baseLng + jitter(),
+            });
+          });
+        }
+        return arr;
+      }
+
+      const confirmedSites = makeSiteObjects(confirmedSiteNames, "confirmed");
+      const partnerSites = makeSiteObjects(partnerSiteNames, "partner");
+
+      /* --------------------------------------------------
+       * 4. Initialise Leaflet map
+       * -------------------------------------------------- */
+      const map = L.map("map", {
+        center: [15, 5],
+        zoom: 2,
+        zoomControl: false,
+        scrollWheelZoom: window.innerWidth > 640,
+      });
+
+      L.control.zoom({ position: "bottomright" }).addTo(map);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap contributors",
+      }).addTo(map);
+
+      // Cluster groups
+      const confirmedCluster = L.markerClusterGroup({
+        iconCreateFunction: (cluster) =>
+          L.divIcon({
+            html: `<div><span>${cluster.getChildCount()}</span></div>`,
+            className: "marker-cluster marker-cluster-confirmed",
+            iconSize: L.point(40, 40),
+          }),
+      });
+
+      const partnerCluster = L.markerClusterGroup({
+        iconCreateFunction: (cluster) =>
+          L.divIcon({
+            html: `<div><span>${cluster.getChildCount()}</span></div>`,
+            className: "marker-cluster marker-cluster-partner",
+            iconSize: L.point(40, 40),
+          }),
+      });
+
+      function addMarkers() {
+        confirmedSites.forEach((site) => {
+          const m = L.circleMarker([site.lat, site.lng], {
+            radius: 8,
+            fillColor: "#16a34a",
+            color: "#ffffff",
+            weight: 2,
+            opacity: 1,
+            fillOpacity: 0.8,
+          }).bindPopup(
+            `<div style='font-family:Inter,sans-serif'>
+               <h4 style='margin:0 0 8px 0;color:#16a34a;font-size:16px'>${site.name}</h4>
+               <p style='margin:0;font-size:14px'><strong>Country:</strong> ${site.country}</p>
+             </div>`
+          );
+          confirmedCluster.addLayer(m);
+        });
+
+        partnerSites.forEach((site) => {
+          const m = L.circleMarker([site.lat, site.lng], {
+            radius: 8,
+            fillColor: "#ca8a04",
+            color: "#ffffff",
+            weight: 2,
+            opacity: 1,
+            fillOpacity: 0.8,
+          }).bindPopup(
+            `<div style='font-family:Inter,sans-serif'>
+               <h4 style='margin:0 0 8px 0;color:#ca8a04;font-size:16px'>${site.name}</h4>
+               <p style='margin:0;font-size:14px'><strong>Country:</strong> ${site.country}</p>
+             </div>`
+          );
+          partnerCluster.addLayer(m);
+        });
+
+        map.addLayer(confirmedCluster);
+        map.addLayer(partnerCluster);
+      }
+
+      /* --------------------------------------------------
+       * 5. KPI helpers
+       * -------------------------------------------------- */
+      function animateCounter(id, target) {
+        const el = document.getElementById(id);
+        const start = parseInt(el.textContent) || 0;
+        const dur = 800;
+        const t0 = performance.now();
+        function step(t) {
+          const p = Math.min((t - t0) / dur, 1);
+          el.textContent = Math.floor(start + (target - start) * p);
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      function refreshKPIs() {
+        const confirmedVisible = document.getElementById("confirmedFilter").checked;
+        const partnerVisible = document.getElementById("partnerFilter").checked;
+        const total = (confirmedVisible ? confirmedSites.length : 0) + (partnerVisible ? partnerSites.length : 0);
+        const countries = new Set();
+        if (confirmedVisible) confirmedSites.forEach((s) => countries.add(s.country));
+        if (partnerVisible) partnerSites.forEach((s) => countries.add(s.country));
+        animateCounter("totalSites", total);
+        animateCounter("totalCountries", countries.size);
+      }
+
+      /* --------------------------------------------------
+       * 6. Filters + search
+       * -------------------------------------------------- */
+      function applyFilters() {
+        const confirmedVisible = document.getElementById("confirmedFilter").checked;
+        const partnerVisible = document.getElementById("partnerFilter").checked;
+        if (confirmedVisible) map.addLayer(confirmedCluster);
+        else map.removeLayer(confirmedCluster);
+        if (partnerVisible) map.addLayer(partnerCluster);
+        else map.removeLayer(partnerCluster);
+        refreshKPIs();
+      }
+
+      function searchSites(q) {
+        if (!q.trim()) return;
+        q = q.toLowerCase();
+        const all = [...confirmedSites, ...partnerSites];
+        const match = all.find((s) => s.name.toLowerCase().includes(q) || s.country.toLowerCase().includes(q));
+        if (!match) return;
+        map.flyTo([match.lat, match.lng], 8);
+        setTimeout(() => {
+          const layers = [...confirmedCluster.getLayers(), ...partnerCluster.getLayers()];
+          const found = layers.find((l) => Math.abs(l.getLatLng().lat - match.lat) < 0.5 && Math.abs(l.getLatLng().lng - match.lng) < 0.5);
+          if (found) found.openPopup();
+        }, 600);
+      }
+
+      /* --------------------------------------------------
+       * 7. Init everything
+       * -------------------------------------------------- */
+      addMarkers();
+      refreshKPIs();
+
+      // Event listeners
+      document.getElementById("confirmedFilter").addEventListener("change", applyFilters);
+      document.getElementById("partnerFilter").addEventListener("change", applyFilters);
+      document.getElementById("searchInput").addEventListener("keypress", (e) => {
+        if (e.key === "Enter") searchSites(e.target.value);
+      });
+      document.getElementById("mobileToggle").addEventListener("click", () => {
+        document.getElementById("controlPanel").classList.toggle("active");
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") document.getElementById("controlPanel").classList.remove("active");
+      });
+      window.addEventListener("resize", () => {
+        map.invalidateSize();
+        window.innerWidth > 640 ? map.scrollWheelZoom.enable() : map.scrollWheelZoom.disable();
+      });
+    </script>
+  </body>
+</html>

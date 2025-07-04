@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oasis of Change | Tree-Planting Impact Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#16a34a',
+                        'legacy-gold': '#eab308',
+                        'deep-forest': '#0f172a',
+                        'cloud-white': '#ffffff',
+                        'mist-gray': '#f1f5f9'
+                    },
+                    fontFamily: {
+                        'serif': ['DM Serif Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .font-tabular { font-variant-numeric: tabular-nums; }
+        .bar-animation { transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .tab-underline { 
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+        .tab-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #16a34a;
+            transform: scaleX(0);
+            transition: transform 0.2s ease;
+        }
+        .tab-underline.active::after {
+            transform: scaleX(1);
+        }
+        .count-up {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body class="bg-mist-gray font-sans">
+    <!-- Hero Block -->
+    <header class="w-full text-center py-12 px-4">
+        <h1 class="font-serif font-semibold text-deep-forest text-4xl md:text-5xl mb-4">
+            Tree-Planting Impact Report
+        </h1>
+        <div class="text-gray-600 text-sm space-y-1">
+            <p>Last updated July 2 2025 • Vancouver, Canada</p>
+            <p>Published under the Oasis of Change Sustainability Charter</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 pb-12">
+        <!-- Impact Overview Card -->
+        <section class="bg-cloud-white rounded-lg shadow-sm p-8 mb-8">
+            <!-- KPI Grid -->
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <!-- Verified KPI -->
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-medium text-deep-forest">Verified (Tree-Nation)</h3>
+                        <span class="font-tabular text-2xl font-semibold text-deep-forest" id="verified-count">1,602</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-brand-green h-2 rounded-full bar-animation" 
+                             style="width: 0%" 
+                             data-target="22" 
+                             aria-label="22% of total trees verified">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legacy KPI -->
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-medium text-deep-forest">Legacy partner totals</h3>
+                        <span class="font-tabular text-2xl font-semibold text-deep-forest" id="legacy-count">7,338</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-legacy-gold h-2 rounded-full bar-animation" 
+                             style="width: 0%" 
+                             data-target="100" 
+                             aria-label="78% of total trees from legacy partners">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Impact -->
+            <div class="text-center border-t pt-6">
+                <p class="text-brand-green font-semibold text-xl">
+                    Total impact: <span class="count-up font-tabular" id="total-count">8,940</span> trees
+                </p>
+                <p class="text-xs text-gray-500 mt-2">
+                    Legacy data includes historical partnerships prior to Tree-Nation certification program
+                </p>
+            </div>
+        </section>
+
+        <!-- Tab Strip -->
+        <nav class="border-b border-gray-200 mb-6" role="tablist">
+            <div class="flex space-x-8">
+                <button class="tab-underline active py-3 px-1 text-brand-green font-medium" 
+                        role="tab" 
+                        aria-selected="true" 
+                        aria-controls="verified-panel" 
+                        id="verified-tab">
+                    Verified
+                </button>
+                <button class="tab-underline py-3 px-1 text-gray-500 font-medium hover:text-gray-700" 
+                        role="tab" 
+                        aria-selected="false" 
+                        aria-controls="legacy-panel" 
+                        id="legacy-tab">
+                    Legacy
+                </button>
+            </div>
+        </nav>
+
+        <!-- Data Panels -->
+        <div class="bg-cloud-white rounded-lg shadow-sm overflow-hidden">
+            <!-- Verified Panel -->
+            <div id="verified-panel" role="tabpanel" aria-labelledby="verified-tab" class="p-6">
+                <div class="mb-4">
+                    <input type="text" 
+                           placeholder="Search forests, countries, or certificate numbers..." 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent"
+                           id="verified-search">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full" id="verified-table">
+                        <thead>
+                            <tr class="border-b border-gray-200">
+                                <th class="text-left py-3 px-2 font-medium text-gray-700 cursor-pointer hover:text-brand-green" data-sort="forest">
+                                    Forest/Project ↕
+                                </th>
+                                <th class="text-left py-3 px-2 font-medium text-gray-700 cursor-pointer hover:text-brand-green" data-sort="country">
+                                    Country ↕
+                                </th>
+                                <th class="text-right py-3 px-2 font-medium text-gray-700 cursor-pointer hover:text-brand-green" data-sort="trees">
+                                    Trees ↕
+                                </th>
+                                <th class="text-left py-3 px-2 font-medium text-gray-700 cursor-pointer hover:text-brand-green" data-sort="certificate">
+                                    Certificate # ↕
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="verified-data">
+                            <tr class="even:bg-gray-50 hover:bg-green-50 hover:scale-[1.002] transition-all duration-150">
+                                <td class="py-3 px-2">Web-Ready</td>
+                                <td class="py-3 px-2">🇨🇦 Canada</td>
+                                <td class="py-3 px-2 text-right font-tabular">921</td>
+                                <td class="py-3 px-2 font-mono text-sm">TN-WEB-2025-06-10</td>
+                            </tr>
+                            <tr class="even:bg-gray-50 hover:bg-green-50 hover:scale-[1.002] transition-all duration-150">
+                                <td class="py-3 px-2">Stanley Park Ecology Society</td>
+                                <td class="py-3 px-2">🇨🇦 Canada</td>
+                                <td class="py-3 px-2 text-right font-tabular">228</td>
+                                <td class="py-3 px-2 font-mono text-sm">TN-SPES-2025-06-15</td>
+                            </tr>
+                            <tr class="even:bg-gray-50 hover:bg-green-50 hover:scale-[1.002] transition-all duration-150">
+                                <td class="py-3 px-2">Sustainable WWW</td>
+                                <td class="py-3 px-2">🇸🇪 Sweden</td>
+                                <td class="py-3 px-2 text-right font-tabular">159</td>
+                                <td class="py-3 px-2 font-mono text-sm">TN-SWWW-2025-05-30</td>
+                            </tr>
+                            <tr class="even:bg-gray-50 hover:bg-green-50 hover:scale-[1.002] transition-all duration-150">
+                                <td class="py-3 px-2">Mittler Senior Technology (MST)</td>
+                                <td class="py-3 px-2">🇺🇸 United States</td>
+                                <td class="py-3 px-2 text-right font-tabular">123</td>
+                                <td class="py-3 px-2 font-mono text-sm">TN-MST-2025-Q2-001</td>
+                            </tr>
+                            <tr class="even:bg-gray-50 hover:bg-green-50 hover:scale-[1.002] transition-all duration-150">
+                                <td class="py-3 px-2">EcoSearch</td>
+                                <td class="py-3 px-2">🇨🇦 Canada</td>
+                                <td class="py-3 px-2 text-right font-tabular">101</td>
+                                <td class="py-3 px-2 font-mono text-sm">TN-ECO-2025-06-20</td>
+                            </tr>
+                            <tr class="even:bg-gray-50 hover:bg-green-50 hover:scale-[1.002] transition-all duration-150">
+                                <td class="py-3 px-2">Tree-Nation Gifts</td>
+                                <td class="py-3 px-2">🌍 Global</td>
+                                <td class="py-3 px-2 text-right font-tabular">70</td>
+                                <td class="py-3 px-2 font-mono text-sm">TN-GIFTS-2025-H1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Legacy Panel -->
+            <div id="legacy-panel" role="tabpanel" aria-labelledby="legacy-tab" class="p-6 hidden">
+                <div class="mb-4">
+                    <input type="text" 
+                           placeholder="Search partner organizations..." 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-legacy-gold focus:border-transparent"
+                           id="legacy-search">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full" id="legacy-table">
+                        <thead>
+                            <tr class="border-b border-gray-200">
+                                <th class="text-left py-3 px-2 font-medium text-gray-700 cursor-pointer hover:text-legacy-gold" data-sort="partner">
+                                    Partner Organization ↕
+                                </th>
+                                <th class="text-right py-3 px-2 font-medium text-gray-700 cursor-pointer hover:text-legacy-gold" data-sort="trees">
+                                    Trees Planted ↕
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="legacy-data">
+                            <tr class="even:bg-gray-50 hover:bg-yellow-50 hover:scale-[1.002] transition-all duration-150">
+                                <td class="py-3 px-2">Tero Partner</td>
+                                <td class="py-3 px-2 text-right font-tabular">4,567</td>
+                            </tr>
+                            <tr class="even:bg-gray-50 hover:bg-yellow-50 hover:scale-[1.002] transition-all duration-150">
+                                <td class="py-3 px-2">Refoorest Partner</td>
+                                <td class="py-3 px-2 text-right font-tabular">2,771</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Note -->
+        <footer class="mt-8 text-center">
+            <p class="text-xs text-gray-500">
+                From July 2025 onward, all tree-planting initiatives will be verified through Tree-Nation certificates only.
+            </p>
+        </footer>
+    </main>
+
+    <script>
+        // Animation and interaction functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate KPI bars
+            setTimeout(() => {
+                const bars = document.querySelectorAll('.bar-animation');
+                bars.forEach(bar => {
+                    const target = bar.getAttribute('data-target');
+                    bar.style.width = target + '%';
+                });
+            }, 300);
+
+            // Count-up animation for total
+            const totalElement = document.getElementById('total-count');
+            const targetValue = 8940;
+            let currentValue = 0;
+            const duration = 1000;
+            const increment = targetValue / (duration / 16);
+
+            function updateCount() {
+                currentValue += increment;
+                if (currentValue >= targetValue) {
+                    currentValue = targetValue;
+                    totalElement.textContent = currentValue.toLocaleString();
+                    return;
+                }
+                totalElement.textContent = Math.floor(currentValue).toLocaleString();
+                requestAnimationFrame(updateCount);
+            }
+
+            setTimeout(updateCount, 500);
+
+            // Tab functionality
+            const tabs = document.querySelectorAll('[role="tab"]');
+            const panels = document.querySelectorAll('[role="tabpanel"]');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active states
+                    tabs.forEach(t => {
+                        t.classList.remove('active', 'text-brand-green');
+                        t.classList.add('text-gray-500');
+                        t.setAttribute('aria-selected', 'false');
+                    });
+
+                    // Add active state to clicked tab
+                    tab.classList.add('active', 'text-brand-green');
+                    tab.classList.remove('text-gray-500');
+                    tab.setAttribute('aria-selected', 'true');
+
+                    // Hide all panels
+                    panels.forEach(panel => panel.classList.add('hidden'));
+
+                    // Show target panel
+                    const targetPanel = document.getElementById(tab.getAttribute('aria-controls'));
+                    targetPanel.classList.remove('hidden');
+                });
+            });
+
+            // Search functionality
+            function setupSearch(searchId, tableId, dataClass) {
+                const searchInput = document.getElementById(searchId);
+                const rows = document.querySelectorAll(`${tableId} .${dataClass} tr`);
+
+                searchInput.addEventListener('input', (e) => {
+                    const searchTerm = e.target.value.toLowerCase();
+                    
+                    rows.forEach(row => {
+                        const text = row.textContent.toLowerCase();
+                        if (text.includes(searchTerm)) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                });
+            }
+
+            setupSearch('verified-search', '#verified-table', 'verified-data');
+            setupSearch('legacy-search', '#legacy-table', 'legacy-data');
+
+            // Simple sorting functionality
+            function setupSorting(tableId, dataClass) {
+                const headers = document.querySelectorAll(`${tableId} th[data-sort]`);
+                
+                headers.forEach(header => {
+                    header.addEventListener('click', () => {
+                        const sortKey = header.getAttribute('data-sort');
+                        const tbody = document.querySelector(`${tableId} .${dataClass}`);
+                        const rows = Array.from(tbody.querySelectorAll('tr'));
+                        
+                        const isNumeric = sortKey === 'trees';
+                        const isAscending = !header.classList.contains('sort-desc');
+                        
+                        rows.sort((a, b) => {
+                            let aVal, bVal;
+                            
+                            if (sortKey === 'forest' || sortKey === 'partner') {
+                                aVal = a.cells[0].textContent.trim();
+                                bVal = b.cells[0].textContent.trim();
+                            } else if (sortKey === 'country') {
+                                aVal = a.cells[1].textContent.trim();
+                                bVal = b.cells[1].textContent.trim();
+                            } else if (sortKey === 'trees') {
+                                const cellIndex = dataClass === 'verified-data' ? 2 : 1;
+                                aVal = parseInt(a.cells[cellIndex].textContent.replace(/,/g, ''));
+                                bVal = parseInt(b.cells[cellIndex].textContent.replace(/,/g, ''));
+                            } else if (sortKey === 'certificate') {
+                                aVal = a.cells[3].textContent.trim();
+                                bVal = b.cells[3].textContent.trim();
+                            }
+                            
+                            if (isNumeric) {
+                                return isAscending ? aVal - bVal : bVal - aVal;
+                            } else {
+                                return isAscending ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+                            }
+                        });
+                        
+                        // Clear tbody and append sorted rows
+                        tbody.innerHTML = '';
+                        rows.forEach(row => tbody.appendChild(row));
+                        
+                        // Update header classes
+                        headers.forEach(h => h.classList.remove('sort-desc', 'sort-asc'));
+                        header.classList.add(isAscending ? 'sort-asc' : 'sort-desc');
+                    });
+                });
+            }
+
+            setupSorting('#verified-table', 'verified-data');
+            setupSorting('#legacy-table', 'legacy-data');
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'95a1c31e51ddbda2',t:'MTc1MTY2NTAyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
