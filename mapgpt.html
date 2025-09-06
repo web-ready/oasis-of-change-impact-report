@@ -4,21 +4,13 @@
   <meta charset="utf-8" />
   <title>Tree-Planting Locations</title>
 
-  <!-- Tailwind for quick styling (optional) -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
 
-<!-- Leaflet & MarkerCluster -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"
-/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 
   <style>
     #map       { height: 540px; }
@@ -27,22 +19,24 @@
 </head>
 
 <body class="bg-gray-50 p-6">
-  <h1 class="text-2xl font-bold mb-4">Tree-Planting Locations (Site-Level)</h1>
-  <div id="map" class="w-full rounded-lg shadow-lg border"></div>
+  <h1 class="text-2xl font-bold mb-4">Tree-Planting Locations (Country-Level)</h1>
 
-  <!-- JS libs -->
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha512-GZC+gGvunG8Mlnk6CrlOnqmtRXpbeew3zaVmo0BQVvktNaiJgH7YAyz3y80PRz0WlXW9pHUjF4/wWcT6hni2Vg=="
-    crossorigin=""
-  ></script>
-  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <div id="map" class="w-full rounded-lg shadow-lg border mb-6"></div>
+
+  <div class="max-w-3xl">
+    <p class="text-sm text-gray-600 mb-2">
+      <strong>Disclaimer:</strong> Some information is provided by third-party partners and may not be up to date or accurate.
+    </p>
+
+    <h2 class="text-xl font-semibold mb-2">Full site lists</h2>
+    <p class="text-sm text-gray-700 mb-4">Expand a country to view all recorded planting sites.</p>
+
+    <!-- Site lists render here -->
+    <div id="site-lists" class="space-y-3"></div>
+  </div>
 
   <script>
-    /* ---------- source data (trimmed for brevity) ---------- */
     const plantingData = {
-      /* countryCode : { centroid:[lat,lng], type:'confirmed'|'partner', sites:[...] } */
-
       MG: { centroid: [-18.77, 46.87], type: 'confirmed', sites: [
         'Kandrany 1', 'Akalamboro', 'Ampasimarine', 'Akalamboro Dry Deciduous',
         'Analamandreky', 'Ankarafantsika', 'Antsanitia Dry Deciduous',
@@ -75,7 +69,7 @@
         'Olokurto','Turasha'
       ]},
 
-      /* countries without explicit site arrays → single marker */
+      /* countries without explicit site arrays → count pending */
       TZ: { centroid: [-6.37, 34.89], type:'confirmed', sites:['Tanzania (sites TBD)']},
       SN: { centroid: [14.50,-14.45], type:'confirmed', sites:['Senegal (sites TBD)']},
       US: { centroid: [39.83,-98.58], type:'confirmed', sites:['United States (sites TBD)']},
@@ -90,54 +84,120 @@
       ID: { centroid: [ -0.79,113.92],type:'partner',  sites:['Indonesia (partner)']}
     };
 
-    /* ---------- helper to jitter sites around centroid ---------- */
-    function randomOffset(d = 0.8) {     // ±0.8°
-      return (Math.random() - 0.5) * d;
+    const countryName = {
+      MG: 'Madagascar',
+      NP: 'Nepal',
+      KE: 'Kenya',
+      TZ: 'Tanzania',
+      SN: 'Senegal',
+      US: 'United States',
+      CM: 'Cameroon',
+      IN: 'India',
+      MZ: 'Mozambique',
+      CF: 'Central African Republic',
+      LA: 'Laos',
+      CD: 'DR Congo',
+      TH: 'Thailand',
+      PE: 'Peru',
+      ID: 'Indonesia'
+    };
+
+    function countLabel(arr) {
+      // If we truly have a list of sites (>1), show the count; otherwise say pending.
+      if (Array.isArray(arr) && arr.length > 1) {
+        return `${arr.length} planting site${arr.length === 1 ? '' : 's'}`;
+      }
+      return 'site count pending';
     }
 
-    /* ---------- set up leaflet map ---------- */
-    const map = L.map('map', { scrollWheelZoom:true }).setView([11, 16], 2);
+    // ---------- set up the map (country-level markers only) ----------
+    const map = L.map('map', { scrollWheelZoom: true }).setView([11, 16], 2);
 
-    L.tileLayer(
-      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       { attribution: '&copy; OpenStreetMap contributors' }
     ).addTo(map);
 
     const clusterGroup = L.markerClusterGroup();
 
-    /* ---------- create a marker per site ---------- */
     Object.entries(plantingData).forEach(([cc, cfg]) => {
-      const [lat0, lng0] = cfg.centroid;
+      const [lat, lng] = cfg.centroid;
 
-      cfg.sites.forEach(siteName => {
-        // jitter so overlapping sites separate visually
-        const lat = lat0 + randomOffset();
-        const lng = lng0 + randomOffset();
-
-        const marker = L.circleMarker([lat, lng], {
-          radius: 5,
-          color: cfg.type === 'confirmed' ? '#16a34a' : '#ca8a04',
-          weight: 1,
-          fillOpacity: 0.9
-        });
-
-        const popupHTML = `
-          <div class="popup-h1">${siteName}</div>
-          <div class="text-xs">
-            ${cfg.type === 'confirmed'
-              ? '<span class="text-green-700 font-semibold">Confirmed site</span>'
-              : '<span class="text-yellow-700 font-semibold">Partner / legacy region</span>'
-            }<br>
-            Country: <b>${cc}</b>
-          </div>
-        `;
-
-        marker.bindPopup(popupHTML);
-        clusterGroup.addLayer(marker);
+      const marker = L.circleMarker([lat, lng], {
+        radius: 7,
+        color: cfg.type === 'confirmed' ? '#16a34a' : '#ca8a04',
+        weight: 2,
+        fillOpacity: 0.9
       });
+
+      const title = `${countryName[cc] || cc} (${countLabel(cfg.sites)})`;
+
+      const popupHTML = `
+        <div class="popup-h1">${title}</div>
+        <div class="text-xs">
+          ${cfg.type === 'confirmed'
+            ? '<span class="text-green-700 font-semibold">Confirmed</span>'
+            : '<span class="text-yellow-700 font-semibold">Partner / legacy region</span>'
+          }<br>
+          Country code: <b>${cc}</b>
+        </div>
+      `;
+
+      marker.bindPopup(popupHTML);
+      clusterGroup.addLayer(marker);
     });
 
     clusterGroup.addTo(map);
+
+    // ---------- render the full site lists under the map ----------
+    const siteLists = document.getElementById('site-lists');
+
+    Object.entries(plantingData)
+      // Show confirmed countries with real lists first
+      .sort((a, b) => {
+        const aHas = a[1].sites.length > 1;
+        const bHas = b[1].sites.length > 1;
+        return (aHas === bHas) ? 0 : (aHas ? -1 : 1);
+      })
+      .forEach(([cc, cfg]) => {
+        const name = countryName[cc] || cc;
+        const hasList = Array.isArray(cfg.sites) && cfg.sites.length > 1;
+
+        const details = document.createElement('details');
+        details.className = 'border rounded-lg bg-white shadow-sm';
+
+        const summary = document.createElement('summary');
+        summary.className = 'cursor-pointer px-4 py-3 font-medium flex items-center justify-between';
+        summary.innerHTML = `
+          <span>${name} — ${hasList ? `${cfg.sites.length} site${cfg.sites.length===1?'':'s'}` : 'site count pending'}</span>
+          <span class="text-xs uppercase tracking-wide ${cfg.type==='confirmed' ? 'text-green-700' : 'text-yellow-700'}">
+            ${cfg.type==='confirmed' ? 'Confirmed' : 'Partner'}
+          </span>
+        `;
+
+        details.appendChild(summary);
+
+        const body = document.createElement('div');
+        body.className = 'px-4 pb-4';
+
+        if (hasList) {
+          const ul = document.createElement('ul');
+          ul.className = 'list-disc pl-5 space-y-1 text-sm';
+          cfg.sites.forEach(s => {
+            const li = document.createElement('li');
+            li.textContent = s;
+            ul.appendChild(li);
+          });
+          body.appendChild(ul);
+        } else {
+          const p = document.createElement('p');
+          p.className = 'text-sm text-gray-600';
+          p.textContent = 'Full site list not yet available.';
+          body.appendChild(p);
+        }
+
+        details.appendChild(body);
+        siteLists.appendChild(details);
+      });
   </script>
 </body>
 </html>
