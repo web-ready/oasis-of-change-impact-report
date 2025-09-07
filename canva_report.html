@@ -52,26 +52,68 @@
             font-variant-numeric: tabular-nums;
         }
     </style>
+    <style>
+        /* Hide table scrollbar*/
+        #verified-panel .overflow-x-auto,
+#legacy-panel .overflow-x-auto {
+    overflow-x: auto;
+    scrollbar-width: none; 
+}
+
+#verified-panel .overflow-x-auto::-webkit-scrollbar,
+#legacy-panel .overflow-x-auto::-webkit-scrollbar {
+    display: none;
+}
+    </style>
 </head>
 <body class="bg-mist-gray font-sans">
-    <!-- Hero Block -->
     <header class="w-full text-center py-12 px-4">
         <h1 class="font-serif font-semibold text-deep-forest text-4xl md:text-5xl mb-4">
             Tree-Planting Impact Report
         </h1>
         <div class="text-gray-600 text-sm space-y-1">
-            <p>Last updated July 2 2025 • Vancouver, Canada</p>
-            <p>Published under the Oasis of Change Sustainability Charter</p>
+     <p>
+  <b>Last updated: September 7th, 2025</b>
+  <span id="last-updated-relative" class="text-gray-500 text-xs ml-2"></span>
+</p>
+<script>
+  (function () {
+   var lastUpdated = new Date('2025-09-07T00:00:00-07:00'); 
+    var now = new Date();
+    var diffMs = now - lastUpdated;
+    var diffSec = Math.floor(diffMs / 1000);
+    var diffMin = Math.floor(diffSec / 60);
+    var diffHr = Math.floor(diffMin / 60);
+    var diffDay = Math.floor(diffHr / 24);
+    var diffMonth = Math.floor(diffDay / 30.44);
+    var diffYear = Math.floor(diffDay / 365.25);
+
+    var rel = '';
+    if (diffYear > 0) {
+      rel = diffYear === 1 ? '1 year ago' : diffYear + ' years ago';
+    } else if (diffMonth > 0) {
+      rel = diffMonth === 1 ? '1 month ago' : diffMonth + ' months ago';
+    } else if (diffDay > 0) {
+      rel = diffDay === 1 ? '1 day ago' : diffDay + ' days ago';
+    } else if (diffHr > 0) {
+      rel = diffHr === 1 ? '1 hour ago' : diffHr + ' hours ago';
+    } else if (diffMin > 0) {
+      rel = diffMin === 1 ? '1 minute ago' : diffMin + ' minutes ago';
+    } else {
+      rel = 'just now';
+    }
+    document.getElementById('last-updated-relative').textContent = '(' + rel + ')';
+  })();
+</script>
+
+            <p>Published under the Oasis of Change, Inc., Sustainability Charter and overseen by our Board of Directors.
+      </p>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="max-w-6xl mx-auto px-4 pb-12">
-        <!-- Impact Overview Card -->
         <section class="bg-cloud-white rounded-lg shadow-sm p-8 mb-8">
-            <!-- KPI Grid -->
             <div class="grid md:grid-cols-2 gap-6 mb-6">
-                <!-- Verified KPI -->
                 <div class="space-y-3">
                     <div class="flex justify-between items-center">
                         <h3 class="font-medium text-deep-forest">Verified (Tree-Nation)</h3>
@@ -81,12 +123,11 @@
                         <div class="bg-brand-green h-2 rounded-full bar-animation" 
                              style="width: 0%" 
                              data-target="22" 
-                             aria-label="22% of total trees verified">
+                             aria-label="total verified trees count">
                         </div>
                     </div>
                 </div>
 
-                <!-- Legacy KPI -->
                 <div class="space-y-3">
                     <div class="flex justify-between items-center">
                         <h3 class="font-medium text-deep-forest">Legacy partner totals</h3>
@@ -96,13 +137,12 @@
                         <div class="bg-legacy-gold h-2 rounded-full bar-animation" 
                              style="width: 0%" 
                              data-target="100" 
-                             aria-label="78% of total trees from legacy partners">
+                             aria-label="total trees legacy count">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Total Impact -->
             <div class="text-center border-t pt-6">
                 <p class="text-brand-green font-semibold text-xl">
                     Total impact: <span class="count-up font-tabular" id="total-count">8,940</span> trees
@@ -113,7 +153,6 @@
             </div>
         </section>
 
-        <!-- Tab Strip -->
         <nav class="border-b border-gray-200 mb-6" role="tablist">
             <div class="flex space-x-8">
                 <button class="tab-underline active py-3 px-1 text-brand-green font-medium" 
@@ -133,9 +172,7 @@
             </div>
         </nav>
 
-        <!-- Data Panels -->
         <div class="bg-cloud-white rounded-lg shadow-sm overflow-hidden">
-            <!-- Verified Panel -->
             <div id="verified-panel" role="tabpanel" aria-labelledby="verified-tab" class="p-6">
                 <div class="mb-4">
                     <input type="text" 
@@ -164,37 +201,37 @@
                         <tbody class="verified-data">
                             <tr class="even:bg-gray-50 hover:bg-green-50 hover:scale-[1.002] transition-all duration-150">
                                 <td class="py-3 px-2">Web-Ready</td>
-                                <td class="py-3 px-2">🇨🇦 Canada</td>
+                                <td class="py-3 px-2">Canada</td>
                                 <td class="py-3 px-2 text-right font-tabular">921</td>
                                 <td class="py-3 px-2 font-mono text-sm">TN-WEB-2025-06-10</td>
                             </tr>
                             <tr class="even:bg-gray-50 hover:bg-green-50 hover:scale-[1.002] transition-all duration-150">
-                                <td class="py-3 px-2">Stanley Park Ecology Society</td>
-                                <td class="py-3 px-2">🇨🇦 Canada</td>
+                                <td class="py-3 px-2">Stanley Park Ecology Society (SPES)</td>
+                                <td class="py-3 px-2">Canada</td>
                                 <td class="py-3 px-2 text-right font-tabular">228</td>
                                 <td class="py-3 px-2 font-mono text-sm">TN-SPES-2025-06-15</td>
                             </tr>
                             <tr class="even:bg-gray-50 hover:bg-green-50 hover:scale-[1.002] transition-all duration-150">
                                 <td class="py-3 px-2">Sustainable WWW</td>
-                                <td class="py-3 px-2">🇸🇪 Sweden</td>
+                                <td class="py-3 px-2">Sweden</td>
                                 <td class="py-3 px-2 text-right font-tabular">159</td>
                                 <td class="py-3 px-2 font-mono text-sm">TN-SWWW-2025-05-30</td>
                             </tr>
                             <tr class="even:bg-gray-50 hover:bg-green-50 hover:scale-[1.002] transition-all duration-150">
                                 <td class="py-3 px-2">Mittler Senior Technology (MST)</td>
-                                <td class="py-3 px-2">🇺🇸 United States</td>
+                                <td class="py-3 px-2">United States</td>
                                 <td class="py-3 px-2 text-right font-tabular">123</td>
                                 <td class="py-3 px-2 font-mono text-sm">TN-MST-2025-Q2-001</td>
                             </tr>
                             <tr class="even:bg-gray-50 hover:bg-green-50 hover:scale-[1.002] transition-all duration-150">
                                 <td class="py-3 px-2">EcoSearch</td>
-                                <td class="py-3 px-2">🇨🇦 Canada</td>
+                                <td class="py-3 px-2">Canada</td>
                                 <td class="py-3 px-2 text-right font-tabular">101</td>
                                 <td class="py-3 px-2 font-mono text-sm">TN-ECO-2025-06-20</td>
                             </tr>
                             <tr class="even:bg-gray-50 hover:bg-green-50 hover:scale-[1.002] transition-all duration-150">
                                 <td class="py-3 px-2">Tree-Nation Gifts</td>
-                                <td class="py-3 px-2">🌍 Global</td>
+                                <td class="py-3 px-2">Global</td>
                                 <td class="py-3 px-2 text-right font-tabular">70</td>
                                 <td class="py-3 px-2 font-mono text-sm">TN-GIFTS-2025-H1</td>
                             </tr>
@@ -203,7 +240,6 @@
                 </div>
             </div>
 
-            <!-- Legacy Panel -->
             <div id="legacy-panel" role="tabpanel" aria-labelledby="legacy-tab" class="p-6 hidden">
                 <div class="mb-4">
                     <input type="text" 
@@ -238,7 +274,6 @@
             </div>
         </div>
 
-        <!-- Footer Note -->
         <footer class="mt-8 text-center">
             <p class="text-xs text-gray-500">
                 From July 2025 onward, all tree-planting initiatives will be verified through Tree-Nation certificates only.
@@ -247,9 +282,7 @@
     </main>
 
     <script>
-        // Animation and interaction functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Animate KPI bars
             setTimeout(() => {
                 const bars = document.querySelectorAll('.bar-animation');
                 bars.forEach(bar => {
@@ -258,7 +291,6 @@
                 });
             }, 300);
 
-            // Count-up animation for total
             const totalElement = document.getElementById('total-count');
             const targetValue = 8940;
             let currentValue = 0;
@@ -278,34 +310,25 @@
 
             setTimeout(updateCount, 500);
 
-            // Tab functionality
             const tabs = document.querySelectorAll('[role="tab"]');
             const panels = document.querySelectorAll('[role="tabpanel"]');
 
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
-                    // Remove active states
                     tabs.forEach(t => {
                         t.classList.remove('active', 'text-brand-green');
                         t.classList.add('text-gray-500');
                         t.setAttribute('aria-selected', 'false');
                     });
 
-                    // Add active state to clicked tab
                     tab.classList.add('active', 'text-brand-green');
                     tab.classList.remove('text-gray-500');
                     tab.setAttribute('aria-selected', 'true');
-
-                    // Hide all panels
                     panels.forEach(panel => panel.classList.add('hidden'));
-
-                    // Show target panel
                     const targetPanel = document.getElementById(tab.getAttribute('aria-controls'));
                     targetPanel.classList.remove('hidden');
                 });
             });
-
-            // Search functionality
             function setupSearch(searchId, tableId, dataClass) {
                 const searchInput = document.getElementById(searchId);
                 const rows = document.querySelectorAll(`${tableId} .${dataClass} tr`);
@@ -327,7 +350,6 @@
             setupSearch('verified-search', '#verified-table', 'verified-data');
             setupSearch('legacy-search', '#legacy-table', 'legacy-data');
 
-            // Simple sorting functionality
             function setupSorting(tableId, dataClass) {
                 const headers = document.querySelectorAll(`${tableId} th[data-sort]`);
                 
@@ -365,11 +387,9 @@
                             }
                         });
                         
-                        // Clear tbody and append sorted rows
                         tbody.innerHTML = '';
                         rows.forEach(row => tbody.appendChild(row));
                         
-                        // Update header classes
                         headers.forEach(h => h.classList.remove('sort-desc', 'sort-asc'));
                         header.classList.add(isAscending ? 'sort-asc' : 'sort-desc');
                     });
