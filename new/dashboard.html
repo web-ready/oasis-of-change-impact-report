@@ -113,6 +113,7 @@
             z-index: 10;
         }
         
+        
     </style>
     <style>
         /* Hide table scrollbar*/
@@ -249,16 +250,16 @@
         </section>
 
         <section class="grid md:grid-cols-2 gap-6 mb-8">
-            <div class="bg-cloud-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="bg-white rounded-lg border border-gray-200 p-6">
                 <div class="flex justify-between items-center mb-4">
                     <div>
-                        <h3 class="font-semibold text-deep-forest text-lg">Verified (Tree-Nation)</h3>
+                        <h3 class="font-semibold text-gray-900 text-lg">Verified (Tree-Nation)</h3>
                         <p class="text-sm text-gray-600">Certified tree plantings</p>
                     </div>
-                    <span class="font-tabular text-2xl font-bold text-brand-green" id="verified-count">1,602</span>
+                    <span class="font-tabular text-2xl font-bold text-green-600" id="verified-count">1,602</span>
                 </div>
                 <div class="w-full bg-gray-200 rounded-full h-2">
-                    <div class="bg-brand-green h-2 rounded-full bar-animation" 
+                    <div class="bg-green-500 h-2 rounded-full bar-animation" 
                          style="width: 0%" 
                          data-target="18" 
                          aria-label="verified trees percentage">
@@ -267,22 +268,63 @@
                 <p class="text-xs text-gray-500 mt-2">18% of total impact</p>
             </div>
 
-            <div class="bg-cloud-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="bg-white rounded-lg border border-gray-200 p-6">
                 <div class="flex justify-between items-center mb-4">
                     <div>
-                        <h3 class="font-semibold text-deep-forest text-lg">Legacy Partners</h3>
+                        <h3 class="font-semibold text-gray-900 text-lg">Legacy Partners</h3>
                         <p class="text-sm text-gray-600">Historical partnerships</p>
                     </div>
-                    <span class="font-tabular text-2xl font-bold text-legacy-gold" id="legacy-count">7,338</span>
+                    <span class="font-tabular text-2xl font-bold text-orange-600" id="legacy-count">7,338</span>
                 </div>
                 <div class="w-full bg-gray-200 rounded-full h-2">
-                    <div class="bg-legacy-gold h-2 rounded-full bar-animation" 
+                    <div class="bg-orange-500 h-2 rounded-full bar-animation" 
                          style="width: 0%" 
                          data-target="82" 
                          aria-label="legacy trees percentage">
                     </div>
                 </div>
                 <p class="text-xs text-gray-500 mt-2">82% of total impact</p>
+            </div>
+        </section>
+
+        <!-- Environmental Impact Section -->
+        <section class="bg-white rounded-lg border border-gray-200 p-6 mb-8">
+            <div class="mb-6">
+                <h3 class="font-semibold text-gray-900 text-xl mb-2">Environmental Impact</h3>
+                <p class="text-gray-600 text-sm">Verified Tree-Nation data on our environmental contributions</p>
+            </div>
+            
+            <!-- Impact Stats -->
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <!-- CO2 Captured -->
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-green-600 mb-2" id="co2-simple">133,510</div>
+                    <div class="text-lg font-medium text-gray-900 mb-1">kg CO₂ Captured</div>
+                    <div class="text-sm text-gray-600">Verified Tree-Nation data</div>
+                </div>
+
+                <!-- Hectares Restored -->
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-blue-600 mb-2" id="hectares-simple">0.874</div>
+                    <div class="text-lg font-medium text-gray-900 mb-1">Hectares Restored</div>
+                    <div class="text-sm text-gray-600">Land area rehabilitated</div>
+                </div>
+            </div>
+
+            <!-- Progress to Goal -->
+            <div class="bg-gray-50 rounded-lg p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h4 class="font-semibold text-gray-900">Progress to 10,000 Tree Goal</h4>
+                    <span class="text-lg font-bold text-green-600" id="goal-progress">8,940 / 10,000</span>
+                </div>
+                <div class="bg-gray-200 rounded-full h-4 mb-2">
+                    <div class="bg-green-500 h-4 rounded-full transition-all duration-1000 ease-out" 
+                         style="width: 89.4%" id="goal-progress-bar"></div>
+                </div>
+                <div class="flex justify-between text-sm text-gray-600">
+                    <span>89.4% Complete</span>
+                    <span>1,060 trees to go</span>
+                </div>
             </div>
         </section>
 
@@ -532,6 +574,47 @@
             setupSorting('#verified-table', 'verified-data');
             setupSorting('#legacy-table', 'legacy-data');
         });
+
+        // Simple Impact Metrics Animation
+        function animateImpactMetrics() {
+            // Animate CO2 captured (kg)
+            animateNumber('co2-simple', 0, 133510, 0, '');
+            
+            // Animate hectares restored
+            animateNumber('hectares-simple', 0, 0.874, 3, '');
+        }
+
+        function animateNumber(elementId, start, end, decimals, suffix) {
+            const element = document.getElementById(elementId);
+            const duration = 2000;
+            const startTime = performance.now();
+            
+            function updateNumber(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = start + (end - start) * progress;
+                
+                if (decimals > 0) {
+                    element.textContent = current.toFixed(decimals) + suffix;
+                } else {
+                    element.textContent = Math.floor(current) + suffix;
+                }
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateNumber);
+                }
+            }
+            
+            requestAnimationFrame(updateNumber);
+        }
+
+        // Initialize impact metrics animation
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                animateImpactMetrics();
+            }, 1500);
+        });
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'95a1c31e51ddbda2',t:'MTc1MTY2NTAyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
