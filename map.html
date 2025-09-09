@@ -35,8 +35,27 @@
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 
   <style>
-    #map       { height: 540px; }
-    .popup-h1  { font-weight: 600; font-size: 1rem; margin-bottom: .25rem; }
+    #map { 
+      height: 600px; 
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    .popup-h1 { 
+      font-weight: 600; 
+      font-size: 1rem; 
+      margin-bottom: .25rem; 
+    }
+    .leaflet-popup-content-wrapper {
+      border-radius: 8px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    .site-accordion {
+      transition: all 0.2s ease-in-out;
+    }
+    .site-accordion:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    }
   </style>
 </head>
 
@@ -74,44 +93,75 @@
       </div>
     </div>
   </header>
-  <div id="mobile-menu" class="md:hidden hidden fixed inset-0 z-[2000] bg-black">
+  <div id="mobile-menu" class="md:hidden hidden fixed inset-0 z-[2000] bg-black/90 backdrop-blur-sm">
     <div class="w-full h-full flex items-center justify-center p-6" id="mobile-menu-backdrop">
-      <div class="text-center text-white">
-        <h2 class="font-serif text-3xl md:text-4xl mb-6">Navigate</h2>
-        <nav class="space-y-4 text-xl">
-          <a href="/final_dashboard.html" class="block hover:text-brand-green">Dashboard</a>
-          <a href="/certificates.html" class="block hover:text-brand-green">Certificates</a>
-          <a href="/species.html" class="block hover:text-brand-green">Tree Species</a>
-          <a href="/gallery.html" class="block hover:text-brand-green">Gallery</a>
-          <a href="/map.html" class="block text-brand-green">View Map</a>
+      <div class="text-center text-white max-w-sm mx-auto">
+        <h2 class="font-serif text-4xl mb-8">Navigate</h2>
+        <nav class="space-y-6 text-lg">
+          <a href="/final_dashboard.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Dashboard</a>
+          <a href="/certificates.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Certificates</a>
+          <a href="/species.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Tree Species</a>
+          <a href="/gallery.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Gallery</a>
+          <a href="/map.html" class="block py-2 px-4 rounded-lg bg-brand-green/20 text-brand-green border border-brand-green/30">View Map</a>
         </nav>
-        <button id="mobile-menu-close" class="mt-10 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-gray-400 text-gray-200 hover:text-white hover:border-white">Close</button>
+        <button id="mobile-menu-close" class="mt-12 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-200">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+          Close
+        </button>
       </div>
     </div>
   </div>
-  <section class="bg-white py-10 border-b border-gray-100">
+  <section class="bg-gradient-to-br from-white to-gray-50 py-16 border-b border-gray-100">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <h1 class="font-serif text-4xl md:text-5xl text-deep-forest">Tree‑Planting Locations</h1>
-        <p class="mt-2 text-sm text-gray-600">Country‑level overview of documented project sites</p>
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="font-serif text-5xl md:text-6xl text-deep-forest mb-4">Tree‑Planting Locations</h1>
+        <p class="text-lg text-gray-600 leading-relaxed">Explore our global network of reforestation projects across multiple countries and ecosystems</p>
+        <div class="mt-8 flex flex-wrap justify-center gap-4 text-sm text-gray-500">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full bg-brand-green"></div>
+            <span>Confirmed Projects</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full bg-legacy-gold"></div>
+            <span>Partner Projects</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Map Section -->
+    <div class="mb-12">
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-2xl font-semibold text-deep-forest">Interactive Map</h2>
+          <div class="text-sm text-gray-500">
+            Click markers to explore project details
+          </div>
+        </div>
+        <div id="map" class="w-full"></div>
+      </div>
+    </div>
 
-  <div id="map" class="w-full rounded-lg border border-gray-200 mb-6"></div>
+    <!-- Site Lists Section -->
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+      <div class="mb-6">
+        <h2 class="text-2xl font-semibold text-deep-forest mb-2">Project Sites by Country</h2>
+        <p class="text-gray-600">Click on any country below to view detailed site information and project status.</p>
+      </div>
 
-  <div class="max-w-3xl">
-    <p class="text-sm text-gray-600 mb-2">
-      <strong>Disclaimer:</strong> Some information is provided by third-party partners and may not be up to date or accurate.
-    </p>
+      <div class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+        <p class="text-sm text-amber-800">
+          <strong>Note:</strong> Some information is provided by third-party partners and may not be up to date or accurate.
+        </p>
+      </div>
 
-    <h2 class="text-xl font-semibold text-deep-forest mb-2">Full site lists</h2>
-    <p class="text-sm text-gray-700 mb-4">Expand a country to view all recorded planting sites.</p>
-
-    <div id="site-lists" class="space-y-3"></div>
-  </div>
+      <div id="site-lists" class="space-y-4"></div>
+    </div>
+  </main>
 
   <script>
     const plantingData = {
@@ -287,34 +337,47 @@
         const hasList = Array.isArray(cfg.sites) && cfg.sites.length > 1;
 
         const details = document.createElement('details');
-        details.className = 'border border-gray-200 rounded-lg bg-white shadow-sm';
+        details.className = 'site-accordion border border-gray-200 rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-200';
 
         const summary = document.createElement('summary');
-        summary.className = 'cursor-pointer px-4 py-3 font-medium flex items-center justify-between text-deep-forest';
+        summary.className = 'cursor-pointer px-6 py-4 font-medium flex items-center justify-between text-deep-forest hover:bg-gray-50 rounded-xl transition-colors duration-200';
         summary.innerHTML = `
-          <span>${name} — ${hasList ? `${cfg.sites.length} site${cfg.sites.length===1?'':'s'}` : 'site count pending'}</span>
-          <span class="text-xs uppercase tracking-wide ${cfg.type==='confirmed' ? 'text-green-700' : 'text-yellow-700'}">
-            ${cfg.type==='confirmed' ? 'Confirmed' : 'Partner'}
-          </span>
+          <div class="flex items-center gap-3">
+            <div class="w-3 h-3 rounded-full ${cfg.type==='confirmed' ? 'bg-brand-green' : 'bg-legacy-gold'}"></div>
+            <span class="text-lg">${name}</span>
+            <span class="text-sm text-gray-500">— ${hasList ? `${cfg.sites.length} site${cfg.sites.length===1?'':'s'}` : 'site count pending'}</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-xs px-3 py-1 rounded-full font-medium ${cfg.type==='confirmed' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}">
+              ${cfg.type==='confirmed' ? 'Confirmed' : 'Partner'}
+            </span>
+            <svg class="w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
         `;
 
         details.appendChild(summary);
 
         const body = document.createElement('div');
-        body.className = 'px-4 pb-4';
+        body.className = 'px-6 pb-6 pt-2 border-t border-gray-100';
 
         if (hasList) {
           const ul = document.createElement('ul');
-          ul.className = 'list-disc pl-5 space-y-1 text-sm';
+          ul.className = 'grid grid-cols-1 md:grid-cols-2 gap-2 text-sm';
           cfg.sites.forEach(s => {
             const li = document.createElement('li');
-            li.textContent = s;
+            li.className = 'flex items-center gap-2 text-gray-700';
+            li.innerHTML = `
+              <div class="w-1.5 h-1.5 rounded-full bg-brand-green flex-shrink-0"></div>
+              <span>${s}</span>
+            `;
             ul.appendChild(li);
           });
           body.appendChild(ul);
         } else {
           const p = document.createElement('p');
-          p.className = 'text-sm text-gray-600';
+          p.className = 'text-sm text-gray-600 italic';
           p.textContent = 'Full site list not yet available.';
           body.appendChild(p);
         }
