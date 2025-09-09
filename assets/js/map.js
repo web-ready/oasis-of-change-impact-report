@@ -367,22 +367,22 @@ function renderTotals() {
         </div>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center">
-          <div class="text-3xl font-bold text-deep-forest mb-2">${totals.totalCountries}</div>
-          <div class="text-sm text-gray-600">Total Countries</div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
+        <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 text-center">
+          <div class="text-2xl sm:text-3xl font-bold text-deep-forest mb-2">${totals.totalCountries}</div>
+          <div class="text-xs sm:text-sm text-gray-600">Total Countries</div>
           <div class="text-xs text-gray-500 mt-1">
             ${totals.confirmedCountries} confirmed • ${totals.supportedCountries} supported • ${totals.mixedCountries} mixed
           </div>
         </div>
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center">
-          <div class="text-3xl font-bold text-brand-green mb-2">${totals.confirmedSites}</div>
-          <div class="text-sm text-gray-600">Confirmed Sites</div>
+        <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 text-center">
+          <div class="text-2xl sm:text-3xl font-bold text-brand-green mb-2">${totals.confirmedSites}</div>
+          <div class="text-xs sm:text-sm text-gray-600">Confirmed Sites</div>
           <div class="text-xs text-gray-500 mt-1">Tree-Nation plantings</div>
         </div>
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center">
-          <div class="text-3xl font-bold text-legacy-gold mb-2">${totals.supportedSites}</div>
-          <div class="text-sm text-gray-600">Supported Sites</div>
+        <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 text-center sm:col-span-2 lg:col-span-1">
+          <div class="text-2xl sm:text-3xl font-bold text-legacy-gold mb-2">${totals.supportedSites}</div>
+          <div class="text-xs sm:text-sm text-gray-600">Supported Sites</div>
           <div class="text-xs text-gray-500 mt-1">Legacy partner projects</div>
         </div>
       </div>
@@ -391,11 +391,22 @@ function renderTotals() {
 }
 
 function initializeMap() {
-  const map = L.map('map', { scrollWheelZoom: true }).setView([11, 16], 2);
+  const map = L.map('map', { 
+    scrollWheelZoom: true,
+    zoomControl: true,
+    attributionControl: true
+  }).setView([11, 16], 2);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     { attribution: '&copy; OpenStreetMap contributors' }
   ).addTo(map);
+
+  // Handle map resize on window resize
+  window.addEventListener('resize', () => {
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 100);
+  });
 
   const clusterGroup = L.markerClusterGroup();
 
@@ -509,7 +520,7 @@ function renderSiteLists() {
       const hasList = Array.isArray(cfg.sites) && cfg.sites.length > 0;
 
       const details = document.createElement('details');
-      details.className = 'site-accordion border border-gray-200 rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-200';
+      details.className = 'site-accordion border border-gray-200 rounded-lg sm:rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-200';
 
       let statusColor, statusBg, statusText;
       if (cfg.type === 'confirmed') {
@@ -527,19 +538,19 @@ function renderSiteLists() {
       }
 
       const summary = document.createElement('summary');
-      summary.className = 'cursor-pointer px-6 py-4 font-medium flex items-center justify-between text-deep-forest hover:bg-gray-50 rounded-xl transition-colors duration-200';
+      summary.className = 'cursor-pointer px-4 sm:px-6 py-3 sm:py-4 font-medium flex flex-col sm:flex-row sm:items-center sm:justify-between text-deep-forest hover:bg-gray-50 rounded-lg sm:rounded-xl transition-colors duration-200 gap-2 sm:gap-0';
       summary.innerHTML = `
-        <div class="flex items-center gap-3">
-          <div class="w-3 h-3 rounded-full ${statusColor}"></div>
-          <span class="text-lg">${name}</span>
-          <span class="text-sm text-gray-500">— ${hasList ? `${cfg.sites.length} site${cfg.sites.length===1?'':'s'}` : 'site count pending'}</span>
+        <div class="flex items-center gap-2 sm:gap-3">
+          <div class="w-3 h-3 rounded-full ${statusColor} flex-shrink-0"></div>
+          <span class="text-base sm:text-lg">${name}</span>
+          <span class="text-xs sm:text-sm text-gray-500">— ${hasList ? `${cfg.sites.length} site${cfg.sites.length===1?'':'s'}` : 'site count pending'}</span>
         </div>
-        <div class="flex items-center gap-3">
-          <span class="text-xs px-3 py-1 rounded-full font-medium ${statusBg} ${statusText}">
+        <div class="flex items-center gap-2 sm:gap-3 ml-5 sm:ml-0">
+          <span class="text-xs px-2 sm:px-3 py-1 rounded-full font-medium ${statusBg} ${statusText}">
             ${cfg.type === 'confirmed' ? 'Confirmed' : cfg.type === 'mixed' ? 'Mixed' : 'Supported'}
           </span>
-          <span class="text-xs text-gray-500">${cfg.source || 'Mixed Sources'}</span>
-          <svg class="w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <span class="text-xs text-gray-500 hidden sm:inline">${cfg.source || 'Mixed Sources'}</span>
+          <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </div>
@@ -548,14 +559,14 @@ function renderSiteLists() {
       details.appendChild(summary);
 
       const body = document.createElement('div');
-      body.className = 'px-6 pb-6 pt-2 border-t border-gray-100';
+      body.className = 'px-4 sm:px-6 pb-4 sm:pb-6 pt-2 border-t border-gray-100';
 
       if (hasList) {
         const ul = document.createElement('ul');
-        ul.className = 'grid grid-cols-1 md:grid-cols-2 gap-2 text-sm';
+        ul.className = 'grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm';
         cfg.sites.forEach(site => {
           const li = document.createElement('li');
-          li.className = 'flex items-center gap-2 text-gray-700';
+          li.className = 'flex items-center gap-2 text-gray-700 py-1';
           
           let siteColor, siteType;
           if (typeof site === 'string') {
@@ -568,15 +579,15 @@ function renderSiteLists() {
           
           li.innerHTML = `
             <div class="w-1.5 h-1.5 rounded-full ${siteColor} flex-shrink-0"></div>
-            <span>${typeof site === 'string' ? site : site.name}</span>
-            <span class="text-xs text-gray-500 ml-auto">${siteType}</span>
+            <span class="flex-1 truncate">${typeof site === 'string' ? site : site.name}</span>
+            <span class="text-xs text-gray-500 ml-2 flex-shrink-0">${siteType}</span>
           `;
           ul.appendChild(li);
         });
         body.appendChild(ul);
       } else {
         const p = document.createElement('p');
-        p.className = 'text-sm text-gray-600 italic';
+        p.className = 'text-xs sm:text-sm text-gray-600 italic';
         p.textContent = 'Full site list not yet available.';
         body.appendChild(p);
       }

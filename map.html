@@ -112,45 +112,45 @@
     </div>
   </section>
 
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
     <!-- Map Section -->
-    <div class="mb-12">
-      <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-2xl font-semibold text-deep-forest">Interactive Map</h2>
-          <div class="text-sm text-gray-500">
+    <div class="mb-8 sm:mb-12">
+      <div class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
+          <h2 class="text-xl sm:text-2xl font-semibold text-deep-forest">Interactive Map</h2>
+          <div class="text-xs sm:text-sm text-gray-500">
             Click markers to explore project details
           </div>
         </div>
-        <div id="map" class="w-full"></div>
+        <div id="map" class="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-lg overflow-hidden"></div>
       </div>
     </div>
 
     <!-- Totals Summary -->
-    <div id="totals-summary" class="mb-12"></div>
+    <div id="totals-summary" class="mb-8 sm:mb-12"></div>
 
     <!-- Site Lists Section -->
-    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-      <div class="mb-6">
-        <h2 class="text-2xl font-semibold text-deep-forest mb-2">Project Sites by Country</h2>
-        <p class="text-gray-600">Click on any country below to view detailed site information and project status.</p>
+    <div class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100">
+      <div class="mb-4 sm:mb-6">
+        <h2 class="text-xl sm:text-2xl font-semibold text-deep-forest mb-2">Project Sites by Country</h2>
+        <p class="text-sm sm:text-base text-gray-600">Click on any country below to view detailed site information and project status.</p>
       </div>
 
       <!-- Filter Controls -->
-      <div class="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-        <div class="flex flex-wrap items-center gap-4 mb-4">
-          <div class="flex items-center gap-2">
-            <label class="text-sm font-medium text-gray-700">Filter by type:</label>
-            <select id="type-filter" class="px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-green focus:border-brand-green">
+      <div class="mb-4 sm:mb-6 p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-lg">
+        <div class="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto">
+            <label class="text-xs sm:text-sm font-medium text-gray-700 whitespace-nowrap">Filter by type:</label>
+            <select id="type-filter" class="w-full sm:w-auto px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-green focus:border-brand-green">
               <option value="all">All Types</option>
               <option value="confirmed">Confirmed</option>
               <option value="supported">Supported</option>
               <option value="mixed">Mixed</option>
             </select>
           </div>
-          <div class="flex items-center gap-2">
-            <label class="text-sm font-medium text-gray-700">Filter by source:</label>
-            <select id="source-filter" class="px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-green focus:border-brand-green">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto">
+            <label class="text-xs sm:text-sm font-medium text-gray-700 whitespace-nowrap">Filter by source:</label>
+            <select id="source-filter" class="w-full sm:w-auto px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-green focus:border-brand-green">
               <option value="all">All Sources</option>
               <option value="Tree-Nation">Tree-Nation</option>
               <option value="Eden Reforestation">Eden Reforestation</option>
@@ -158,20 +158,20 @@
               <option value="Legacy Partner (Refoorest)">Legacy Partner (Refoorest)</option>
             </select>
           </div>
-          <button id="clear-filters" class="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-800 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+          <button id="clear-filters" class="w-full sm:w-auto px-3 py-1.5 text-sm text-gray-600 hover:text-gray-800 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
             Clear Filters
           </button>
         </div>
-        <div id="filter-results" class="text-sm text-gray-600"></div>
+        <div id="filter-results" class="text-xs sm:text-sm text-gray-600"></div>
       </div>
 
-      <div class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-        <p class="text-sm text-amber-800">
+      <div class="mb-4 sm:mb-6 p-3 sm:p-4 bg-amber-50 border border-amber-200 rounded-lg">
+        <p class="text-xs sm:text-sm text-amber-800">
           <strong>Note:</strong> Some information is provided by third-party partners and may not be up to date or accurate.
         </p>
       </div>
 
-      <div id="site-lists" class="space-y-4"></div>
+      <div id="site-lists" class="space-y-3 sm:space-y-4"></div>
     </div>
   </main>
 

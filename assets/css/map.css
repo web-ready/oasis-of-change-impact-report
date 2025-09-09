@@ -6,6 +6,26 @@
   z-index: 10;
 }
 
+/* Mobile responsive map heights */
+@media (max-width: 640px) {
+  #map {
+    height: 256px;
+    border-radius: 8px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  #map {
+    height: 320px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  #map {
+    height: 384px;
+  }
+}
+
 .leaflet-control-container {
   z-index: 10 !important;
 }
@@ -22,6 +42,21 @@
   font-weight: 600; 
   font-size: 1rem; 
   margin-bottom: .25rem; 
+}
+
+/* Mobile responsive popup */
+@media (max-width: 640px) {
+  .popup-h1 {
+    font-size: 0.875rem;
+  }
+  
+  .leaflet-popup-content {
+    font-size: 0.75rem;
+  }
+  
+  .leaflet-popup-content-wrapper {
+    padding: 8px;
+  }
 }
 
 .leaflet-popup-content-wrapper {
