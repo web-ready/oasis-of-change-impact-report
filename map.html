@@ -50,16 +50,16 @@
         </div>
         
         <div class="hidden md:flex items-center gap-3">
-          <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+          <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-gray-200 text-gray-700 text-sm hover:bg-gray-50 transition-colors">
             Certificates
           </a>
-          <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+          <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-gray-200 text-gray-700 text-sm hover:bg-gray-50 transition-colors">
             Tree Species
           </a>
-          <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+          <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-gray-200 text-gray-700 text-sm hover:bg-gray-50 transition-colors">
             Gallery
           </a>
-          <a href="/map.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:opacity-90 transition">
+          <a href="/map.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-brand-green text-white text-sm hover:opacity-90 transition-colors">
             View Map
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -68,16 +68,16 @@
         </div>
         
         <div class="md:hidden flex items-center gap-2">
-          <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition" aria-label="Certificates">
+          <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-gray-200 text-gray-700 text-sm hover:bg-gray-50 transition-colors" aria-label="Certificates">
             Certificates
           </a>
-          <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition" aria-label="Tree Species">
+          <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-gray-200 text-gray-700 text-sm hover:bg-gray-50 transition-colors" aria-label="Tree Species">
             Trees
           </a>
-          <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition" aria-label="Gallery">
+          <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-gray-200 text-gray-700 text-sm hover:bg-gray-50 transition-colors" aria-label="Gallery">
             Gallery
           </a>
-          <a href="/map.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:opacity-90 transition" aria-label="View Map">
+          <a href="/map.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-brand-green text-white text-sm hover:opacity-90 transition-colors" aria-label="View Map">
             Map
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -88,17 +88,26 @@
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-    <h1 class="text-2xl font-bold mb-4">Tree-Planting Locations (Country-Level)</h1>
+  <!-- Hero -->
+  <section class="bg-white py-10 border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="font-serif text-4xl md:text-5xl text-deep-forest">Tree‑Planting Locations</h1>
+        <p class="mt-2 text-sm text-gray-600">Country‑level overview of documented project sites</p>
+      </div>
+    </div>
+  </section>
 
-  <div id="map" class="w-full rounded-lg shadow-lg border mb-6"></div>
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+  <div id="map" class="w-full rounded-lg border border-gray-200 mb-6"></div>
 
   <div class="max-w-3xl">
     <p class="text-sm text-gray-600 mb-2">
       <strong>Disclaimer:</strong> Some information is provided by third-party partners and may not be up to date or accurate.
     </p>
 
-    <h2 class="text-xl font-semibold mb-2">Full site lists</h2>
+    <h2 class="text-xl font-semibold text-deep-forest mb-2">Full site lists</h2>
     <p class="text-sm text-gray-700 mb-4">Expand a country to view all recorded planting sites.</p>
 
     <!-- Site lists render here -->
@@ -279,10 +288,10 @@
         const hasList = Array.isArray(cfg.sites) && cfg.sites.length > 1;
 
         const details = document.createElement('details');
-        details.className = 'border rounded-lg bg-white shadow-sm';
+        details.className = 'border border-gray-200 rounded-lg bg-white shadow-sm';
 
         const summary = document.createElement('summary');
-        summary.className = 'cursor-pointer px-4 py-3 font-medium flex items-center justify-between';
+        summary.className = 'cursor-pointer px-4 py-3 font-medium flex items-center justify-between text-deep-forest';
         summary.innerHTML = `
           <span>${name} — ${hasList ? `${cfg.sites.length} site${cfg.sites.length===1?'':'s'}` : 'site count pending'}</span>
           <span class="text-xs uppercase tracking-wide ${cfg.type==='confirmed' ? 'text-green-700' : 'text-yellow-700'}">
