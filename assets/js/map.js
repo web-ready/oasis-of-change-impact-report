@@ -238,7 +238,16 @@ const plantingData = {
     type: 'supported', 
     source: 'Legacy Partner (Refoorest)',
     sites: [
-      { name: 'Refoorest partner (legacy)', type: 'supported', source: 'Legacy Partner (Refoorest)' }
+      { name: 'Balan FMNR', type: 'supported', source: 'Legacy Partner (Refoorest)' },
+      { name: 'La Vallee DP', type: 'supported', source: 'Legacy Partner (Refoorest)' },
+      { name: 'Jacmel Agro (Lavanneau)', type: 'supported', source: 'Legacy Partner (Refoorest)' },
+      { name: 'Lavoute DP', type: 'supported', source: 'Legacy Partner (Refoorest)' },
+      { name: 'Gonaives Agroforestry', type: 'supported', source: 'Legacy Partner (Refoorest)' },
+      { name: 'East Aquin Mangrove', type: 'supported', source: 'Legacy Partner (Refoorest)' },
+      { name: 'West Aquin Mangrove (Morisseau)', type: 'supported', source: 'Legacy Partner (Refoorest)' },
+      { name: 'Ile-a-Vache Mangrove', type: 'supported', source: 'Legacy Partner (Refoorest)' },
+      { name: 'Leogane Mountains DP', type: 'supported', source: 'Legacy Partner (Refoorest)' },
+      { name: 'Thoman DP', type: 'supported', source: 'Legacy Partner (Refoorest)' }
     ]
   },
   HN: { 
