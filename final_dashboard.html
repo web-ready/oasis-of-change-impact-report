@@ -333,30 +333,18 @@
 
                 <div class="hidden md:flex items-center gap-3">
                     <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
                         Certificates
                     </a>
                     <a href="/map.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:opacity-90 transition">
                         View Map
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                        </svg>
                     </a>
                 </div>
                 <div class="md:hidden flex items-center gap-2">
                     <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition" aria-label="Certificates">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
                         Certificates
                     </a>
                     <a href="/map.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:opacity-90 transition" aria-label="View Map">
                         View Map
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                        </svg>
                     </a>
                 </div>
             </div>
@@ -380,38 +368,44 @@
     <main class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
         <!-- Desktop Hero Section (hidden on mobile) -->
         <section class="hidden md:block hero-gradient rounded-3xl p-12 mb-12 text-white relative overflow-hidden">
-            <div class="absolute inset-0 opacity-10">
-                <svg width="100%" height="100%" viewBox="0 0 400 400">
-                    <defs>
-                        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="1"/>
-                        </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#grid)"/>
-                </svg>
+            <div class="absolute inset-0">
+                <div 
+                    class="w-full h-full"
+                    style="
+                        background-image: url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=100&w=2074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+                        background-size: cover;
+                        background-position: center;
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        inset: 0;
+                        z-index: 0;
+                    ">
+                    <div class="absolute inset-0 bg-black opacity-40"></div>
+                </div>
             </div>
             
             <div class="relative z-10">
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
                     <div>
                         <h2 class="font-serif text-5xl lg:text-6xl mb-6 leading-tight">Tree-Planting Impact Report</h2>
-                        <p class="text-xl text-gray-300 mb-8">Comprehensive analysis of our environmental restoration efforts and verified impact metrics.</p>
-                        <div class="flex items-center space-x-4 text-sm text-gray-400">
+                        <p class="text-xl mb-8">Comprehensive analysis of our environmental restoration efforts and verified impact metrics.</p>
+                        <div class="flex items-center space-x-4 text-sm">
                             <div class="flex items-center space-x-2">
                                 <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                                 <span>Live Data</span>
                             </div>
                             <span>•</span>
                             <span>Last updated: September 7th, 2025</span>
-                            <span id="last-updated-relative" class="text-gray-500 text-xs ml-2"></span>
+                            <span id="last-updated-relative" class="text-xs ml-2"></span>
                         </div>
                     </div>
                     
                     <div class="text-center lg:text-right">
                         <div class="inline-block">
                             <div class="tabular-nums text-7xl lg:text-8xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent count-up" id="total-count">8,940</div>
-                            <div class="text-2xl font-medium text-gray-300 mb-2">Trees Planted</div>
-                            <div class="text-gray-400">Making a measurable impact on our planet's future</div>
+                            <div class="text-2xl font-medium mb-2">Trees Planted</div>
+                            <div>Making a measurable impact on our planet's future</div>
                         </div>
                     </div>
                 </div>
@@ -435,11 +429,6 @@
             <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="metric-card rounded-2xl p-8 animate-slide-up stagger-1">
                     <div class="flex items-start justify-between mb-6">
-                        <div class="w-12 h-12 bg-brand-green/10 rounded-xl flex items-center justify-center">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#16A34A" stroke-width="2" fill="none"/>
-                            </svg>
-                        </div>
                         <span class="text-xs font-medium px-3 py-1 bg-brand-green/10 text-brand-green rounded-full">Verified</span>
                     </div>
                     <div class="tabular-nums text-4xl font-bold text-deep-forest mb-2" id="verified-count">1,602</div>
@@ -455,11 +444,6 @@
 
                 <div class="metric-card rounded-2xl p-8 animate-slide-up stagger-2">
                     <div class="flex items-start justify-between mb-6">
-                        <div class="w-12 h-12 bg-legacy-gold/10 rounded-xl flex items-center justify-center">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="#EAB308" stroke-width="2" fill="none"/>
-                            </svg>
-                        </div>
                         <span class="text-xs font-medium px-3 py-1 bg-legacy-gold/10 text-yellow-700 rounded-full">Legacy</span>
                     </div>
                     <div class="tabular-nums text-4xl font-bold text-deep-forest mb-2" id="legacy-count">7,338</div>
