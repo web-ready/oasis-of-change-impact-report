@@ -538,10 +538,30 @@
                     <table class="w-full" id="verified-table">
                         <thead>
                             <tr class="border-b border-gray-100">
-                                <th class="text-left py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="forest">Project ↕</th>
-                                <th class="text-left py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="country">Location ↕</th>
-                                <th class="text-right py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="trees">Trees ↕</th>
-                                <th class="text-left py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="certificate">Certificate ↕</th>
+                                <th class="text-left py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="forest">
+                                    <div class="flex items-center gap-1">
+                                        <span>Project</span>
+                                        <span class="text-xs">↕</span>
+                                    </div>
+                                </th>
+                                <th class="text-left py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="country">
+                                    <div class="flex items-center gap-1">
+                                        <span>Location</span>
+                                        <span class="text-xs">↕</span>
+                                    </div>
+                                </th>
+                                <th class="text-right py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="trees">
+                                    <div class="flex items-center justify-end gap-1">
+                                        <span>Trees</span>
+                                        <span class="text-xs">↕</span>
+                                    </div>
+                                </th>
+                                <th class="text-left py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="certificate">
+                                    <div class="flex items-center gap-1">
+                                        <span>Certificate</span>
+                                        <span class="text-xs">↕</span>
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="verified-data">
@@ -793,8 +813,18 @@
                     <table class="w-full" id="legacy-table">
                         <thead>
                             <tr class="border-b border-gray-100">
-                                <th class="text-left py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-legacy-gold" data-sort="partner">Organization ↕</th>
-                                <th class="text-right py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-legacy-gold" data-sort="trees">Trees Planted ↕</th>
+                                <th class="text-left py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-legacy-gold" data-sort="partner">
+                                    <div class="flex items-center gap-1">
+                                        <span>Organization</span>
+                                        <span class="text-xs">↕</span>
+                                    </div>
+                                </th>
+                                <th class="text-right py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-legacy-gold" data-sort="trees">
+                                    <div class="flex items-center justify-end gap-1">
+                                        <span>Trees Planted</span>
+                                        <span class="text-xs">↕</span>
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="legacy-data">
@@ -1031,6 +1061,12 @@
             // Setup sorting functionality
             function setupSorting(tableId, dataClass) {
                 const headers = document.querySelectorAll(`${tableId} th[data-sort]`);
+                let originalOrder = new Map(); // Store original order for each table
+                
+                // Store original order
+                const tbody = document.querySelector(`${tableId} .${dataClass}`);
+                const originalRows = Array.from(tbody.querySelectorAll('tr'));
+                originalOrder.set(tableId, originalRows.map(row => row.cloneNode(true)));
                 
                 headers.forEach(header => {
                     header.addEventListener('click', () => {
@@ -1039,39 +1075,78 @@
                         const rows = Array.from(tbody.querySelectorAll('tr'));
                         
                         const isNumeric = sortKey === 'trees';
-                        const isAscending = !header.classList.contains('sort-desc');
+                        const currentState = header.getAttribute('data-sort-state') || 'none';
                         
-                        rows.sort((a, b) => {
-                            let aVal, bVal;
-                            
-                            if (sortKey === 'forest' || sortKey === 'partner') {
-                                aVal = a.cells[0].textContent.trim();
-                                bVal = b.cells[0].textContent.trim();
-                            } else if (sortKey === 'country') {
-                                aVal = a.cells[1].textContent.trim();
-                                bVal = b.cells[1].textContent.trim();
-                            } else if (sortKey === 'trees') {
-                                const cellIndex = dataClass === 'verified-data' ? 2 : 1;
-                                aVal = parseInt(a.cells[cellIndex].textContent.replace(/,/g, ''));
-                                bVal = parseInt(b.cells[cellIndex].textContent.replace(/,/g, ''));
-                            } else if (sortKey === 'certificate') {
-                                const cellIndex = dataClass === 'verified-data' ? 3 : 2;
-                                aVal = a.cells[cellIndex].textContent.trim();
-                                bVal = b.cells[cellIndex].textContent.trim();
-                            }
-                            
-                            if (isNumeric) {
-                                return isAscending ? aVal - bVal : bVal - aVal;
-                            } else {
-                                return isAscending ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
-                            }
+                        // Cycle through states: none -> asc -> desc -> none
+                        let newState, isAscending;
+                        if (currentState === 'none') {
+                            newState = 'asc';
+                            isAscending = true;
+                        } else if (currentState === 'asc') {
+                            newState = 'desc';
+                            isAscending = false;
+                        } else {
+                            newState = 'none';
+                            isAscending = true; // Not used when restoring original order
+                        }
+                        
+                        // Clear all sort states first
+                        headers.forEach(h => {
+                            h.classList.remove('sort-desc', 'sort-asc', 'sort-none');
+                            h.setAttribute('data-sort-state', 'none');
+                            // Reset arrow display
+                            const arrow = h.querySelector('.text-xs');
+                            if (arrow) arrow.textContent = '↕';
                         });
                         
-                        tbody.innerHTML = '';
-                        rows.forEach(row => tbody.appendChild(row));
-                        
-                        headers.forEach(h => h.classList.remove('sort-desc', 'sort-asc'));
-                        header.classList.add(isAscending ? 'sort-asc' : 'sort-desc');
+                        if (newState === 'none') {
+                            // Restore original order
+                            tbody.innerHTML = '';
+                            originalOrder.get(tableId).forEach(row => tbody.appendChild(row));
+                            header.classList.add('sort-none');
+                            header.setAttribute('data-sort-state', 'none');
+                            const arrow = header.querySelector('.text-xs');
+                            if (arrow) arrow.textContent = '↕';
+                        } else {
+                            // Sort the data
+                            rows.sort((a, b) => {
+                                let aVal, bVal;
+                                
+                                if (sortKey === 'forest' || sortKey === 'partner') {
+                                    aVal = a.cells[0].textContent.trim();
+                                    bVal = b.cells[0].textContent.trim();
+                                } else if (sortKey === 'country') {
+                                    aVal = a.cells[1].textContent.trim();
+                                    bVal = b.cells[1].textContent.trim();
+                                } else if (sortKey === 'trees') {
+                                    const cellIndex = dataClass === 'verified-data' ? 2 : 1;
+                                    aVal = parseInt(a.cells[cellIndex].textContent.replace(/,/g, ''));
+                                    bVal = parseInt(b.cells[cellIndex].textContent.replace(/,/g, ''));
+                                } else if (sortKey === 'certificate') {
+                                    const cellIndex = dataClass === 'verified-data' ? 3 : 2;
+                                    aVal = a.cells[cellIndex].textContent.trim();
+                                    bVal = b.cells[cellIndex].textContent.trim();
+                                }
+                                
+                                if (isNumeric) {
+                                    return isAscending ? aVal - bVal : bVal - aVal;
+                                } else {
+                                    return isAscending ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+                                }
+                            });
+                            
+                            tbody.innerHTML = '';
+                            rows.forEach(row => tbody.appendChild(row));
+                            
+                            header.classList.add(newState === 'asc' ? 'sort-asc' : 'sort-desc');
+                            header.setAttribute('data-sort-state', newState);
+                            
+                            // Update arrow display
+                            const arrow = header.querySelector('.text-xs');
+                            if (arrow) {
+                                arrow.textContent = newState === 'asc' ? '↑' : '↓';
+                            }
+                        }
                     });
                 });
             }
