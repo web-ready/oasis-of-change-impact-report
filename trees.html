@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Species - Oasis of Change, Inc.</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#16A34A',
+                        'legacy-gold': '#EAB308',
+                        'deep-forest': '#0F172A',
+                        'cloud-white': '#FFFFFF',
+                        'mist-gray': '#F8FAFC'
+                    },
+                    fontFamily: {
+                        'serif': ['DM Serif Display', 'serif'],
+                        'sans': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .tree-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .tree-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .species-badge {
+            background: linear-gradient(135deg, #16A34A, #22c55e);
+            color: white;
+        }
+        
+        .native-badge {
+            background: linear-gradient(135deg, #059669, #10b981);
+        }
+        
+        .adaptive-badge {
+            background: linear-gradient(135deg, #0891b2, #06b6d4);
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.6s ease-out forwards;
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+    </style>
+</head>
+<body class="bg-mist-gray font-sans antialiased">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between h-14">
+                <div class="flex items-center gap-2">
+                    <a href="/final_dashboard.html" class="font-serif text-lg text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
+                </div>
+
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="/final_dashboard.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+                        Dashboard
+                    </a>
+                    <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+                        Certificates
+                    </a>
+                    <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+                        Gallery
+                    </a>
+                    <a href="/map.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:opacity-90 transition">
+                        View Map
+                    </a>
+                </div>
+                <div class="md:hidden flex items-center gap-2">
+                    <a href="/final_dashboard.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+                        Dashboard
+                    </a>
+                    <a href="/map.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:opacity-90 transition">
+                        Map
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <!-- Hero Section -->
+        <section class="text-center mb-12">
+            <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-deep-forest mb-6">
+                Tree Species & Varieties
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                Discover the diverse range of native and adaptive tree species we plant across our restoration projects, each carefully selected for maximum environmental impact.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200">
+                    <div class="w-3 h-3 rounded-full bg-green-600"></div>
+                    <span class="text-sm font-medium text-gray-700">12 Species Combinations</span>
+                </div>
+                <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200">
+                    <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                    <span class="text-sm font-medium text-gray-700">Native & Adaptive</span>
+                </div>
+                <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200">
+                    <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                    <span class="text-sm font-medium text-gray-700">Climate Resilient</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Species Overview -->
+        <section class="mb-16">
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="tree-card rounded-2xl p-8 animate-slide-up stagger-1">
+                    <h2 class="text-2xl font-semibold text-deep-forest mb-4">Native Species</h2>
+                    <p class="text-gray-600 mb-6">
+                        Indigenous trees that have evolved naturally in their local ecosystems, providing optimal habitat support and biodiversity benefits.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-green-600 rounded-full"></div>
+                            <span class="text-sm text-gray-700">Perfectly adapted to local climate</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-green-600 rounded-full"></div>
+                            <span class="text-sm text-gray-700">Supports native wildlife</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-green-600 rounded-full"></div>
+                            <span class="text-sm text-gray-700">Natural pest resistance</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tree-card rounded-2xl p-8 animate-slide-up stagger-2">
+                    <h2 class="text-2xl font-semibold text-deep-forest mb-4">Adaptive Species</h2>
+                    <p class="text-gray-600 mb-6">
+                        Carefully selected non-native species that thrive in changing climate conditions while providing enhanced environmental benefits.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                            <span class="text-sm text-gray-700">Climate change resilient</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                            <span class="text-sm text-gray-700">Enhanced carbon sequestration</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                            <span class="text-sm text-gray-700">Fast growth rates</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Species Grid -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-semibold text-deep-forest mb-8 text-center">Our Tree Species</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Species 1 -->
+                <div class="tree-card rounded-2xl p-6 animate-slide-up stagger-1">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-deep-forest">Douglas Fir</h3>
+                        <span class="native-badge px-3 py-1 rounded-full text-xs font-medium text-white">Native</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Tall evergreen conifer native to the Pacific Northwest, excellent for carbon sequestration and wildlife habitat.
+                    </p>
+                    <div class="space-y-2 text-xs text-gray-500">
+                        <div class="flex justify-between">
+                            <span>Height:</span>
+                            <span>40-80m</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Lifespan:</span>
+                            <span>500+ years</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>CO₂/year:</span>
+                            <span>22kg</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Species 2 -->
+                <div class="tree-card rounded-2xl p-6 animate-slide-up stagger-2">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-deep-forest">Western Red Cedar</h3>
+                        <span class="native-badge px-3 py-1 rounded-full text-xs font-medium text-white">Native</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Iconic Pacific Northwest tree with exceptional longevity and cultural significance to indigenous communities.
+                    </p>
+                    <div class="space-y-2 text-xs text-gray-500">
+                        <div class="flex justify-between">
+                            <span>Height:</span>
+                            <span>50-70m</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Lifespan:</span>
+                            <span>1000+ years</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>CO₂/year:</span>
+                            <span>25kg</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Species 3 -->
+                <div class="tree-card rounded-2xl p-6 animate-slide-up stagger-3">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-deep-forest">Sitka Spruce</h3>
+                        <span class="native-badge px-3 py-1 rounded-full text-xs font-medium text-white">Native</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Fast-growing coastal conifer with excellent wind resistance and high carbon absorption rates.
+                    </p>
+                    <div class="space-y-2 text-xs text-gray-500">
+                        <div class="flex justify-between">
+                            <span>Height:</span>
+                            <span>50-90m</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Lifespan:</span>
+                            <span>400+ years</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>CO₂/year:</span>
+                            <span>28kg</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Species 4 -->
+                <div class="tree-card rounded-2xl p-6 animate-slide-up stagger-4">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-deep-forest">Bigleaf Maple</h3>
+                        <span class="native-badge px-3 py-1 rounded-full text-xs font-medium text-white">Native</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Deciduous hardwood providing seasonal color changes and excellent habitat for birds and insects.
+                    </p>
+                    <div class="space-y-2 text-xs text-gray-500">
+                        <div class="flex justify-between">
+                            <span>Height:</span>
+                            <span>20-35m</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Lifespan:</span>
+                            <span>200+ years</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>CO₂/year:</span>
+                            <span>18kg</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Species 5 -->
+                <div class="tree-card rounded-2xl p-6 animate-slide-up stagger-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-deep-forest">Eucalyptus Globulus</h3>
+                        <span class="adaptive-badge px-3 py-1 rounded-full text-xs font-medium text-white">Adaptive</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Fast-growing Australian species with exceptional carbon sequestration and drought tolerance.
+                    </p>
+                    <div class="space-y-2 text-xs text-gray-500">
+                        <div class="flex justify-between">
+                            <span>Height:</span>
+                            <span>30-55m</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Lifespan:</span>
+                            <span>150+ years</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>CO₂/year:</span>
+                            <span>35kg</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Species 6 -->
+                <div class="tree-card rounded-2xl p-6 animate-slide-up stagger-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-deep-forest">Paulownia Tomentosa</h3>
+                        <span class="adaptive-badge px-3 py-1 rounded-full text-xs font-medium text-white">Adaptive</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Rapidly growing Asian species with beautiful flowers and exceptional carbon absorption capabilities.
+                    </p>
+                    <div class="space-y-2 text-xs text-gray-500">
+                        <div class="flex justify-between">
+                            <span>Height:</span>
+                            <span>15-25m</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Lifespan:</span>
+                            <span>100+ years</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>CO₂/year:</span>
+                            <span>40kg</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Environmental Benefits -->
+        <section class="mb-16">
+            <div class="tree-card rounded-2xl p-8">
+                <h2 class="text-2xl font-semibold text-deep-forest mb-6 text-center">Environmental Impact</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-deep-forest mb-2">Carbon Sequestration</h3>
+                        <p class="text-sm text-gray-600">Our diverse species portfolio maximizes carbon absorption, with some trees capturing up to 40kg CO₂ annually.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-deep-forest mb-2">Biodiversity Support</h3>
+                        <p class="text-sm text-gray-600">Native species provide essential habitat for local wildlife, while adaptive species enhance ecosystem resilience.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-deep-forest mb-2">Climate Resilience</h3>
+                        <p class="text-sm text-gray-600">Our species selection ensures long-term survival and continued environmental benefits in changing climate conditions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="text-center">
+            <div class="tree-card rounded-2xl p-8">
+                <h2 class="text-2xl font-semibold text-deep-forest mb-4">Support Our Tree Planting Mission</h2>
+                <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                    Each tree species we plant is carefully selected for maximum environmental impact. Learn more about our projects and see the results in action.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/final_dashboard.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-brand-green text-white font-medium hover:opacity-90 transition">
+                        View Dashboard
+                    </a>
+                    <a href="/gallery.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-deep-forest font-medium border border-gray-300 hover:bg-gray-50 transition">
+                        See Gallery
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Animate cards on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '0';
+                        entry.target.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            entry.target.style.transition = 'all 0.6s ease-out';
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, 100);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.animate-slide-up').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
