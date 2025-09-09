@@ -1,4 +1,3 @@
-// Map Page JavaScript
 const plantingData = {
   MG: { centroid: [-18.77, 46.87], type: 'confirmed', sites: [
     'Eden Reforestation Projects',
@@ -37,7 +36,6 @@ const plantingData = {
     'Olokurto','Turasha'
   ]},
 
-  /* countries with best documented projects (listed first) */
   TZ: { centroid: [-6.37, 34.89], type:'confirmed', sites: [
     'Usambara Biodiversity Conservation',
     'Mlola Biodiversity Restoration', 
@@ -57,7 +55,6 @@ const plantingData = {
     'Trees for Tigers'
   ]},
   
-  /* countries with some documented projects */
   SN: { centroid: [14.50,-14.45], type:'confirmed', sites: [
     'Forest Garden Program',
     'Senegal (additional sites - still gathering data)'
@@ -83,7 +80,6 @@ const plantingData = {
     'Yapen Island - Ansus (Refoorest partner)'
   ]},
   
-  /* Refoorest partner countries */
   HT: { centroid: [18.97, -72.29], type:'partner', sites:['Refoorest partner (legacy)']},
   HN: { centroid: [15.20, -86.24], type:'partner', sites:['Refoorest partner (legacy)']},
   NI: { centroid: [12.87, -85.21], type:'partner', sites:['Refoorest partner (legacy)']}
@@ -112,14 +108,12 @@ const countryName = {
 };
 
 function countLabel(arr) {
-  // If we truly have a list of sites (>1), show the count; otherwise say pending.
   if (Array.isArray(arr) && arr.length > 1) {
     return `${arr.length} planting site${arr.length === 1 ? '' : 's'}`;
   }
   return 'site count pending';
 }
 
-// Initialize map
 function initializeMap() {
   const map = L.map('map', { scrollWheelZoom: true }).setView([11, 16], 2);
 
@@ -160,12 +154,10 @@ function initializeMap() {
   return map;
 }
 
-// Render site lists
 function renderSiteLists() {
   const siteLists = document.getElementById('site-lists');
 
   Object.entries(plantingData)
-    // Show confirmed countries with real lists first
     .sort((a, b) => {
       const aHas = a[1].sites.length > 1;
       const bHas = b[1].sites.length > 1;
@@ -226,7 +218,6 @@ function renderSiteLists() {
     });
 }
 
-// Mobile menu functionality
 function initializeMobileMenu() {
   const toggleBtn = document.getElementById('mobile-menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
@@ -248,7 +239,6 @@ function initializeMobileMenu() {
   }
 }
 
-// Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
   initializeMap();
   renderSiteLists();
