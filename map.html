@@ -37,7 +37,6 @@
 </head>
 
 <body class="bg-mist-gray font-sans antialiased">
-  <!-- Header -->
   <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="flex items-center justify-between h-14 relative">
@@ -98,11 +97,15 @@
         <div class="mt-8 flex flex-wrap justify-center gap-4 text-sm text-gray-500">
           <div class="flex items-center gap-2">
             <div class="w-3 h-3 rounded-full bg-brand-green"></div>
-            <span>Confirmed Projects</span>
+            <span>Confirmed Plantings</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full bg-purple-500"></div>
+            <span>Mixed Projects</span>
           </div>
           <div class="flex items-center gap-2">
             <div class="w-3 h-3 rounded-full bg-legacy-gold"></div>
-            <span>Partner Projects</span>
+            <span>Supported Projects</span>
           </div>
         </div>
       </div>
@@ -122,6 +125,9 @@
         <div id="map" class="w-full"></div>
       </div>
     </div>
+
+    <!-- Totals Summary -->
+    <div id="totals-summary" class="mb-12"></div>
 
     <!-- Site Lists Section -->
     <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
