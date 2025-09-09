@@ -255,7 +255,12 @@ const plantingData = {
     type: 'supported', 
     source: 'Legacy Partner (Refoorest)',
     sites: [
-      { name: 'Refoorest partner (legacy)', type: 'supported', source: 'Legacy Partner (Refoorest)' }
+      { name: 'La Tigra 1', type: 'supported', source: 'Legacy Partner (Refoorest)' },
+      { name: 'Cofradia (La Tigra 2)', type: 'supported', source: 'Legacy Partner (Refoorest)' },
+      { name: 'Uyuca', type: 'supported', source: 'Legacy Partner (Refoorest)' },
+      { name: 'La Mora (La Muralla 1)', type: 'supported', source: 'Legacy Partner (Refoorest)' },
+      { name: 'El Cacao (La Muralla 2)', type: 'supported', source: 'Legacy Partner (Refoorest)' },
+      { name: 'La Muralla 3 (Las Jagüillas)', type: 'supported', source: 'Legacy Partner (Refoorest)' }
     ]
   },
   NI: { 
@@ -263,7 +268,7 @@ const plantingData = {
     type: 'supported', 
     source: 'Legacy Partner (Refoorest)',
     sites: [
-      { name: 'Refoorest partner (legacy)', type: 'supported', source: 'Legacy Partner (Refoorest)' }
+      { name: 'Bosawas 3', type: 'supported', source: 'Legacy Partner (Refoorest)' }
     ]
   }
 };
@@ -435,10 +440,65 @@ function initializeMap() {
   return map;
 }
 
+// Global filter state
+let currentFilters = {
+  type: 'all',
+  source: 'all'
+};
+
+function getFilteredData() {
+  return Object.entries(plantingData).filter(([cc, cfg]) => {
+    // Type filter
+    if (currentFilters.type !== 'all' && cfg.type !== currentFilters.type) {
+      return false;
+    }
+    
+    // Source filter
+    if (currentFilters.source !== 'all') {
+      if (cfg.type === 'mixed') {
+        // For mixed countries, check if any site matches the source filter
+        const hasMatchingSource = cfg.sites.some(site => {
+          if (typeof site === 'string') {
+            return cfg.source === currentFilters.source;
+          }
+          return site.source === currentFilters.source;
+        });
+        if (!hasMatchingSource) {
+          return false;
+        }
+      } else {
+        // For non-mixed countries, check the country's source
+        if (cfg.source !== currentFilters.source) {
+          return false;
+        }
+      }
+    }
+    
+    return true;
+  });
+}
+
+function updateFilterResults() {
+  const filteredData = getFilteredData();
+  const totalCountries = Object.keys(plantingData).length;
+  const resultsContainer = document.getElementById('filter-results');
+  
+  if (resultsContainer) {
+    if (currentFilters.type === 'all' && currentFilters.source === 'all') {
+      resultsContainer.textContent = `Showing all ${totalCountries} countries`;
+    } else {
+      resultsContainer.textContent = `Showing ${filteredData.length} of ${totalCountries} countries`;
+    }
+  }
+}
+
 function renderSiteLists() {
   const siteLists = document.getElementById('site-lists');
+  siteLists.innerHTML = ''; // Clear existing content
 
-  Object.entries(plantingData)
+  const filteredData = getFilteredData();
+
+  filteredData
     .sort((a, b) => {
       const aHas = a[1].sites.length > 1;
       const bHas = b[1].sites.length > 1;
@@ -547,9 +607,50 @@ function initializeMobileMenu() {
   }
 }
 
+function initializeFilters() {
+  const typeFilter = document.getElementById('type-filter');
+  const sourceFilter = document.getElementById('source-filter');
+  const clearFiltersBtn = document.getElementById('clear-filters');
+  
+  function applyFilters() {
+    renderSiteLists();
+    updateFilterResults();
+  }
+  
+  if (typeFilter) {
+    typeFilter.addEventListener('change', (e) => {
+      currentFilters.type = e.target.value;
+      applyFilters();
+    });
+  }
+  
+  if (sourceFilter) {
+    sourceFilter.addEventListener('change', (e) => {
+      currentFilters.source = e.target.value;
+      applyFilters();
+    });
+  }
+  
+  if (clearFiltersBtn) {
+    clearFiltersBtn.addEventListener('click', () => {
+      currentFilters.type = 'all';
+      currentFilters.source = 'all';
+      
+      if (typeFilter) typeFilter.value = 'all';
+      if (sourceFilter) sourceFilter.value = 'all';
+      
+      applyFilters();
+    });
+  }
+  
+  // Initialize filter results display
+  updateFilterResults();
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   initializeMap();
   renderSiteLists();
   renderTotals();
   initializeMobileMenu();
+  initializeFilters();
 });

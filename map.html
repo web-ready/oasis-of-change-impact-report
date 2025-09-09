@@ -136,6 +136,35 @@
         <p class="text-gray-600">Click on any country below to view detailed site information and project status.</p>
       </div>
 
+      <!-- Filter Controls -->
+      <div class="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+        <div class="flex flex-wrap items-center gap-4 mb-4">
+          <div class="flex items-center gap-2">
+            <label class="text-sm font-medium text-gray-700">Filter by type:</label>
+            <select id="type-filter" class="px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-green focus:border-brand-green">
+              <option value="all">All Types</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="supported">Supported</option>
+              <option value="mixed">Mixed</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-2">
+            <label class="text-sm font-medium text-gray-700">Filter by source:</label>
+            <select id="source-filter" class="px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-green focus:border-brand-green">
+              <option value="all">All Sources</option>
+              <option value="Tree-Nation">Tree-Nation</option>
+              <option value="Eden Reforestation">Eden Reforestation</option>
+              <option value="Legacy Partner (Tero)">Legacy Partner (Tero)</option>
+              <option value="Legacy Partner (Refoorest)">Legacy Partner (Refoorest)</option>
+            </select>
+          </div>
+          <button id="clear-filters" class="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-800 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+            Clear Filters
+          </button>
+        </div>
+        <div id="filter-results" class="text-sm text-gray-600"></div>
+      </div>
+
       <div class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
         <p class="text-sm text-amber-800">
           <strong>Note:</strong> Some information is provided by third-party partners and may not be up to date or accurate.
