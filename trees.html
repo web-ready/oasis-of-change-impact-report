@@ -78,12 +78,11 @@
                     <a href="/final_dashboard.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
                 </div>
 
-                <!-- Desktop Nav -->
                 <div class="hidden md:flex items-center gap-3">
                     <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
                         Certificates
                     </a>
-                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:opacity-90 transition">
+                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
                         Tree Species
                     </a>
                     <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
@@ -104,16 +103,6 @@
                     </svg>
                 </button>
 
-                <!-- Mobile Menu -->
-                <div id="mobile-menu" class="md:hidden hidden absolute top-14 inset-x-0 bg-white border-b border-gray-200 shadow-sm">
-                    <nav class="px-4 py-3 grid grid-cols-1 gap-2">
-                        <a href="/final_dashboard.html" class="px-3 py-2 rounded-md border border-gray-200 text-gray-700 text-sm">Dashboard</a>
-                        <a href="/certificates.html" class="px-3 py-2 rounded-md border border-gray-200 text-gray-700 text-sm">Certificates</a>
-                        <a href="/species.html" class="px-3 py-2 rounded-md border border-gray-200 text-gray-700 text-sm">Tree Species</a>
-                        <a href="/gallery.html" class="px-3 py-2 rounded-md border border-gray-200 text-gray-700 text-sm">Gallery</a>
-                        <a href="/map.html" class="px-3 py-2 rounded-md bg-brand-green text-white text-sm">View Map</a>
-                    </nav>
-                </div>
             </div>
         </div>
     </header>
@@ -420,7 +409,7 @@
 
     <script>
         // Mobile menu toggle
-        document.addEventListener('DOMContentLoaded', function() {
+        (function(){
             const toggleBtn = document.getElementById('mobile-menu-toggle');
             const mobileMenu = document.getElementById('mobile-menu');
             const closeBtn = document.getElementById('mobile-menu-close');
@@ -435,7 +424,7 @@
                 toggleBtn.addEventListener('click', toggleMenu);
                 if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
             }
-        });
+        })();
 
         // Animate cards on scroll
         document.addEventListener('DOMContentLoaded', function() {
