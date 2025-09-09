@@ -180,7 +180,7 @@
                 </svg>
             </div>
             <h2 class="text-2xl font-semibold text-deep-forest mb-2">Download All Certificates</h2>
-            <p class="text-gray-600 mb-6">Get the complete collection of 6 verified tree-planting certificates in a single ZIP file.</p>
+            <p class="text-gray-600 mb-6">Get the complete collection of 5 verified tree-planting certificates in a single ZIP file.</p>
             <button class="bulk-download" onclick="downloadAllCertificates()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
@@ -298,26 +298,6 @@
                 </div>
             </div>
 
-            <!-- Certificate 6 -->
-            <div class="certificate-card">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between">
-                    <div class="flex-1">
-                        <h3 class="text-lg font-semibold text-deep-forest mb-1">Tree-Nation Gifts</h3>
-                        <div class="text-sm text-gray-600 space-y-1">
-                            <p><strong>Certificate:</strong> TN-GIFTS-2025-H1</p>
-                            <p><strong>Location:</strong> Global</p>
-                            <p><strong>Trees Planted:</strong> 70</p>
-                            <p><strong>Date:</strong> H1 2025</p>
-                        </div>
-                    </div>
-                    <button class="download-btn" onclick="downloadCertificate('TN-GIFTS-2025-H1')">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                        Download PDF
-                    </button>
-                </div>
-            </div>
         </div>
 
         <!-- Verification Notice -->
@@ -375,7 +355,7 @@
         function downloadAllCertificates() {
             // In a real implementation, this would create and download a ZIP file
             // For now, we'll show a notification
-            alert('Downloading all certificates as ZIP file...\n\nIn a production environment, this would create a ZIP file containing all 6 PDF certificates and initiate the download.');
+            alert('Downloading all certificates as ZIP file...\n\nIn a production environment, this would create a ZIP file containing all 5 PDF certificates and initiate the download.');
             
             // Simulate bulk download
             setTimeout(() => {
