@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tree Species - Oasis of Change, Inc.</title>
+    <meta name="author" content="Oasis of Change, Inc.">
+    <meta property="og:site_name" content="Oasis of Change, Inc.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -27,30 +29,31 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .popup-h1 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
-        .species-card { transition: all 0.3s ease; }
-        .species-card:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .species-card { transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+        .tag { font-size: 10px; padding: 2px 8px; border-radius: 9999px; color: #111827; background-color: #F3F4F6; }
+        .chip { font-size: 10px; padding: 2px 8px; border-radius: 9999px; color: #065F46; background-color: #ECFDF5; }
     </style>
 </head>
 <body class="bg-mist-gray font-sans antialiased">
     <!-- Header -->
-    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="flex items-center justify-between h-14">
                 <div class="flex items-center">
-                    <span class="font-serif text-lg text-deep-forest">Oasis of Change, Inc.</span>
+                    <a href="/final_dashboard.html" class="font-serif text-lg text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
                 </div>
                 
                 <div class="hidden md:flex items-center gap-3">
-                    <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+                    <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-gray-200 text-gray-700 text-sm hover:bg-gray-50 transition-colors">
                         Certificates
                     </a>
-                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-gray-200 text-gray-700 text-sm hover:bg-gray-50 transition-colors">
                         Tree Species
                     </a>
-                    <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+                    <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-gray-200 text-gray-700 text-sm hover:bg-gray-50 transition-colors">
                         Gallery
                     </a>
-                    <a href="/map.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:opacity-90 transition">
+                    <a href="/map.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-brand-green text-white text-sm hover:opacity-90 transition-colors">
                         View Map
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -59,16 +62,16 @@
                 </div>
                 
                 <div class="md:hidden flex items-center gap-2">
-                    <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition" aria-label="Certificates">
+                    <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-gray-200 text-gray-700 text-sm hover:bg-gray-50 transition-colors" aria-label="Certificates">
                         Certificates
                     </a>
-                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition" aria-label="Tree Species">
+                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-gray-200 text-gray-700 text-sm hover:bg-gray-50 transition-colors" aria-label="Tree Species">
                         Trees
                     </a>
-                    <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition" aria-label="Gallery">
+                    <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-gray-200 text-gray-700 text-sm hover:bg-gray-50 transition-colors" aria-label="Gallery">
                         Gallery
                     </a>
-                    <a href="/map.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:opacity-90 transition" aria-label="View Map">
+                    <a href="/map.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-brand-green text-white text-sm hover:opacity-90 transition-colors" aria-label="View Map">
                         Map
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -80,13 +83,11 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="bg-gradient-to-br from-deep-forest to-brand-green text-white py-16">
+    <section class="bg-white py-10 border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Tree Species Database</h1>
-                <p class="text-xl text-gray-100 max-w-3xl mx-auto">
-                    Comprehensive catalog of tree species planted across our global reforestation projects
-                </p>
+                <h1 class="text-3xl md:text-4xl font-serif text-deep-forest">Tree Species</h1>
+                <p class="mt-2 text-sm text-gray-600">A simple, transparent list of species planted across our projects</p>
             </div>
         </div>
     </section>
@@ -113,92 +114,40 @@
     <!-- Filter Section -->
     <section class="py-8 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-wrap gap-4 justify-center">
-                <button class="filter-btn active px-6 py-2 rounded-full border-2 border-brand-green text-brand-green font-medium hover:bg-brand-green hover:text-white transition-all" data-filter="all">
+            <div class="flex flex-wrap gap-3 justify-center">
+                <button class="filter-btn active px-4 py-1.5 rounded-md border border-brand-green text-brand-green text-sm hover:bg-brand-green hover:text-white transition-colors" data-filter="all">
                     All Species
                 </button>
-                <button class="filter-btn px-6 py-2 rounded-full border-2 border-gray-300 text-gray-600 font-medium hover:border-brand-green hover:text-brand-green transition-all" data-filter="verified">
+                <button class="filter-btn px-4 py-1.5 rounded-md border border-gray-300 text-gray-700 text-sm hover:border-brand-green hover:text-brand-green transition-colors" data-filter="verified">
                     Verified (Tree-Nation)
                 </button>
-                <button class="filter-btn px-6 py-2 rounded-full border-2 border-gray-300 text-gray-600 font-medium hover:border-brand-green hover:text-brand-green transition-all" data-filter="legacy">
+                <button class="filter-btn px-4 py-1.5 rounded-md border border-gray-300 text-gray-700 text-sm hover:border-brand-green hover:text-brand-green transition-colors" data-filter="legacy">
                     Legacy Partner (Refoorest)
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- Category Breakdown (Verified) -->
-    <section class="py-8 bg-white">
+    <!-- Category Notes (minimal) -->
+    <section class="py-6 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-4 flex items-center justify-between flex-wrap gap-2">
-                <h2 class="text-lg font-semibold text-deep-forest">Category Breakdown (Tree‑Nation Verified)</h2>
-                <span class="text-xs text-gray-500">As of Sep 8, 2025</span>
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <h2 class="text-base font-semibold text-deep-forest">About these categories</h2>
+                <span class="text-xs text-gray-500">Data snapshot • Sep 2025</span>
             </div>
-
-            <div class="space-y-3">
-                <div>
-                    <div class="flex justify-between text-sm text-gray-700"><span>Agroforestry</span><span>54.1%</span></div>
-                    <div class="w-full h-2 bg-gray-100 rounded">
-                        <div class="h-2 bg-brand-green rounded" style="width:54.1%"></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-sm text-gray-700"><span>Plant</span><span>35.2%</span></div>
-                    <div class="w-full h-2 bg-gray-100 rounded">
-                        <div class="h-2 bg-emerald-400 rounded" style="width:35.2%"></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-sm text-gray-700"><span>Fast‑growing</span><span>5.1%</span></div>
-                    <div class="w-full h-2 bg-gray-100 rounded">
-                        <div class="h-2 bg-yellow-400 rounded" style="width:5.1%"></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-sm text-gray-700"><span>Medicinal</span><span>3.5%</span></div>
-                    <div class="w-full h-2 bg-gray-100 rounded">
-                        <div class="h-2 bg-purple-400 rounded" style="width:3.5%"></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-sm text-gray-700"><span>Endangered</span><span>0.8%</span></div>
-                    <div class="w-full h-2 bg-gray-100 rounded">
-                        <div class="h-2 bg-red-400 rounded" style="width:0.8%"></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-sm text-gray-700"><span>Majestic</span><span>0.5%</span></div>
-                    <div class="w-full h-2 bg-gray-100 rounded">
-                        <div class="h-2 bg-indigo-400 rounded" style="width:0.5%"></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-sm text-gray-700"><span>Fauna protection</span><span>0.5%</span></div>
-                    <div class="w-full h-2 bg-gray-100 rounded">
-                        <div class="h-2 bg-teal-400 rounded" style="width:0.5%"></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-sm text-gray-700"><span>Nutritional</span><span>0.4%</span></div>
-                    <div class="w-full h-2 bg-gray-100 rounded">
-                        <div class="h-2 bg-orange-400 rounded" style="width:0.4%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <p class="mt-4 text-xs text-gray-500">Sources: Tree‑Nation project data; web‑ready project; SustainablWWW; Stanley Park Ecology; Mittler Senior Tech.</p>
+            <p class="mt-2 text-xs text-gray-600">Labels like Agroforestry, Mangrove, or Medicinal are provided by project partners to describe typical uses and habitats.</p>
         </div>
     </section>
 
     <!-- Species Grid -->
     <section class="py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div id="species-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div id="species-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <!-- Nepal Species -->
-                <div class="species-card bg-white rounded-lg shadow-md p-6" data-category="legacy" data-country="nepal">
+                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="nepal">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-deep-forest">Nepal</h3>
-                        <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">Legacy Partner</span>
+                        <span class="tag">Legacy partner</span>
                     </div>
                     <div class="space-y-2 text-sm">
                         <p><strong>Acacia katechu</strong> (Khair)</p>
@@ -220,10 +169,10 @@
                 </div>
 
                 <!-- Madagascar Species -->
-                <div class="species-card bg-white rounded-lg shadow-md p-6" data-category="legacy" data-country="madagascar">
+                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="madagascar">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-deep-forest">Madagascar</h3>
-                        <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">Legacy Partner</span>
+                        <span class="tag">Legacy partner</span>
                     </div>
                     <div class="space-y-2 text-sm">
                         <p><strong>Anacardium occidentale</strong> (Cashew)</p>
@@ -243,10 +192,10 @@
                 </div>
 
                 <!-- Haiti Species -->
-                <div class="species-card bg-white rounded-lg shadow-md p-6" data-category="legacy" data-country="haiti">
+                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="haiti">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-deep-forest">Haiti</h3>
-                        <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">Legacy Partner</span>
+                        <span class="tag">Legacy partner</span>
                     </div>
                     <div class="space-y-2 text-sm">
                         <p><strong>Annona muricata</strong> (Soursop)</p>
@@ -266,10 +215,10 @@
                 </div>
 
                 <!-- Indonesia Species -->
-                <div class="species-card bg-white rounded-lg shadow-md p-6" data-category="legacy" data-country="indonesia">
+                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="indonesia">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-deep-forest">Indonesia</h3>
-                        <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">Legacy Partner</span>
+                        <span class="tag">Legacy partner</span>
                     </div>
                     <div class="space-y-2 text-sm">
                         <p><strong>Avicennia marina</strong> (Grey Mangrove)</p>
@@ -282,10 +231,10 @@
                 </div>
 
                 <!-- Mozambique Species -->
-                <div class="species-card bg-white rounded-lg shadow-md p-6" data-category="legacy" data-country="mozambique">
+                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="mozambique">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-deep-forest">Mozambique</h3>
-                        <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">Legacy Partner</span>
+                        <span class="tag">Legacy partner</span>
                     </div>
                     <div class="space-y-2 text-sm">
                         <p><strong>Avicennia marina</strong> (Grey Mangrove)</p>
@@ -304,10 +253,10 @@
                 </div>
 
                 <!-- Kenya Species -->
-                <div class="species-card bg-white rounded-lg shadow-md p-6" data-category="legacy" data-country="kenya">
+                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="kenya">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-deep-forest">Kenya</h3>
-                        <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">Legacy Partner</span>
+                        <span class="tag">Legacy partner</span>
                     </div>
                     <div class="space-y-2 text-sm">
                         <p><strong>Acacia gerrardii</strong> (Grey Thorn)</p>
@@ -329,10 +278,10 @@
                 </div>
 
                 <!-- Central America Species -->
-                <div class="species-card bg-white rounded-lg shadow-md p-6" data-category="legacy" data-country="central-america">
+                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="central-america">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-deep-forest">Central America</h3>
-                        <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">Legacy Partner</span>
+                        <span class="tag">Legacy partner</span>
                     </div>
                     <div class="space-y-2 text-sm">
                         <p><strong>Liquidambar styraciflua</strong> (Sweetgum)</p>
@@ -345,61 +294,61 @@
                 </div>
 
                 <!-- Verified Species (Tree-Nation) -->
-                <div class="species-card bg-white rounded-lg shadow-md p-6" data-category="verified" data-country="verified">
+                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="verified" data-country="verified">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-deep-forest">Verified Species</h3>
-                        <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Verified</span>
+                        <h3 class="text-lg font-semibold text-deep-forest">Verified species</h3>
+                        <span class="tag" style="border-color:#BBF7D0;color:#166534;background-color:#F0FDF4">Verified</span>
                     </div>
                     <div class="space-y-3 text-sm">
-                        <p class="text-gray-600">Selected most-planted species verified via Tree‑Nation:</p>
+                        <p class="text-gray-600">Selected most‑planted species verified via Tree‑Nation:</p>
 
                         <p>
                             <strong>Syzygium cumini</strong>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-green-100 text-green-800 text-[10px] font-semibold align-middle">MOST PLANTED</span>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 text-[10px] font-medium align-middle">CO2 100 Kg</span>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-medium align-middle">Agroforestry</span>
+                            <span class="ml-2 chip">Most planted</span>
+                            <span class="ml-2 tag">CO2 100 kg</span>
+                            <span class="ml-2 tag">Agroforestry</span>
                         </p>
 
                         <p>
                             <strong>Rhizophora mucronata</strong>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 text-[10px] font-medium align-middle">CO2 50 Kg</span>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-medium align-middle">Mangrove</span>
+                            <span class="ml-2 tag">CO2 50 kg</span>
+                            <span class="ml-2 tag">Mangrove</span>
                         </p>
 
                         <p>
                             <strong>Ceriops tagal</strong>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 text-[10px] font-medium align-middle">CO2 20 Kg</span>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-medium align-middle">Agroforestry</span>
+                            <span class="ml-2 tag">CO2 20 kg</span>
+                            <span class="ml-2 tag">Agroforestry</span>
                         </p>
 
                         <p>
                             <strong>Azadirachta indica</strong>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 text-[10px] font-medium align-middle">CO2 100 Kg</span>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-800 text-[10px] font-medium align-middle">Fast‑growing</span>
+                            <span class="ml-2 tag">CO2 100 kg</span>
+                            <span class="ml-2 tag">Fast‑growing</span>
                         </p>
 
                         <p>
                             <strong>Albizia gummifera</strong>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 text-[10px] font-medium align-middle">CO2 50 Kg</span>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-medium align-middle">Agroforestry</span>
+                            <span class="ml-2 tag">CO2 50 kg</span>
+                            <span class="ml-2 tag">Agroforestry</span>
                         </p>
 
                         <p>
                             <strong>Albizia schimperiana</strong>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 text-[10px] font-medium align-middle">CO2 50 Kg</span>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 text-[10px] font-medium align-middle">Medicinal</span>
+                            <span class="ml-2 tag">CO2 50 kg</span>
+                            <span class="ml-2 tag">Medicinal</span>
                         </p>
 
                         <p>
                             <strong>Phyllanthus emblica</strong>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 text-[10px] font-medium align-middle">CO2 10 Kg</span>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 text-[10px] font-medium align-middle">Medicinal</span>
+                            <span class="ml-2 tag">CO2 10 kg</span>
+                            <span class="ml-2 tag">Medicinal</span>
                         </p>
 
                         <p>
                             <strong>Citrus limon</strong>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 text-[10px] font-medium align-middle">CO2 10 Kg</span>
-                            <span class="ml-2 px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-medium align-middle">Agroforestry</span>
+                            <span class="ml-2 tag">CO2 10 kg</span>
+                            <span class="ml-2 tag">Agroforestry</span>
                         </p>
                     </div>
                 </div>
@@ -408,11 +357,11 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-deep-forest text-white py-12">
+    <footer class="bg-deep-forest text-white py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
-                <h3 class="text-2xl font-bold mb-4">Oasis of Change</h3>
-                <p class="text-gray-300 mb-6">Transforming landscapes, one tree at a time</p>
+                <h3 class="text-2xl font-serif mb-2">Oasis of Change</h3>
+                <p class="text-gray-300 mb-4">Transforming landscapes, one tree at a time</p>
                 <div class="flex justify-center space-x-6">
                     <a href="/final_dashboard.html" class="text-gray-300 hover:text-white transition-colors">Dashboard</a>
                     <a href="/certificates.html" class="text-gray-300 hover:text-white transition-colors">Certificates</a>
