@@ -4,8 +4,28 @@
   <meta charset="utf-8" />
   <title>Tree-Planting Locations</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-green': '#16A34A',
+            'legacy-gold': '#EAB308',
+            'deep-forest': '#0F172A',
+            'cloud-white': '#FFFFFF',
+            'mist-gray': '#F8FAFC'
+          },
+          fontFamily: {
+            'serif': ['DM Serif Display', 'serif'],
+            'sans': ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
 
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
 
@@ -18,8 +38,56 @@
   </style>
 </head>
 
-<body class="bg-gray-50 p-6">
-  <h1 class="text-2xl font-bold mb-4">Tree-Planting Locations (Country-Level)</h1>
+<body class="bg-mist-gray font-sans antialiased">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-14">
+        <div class="flex items-center">
+          <span class="font-serif text-lg text-deep-forest">Oasis of Change, Inc.</span>
+        </div>
+        
+        <div class="hidden md:flex items-center gap-3">
+          <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+            Certificates
+          </a>
+          <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+            Tree Species
+          </a>
+          <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+            Gallery
+          </a>
+          <a href="/map.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:opacity-90 transition">
+            View Map
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+        
+        <div class="md:hidden flex items-center gap-2">
+          <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition" aria-label="Certificates">
+            Certificates
+          </a>
+          <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition" aria-label="Tree Species">
+            Trees
+          </a>
+          <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition" aria-label="Gallery">
+            Gallery
+          </a>
+          <a href="/map.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:opacity-90 transition" aria-label="View Map">
+            Map
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <h1 class="text-2xl font-bold mb-4">Tree-Planting Locations (Country-Level)</h1>
 
   <div id="map" class="w-full rounded-lg shadow-lg border mb-6"></div>
 
@@ -245,5 +313,6 @@
         siteLists.appendChild(details);
       });
   </script>
+  </main>
 </body>
 </html>
