@@ -38,14 +38,7 @@
   <script>
     const plantingData = {
       MG: { centroid: [-18.77, 46.87], type: 'confirmed', sites: [
-        'Kandrany 1', 'Akalamboro', 'Ampasimarine', 'Akalamboro Dry Deciduous',
-        'Analamandreky', 'Ankarafantsika', 'Antsanitia Dry Deciduous',
-        'Antanamarina', 'Antsanitia Mangrove', 'Aranta', 'Akotorery',
-        'Farabe Lighthouse', 'Mahabana', 'Mariarano', 'Mataitraomby',
-        'Mbararata', 'Namakia', 'Morangobe', 'Papamena 1', 'Sakoany', 'RN4',
-        'Papamena 2', 'Vilamatsa', 'Marotaola', 'Ambonio 1', 'Boanamary 1',
-        'Ankalahila Mangrove', 'Bemangoraka 1', 'Bestiboka Island 1',
-        'Marotia 1', 'Bestiboka River – Island 2', 'Ambonio 2'
+        'Eden Reforestation Projects'
       ]},
 
       NP: { centroid: [28.39, 84.12], type: 'confirmed', sites: [
@@ -57,24 +50,27 @@
       ]},
 
       KE: { centroid: [-0.02, 37.91], type: 'confirmed', sites: [
-        'Kilifi','Kiongwe','Kipini','Kwasasi/Magumba','Manda – Matondoni',
-        'Manda Uwanjani','Marerenni & Kurawa','Mida Creek',
-        'Milihoi/Kichwa cha Nyoka','Mokowe Mama','Mtwapa Creek','Mwamdudu',
-        'Ngomeni','Pate Island','Port Reitz','Tsunza','Tudor Creek',
-        'Amu Ranch Cut Line','Big Fig','Gatamaiyu','Gwasi','Imenti Forest',
-        'Kass FM','Kenton Planting Site','Kitiligini','Monkey Corner',
-        'Monkey Corner Expansion','Ngaya','Nyambene','Ol Mariko',
-        'Old Kijabe Town – Arbor Day','Old Kijabe Town – Aspiration 1',
-        'Old Kijabe Town – Aspiration 2','Old Kijabe Town – Verizon',
-        'Olokurto','Turasha'
+        'Bore',
+        'Save the Aberdare Forest',
+        'Swahili Coast Mangrove Restoration'
       ]},
 
-      /* countries without explicit site arrays → count pending */
-      TZ: { centroid: [-6.37, 34.89], type:'confirmed', sites:['Tanzania (sites TBD)']},
-      SN: { centroid: [14.50,-14.45], type:'confirmed', sites:['Senegal (sites TBD)']},
-      US: { centroid: [39.83,-98.58], type:'confirmed', sites:['United States (sites TBD)']},
-      CM: { centroid: [7.37, 12.35], type:'confirmed', sites:['Cameroon (sites TBD)']},
-      IN: { centroid: [20.59, 78.96], type:'confirmed', sites:['India (sites TBD)']},
+      /* countries with actual projects */
+      TZ: { centroid: [-6.37, 34.89], type:'confirmed', sites: [
+        'Usambara Biodiversity Conservation',
+        'Mlola Biodiversity Restoration', 
+        'Replanting the burnt Mkussu Forest'
+      ]},
+      UG: { centroid: [1.37, 32.29], type:'confirmed', sites: [
+        'Preservation of Mt. Elgon Ecosystem',
+        'Forest Gardens - Mount Elgon Region'
+      ]},
+      US: { centroid: [39.83,-98.58], type:'confirmed', sites: [
+        'Lost Forests Recovery in California'
+      ]},
+      IN: { centroid: [20.59, 78.96], type:'confirmed', sites: [
+        'Trees for Tribals'
+      ]},
       MZ: { centroid: [-18.67,35.53], type:'partner',   sites:['Mozambique (partner)']},
       CF: { centroid: [ 6.61,20.94], type:'partner',   sites:['Central African Republic (partner)']},
       LA: { centroid: [19.86,102.50],type:'partner',   sites:['Laos (partner)']},
@@ -89,6 +85,7 @@
       NP: 'Nepal',
       KE: 'Kenya',
       TZ: 'Tanzania',
+      UG: 'Uganda',
       SN: 'Senegal',
       US: 'United States',
       CM: 'Cameroon',
