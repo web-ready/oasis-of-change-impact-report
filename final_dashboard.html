@@ -8,6 +8,7 @@
     <meta property="og:site_name" content="Oasis of Change, Inc.">
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="assets/css/dashboard.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -31,308 +32,14 @@
             }
         }
     </script>
-    <style>
-        .tabular-nums {
-            font-feature-settings: 'tnum';
-            font-variant-numeric: tabular-nums;
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .metric-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            border: 1px solid #e2e8f0;
-        }
-        
-        .progress-glow {
-            box-shadow: 0 0 20px rgba(22, 163, 74, 0.3);
-        }
-        
-        .hero-gradient {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-        }
-        
-        .data-row:hover {
-            background: linear-gradient(90deg, rgba(22, 163, 74, 0.02) 0%, rgba(22, 163, 74, 0.05) 100%);
-        }
-        
-        .tab-indicator {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #16A34A, #22c55e);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate-slide-up {
-            animation: slideUp 0.6s ease-out forwards;
-        }
-        
-        .stagger-1 { animation-delay: 0.1s; }
-        .stagger-2 { animation-delay: 0.2s; }
-        .stagger-3 { animation-delay: 0.3s; }
-        .stagger-4 { animation-delay: 0.4s; }
-        
-        .bar-animation { 
-            transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        
-        .count-up {
-            font-variant-numeric: tabular-nums;
-        }
-        
-        /* Hide table scrollbar */
-        .overflow-x-auto {
-            overflow-x: auto;
-            scrollbar-width: none; 
-        }
-        .overflow-x-auto::-webkit-scrollbar {
-            display: none;
-        }
-        
-        /* Mobile-specific styles */
-        @media (max-width: 768px) {
-            .hero-gradient {
-                padding: 2rem 1rem !important;
-            }
-            
-            .metric-card {
-                padding: 1.5rem !important;
-            }
-            
-            .grid.lg\\:grid-cols-4 {
-                grid-template-columns: 1fr;
-            }
-            
-            .lg\\:col-span-2 {
-                grid-column: span 1;
-            }
-            
-            /* Mobile body improvements */
-            body {
-                font-size: 16px;
-                line-height: 1.5;
-            }
-            
-            /* Mobile header improvements */
-            .sticky.top-0 {
-                padding: 0 1rem;
-            }
-            
-            /* Mobile main content */
-            main {
-                padding: 1rem;
-            }
-            
-            /* Mobile KPI cards */
-            .metric-card {
-                margin-bottom: 1rem;
-            }
-            
-            /* Mobile progress section */
-            .progress-glow {
-                box-shadow: 0 0 10px rgba(22, 163, 74, 0.2);
-            }
-            
-            /* Mobile table improvements */
-            .mobile-table-container {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                border-radius: 0.75rem;
-                border: 1px solid #e5e7eb;
-            }
-            
-            .mobile-table {
-                min-width: 600px;
-                font-size: 0.875rem;
-            }
-            
-            .mobile-table th,
-            .mobile-table td {
-                padding: 0.75rem 0.5rem;
-                white-space: nowrap;
-            }
-            
-            .mobile-table th:first-child,
-            .mobile-table td:first-child {
-                position: sticky;
-                left: 0;
-                background: white;
-                z-index: 10;
-                border-right: 1px solid #e5e7eb;
-                min-width: 120px;
-            }
-            
-            .mobile-search-container {
-                position: sticky;
-                top: 0;
-                background: white;
-                z-index: 20;
-                padding: 1rem;
-                border-bottom: 1px solid #e5e7eb;
-                margin: -1rem -1rem 1rem -1rem;
-            }
-            
-            .mobile-search-input {
-                width: 100%;
-                padding: 0.75rem;
-                border: 1px solid #d1d5db;
-                border-radius: 0.5rem;
-                font-size: 1rem;
-                background: #f9fafb;
-            }
-            
-            .mobile-search-input:focus {
-                outline: none;
-                border-color: #16a34a;
-                background: white;
-                box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
-            }
-            
-            /* Mobile card layout for better readability */
-            .mobile-data-card {
-                background: white;
-                border: 1px solid #e5e7eb;
-                border-radius: 0.75rem;
-                padding: 1rem;
-                margin-bottom: 0.75rem;
-            }
-            
-            .mobile-data-card:last-child {
-                margin-bottom: 0;
-            }
-            
-            .mobile-card-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: flex-start;
-                margin-bottom: 0.75rem;
-            }
-            
-            .mobile-card-title {
-                font-weight: 600;
-                color: #0f172a;
-                font-size: 1rem;
-                line-height: 1.4;
-            }
-            
-            .mobile-card-subtitle {
-                color: #6b7280;
-                font-size: 0.875rem;
-                margin-top: 0.25rem;
-            }
-            
-            .mobile-card-meta {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.5rem;
-                margin-top: 0.75rem;
-            }
-            
-            .mobile-meta-item {
-                display: flex;
-                align-items: center;
-                gap: 0.25rem;
-                font-size: 0.75rem;
-                color: #6b7280;
-            }
-            
-            .mobile-trees-count {
-                font-size: 1.25rem;
-                font-weight: 700;
-                color: #16a34a;
-            }
-            
-            /* Hide desktop table on mobile */
-            .desktop-table {
-                display: none;
-            }
-            
-            /* Show mobile cards on mobile */
-            .mobile-cards {
-                display: block;
-            }
-            
-            /* Touch-friendly improvements */
-            .tab-button {
-                min-height: 48px;
-                padding: 1rem;
-            }
-            
-            /* Mobile footer improvements */
-            .mt-12 {
-                margin-top: 2rem;
-            }
-            
-            /* Better mobile spacing */
-            .mb-12 {
-                margin-bottom: 2rem;
-            }
-            
-            /* Mobile text sizing */
-            .text-4xl {
-                font-size: 2rem;
-            }
-            
-            .text-5xl {
-                font-size: 2.5rem;
-            }
-            
-            .text-6xl {
-                font-size: 3rem;
-            }
-            
-            .text-7xl {
-                font-size: 3.5rem;
-            }
-            
-            .text-8xl {
-                font-size: 4rem;
-            }
-        }
-        
-        /* Desktop styles */
-        @media (min-width: 769px) {
-            .desktop-table {
-                display: block;
-            }
-            
-            .mobile-cards {
-                display: none;
-            }
-            
-            .mobile-search-container {
-                display: none;
-            }
-        }
-        
-        @media print {
-            body { background: white !important; }
-            .no-print { display: none !important; }
-        }
-    </style>
 </head>
 <body class="bg-mist-gray font-sans antialiased">
-    <!-- Header -->
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="flex items-center justify-between h-14 relative">
                 <div class="flex items-center gap-2">
                     <a href="/final_dashboard.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
                 </div>
-
-                <!-- desktop nav area kept for future links (empty) -->
-                <nav class="hidden md:flex items-center gap-6"></nav>
 
                 <div class="hidden md:flex items-center gap-3">
                     <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
@@ -356,13 +63,10 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
                 </button>
-
-                
             </div>
         </div>
     </header>
 
-    <!-- Global mobile menu overlay -->
     <div id="mobile-menu" class="md:hidden hidden fixed inset-0 z-[2000] bg-black/90 backdrop-blur-sm">
         <div class="w-full h-full flex items-center justify-center p-6" id="mobile-menu-backdrop">
             <div class="text-center text-white max-w-sm mx-auto">
@@ -383,15 +87,13 @@
             </div>
         </div>
     </div>
-
-    <!-- Mobile Header (hidden on desktop) -->
     <header class="md:hidden w-full text-center py-12 px-4">
         <h1 class="font-serif font-semibold text-deep-forest text-4xl md:text-5xl mb-4">
             Tree-Planting Impact Report
         </h1>
         <div class="text-gray-600 text-sm space-y-1">
             <p>
-                <b>Last updated: September 7th, 2025</b>
+                <b>Last updated: September 10th, 2025</b>
                 <span id="last-updated-relative-mobile" class="text-gray-500 text-xs ml-2"></span>
             </p>
             <p>Published under the Oasis of Change, Inc., Sustainability Charter and overseen by our Board of Directors.</p>
@@ -428,7 +130,7 @@
                                 <span>Live Data</span>
                             </div>
                             <span>•</span>
-                            <span>Last updated: September 7th, 2025</span>
+                            <span>Last updated: September 10th, 2025</span>
                             <span id="last-updated-relative" class="text-xs ml-2"></span>
                         </div>
                     </div>
