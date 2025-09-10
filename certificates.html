@@ -93,14 +93,12 @@
     </style>
 </head>
 <body class="bg-mist-gray font-sans antialiased">
-    <!-- Header -->
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="flex items-center justify-between h-14 relative">
                 <div class="flex items-center gap-2">
                     <a href="/final_dashboard.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
                 </div>
-                <!-- Desktop Nav -->
                 <div class="hidden md:flex items-center gap-3">
                     <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
                         Certificates
@@ -119,7 +117,6 @@
                     </a>
                 </div>
                 
-                <!-- Mobile Nav -->
                 <button id="mobile-menu-toggle" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50" aria-label="Open menu" aria-expanded="false">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -131,7 +128,6 @@
         </div>
     </header>
 
-    <!-- Global mobile menu overlay -->
     <div id="mobile-menu" class="md:hidden hidden fixed inset-0 z-[2000] bg-black/90 backdrop-blur-sm">
         <div class="w-full h-full flex items-center justify-center p-6" id="mobile-menu-backdrop">
             <div class="text-center text-white max-w-sm mx-auto">
@@ -190,7 +186,6 @@
         <div class="mb-8">
             <h2 class="text-2xl font-semibold text-deep-forest mb-6">Certificates</h2>
             
-            <!-- Certificate 1 -->
             <div class="certificate-card">
                 <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
                     <div class="flex-1">
@@ -214,7 +209,6 @@
                 </div>
             </div>
 
-            <!-- Certificate 2 -->
             <div class="certificate-card">
                 <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
                     <div class="flex-1">
@@ -238,7 +232,6 @@
                 </div>
             </div>
 
-            <!-- Certificate 3a -->
             <div class="certificate-card">
                 <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
                     <div class="flex-1">
@@ -262,7 +255,6 @@
                 </div>
             </div>
 
-            <!-- Certificate 3b -->
             <div class="certificate-card">
                 <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
                     <div class="flex-1">
@@ -286,7 +278,6 @@
                 </div>
             </div>
 
-            <!-- Certificate 4 -->
             <div class="certificate-card">
                 <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
                     <div class="flex-1">
@@ -310,7 +301,6 @@
                 </div>
             </div>
 
-            <!-- Certificate 5 -->
             <div class="certificate-card">
                 <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
                     <div class="flex-1">
@@ -336,9 +326,7 @@
 
         </div>
 
-        <!-- Detailed Information -->
         <div id="detailed-info" class="mt-12">
-            <!-- Verification Notice -->
             <div class="mb-6 p-6 bg-blue-50 border border-blue-200 rounded-2xl">
                 <div class="flex items-start space-x-4">
                     <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -357,7 +345,6 @@
                 </div>
             </div>
 
-            <!-- Tree Minimum Notice -->
             <div class="mb-8 p-6 bg-green-50 border border-green-200 rounded-2xl">
                 <div class="flex items-start space-x-4">
                     <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -387,7 +374,6 @@
             });
         }
         function downloadCertificate(certificateId) {
-            // Map certificate IDs to actual file paths
             const certificatePaths = {
                 'web-ready-2025-madagascar': 'assets/certificates/Web-Ready/2025 Planting/2025-02-26_Web-Ready-Planting_Eden-Reforestation_Madagascar_675-Trees-33750kg-CO2.pdf',
                 'spes-2024-tanzania': 'assets/certificates/Stanley Park Ecology Society (SPES)/2024-01-26_Stanley-Park-Ecology-Society_Usambara-Biodiversity_Tanzania_100-Trees-15000kg-CO2.pdf.pdf',
@@ -399,7 +385,6 @@
             
             const filePath = certificatePaths[certificateId];
             if (filePath) {
-                // Create a temporary link to download the file
                 const link = document.createElement('a');
                 link.href = filePath;
                 link.download = filePath.split('/').pop();
@@ -412,13 +397,11 @@
         }
 
 
-        // Add some interactive feedback
         document.addEventListener('DOMContentLoaded', function() {
             const downloadButtons = document.querySelectorAll('.download-btn');
             
             downloadButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    // Add a subtle animation feedback
                     this.style.transform = 'scale(0.95)';
                     setTimeout(() => {
                         this.style.transform = '';
@@ -426,7 +409,6 @@
                 });
             });
 
-            // Mobile menu toggle
             const toggleBtn = document.getElementById('mobile-menu-toggle');
             const mobileMenu = document.getElementById('mobile-menu');
             const closeBtn = document.getElementById('mobile-menu-close');
