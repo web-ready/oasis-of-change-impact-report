@@ -110,6 +110,9 @@ function updateTreeStatistics() {
 
     // Populate project tables
     populateProjectTables();
+    
+    // Populate CO₂ equivalencies
+    populateCO2Equivalencies();
 }
 
 function populateProjectTables() {
@@ -536,3 +539,120 @@ document.addEventListener('keydown', function(e) {
         }
     }
 });
+
+// CO₂ Equivalencies Calculation and Display
+function populateCO2Equivalencies() {
+    const treesPlanted = TreeData.getTotalTrees();
+    
+    // Tree-Nation's official CO₂ capture methodology
+    const co2PerTree_10yr = 80; // kg CO₂ per tree over first 10 years (conservative)
+    const co2PerTree_lifetime = 250; // kg CO₂ per tree over lifetime (average)
+    
+    const totalCO2_10yr = treesPlanted * co2PerTree_10yr;
+    const totalCO2_lifetime = treesPlanted * co2PerTree_lifetime;
+    
+    // Update the tree count in the equivalencies section
+    const equivalencyTreesElement = document.getElementById('co2-equivalency-trees');
+    if (equivalencyTreesElement) {
+        equivalencyTreesElement.textContent = treesPlanted.toLocaleString();
+    }
+    
+    // Update CO₂ totals display
+    const co2Total10yrElement = document.getElementById('co2-total-10yr');
+    const co2Total10yrTonnesElement = document.getElementById('co2-total-10yr-tonnes');
+    const co2TotalLifetimeElement = document.getElementById('co2-total-lifetime');
+    const co2TotalLifetimeTonnesElement = document.getElementById('co2-total-lifetime-tonnes');
+    
+    if (co2Total10yrElement) co2Total10yrElement.textContent = totalCO2_10yr.toLocaleString();
+    if (co2Total10yrTonnesElement) co2Total10yrTonnesElement.textContent = (totalCO2_10yr / 1000).toFixed(1);
+    if (co2TotalLifetimeElement) co2TotalLifetimeElement.textContent = totalCO2_lifetime.toLocaleString();
+    if (co2TotalLifetimeTonnesElement) co2TotalLifetimeTonnesElement.textContent = (totalCO2_lifetime / 1000).toFixed(1);
+    
+    // Simple equivalency calculations - just multiply by conversion factors
+    const equivalencies = [
+        {
+            title: "Gasoline Consumed",
+            value_10yr: totalCO2_10yr / 8.887, // US EPA 2024: 8.887 kg CO₂ per gallon
+            value_lifetime: totalCO2_lifetime / 8.887,
+            unit: "gallons",
+            description: "Gasoline consumption avoided",
+            icon: "⛽",
+            source: "US EPA 2024",
+            sourceNumber: 1
+        },
+        {
+            title: "Distance Driven",
+            value_10yr: totalCO2_10yr / 0.393, // US EPA 2024: 3.93 × 10⁻⁴ t CO₂ per mile
+            value_lifetime: totalCO2_lifetime / 0.393,
+            unit: "miles",
+            description: "In gas-powered car (22.8 mpg avg)",
+            icon: "🚗",
+            source: "US EPA 2024",
+            sourceNumber: 2
+        },
+        {
+            title: "Waste Recycled",
+            value_10yr: totalCO2_10yr / 2830, // US EPA WARM 2024: 2.83 t CO₂ e avoided per ton recycled
+            value_lifetime: totalCO2_lifetime / 2830,
+            unit: "tons",
+            description: "Instead of landfilled",
+            icon: "♻️",
+            source: "US EPA WARM 2024",
+            sourceNumber: 3
+        },
+        {
+            title: "Forest Sequestration",
+            value_10yr: totalCO2_10yr / 1000, // US EPA 2024: 1 t CO₂ per acre per year
+            value_lifetime: totalCO2_lifetime / 1000,
+            unit: "acre-years",
+            description: "Forest removing CO₂ for one year",
+            icon: "🌲",
+            source: "US EPA 2024",
+            sourceNumber: 4
+        }
+    ];
+    
+    // Populate the equivalencies grid
+    const gridElement = document.getElementById('co2-equivalencies-grid');
+    if (gridElement) {
+        gridElement.innerHTML = '';
+        
+        equivalencies.forEach(equiv => {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-xl p-6 border border-gray-100 hover:shadow-md transition-shadow duration-200';
+            
+            // Format values appropriately
+            function formatValue(value) {
+                if (value >= 1000000) {
+                    return (value / 1000000).toFixed(1) + 'M';
+                } else if (value >= 1000) {
+                    return (value / 1000).toFixed(1) + 'K';
+                } else if (value < 1) {
+                    return value.toFixed(3);
+                } else {
+                    return Math.round(value).toLocaleString();
+                }
+            }
+            
+            const displayValue10yr = formatValue(equiv.value_10yr);
+            const displayValueLifetime = formatValue(equiv.value_lifetime);
+            
+            card.innerHTML = `
+                <div class="flex items-center justify-between mb-4">
+                    <div class="text-2xl">${equiv.icon}</div>
+                    <div class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">${equiv.source}<sup>${equiv.sourceNumber}</sup></div>
+                </div>
+                <div class="mb-3">
+                    <div class="text-lg font-bold text-deep-forest tabular-nums">${displayValue10yr}</div>
+                    <div class="text-xs text-gray-600 mb-1">${equiv.unit} (10-year)</div>
+                    <div class="text-sm font-semibold text-brand-green tabular-nums">${displayValueLifetime}</div>
+                    <div class="text-xs text-gray-600">${equiv.unit} (lifetime)</div>
+                </div>
+                <div class="text-sm font-medium text-deep-forest mb-1">${equiv.title}</div>
+                <div class="text-xs text-gray-500">${equiv.description}</div>
+            `;
+            
+            gridElement.appendChild(card);
+        });
+    }
+}

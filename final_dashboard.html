@@ -208,7 +208,45 @@
             </div>
         </section>
 
+        <!-- CO₂ Equivalencies Section -->
         <section class="metric-card rounded-2xl p-8 mb-12 animate-slide-up stagger-4">
+            <h3 class="text-2xl font-semibold text-deep-forest mb-8">CO₂ Impact Equivalencies</h3>
+            <p class="text-gray-600 mb-6">Our <span id="co2-equivalency-trees" class="font-semibold text-brand-green">trees</span> planted will capture CO₂ equivalent to:</p>
+            
+            <!-- CO₂ Totals Display -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200">
+                    <div class="text-sm font-medium text-blue-800 mb-2">10-Year Conservative Estimate</div>
+                    <div class="text-3xl font-bold text-blue-900 tabular-nums" id="co2-total-10yr">0</div>
+                    <div class="text-sm text-blue-700">kg CO₂ (<span id="co2-total-10yr-tonnes">0</span> tonnes)</div>
+                </div>
+                <div class="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-6 border border-green-200">
+                    <div class="text-sm font-medium text-green-800 mb-2">Lifetime Average Estimate</div>
+                    <div class="text-3xl font-bold text-green-900 tabular-nums" id="co2-total-lifetime">0</div>
+                    <div class="text-sm text-green-700">kg CO₂ (<span id="co2-total-lifetime-tonnes">0</span> tonnes)</div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="co2-equivalencies-grid">
+                <!-- CO₂ equivalencies will be populated dynamically -->
+            </div>
+            
+            <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                <p class="text-xs text-gray-600 text-center">
+                    <strong>Tree-Nation Methodology:</strong> Conservative estimate: 80 kg CO₂ per tree (10 years)<sup><a href="https://kb.tree-nation.com/knowledge/co2-capture" target="_blank" rel="noopener" class="text-blue-600 hover:underline">1</a></sup>. 
+                    Average lifetime: 250 kg CO₂ per tree<sup><a href="https://kb.tree-nation.com/knowledge/co2-offset-methodology" target="_blank" rel="noopener" class="text-blue-600 hover:underline">2</a></sup>. 
+                    Equivalencies based on:
+                </p>
+                <div class="mt-2 text-xs text-gray-600 text-center space-y-1">
+                    <p><sup>1</sup> <a href="https://kb.tree-nation.com/knowledge/co2-capture" target="_blank" rel="noopener" class="text-blue-600 hover:underline">Tree-Nation CO₂ Capture Methodology</a></p>
+                    <p><sup>2</sup> <a href="https://kb.tree-nation.com/knowledge/co2-offset-methodology" target="_blank" rel="noopener" class="text-blue-600 hover:underline">Tree-Nation Offset Methodology</a></p>
+                    <p><sup>3</sup> <a href="https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator-calculations-and-references" target="_blank" rel="noopener" class="text-blue-600 hover:underline">US EPA 2024 Emission Factors</a></p>
+                    <p><sup>4</sup> <a href="https://www.epa.gov/warm" target="_blank" rel="noopener" class="text-blue-600 hover:underline">US EPA WARM 2024</a></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="metric-card rounded-2xl p-8 mb-12 animate-slide-up stagger-5">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
                 <div>
                     <h3 class="text-2xl font-semibold text-deep-forest mb-2">Progress to 10,000 Tree Goal</h3>
