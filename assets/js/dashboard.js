@@ -1,4 +1,17 @@
-(function () {
+// Initialize tree data and update UI
+function initializeTreeData() {
+    if (typeof TreeData === 'undefined') {
+        console.error('TreeData not loaded. Make sure tree-data.js is included before dashboard.js');
+        return;
+    }
+
+    // Update last updated date
+    const lastUpdatedElement = document.getElementById('last-updated-date');
+    if (lastUpdatedElement) {
+        lastUpdatedElement.textContent = TreeData.lastUpdated;
+    }
+
+    // Calculate relative time
     var lastUpdated = new Date('2025-09-10T00:00:00-07:00'); 
     var now = new Date();
     var diffMs = now - lastUpdated;
@@ -28,7 +41,179 @@
     var mobileElement = document.getElementById('last-updated-relative-mobile');
     if (desktopElement) desktopElement.textContent = '(' + rel + ')';
     if (mobileElement) mobileElement.textContent = '(' + rel + ')';
-})();
+
+    // Update all tree statistics
+    updateTreeStatistics();
+}
+
+function updateTreeStatistics() {
+    // Update total trees
+    const totalTrees = TreeData.getTotalTrees();
+    const totalElement = document.getElementById('total-count');
+    const totalElementMobile = document.getElementById('total-count-mobile');
+    if (totalElement) totalElement.textContent = totalTrees.toLocaleString();
+    if (totalElementMobile) totalElementMobile.textContent = totalTrees.toLocaleString();
+
+    // Update verified trees
+    const verifiedTrees = TreeData.getVerifiedTrees();
+    const verifiedElement = document.getElementById('verified-count');
+    if (verifiedElement) verifiedElement.textContent = verifiedTrees.toLocaleString();
+
+    // Update legacy trees
+    const legacyTrees = TreeData.getLegacyTrees();
+    const legacyElement = document.getElementById('legacy-count');
+    if (legacyElement) legacyElement.textContent = legacyTrees.toLocaleString();
+
+    // Update percentages
+    const verifiedPercentage = TreeData.getVerifiedPercentage();
+    const legacyPercentage = TreeData.getLegacyPercentage();
+    
+    const verifiedPercentageElement = document.getElementById('verified-percentage');
+    const legacyPercentageElement = document.getElementById('legacy-percentage');
+    if (verifiedPercentageElement) verifiedPercentageElement.textContent = verifiedPercentage + '% of total';
+    if (legacyPercentageElement) legacyPercentageElement.textContent = legacyPercentage + '% of total';
+
+    // Update tree count text
+    const verifiedTreesText = document.getElementById('verified-trees-text');
+    const legacyTreesText = document.getElementById('legacy-trees-text');
+    if (verifiedTreesText) verifiedTreesText.textContent = verifiedTrees.toLocaleString() + ' trees';
+    if (legacyTreesText) legacyTreesText.textContent = legacyTrees.toLocaleString() + ' trees';
+
+    // Update progress bars
+    const verifiedProgressBar = document.getElementById('verified-progress-bar');
+    const legacyProgressBar = document.getElementById('legacy-progress-bar');
+    if (verifiedProgressBar) verifiedProgressBar.style.width = verifiedPercentage + '%';
+    if (legacyProgressBar) legacyProgressBar.style.width = legacyPercentage + '%';
+
+    // Update CO2 and species counts
+    const co2Element = document.getElementById('co2-simple');
+    const speciesElement = document.getElementById('species-count');
+    if (co2Element) co2Element.textContent = TreeData.getCo2Captured().toLocaleString();
+    if (speciesElement) speciesElement.textContent = TreeData.getSpeciesCount();
+
+    // Update progress section
+    const progressPercentage = TreeData.getProgressPercentage();
+    const remainingTrees = TreeData.getRemainingTrees();
+    const goalTrees = TreeData.totals.goalTrees;
+    
+    const progressPercentageElement = document.getElementById('progress-percentage');
+    const remainingTreesElement = document.getElementById('remaining-trees-text');
+    const progressTreesPlantedElement = document.getElementById('progress-trees-planted');
+    const progressGoalElement = document.getElementById('progress-goal');
+    const mainProgressBar = document.getElementById('main-progress-bar');
+    
+    if (progressPercentageElement) progressPercentageElement.textContent = progressPercentage + '%';
+    if (remainingTreesElement) remainingTreesElement.textContent = remainingTrees.toLocaleString() + ' trees remaining to reach our milestone';
+    if (progressTreesPlantedElement) progressTreesPlantedElement.textContent = totalTrees.toLocaleString();
+    if (progressGoalElement) progressGoalElement.textContent = goalTrees.toLocaleString();
+    if (mainProgressBar) mainProgressBar.style.width = progressPercentage + '%';
+
+    // Populate project tables
+    populateProjectTables();
+}
+
+function populateProjectTables() {
+    // Populate verified projects table
+    const verifiedTableBody = document.getElementById('verified-table-body');
+    const verifiedMobileCards = document.getElementById('verified-mobile-cards');
+    
+    if (verifiedTableBody) {
+        verifiedTableBody.innerHTML = '';
+        TreeData.getVerifiedProjects().forEach(project => {
+            const row = document.createElement('tr');
+            row.className = 'data-row border-b border-gray-50 transition-all duration-200';
+            row.innerHTML = `
+                <td class="py-6 px-2">
+                    <div class="font-medium text-deep-forest">
+                        <a href="${project.url}" target="_blank" rel="noopener" class="hover:text-brand-green underline-offset-2 hover:underline">${project.name}</a>
+                    </div>
+                    <div class="text-sm text-gray-500">${project.description}</div>
+                </td>
+                <td class="py-6 px-2">
+                    <span class="text-sm font-medium text-gray-700">${project.location}</span>
+                </td>
+                <td class="py-6 px-2 text-right">
+                    <div class="tabular-nums text-lg font-semibold text-deep-forest">${project.trees.toLocaleString()}</div>
+                </td>
+            `;
+            verifiedTableBody.appendChild(row);
+        });
+    }
+
+    // Populate verified mobile cards
+    if (verifiedMobileCards) {
+        verifiedMobileCards.innerHTML = '';
+        TreeData.getVerifiedProjects().forEach(project => {
+            const card = document.createElement('div');
+            card.className = 'mobile-data-card';
+            card.setAttribute('data-search', `${project.name.toLowerCase()} ${project.description.toLowerCase()} ${project.location.toLowerCase()}`);
+            card.innerHTML = `
+                <div class="mobile-card-header">
+                    <div>
+                        <div class="mobile-card-title"><a href="${project.url}" target="_blank" rel="noopener" class="hover:text-brand-green underline-offset-2 hover:underline">${project.name}</a></div>
+                        <div class="mobile-card-subtitle">${project.description}</div>
+                    </div>
+                    <div class="mobile-trees-count">${project.trees.toLocaleString()}</div>
+                </div>
+                <div class="mobile-card-meta">
+                    <div class="mobile-meta-item">
+                        <span>${project.location}</span>
+                    </div>
+                </div>
+            `;
+            verifiedMobileCards.appendChild(card);
+        });
+    }
+
+    // Populate legacy projects table
+    const legacyTableBody = document.getElementById('legacy-table-body');
+    const legacyMobileCards = document.getElementById('legacy-mobile-cards');
+    
+    if (legacyTableBody) {
+        legacyTableBody.innerHTML = '';
+        TreeData.getLegacyProjects().forEach(project => {
+            const row = document.createElement('tr');
+            row.className = 'data-row border-b border-gray-50 transition-all duration-200';
+            row.innerHTML = `
+                <td class="py-6 px-2">
+                    <div class="font-medium text-deep-forest">${project.name}</div>
+                    <div class="text-sm text-gray-500">${project.description}</div>
+                </td>
+                <td class="py-6 px-2 text-right">
+                    <div class="tabular-nums text-lg font-semibold text-deep-forest">${project.trees.toLocaleString()}</div>
+                </td>
+            `;
+            legacyTableBody.appendChild(row);
+        });
+    }
+
+    // Populate legacy mobile cards
+    if (legacyMobileCards) {
+        legacyMobileCards.innerHTML = '';
+        TreeData.getLegacyProjects().forEach(project => {
+            const card = document.createElement('div');
+            card.className = 'mobile-data-card';
+            card.setAttribute('data-search', `${project.name.toLowerCase()} ${project.description.toLowerCase()}`);
+            card.innerHTML = `
+                <div class="mobile-card-header">
+                    <div>
+                        <div class="mobile-card-title">${project.name}</div>
+                        <div class="mobile-card-subtitle">${project.description}</div>
+                    </div>
+                    <div class="mobile-trees-count">${project.trees.toLocaleString()}</div>
+                </div>
+            `;
+            legacyMobileCards.appendChild(card);
+        });
+    }
+}
+
+// Initialize when DOM is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeTreeData);
+} else {
+    initializeTreeData();
+}
 
 (function(){
     const toggleBtn = document.getElementById('mobile-menu-toggle');
@@ -82,16 +267,25 @@ function switchTab(tabName) {
 
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
-        const bars = document.querySelectorAll('.bar-animation');
-        bars.forEach(bar => {
-            const target = bar.getAttribute('data-target');
-            bar.style.width = target + '%';
-        });
+        // Update progress bars with centralized data
+        const verifiedProgressBar = document.getElementById('verified-progress-bar');
+        const legacyProgressBar = document.getElementById('legacy-progress-bar');
+        
+        if (verifiedProgressBar) {
+            const verifiedPercentage = TreeData.getVerifiedPercentage();
+            verifiedProgressBar.style.width = verifiedPercentage + '%';
+        }
+        
+        if (legacyProgressBar) {
+            const legacyPercentage = TreeData.getLegacyPercentage();
+            legacyProgressBar.style.width = legacyPercentage + '%';
+        }
     }, 300);
 
+    // Animate the total count with centralized data
     const totalElement = document.getElementById('total-count');
     const totalElementMobile = document.getElementById('total-count-mobile');
-    const targetValue = 8870;
+    const targetValue = TreeData.getTotalTrees();
     let currentValue = 0;
     const duration = 1000;
     const increment = targetValue / (duration / 16);
@@ -297,8 +491,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function animateImpactMetrics() {
-    animateNumber('co2-simple', 0, 132465, 0, '');
-    animateNumber('species-count', 0, 12, 0, '');
+    animateNumber('co2-simple', 0, TreeData.getCo2Captured(), 0, '');
+    animateNumber('species-count', 0, TreeData.getSpeciesCount(), 0, '');
 }
 
 function animateNumber(elementId, start, end, decimals, suffix) {

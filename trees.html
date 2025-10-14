@@ -413,7 +413,16 @@
         </section>
     </main>
 
+    <script src="assets/js/tree-data.js"></script>
     <script>
+        // Initialize tree data
+        function initializeTreeData() {
+            if (typeof TreeData !== 'undefined') {
+                // Update any dynamic content with centralized data
+                console.log('Tree data loaded:', TreeData.getTotalTrees(), 'trees');
+            }
+        }
+        
         // Mobile menu toggle
         (function(){
             const toggleBtn = document.getElementById('mobile-menu-toggle');
@@ -431,6 +440,13 @@
                 if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
             }
         })();
+        
+        // Initialize when DOM is loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeTreeData);
+        } else {
+            initializeTreeData();
+        }
 
         // Animate cards on scroll
         document.addEventListener('DOMContentLoaded', function() {

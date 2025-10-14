@@ -186,145 +186,9 @@
 
         <div class="mb-8">
             <h2 class="text-2xl font-semibold text-deep-forest mb-6">Certificates</h2>
-            
-            <div class="certificate-card">
-                <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
-                    <div class="flex-1">
-                        <h3 class="text-lg font-semibold text-deep-forest mb-3">Web-Ready Forest Restoration</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">
-                            <p><strong>Certificate:</strong> Eden Reforestation</p>
-                            <p><strong>Location:</strong> Madagascar</p>
-                            <p><strong>Trees Planted:</strong> 675</p>
-                            <p><strong>CO2 Offset:</strong> 33,750 kg</p>
-                            <p class="sm:col-span-2"><strong>Date:</strong> February 26, 2025</p>
-                        </div>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <button class="download-btn w-full sm:w-auto" onclick="downloadCertificate('web-ready-2025-madagascar')">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                            </svg>
-                            Download PDF
-                        </button>
-                    </div>
-                </div>
+            <div id="certificates-container">
+                <!-- Certificates will be populated dynamically -->
             </div>
-
-            <div class="certificate-card">
-                <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
-                    <div class="flex-1">
-                        <h3 class="text-lg font-semibold text-deep-forest mb-3">Stanley Park Ecology Society (SPES)</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">
-                            <p><strong>Certificate:</strong> Usambara Biodiversity</p>
-                            <p><strong>Location:</strong> Tanzania</p>
-                            <p><strong>Trees Planted:</strong> 100</p>
-                            <p><strong>CO2 Offset:</strong> 15,000 kg</p>
-                            <p class="sm:col-span-2"><strong>Date:</strong> January 26, 2024</p>
-                        </div>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <button class="download-btn w-full sm:w-auto" onclick="downloadCertificate('spes-2024-tanzania')">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                        Download PDF
-                    </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="certificate-card">
-                <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
-                    <div class="flex-1">
-                        <h3 class="text-lg font-semibold text-deep-forest mb-3">Sustainable WWW - Planting 1</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">
-                            <p><strong>Certificate:</strong> Usambara Biodiversity</p>
-                            <p><strong>Location:</strong> Tanzania</p>
-                            <p><strong>Trees Planted:</strong> 50</p>
-                            <p><strong>CO2 Offset:</strong> 6,000 kg</p>
-                            <p class="sm:col-span-2"><strong>Date:</strong> December 29, 2023</p>
-                        </div>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <button class="download-btn w-full sm:w-auto" onclick="downloadCertificate('sustainable-www-2023-tanzania-1')">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                        Download PDF
-                    </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="certificate-card">
-                <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
-                    <div class="flex-1">
-                        <h3 class="text-lg font-semibold text-deep-forest mb-3">Sustainable WWW - Planting 2</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">
-                            <p><strong>Certificate:</strong> Usambara Biodiversity</p>
-                            <p><strong>Location:</strong> Tanzania</p>
-                            <p><strong>Trees Planted:</strong> 50</p>
-                            <p><strong>CO2 Offset:</strong> 7,500 kg</p>
-                            <p class="sm:col-span-2"><strong>Date:</strong> December 29, 2023</p>
-                        </div>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <button class="download-btn w-full sm:w-auto" onclick="downloadCertificate('sustainable-www-2023-tanzania-2')">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                        Download PDF
-                    </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="certificate-card">
-                <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
-                    <div class="flex-1">
-                        <h3 class="text-lg font-semibold text-deep-forest mb-3">Mittler Senior Technology (MST)</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">
-                            <p><strong>Certificate:</strong> Usambara Biodiversity</p>
-                            <p><strong>Location:</strong> Tanzania</p>
-                            <p><strong>Trees Planted:</strong> 100</p>
-                            <p><strong>CO2 Offset:</strong> 15,000 kg</p>
-                            <p class="sm:col-span-2"><strong>Date:</strong> January 17, 2024</p>
-                        </div>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <button class="download-btn w-full sm:w-auto" onclick="downloadCertificate('mst-2024-tanzania')">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                        Download PDF
-                    </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="certificate-card">
-                <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
-                    <div class="flex-1">
-                        <h3 class="text-lg font-semibold text-deep-forest mb-3">EcoSearch</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">
-                            <p><strong>Certificate:</strong> Eden Reforestation</p>
-                            <p><strong>Location:</strong> Madagascar</p>
-                            <p><strong>Trees Planted:</strong> 100</p>
-                            <p><strong>CO2 Offset:</strong> 5,000 kg</p>
-                            <p class="sm:col-span-2"><strong>Date:</strong> June 26, 2024</p>
-                        </div>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <button class="download-btn w-full sm:w-auto" onclick="downloadCertificate('ecosearch-2024-madagascar')">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                        Download PDF
-                    </button>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
         <div id="detailed-info" class="mt-12">
@@ -367,6 +231,7 @@
         </div>
     </main>
 
+    <script src="assets/js/tree-data.js"></script>
     <script src="assets/js/certificates.js"></script>
 </body>
 </html>

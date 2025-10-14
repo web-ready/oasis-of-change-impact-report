@@ -130,14 +130,14 @@
                                 <span>Live Data</span>
                             </div>
                             <span>•</span>
-                            <span>Last updated: September 10th, 2025</span>
+                            <span>Last updated: <span id="last-updated-date"></span></span>
                             <span id="last-updated-relative" class="text-xs ml-2"></span>
                         </div>
                     </div>
                     
                     <div class="text-center lg:text-right">
                         <div class="inline-block">
-                            <div class="tabular-nums text-7xl lg:text-8xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent count-up" id="total-count">8,870</div>
+                            <div class="tabular-nums text-7xl lg:text-8xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent count-up" id="total-count"></div>
                             <div class="text-2xl font-medium mb-2">Trees Planted</div>
                             <div>Making a measurable impact on our planet's future</div>
                         </div>
@@ -149,7 +149,7 @@
         <section class="md:hidden bg-cloud-white rounded-xl shadow-lg border border-gray-100 p-6 md:p-12 mb-8 relative overflow-hidden">
             <div class="text-center">
                 <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-deep-forest mb-4">
-                    <span class="count-up font-tabular" id="total-count-mobile">8,870</span>
+                    <span class="count-up font-tabular" id="total-count-mobile"></span>
                 </h2>
                 <p class="text-xl sm:text-2xl md:text-3xl font-semibold text-brand-green mb-2">Trees Planted</p>
                 <p class="text-gray-600 text-base sm:text-lg">Making a positive environmental impact worldwide</p>
@@ -162,14 +162,14 @@
                     <div class="flex items-start justify-between mb-6">
                         <span class="text-xs font-medium px-3 py-1 bg-brand-green/10 text-brand-green rounded-full">Verified</span>
                     </div>
-                    <div class="tabular-nums text-4xl font-bold text-deep-forest mb-2" id="verified-count">1,532</div>
+                    <div class="tabular-nums text-4xl font-bold text-deep-forest mb-2" id="verified-count"></div>
                     <div class="text-sm text-gray-600 mb-4">Tree-Nation Certified</div>
                     <div class="w-full bg-gray-100 rounded-full h-2">
-                        <div class="bg-gradient-to-r from-brand-green to-green-500 h-2 rounded-full progress-glow bar-animation transition-all duration-1000" style="width: 0%" data-target="18"></div>
+                        <div class="bg-gradient-to-r from-brand-green to-green-500 h-2 rounded-full progress-glow bar-animation transition-all duration-1000" style="width: 0%" id="verified-progress-bar"></div>
                     </div>
                     <div class="flex justify-between text-xs text-gray-500 mt-2">
-                        <span>18% of total</span>
-                        <span class="tabular-nums">1,532 trees</span>
+                        <span id="verified-percentage">% of total</span>
+                        <span class="tabular-nums" id="verified-trees-text">trees</span>
                     </div>
                 </div>
 
@@ -177,14 +177,14 @@
                     <div class="flex items-start justify-between mb-6">
                         <span class="text-xs font-medium px-3 py-1 bg-legacy-gold/10 text-yellow-700 rounded-full">Legacy</span>
                     </div>
-                    <div class="tabular-nums text-4xl font-bold text-deep-forest mb-2" id="legacy-count">7,338</div>
+                    <div class="tabular-nums text-4xl font-bold text-deep-forest mb-2" id="legacy-count"></div>
                     <div class="text-sm text-gray-600 mb-4">Partner Organizations</div>
                     <div class="w-full bg-gray-100 rounded-full h-2">
-                        <div class="bg-gradient-to-r from-legacy-gold to-yellow-400 h-2 rounded-full bar-animation transition-all duration-1000" style="width: 0%" data-target="82"></div>
+                        <div class="bg-gradient-to-r from-legacy-gold to-yellow-400 h-2 rounded-full bar-animation transition-all duration-1000" style="width: 0%" id="legacy-progress-bar"></div>
                     </div>
                     <div class="flex justify-between text-xs text-gray-500 mt-2">
-                        <span>82% of total</span>
-                        <span class="tabular-nums">7,338 trees</span>
+                        <span id="legacy-percentage">% of total</span>
+                        <span class="tabular-nums" id="legacy-trees-text">trees</span>
                     </div>
                 </div>
             </div>
@@ -194,13 +194,13 @@
                 <h3 class="text-xl font-semibold text-deep-forest mb-8">Environmental Impact</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <div class="text-center">
-                        <!-- CO₂ Calculation: 8,870 trees × ~14.93 kg CO₂/tree = 132,465 kg total -->
-                        <div class="tabular-nums text-3xl font-bold text-deep-forest mb-1" id="co2-simple">132,465</div>
-                        <div class="text-sm text-gray-600">kg CO₂ Captured</div>
+                        <!-- CO₂ Calculation: 8,870 trees × 14.93 kg CO₂/tree/year × 40 years = 5,297,164 kg total -->
+                        <div class="tabular-nums text-3xl font-bold text-deep-forest mb-1" id="co2-simple"></div>
+                        <div class="text-sm text-gray-600">kg CO₂ Captured*</div>
                         <div class="text-xs text-gray-500 mt-1">Over 40-year lifespan</div>
                     </div>
                     <div class="text-center">
-                        <div class="tabular-nums text-3xl font-bold text-deep-forest mb-1" id="species-count">12</div>
+                        <div class="tabular-nums text-3xl font-bold text-deep-forest mb-1" id="species-count"></div>
                         <div class="text-sm text-gray-600">Tree Species Combinations</div>
                         <div class="text-xs text-gray-500 mt-1">Native & adaptive varieties</div>
                     </div>
@@ -212,17 +212,17 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
                 <div>
                     <h3 class="text-2xl font-semibold text-deep-forest mb-2">Progress to 10,000 Tree Goal</h3>
-                    <p class="text-gray-600">1,060 trees remaining to reach our milestone</p>
+                    <p class="text-gray-600" id="remaining-trees-text">trees remaining to reach our milestone</p>
                 </div>
                 <div class="text-right mt-4 sm:mt-0">
-                    <div class="text-3xl font-bold text-brand-green tabular-nums">89.4%</div>
+                    <div class="text-3xl font-bold text-brand-green tabular-nums" id="progress-percentage"></div>
                     <div class="text-sm text-gray-500">Complete</div>
                 </div>
             </div>
             
             <div class="relative mb-4">
                 <div class="w-full bg-gray-100 rounded-full h-4">
-                    <div class="bg-gradient-to-r from-brand-green via-green-500 to-emerald-400 h-4 rounded-full progress-glow transition-all duration-2000 relative overflow-hidden" style="width: 89.4%">
+                    <div class="bg-gradient-to-r from-brand-green via-green-500 to-emerald-400 h-4 rounded-full progress-glow transition-all duration-2000 relative overflow-hidden" id="main-progress-bar">
                         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
                     </div>
                 </div>
@@ -230,10 +230,10 @@
             
             <div class="flex justify-between text-sm">
                 <span class="text-gray-600">
-                    <span class="tabular-nums font-medium text-deep-forest">8,870</span> trees planted
+                    <span class="tabular-nums font-medium text-deep-forest" id="progress-trees-planted"></span> trees planted
                 </span>
                 <span class="text-gray-600">
-                    Goal: <span class="tabular-nums font-medium text-deep-forest">10,000</span>
+                    Goal: <span class="tabular-nums font-medium text-deep-forest" id="progress-goal"></span>
                 </span>
             </div>
         </section>
@@ -296,167 +296,14 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="verified-data">
-                            <tr class="data-row border-b border-gray-50 transition-all duration-200">
-                                <td class="py-6 px-2">
-                                    <div class="font-medium text-deep-forest">
-                                        <a href="https://tree-nation.com/profile/impact/web-ready" target="_blank" rel="noopener" class="hover:text-brand-green underline-offset-2 hover:underline">Web-Ready</a>
-                                    </div>
-                                    <div class="text-sm text-gray-500">Forest restoration project</div>
-                                </td>
-                                <td class="py-6 px-2">
-                                    <span class="text-sm font-medium text-gray-700">
-                                        Canada
-                                    </span>
-                                </td>
-                                <td class="py-6 px-2 text-right">
-                                    <div class="tabular-nums text-lg font-semibold text-deep-forest">921</div>
-                                </td>
-                            </tr>
-                            <tr class="data-row border-b border-gray-50 transition-all duration-200">
-                                <td class="py-6 px-2">
-                                    <div class="font-medium text-deep-forest">
-                                        <a href="https://tree-nation.com/profile/impact/stanley-park-ecology-society" target="_blank" rel="noopener" class="hover:text-brand-green underline-offset-2 hover:underline">Stanley Park Ecology Society (SPES)</a>
-                                    </div>
-                                    <div class="text-sm text-gray-500">Urban forest restoration</div>
-                                </td>
-                                <td class="py-6 px-2">
-                                    <span class="text-sm font-medium text-gray-700">
-                                        Canada
-                                    </span>
-                                </td>
-                                <td class="py-6 px-2 text-right">
-                                    <div class="tabular-nums text-lg font-semibold text-deep-forest">228</div>
-                                </td>
-                            </tr>
-                            <tr class="data-row border-b border-gray-50 transition-all duration-200">
-                                <td class="py-6 px-2">
-                                    <div class="font-medium text-deep-forest">
-                                        <a href="https://tree-nation.com/profile/impact/sustainable-www" target="_blank" rel="noopener" class="hover:text-brand-green underline-offset-2 hover:underline">Sustainable WWW</a>
-                                    </div>
-                                    <div class="text-sm text-gray-500">Digital sustainability initiative</div>
-                                </td>
-                                <td class="py-6 px-2">
-                                    <span class="text-sm font-medium text-gray-700">
-                                        Sweden
-                                    </span>
-                                </td>
-                                <td class="py-6 px-2 text-right">
-                                    <div class="tabular-nums text-lg font-semibold text-deep-forest">159</div>
-                                </td>
-                            </tr>
-                            <tr class="data-row border-b border-gray-50 transition-all duration-200">
-                                <td class="py-6 px-2">
-                                    <div class="font-medium text-deep-forest">
-                                        <a href="https://tree-nation.com/profile/impact/mittler-senior-technology" target="_blank" rel="noopener" class="hover:text-brand-green underline-offset-2 hover:underline">Mittler Senior Technology (MST)</a>
-                                    </div>
-                                    <div class="text-sm text-gray-500">Corporate sustainability program</div>
-                                </td>
-                                <td class="py-6 px-2">
-                                    <span class="text-sm font-medium text-gray-700">
-                                        United States
-                                    </span>
-                                </td>
-                                <td class="py-6 px-2 text-right">
-                                    <div class="tabular-nums text-lg font-semibold text-deep-forest">123</div>
-                                </td>
-                            </tr>
-                            <tr class="data-row border-b border-gray-50 transition-all duration-200">
-                                <td class="py-6 px-2">
-                                    <div class="font-medium text-deep-forest">
-                                        <a href="https://tree-nation.com/profile/impact/ecosearch" target="_blank" rel="noopener" class="hover:text-brand-green underline-offset-2 hover:underline">EcoSearch</a>
-                                    </div>
-                                    <div class="text-sm text-gray-500">Search engine carbon offset</div>
-                                </td>
-                                <td class="py-6 px-2">
-                                    <span class="text-sm font-medium text-gray-700">
-                                        Canada
-                                    </span>
-                                </td>
-                                <td class="py-6 px-2 text-right">
-                                    <div class="tabular-nums text-lg font-semibold text-deep-forest">101</div>
-                                </td>
-                            </tr>
+                        <tbody class="verified-data" id="verified-table-body">
+                            <!-- Verified projects will be populated dynamically -->
                         </tbody>
                     </table>
                 </div>
                 
                 <div class="mobile-cards" id="verified-mobile-cards">
-                    <div class="mobile-data-card" data-search="web-ready forest restoration canada">
-                        <div class="mobile-card-header">
-                            <div>
-                                <div class="mobile-card-title"><a href="https://tree-nation.com/profile/impact/web-ready" target="_blank" rel="noopener" class="hover:text-brand-green underline-offset-2 hover:underline">Web-Ready</a></div>
-                                <div class="mobile-card-subtitle">Forest restoration project</div>
-                            </div>
-                            <div class="mobile-trees-count">921</div>
-                        </div>
-                        <div class="mobile-card-meta">
-                            <div class="mobile-meta-item">
-                                <span>Canada</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mobile-data-card" data-search="stanley park ecology society spes urban forest restoration canada">
-                        <div class="mobile-card-header">
-                            <div>
-                                <div class="mobile-card-title"><a href="https://tree-nation.com/profile/impact/stanley-park-ecology-society" target="_blank" rel="noopener" class="hover:text-brand-green underline-offset-2 hover:underline">Stanley Park Ecology Society (SPES)</a></div>
-                                <div class="mobile-card-subtitle">Urban forest restoration</div>
-                            </div>
-                            <div class="mobile-trees-count">228</div>
-                        </div>
-                        <div class="mobile-card-meta">
-                            <div class="mobile-meta-item">
-                                <span>Canada</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mobile-data-card" data-search="sustainable www digital sustainability initiative sweden">
-                        <div class="mobile-card-header">
-                            <div>
-                                <div class="mobile-card-title"><a href="https://tree-nation.com/profile/impact/sustainable-www" target="_blank" rel="noopener" class="hover:text-brand-green underline-offset-2 hover:underline">Sustainable WWW</a></div>
-                                <div class="mobile-card-subtitle">Digital sustainability initiative</div>
-                            </div>
-                            <div class="mobile-trees-count">159</div>
-                        </div>
-                        <div class="mobile-card-meta">
-                            <div class="mobile-meta-item">
-                                <span>Sweden</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mobile-data-card" data-search="mittler senior technology mst corporate sustainability program united states">
-                        <div class="mobile-card-header">
-                            <div>
-                                <div class="mobile-card-title"><a href="https://tree-nation.com/profile/impact/mittler-senior-technology" target="_blank" rel="noopener" class="hover:text-brand-green underline-offset-2 hover:underline">Mittler Senior Technology (MST)</a></div>
-                                <div class="mobile-card-subtitle">Corporate sustainability program</div>
-                            </div>
-                            <div class="mobile-trees-count">123</div>
-                        </div>
-                        <div class="mobile-card-meta">
-                            <div class="mobile-meta-item">
-                                <span>United States</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mobile-data-card" data-search="ecosearch search engine carbon offset canada">
-                        <div class="mobile-card-header">
-                            <div>
-                                <div class="mobile-card-title"><a href="https://tree-nation.com/profile/impact/ecosearch" target="_blank" rel="noopener" class="hover:text-brand-green underline-offset-2 hover:underline">EcoSearch</a></div>
-                                <div class="mobile-card-subtitle">Search engine carbon offset</div>
-                            </div>
-                            <div class="mobile-trees-count">101</div>
-                        </div>
-                        <div class="mobile-card-meta">
-                            <div class="mobile-meta-item">
-                                <span>Canada</span>
-                            </div>
-                        </div>
-                    </div>
-                    
+                    <!-- Verified mobile cards will be populated dynamically -->
                 </div>
             </div>
 
@@ -493,49 +340,14 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="legacy-data">
-                            <tr class="data-row border-b border-gray-50 transition-all duration-200">
-                                <td class="py-6 px-2">
-                                    <div class="font-medium text-deep-forest">Tero Partner</div>
-                                    <div class="text-sm text-gray-500">Historical partnership program</div>
-                                </td>
-                                <td class="py-6 px-2 text-right">
-                                    <div class="tabular-nums text-lg font-semibold text-deep-forest">4,567</div>
-                                </td>
-                            </tr>
-                            <tr class="data-row border-b border-gray-50 transition-all duration-200">
-                                <td class="py-6 px-2">
-                                    <div class="font-medium text-deep-forest">Refoorest Partner</div>
-                                    <div class="text-sm text-gray-500">Legacy reforestation initiative</div>
-                                </td>
-                                <td class="py-6 px-2 text-right">
-                                    <div class="tabular-nums text-lg font-semibold text-deep-forest">2,771</div>
-                                </td>
-                            </tr>
+                        <tbody class="legacy-data" id="legacy-table-body">
+                            <!-- Legacy projects will be populated dynamically -->
                         </tbody>
                     </table>
                 </div>
                 
                 <div class="mobile-cards" id="legacy-mobile-cards">
-                    <div class="mobile-data-card" data-search="tero partner historical partnership program">
-                        <div class="mobile-card-header">
-                            <div>
-                                <div class="mobile-card-title">Tero Partner</div>
-                                <div class="mobile-card-subtitle">Historical partnership program</div>
-                            </div>
-                            <div class="mobile-trees-count">4,567</div>
-                        </div>
-                    </div>
-                    
-                    <div class="mobile-data-card" data-search="refoorest partner legacy reforestation initiative">
-                        <div class="mobile-card-header">
-                            <div>
-                                <div class="mobile-card-title">Refoorest Partner</div>
-                                <div class="mobile-card-subtitle">Legacy reforestation initiative</div>
-                            </div>
-                            <div class="mobile-trees-count">2,771</div>
-                        </div>
-                    </div>
+                    <!-- Legacy mobile cards will be populated dynamically -->
                 </div>
             </div>
         </section>
@@ -554,9 +366,18 @@
                     </p>
                 </div>
             </div>
+            
+            <!-- CO2 Calculation Footnote -->
+            <div class="mt-8 p-4 bg-gray-50 rounded-lg">
+                <p class="text-xs text-gray-600 text-center">
+                    <strong>*</strong> CO₂ capture estimates are based on 14.93 kg CO₂ per tree per year over a 40-year lifespan. 
+                    Actual carbon sequestration may vary based on tree species, location, and environmental conditions.
+                </p>
+            </div>
         </div>
     </main>
 
+    <script src="assets/js/tree-data.js"></script>
     <script src="assets/js/dashboard.js"></script>
 </body>
 </html>

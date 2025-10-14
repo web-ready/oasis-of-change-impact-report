@@ -1,4 +1,23 @@
+// Initialize species data from centralized source
+function initializeSpeciesData() {
+    if (typeof TreeData !== 'undefined') {
+        const speciesData = TreeData.getSpeciesData();
+        
+        // Update species count if element exists
+        const speciesCountElement = document.getElementById('species-count-display');
+        if (speciesCountElement) {
+            speciesCountElement.textContent = `${speciesData.totalSpecies} Species Combinations`;
+        }
+        
+        // Update any other dynamic content as needed
+        console.log('Species data loaded:', speciesData);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize species data
+    initializeSpeciesData();
+    
     const toggleBtn = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     const closeBtn = document.getElementById('mobile-menu-close');

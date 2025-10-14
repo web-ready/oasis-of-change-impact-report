@@ -6,20 +6,17 @@ function scrollToDetails() {
 }
 
 function downloadCertificate(certificateId) {
-    const certificatePaths = {
-        'web-ready-2025-madagascar': 'assets/certificates/Web-Ready/2025 Planting/2025-02-26_Web-Ready-Planting_Eden-Reforestation_Madagascar_675-Trees-33750kg-CO2.pdf',
-        'spes-2024-tanzania': 'assets/certificates/Stanley Park Ecology Society (SPES)/2024-01-26_Stanley-Park-Ecology-Society_Usambara-Biodiversity_Tanzania_100-Trees-15000kg-CO2.pdf.pdf',
-        'sustainable-www-2023-tanzania-1': 'assets/certificates/Sustainable WWW/2023-12-29_Sustainable-WWW_Usambara-Biodiversity_Tanzania_50-Trees-6000kg-CO2.pdf.pdf',
-        'sustainable-www-2023-tanzania-2': 'assets/certificates/Sustainable WWW/2023-12-29_Sustainable-WWW_Usambara-Biodiversity_Tanzania_50-Trees-7500kg-CO2.pdf.pdf',
-        'mst-2024-tanzania': 'assets/certificates/Mittler Senior Technology (MST)/2024-01-17_Mittler-Senior-Technology_Usambara-Biodiversity_Tanzania_100-Trees-15000kg-CO2.pdf.pdf',
-        'ecosearch-2024-madagascar': 'assets/certificates/EcoSearch/2024-06-26_EcoSearch_Eden-Reforestation_Madagascar_100-Trees-5000kg-CO2.pdf.pdf'
-    };
+    if (typeof TreeData === 'undefined') {
+        console.error('TreeData not loaded');
+        return;
+    }
     
-    const filePath = certificatePaths[certificateId];
-    if (filePath) {
+    const certificate = TreeData.getCertificates().find(cert => cert.id === certificateId);
+    if (certificate) {
+        const filePath = `assets/certificates/${certificate.filename}`;
         const link = document.createElement('a');
         link.href = filePath;
-        link.download = filePath.split('/').pop();
+        link.download = certificate.filename;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -28,16 +25,59 @@ function downloadCertificate(certificateId) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    const downloadButtons = document.querySelectorAll('.download-btn');
+function populateCertificates() {
+    if (typeof TreeData === 'undefined') {
+        console.error('TreeData not loaded');
+        return;
+    }
     
-    downloadButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            this.style.transform = 'scale(0.95)';
+    const container = document.getElementById('certificates-container');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    TreeData.getCertificates().forEach(certificate => {
+        const certificateCard = document.createElement('div');
+        certificateCard.className = 'certificate-card';
+        certificateCard.innerHTML = `
+            <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
+                <div class="flex-1">
+                    <h3 class="text-lg font-semibold text-deep-forest mb-3">${certificate.title}</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">
+                        <p><strong>Certificate:</strong> ${certificate.certificate}</p>
+                        <p><strong>Location:</strong> ${certificate.location}</p>
+                        <p><strong>Trees Planted:</strong> ${certificate.trees.toLocaleString()}</p>
+                        <p><strong>CO2 Offset:</strong> ${certificate.co2Offset.toLocaleString()} kg</p>
+                        <p class="sm:col-span-2"><strong>Date:</strong> ${certificate.date}</p>
+                    </div>
+                </div>
+                <div class="flex-shrink-0">
+                    <button class="download-btn w-full sm:w-auto" onclick="downloadCertificate('${certificate.id}')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Download PDF
+                    </button>
+                </div>
+            </div>
+        `;
+        container.appendChild(certificateCard);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Populate certificates from centralized data
+    populateCertificates();
+    
+    // Add click animations to download buttons
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.download-btn')) {
+            const button = e.target.closest('.download-btn');
+            button.style.transform = 'scale(0.95)';
             setTimeout(() => {
-                this.style.transform = '';
+                button.style.transform = '';
             }, 150);
-        });
+        }
     });
 
     const toggleBtn = document.getElementById('mobile-menu-toggle');

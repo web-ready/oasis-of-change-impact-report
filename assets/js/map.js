@@ -302,6 +302,29 @@ function countLabel(sites) {
 }
 
 function calculateTotals() {
+  // Use centralized tree data if available, otherwise fall back to plantingData
+  if (typeof TreeData !== 'undefined') {
+    const mapSites = TreeData.getMapSites();
+    const countries = [...new Set(mapSites.map(site => site.country))];
+    const confirmedSites = mapSites.filter(site => site.type === 'confirmed');
+    const supportedSites = mapSites.filter(site => site.type === 'supported');
+    const mixedSites = mapSites.filter(site => site.type === 'mixed');
+    
+    return {
+      totalCountries: countries.length,
+      confirmedCountries: [...new Set(confirmedSites.map(site => site.country))].length,
+      supportedCountries: [...new Set(supportedSites.map(site => site.country))].length,
+      mixedCountries: [...new Set(mixedSites.map(site => site.country))].length,
+      totalSites: mapSites.length,
+      confirmedSites: confirmedSites.length,
+      supportedSites: supportedSites.length,
+      totalTrees: TreeData.getTotalTrees(),
+      verifiedTrees: TreeData.getVerifiedTrees(),
+      legacyTrees: TreeData.getLegacyTrees()
+    };
+  }
+  
+  // Fallback to original calculation
   const countries = Object.keys(plantingData).length;
   const confirmedCountries = Object.values(plantingData).filter(cfg => cfg.type === 'confirmed').length;
   const supportedCountries = Object.values(plantingData).filter(cfg => cfg.type === 'supported').length;
@@ -349,6 +372,32 @@ function renderTotals() {
   const totalsContainer = document.getElementById('totals-summary');
   
   if (totalsContainer) {
+    // Enhanced totals display with tree counts if available
+    const treeStatsHtml = totals.totalTrees ? `
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-4 sm:mb-6">
+        <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 text-center">
+          <div class="text-2xl sm:text-3xl font-bold text-deep-forest mb-2">${totals.totalTrees.toLocaleString()}</div>
+          <div class="text-xs sm:text-sm text-gray-600">Total Trees Planted</div>
+          <div class="text-xs text-gray-500 mt-1">Across all projects</div>
+        </div>
+        <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 text-center">
+          <div class="text-2xl sm:text-3xl font-bold text-brand-green mb-2">${totals.verifiedTrees.toLocaleString()}</div>
+          <div class="text-xs sm:text-sm text-gray-600">Verified Trees</div>
+          <div class="text-xs text-gray-500 mt-1">Tree-Nation certified</div>
+        </div>
+        <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 text-center">
+          <div class="text-2xl sm:text-3xl font-bold text-legacy-gold mb-2">${totals.legacyTrees.toLocaleString()}</div>
+          <div class="text-xs sm:text-sm text-gray-600">Legacy Trees</div>
+          <div class="text-xs text-gray-500 mt-1">Partner organizations</div>
+        </div>
+        <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 text-center">
+          <div class="text-2xl sm:text-3xl font-bold text-deep-forest mb-2">${totals.totalCountries}</div>
+          <div class="text-xs sm:text-sm text-gray-600">Countries</div>
+          <div class="text-xs text-gray-500 mt-1">Global presence</div>
+        </div>
+      </div>
+    ` : '';
+    
     totalsContainer.innerHTML = `
       <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
         <div class="flex items-start gap-3">
@@ -366,6 +415,8 @@ function renderTotals() {
           </div>
         </div>
       </div>
+      
+      ${treeStatsHtml}
       
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
         <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 text-center">
@@ -410,42 +461,84 @@ function initializeMap() {
 
   const clusterGroup = L.markerClusterGroup();
 
-  Object.entries(plantingData).forEach(([cc, cfg]) => {
-    const [lat, lng] = cfg.centroid;
+  // Use centralized data if available, otherwise fall back to plantingData
+  if (typeof TreeData !== 'undefined') {
+    const mapSites = TreeData.getMapSites();
+    
+    mapSites.forEach(site => {
+      let markerColor, markerLabel;
+      if (site.type === 'confirmed') {
+        markerColor = '#16a34a';
+        markerLabel = 'Confirmed';
+      } else if (site.type === 'mixed') {
+        markerColor = '#7c3aed';
+        markerLabel = 'Mixed';
+      } else {
+        markerColor = '#ca8a04';
+        markerLabel = 'Supported';
+      }
 
-    let markerColor, markerLabel;
-    if (cfg.type === 'confirmed') {
-      markerColor = '#16a34a';
-      markerLabel = 'Confirmed';
-    } else if (cfg.type === 'mixed') {
-      markerColor = '#7c3aed';
-      markerLabel = 'Mixed';
-    } else {
-      markerColor = '#ca8a04';
-      markerLabel = 'Supported';
-    }
+      const marker = L.circleMarker([site.lat, site.lng], {
+        radius: 7,
+        color: markerColor,
+        weight: 2,
+        fillOpacity: 0.9
+      });
 
-    const marker = L.circleMarker([lat, lng], {
-      radius: 7,
-      color: markerColor,
-      weight: 2,
-      fillOpacity: 0.9
+      const title = site.name;
+
+      const popupHTML = `
+        <div class="popup-h1">${title}</div>
+        <div class="text-xs">
+          <span class="font-semibold ${site.type === 'confirmed' ? 'text-green-700' : site.type === 'mixed' ? 'text-purple-700' : 'text-yellow-700'}">${markerLabel}</span><br>
+          <span class="text-gray-600">Source: ${site.source}</span><br>
+          <span class="text-gray-600">Location: ${site.country}</span><br>
+          <span class="text-gray-600">${site.description}</span>
+        </div>
+      `;
+
+      marker.bindPopup(popupHTML);
+      clusterGroup.addLayer(marker);
     });
+  } else {
+    // Fallback to original plantingData
+    Object.entries(plantingData).forEach(([cc, cfg]) => {
+      const [lat, lng] = cfg.centroid;
 
-    const title = `${countryName[cc] || cc} (${countLabel(cfg.sites)})`;
+      let markerColor, markerLabel;
+      if (cfg.type === 'confirmed') {
+        markerColor = '#16a34a';
+        markerLabel = 'Confirmed';
+      } else if (cfg.type === 'mixed') {
+        markerColor = '#7c3aed';
+        markerLabel = 'Mixed';
+      } else {
+        markerColor = '#ca8a04';
+        markerLabel = 'Supported';
+      }
 
-    const popupHTML = `
-      <div class="popup-h1">${title}</div>
-      <div class="text-xs">
-        <span class="font-semibold ${cfg.type === 'confirmed' ? 'text-green-700' : cfg.type === 'mixed' ? 'text-purple-700' : 'text-yellow-700'}">${markerLabel}</span><br>
-        <span class="text-gray-600">Source: ${cfg.source}</span><br>
-        Country code: <b>${cc}</b>
-      </div>
-    `;
+      const marker = L.circleMarker([lat, lng], {
+        radius: 7,
+        color: markerColor,
+        weight: 2,
+        fillOpacity: 0.9
+      });
 
-    marker.bindPopup(popupHTML);
-    clusterGroup.addLayer(marker);
-  });
+      const title = `${countryName[cc] || cc} (${countLabel(cfg.sites)})`;
+
+      const popupHTML = `
+        <div class="popup-h1">${title}</div>
+        <div class="text-xs">
+          <span class="font-semibold ${cfg.type === 'confirmed' ? 'text-green-700' : cfg.type === 'mixed' ? 'text-purple-700' : 'text-yellow-700'}">${markerLabel}</span><br>
+          <span class="text-gray-600">Source: ${cfg.source}</span><br>
+          Country code: <b>${cc}</b>
+        </div>
+      `;
+
+      marker.bindPopup(popupHTML);
+      clusterGroup.addLayer(marker);
+    });
+  }
 
   clusterGroup.addTo(map);
   return map;
