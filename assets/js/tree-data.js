@@ -17,7 +17,7 @@ const TreeData = {
         legacyTrees: 7338,
         goalTrees: 10000,
         speciesCount: 67,
-        co2Captured: 800000, // kg CO2 over 10-year conservative estimate (10,000 trees × 80 kg CO2 per tree)
+        co2Captured: 0, // Will be calculated dynamically based on totalTrees
         co2PerTree: 14.93 // kg CO2 per tree per year average
     },
     
@@ -466,7 +466,8 @@ const TreeData = {
     },
     
     getCo2Captured: function() {
-        return this.totals.co2Captured;
+        // Calculate dynamically using Tree-Nation's 10-year conservative methodology
+        return Math.round(this.totals.totalTrees * 80); // 80 kg CO2 per tree over 10 years
     },
     
     getSpeciesCount: function() {
@@ -496,7 +497,7 @@ const TreeData = {
     // Update functions for easy data management
     updateTotalTrees: function(newTotal) {
         this.totals.totalTrees = newTotal;
-        this.totals.co2Captured = Math.round(newTotal * 80); // Tree-Nation's 10-year conservative methodology
+        // CO2 captured is now calculated dynamically in getCo2Captured() function
         this.recalculateTotals(); // Ensure all totals are consistent
     },
     
@@ -535,8 +536,8 @@ const TreeData = {
         // Update total
         this.totals.totalTrees = this.totals.verifiedTrees + this.totals.legacyTrees;
         
-        // Update CO2 captured using Tree-Nation's 10-year conservative methodology
-        this.totals.co2Captured = Math.round(this.totals.totalTrees * 80); // 80 kg CO2 per tree over 10 years
+        // CO2 captured is now calculated dynamically in getCo2Captured() function
+        // No need to store it in totals since it's calculated on-demand
     }
 };
 
