@@ -12,7 +12,7 @@ const TreeData = {
     
     // Overall Statistics
     totals: {
-        totalTrees: 8870,
+        totalTrees: 9000,
         verifiedTrees: 1532,
         legacyTrees: 7338,
         goalTrees: 10000,
