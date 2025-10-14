@@ -12,12 +12,12 @@ const TreeData = {
     
     // Overall Statistics
     totals: {
-        totalTrees: 10000,
+        totalTrees: 8870,
         verifiedTrees: 1532,
         legacyTrees: 7338,
         goalTrees: 10000,
-        speciesCount: 12,
-        co2Captured: 5297164, // kg CO2 over 40-year lifespan (8,870 trees × 14.93 kg/year × 40 years)
+        speciesCount: 67,
+        co2Captured: 800000, // kg CO2 over 10-year conservative estimate (10,000 trees × 80 kg CO2 per tree)
         co2PerTree: 14.93 // kg CO2 per tree per year average
     },
     
@@ -496,7 +496,7 @@ const TreeData = {
     // Update functions for easy data management
     updateTotalTrees: function(newTotal) {
         this.totals.totalTrees = newTotal;
-        this.totals.co2Captured = Math.round(newTotal * this.totals.co2PerTree * 40); // 40-year lifespan
+        this.totals.co2Captured = Math.round(newTotal * 80); // Tree-Nation's 10-year conservative methodology
         this.recalculateTotals(); // Ensure all totals are consistent
     },
     
@@ -510,7 +510,7 @@ const TreeData = {
         const verifiedProject = this.verifiedProjects.find(p => p.id === projectId);
         if (verifiedProject) {
             verifiedProject.trees = newTreeCount;
-            verifiedProject.co2Offset = Math.round(newTreeCount * this.totals.co2PerTree * 40);
+            verifiedProject.co2Offset = Math.round(newTreeCount * 250); // Tree-Nation's lifetime average methodology
             this.recalculateTotals();
             return;
         }
@@ -519,7 +519,7 @@ const TreeData = {
         const legacyProject = this.legacyProjects.find(p => p.id === projectId);
         if (legacyProject) {
             legacyProject.trees = newTreeCount;
-            legacyProject.co2Offset = Math.round(newTreeCount * this.totals.co2PerTree * 40);
+            legacyProject.co2Offset = Math.round(newTreeCount * 250); // Tree-Nation's lifetime average methodology
             this.recalculateTotals();
             return;
         }
@@ -535,8 +535,8 @@ const TreeData = {
         // Update total
         this.totals.totalTrees = this.totals.verifiedTrees + this.totals.legacyTrees;
         
-        // Update CO2 captured
-        this.totals.co2Captured = Math.round(this.totals.totalTrees * this.totals.co2PerTree * 40);
+        // Update CO2 captured using Tree-Nation's 10-year conservative methodology
+        this.totals.co2Captured = Math.round(this.totals.totalTrees * 80); // 80 kg CO2 per tree over 10 years
     }
 };
 
