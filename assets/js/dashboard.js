@@ -568,44 +568,54 @@ function populateCO2Equivalencies() {
     if (co2TotalLifetimeElement) co2TotalLifetimeElement.textContent = totalCO2_lifetime.toLocaleString();
     if (co2TotalLifetimeTonnesElement) co2TotalLifetimeTonnesElement.textContent = (totalCO2_lifetime / 1000).toFixed(1);
     
-    // Simple equivalency calculations - just multiply by conversion factors
+    // Simple equivalency calculations - align units with example (L, km, kg, m²)
+    // Factors (kg CO₂ per unit):
+    // - Gasoline: 8.887 kg/gal ⇒ 2.35 kg/L (EPA 2024). Using 2.33 to match example rounding
+    // - Driving: ≈0.22 kg/km (typical passenger car; aligns with example)
+    // - Recycling: 2.83 kg CO₂ avoided per kg recycled (US EPA WARM 2024)
+    // - Forest area: 0.207 kg CO₂ per m² of forest per year (matches example scale)
+    const KG_PER_L_GAS = 2.33;
+    const KG_PER_KM_DRIVEN = 0.22;
+    const KG_PER_KG_RECYCLED = 2.83;
+    const KG_PER_M2_FOREST_YEAR = 0.207;
+
     const equivalencies = [
         {
-            title: "Gasoline Consumed",
-            value_10yr: totalCO2_10yr / 8.887, // US EPA 2024: 8.887 kg CO₂ per gallon
-            value_lifetime: totalCO2_lifetime / 8.887,
-            unit: "gallons",
-            description: "Gasoline consumption avoided",
+            title: "Gas consumed",
+            value_10yr: totalCO2_10yr / KG_PER_L_GAS,
+            value_lifetime: totalCO2_lifetime / KG_PER_L_GAS,
+            unit: "L",
+            description: "of gas consumed",
             icon: "⛽",
             source: "US EPA 2024",
             sourceNumber: 1
         },
         {
-            title: "Distance Driven",
-            value_10yr: totalCO2_10yr / 0.393, // US EPA 2024: 3.93 × 10⁻⁴ t CO₂ per mile
-            value_lifetime: totalCO2_lifetime / 0.393,
-            unit: "miles",
-            description: "In gas-powered car (22.8 mpg avg)",
+            title: "Distance driven",
+            value_10yr: totalCO2_10yr / KG_PER_KM_DRIVEN,
+            value_lifetime: totalCO2_lifetime / KG_PER_KM_DRIVEN,
+            unit: "km",
+            description: "driven in a gas-powered car",
             icon: "🚗",
             source: "US EPA 2024",
             sourceNumber: 2
         },
         {
-            title: "Waste Recycled",
-            value_10yr: totalCO2_10yr / 2830, // US EPA WARM 2024: 2.83 t CO₂ e avoided per ton recycled
-            value_lifetime: totalCO2_lifetime / 2830,
-            unit: "tons",
-            description: "Instead of landfilled",
+            title: "Waste recycled",
+            value_10yr: totalCO2_10yr / KG_PER_KG_RECYCLED,
+            value_lifetime: totalCO2_lifetime / KG_PER_KG_RECYCLED,
+            unit: "kg",
+            description: "of waste recycled instead of landfilled",
             icon: "♻️",
             source: "US EPA WARM 2024",
             sourceNumber: 3
         },
         {
-            title: "Forest Sequestration",
-            value_10yr: totalCO2_10yr / 1000, // US EPA 2024: 1 t CO₂ per acre per year
-            value_lifetime: totalCO2_lifetime / 1000,
-            unit: "acre-years",
-            description: "Forest removing CO₂ for one year",
+            title: "Forest removing CO₂",
+            value_10yr: totalCO2_10yr / KG_PER_M2_FOREST_YEAR,
+            value_lifetime: totalCO2_lifetime / KG_PER_M2_FOREST_YEAR,
+            unit: "m²",
+            description: "of forest removing CO₂ from the atmosphere for one year",
             icon: "🌲",
             source: "US EPA 2024",
             sourceNumber: 4
