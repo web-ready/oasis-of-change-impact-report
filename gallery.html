@@ -14,6 +14,7 @@
                 extend: {
                     colors: {
                         'brand-green': '#004734',
+                        'brand-green-light': '#006B50',
                         'legacy-gold': '#EAB308',
                         'deep-forest': '#0F172A',
                         'cloud-white': '#FFFFFF',
@@ -32,69 +33,138 @@
         }
     </script>
     <style>
-        .gallery-card {
-            background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-muted) 100%);
-            border: 1px solid var(--color-border);
-            transition: all 0.3s ease;
+        .gallery-hero {
+            background: linear-gradient(145deg, #003326 0%, #004734 40%, #005a42 70%, #004230 100%);
+            position: relative;
             overflow: hidden;
         }
-        
-        .gallery-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        .gallery-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                         radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 40%),
+                         radial-gradient(circle at 60% 80%, rgba(255,255,255,0.04) 0%, transparent 45%);
+            opacity: 0.5;
         }
-        
+
+        .gallery-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .gallery-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 71, 52, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-color: #004734;
+        }
+
         .gallery-image {
-            background: #f1f5f9;
-            height: 180px;
+            height: 220px;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
-        
-        .image-placeholder {
+        .gallery-image.before-bg { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 50%, #fca5a5 100%); }
+        .gallery-image.progress-bg { background: linear-gradient(135deg, #eff6ff 0%, #bfdbfe 50%, #93c5fd 100%); }
+        .gallery-image.after-bg { background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 50%, #6ee7b7 100%); }
+
+        .gallery-image .icon-wrap {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+        .before-bg .icon-wrap { background: rgba(220, 38, 38, 0.15); color: #dc2626; }
+        .progress-bg .icon-wrap { background: rgba(37, 99, 235, 0.15); color: #2563eb; }
+        .after-bg .icon-wrap { background: rgba(5, 150, 105, 0.15); color: #059669; }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+        }
+        .badge-before { background: #fef2f2; color: #dc2626; }
+        .badge-progress { background: #eff6ff; color: #2563eb; }
+        .badge-after { background: #ecfdf5; color: #059669; }
+        .badge-before .badge-dot { background: #dc2626; }
+        .badge-progress .badge-dot { background: #2563eb; }
+        .badge-after .badge-dot { background: #059669; }
+        .badge-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+        .filter-pill {
+            padding: 8px 20px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1.5px solid #e2e8f0;
+            background: white;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .filter-pill:hover {
+            border-color: #004734;
+            color: #004734;
+            background: #f0fdf4;
+        }
+        .filter-pill.active {
+            background: #004734;
+            color: white;
+            border-color: #004734;
+            box-shadow: 0 2px 8px rgba(0, 71, 52, 0.25);
+        }
+
+        .stat-pill {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(4px);
+            border-radius: 0.75rem;
+            padding: 12px 20px;
             text-align: center;
-            color: var(--color-text-muted);
+            transition: background 0.2s;
         }
-        
-        .category-badge {
-            background: linear-gradient(135deg, var(--color-brand-green), var(--color-brand-green-light));
-            color: white;
+        .stat-pill:hover {
+            background: rgba(255,255,255,0.18);
         }
-        
-        .before-badge {
-            background: linear-gradient(135deg, var(--color-error), var(--color-error-light));
-            color: white;
-        }
-        
-        .after-badge {
-            background: linear-gradient(135deg, var(--color-success), var(--color-success-light));
-            color: white;
-        }
-        
-        .progress-badge {
-            background: linear-gradient(135deg, var(--color-info), var(--color-info-light));
-            color: white;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        .animate-slide-up {
-            animation: slideUp 0.6s ease-out forwards;
+        .fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
         }
-        
-        .stagger-1 { animation-delay: 0.1s; }
-        .stagger-2 { animation-delay: 0.2s; }
-        .stagger-3 { animation-delay: 0.3s; }
-        .stagger-4 { animation-delay: 0.4s; }
-        .stagger-5 { animation-delay: 0.5s; }
-        .stagger-6 { animation-delay: 0.6s; }
-        .stagger-7 { animation-delay: 0.7s; }
-        .stagger-8 { animation-delay: 0.8s; }
-        .stagger-9 { animation-delay: 0.9s; }
+        .delay-1 { animation-delay: 0.05s; }
+        .delay-2 { animation-delay: 0.1s; }
+        .delay-3 { animation-delay: 0.15s; }
+        .delay-4 { animation-delay: 0.2s; }
+        .delay-5 { animation-delay: 0.25s; }
+        .delay-6 { animation-delay: 0.3s; }
+        .delay-7 { animation-delay: 0.35s; }
+        .delay-8 { animation-delay: 0.4s; }
+        .delay-9 { animation-delay: 0.45s; }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8125rem;
+            color: #94a3b8;
+        }
     </style>
 </head>
 <body class="bg-mist-gray font-sans antialiased">
@@ -104,20 +174,16 @@
                 <div class="flex items-center gap-2">
                     <a href="/index.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
                 </div>
-
                 <div class="hidden md:flex items-center gap-3">
                     <a href="/index.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Dashboard</a>
                     <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Certificates</a>
                     <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Tree Species</a>
                 </div>
-                
                 <button id="mobile-menu-toggle" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50" aria-label="Open menu" aria-expanded="false">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
                 </button>
-
-                
             </div>
         </div>
     </header>
@@ -141,341 +207,287 @@
         </div>
     </div>
 
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        <section class="text-center mb-12">
-            <h1 class="font-serif text-3xl md:text-4xl text-deep-forest mb-4">
-                Project Gallery
-            </h1>
-            <p class="text-base text-gray-600 max-w-2xl mx-auto mb-8">
-                Before, during, and after documentation from our reforestation projects.
+    <!-- Hero Section -->
+    <section class="gallery-hero -mt-0 px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-10 sm:pb-14">
+        <div class="relative z-10 max-w-6xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white/80 text-xs font-medium px-4 py-1.5 rounded-full mb-6 border border-white/10">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                Project Documentation
+            </div>
+            <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl text-white mb-4 tracking-tight">Project Gallery</h1>
+            <p class="text-white/65 text-sm sm:text-base max-w-xl mx-auto leading-relaxed mb-8">
+                Visual documentation of our reforestation journey &mdash; from bare land to thriving ecosystems.
             </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200">
-                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                    <span class="text-sm font-medium text-gray-700">Before Restoration</span>
+            <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
+                <div class="stat-pill">
+                    <div class="text-2xl font-bold text-white">3</div>
+                    <div class="text-xs text-white/55 font-medium mt-0.5">Before</div>
                 </div>
-                <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200">
-                    <div class="w-3 h-3 rounded-full bg-blue-500"></div>
-                    <span class="text-sm font-medium text-gray-700">Planting Progress</span>
+                <div class="stat-pill">
+                    <div class="text-2xl font-bold text-white">3</div>
+                    <div class="text-xs text-white/55 font-medium mt-0.5">In Progress</div>
                 </div>
-                <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200">
-                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                    <span class="text-sm font-medium text-gray-700">After Growth</span>
+                <div class="stat-pill">
+                    <div class="text-2xl font-bold text-white">3</div>
+                    <div class="text-xs text-white/55 font-medium mt-0.5">Completed</div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="mb-12">
-            <div class="flex flex-wrap justify-center gap-2 mb-8">
-                <button onclick="filterGallery('all')" class="filter-btn active px-4 py-2 rounded-lg bg-brand-green text-white text-sm font-medium transition">
-                    All Projects
-                </button>
-                <button onclick="filterGallery('before')" class="filter-btn px-4 py-2 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
-                    Before
-                </button>
-                <button onclick="filterGallery('progress')" class="filter-btn px-4 py-2 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
-                    Progress
-                </button>
-                <button onclick="filterGallery('after')" class="filter-btn px-4 py-2 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
-                    After
-                </button>
-            </div>
-        </section>
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
 
-        <section class="mb-16">
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
-                
-                <div class="gallery-card rounded-2xl overflow-hidden animate-slide-up stagger-1" data-category="before">
-                    <div class="gallery-image">
-                        <div class="image-placeholder">
-                            <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <p class="text-sm">Before Restoration</p>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-lg font-semibold text-deep-forest">Web-Ready Project Site</h3>
-                            <span class="before-badge px-3 py-1 rounded-full text-xs font-medium text-white">Before</span>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Forest restoration area in Canada prior to planting.
-                        </p>
-                        <div class="flex items-center gap-2 text-xs text-gray-500">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                            <span>Canada</span>
-                        </div>
+        <!-- Filter Bar -->
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10">
+            <button onclick="filterGallery('all')" class="filter-pill active">All Projects</button>
+            <button onclick="filterGallery('before')" class="filter-pill">Before</button>
+            <button onclick="filterGallery('progress')" class="filter-pill">In Progress</button>
+            <button onclick="filterGallery('after')" class="filter-pill">After</button>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="gallery-grid">
+
+            <!-- Card 1 -->
+            <div class="gallery-card fade-in-up delay-1" data-category="before">
+                <div class="gallery-image before-bg">
+                    <div class="icon-wrap">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
                     </div>
                 </div>
-
-                <div class="gallery-card rounded-2xl overflow-hidden animate-slide-up stagger-2" data-category="before">
-                    <div class="gallery-image">
-                        <div class="image-placeholder">
-                            <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <p class="text-sm">Before Restoration</p>
-                        </div>
+                <div class="p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-base font-semibold text-deep-forest">Web-Ready Project Site</h3>
+                        <span class="badge badge-before"><span class="badge-dot"></span>Before</span>
                     </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-lg font-semibold text-deep-forest">Stanley Park Site</h3>
-                            <span class="before-badge px-3 py-1 rounded-full text-xs font-medium text-white">Before</span>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Urban forest area in Vancouver before restoration work began.
-                        </p>
-                        <div class="flex items-center gap-2 text-xs text-gray-500">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                            <span>Vancouver, Canada</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gallery-card rounded-2xl overflow-hidden animate-slide-up stagger-3" data-category="progress">
-                    <div class="gallery-image">
-                        <div class="image-placeholder">
-                            <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <p class="text-sm">Planting in Progress</p>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-lg font-semibold text-deep-forest">Tree Planting Day</h3>
-                            <span class="progress-badge px-3 py-1 rounded-full text-xs font-medium text-white">Progress</span>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Volunteers and team members actively planting Douglas Fir and Western Red Cedar saplings.
-                        </p>
-                        <div class="flex items-center gap-2 text-xs text-gray-500">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <span>March 2025</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gallery-card rounded-2xl overflow-hidden animate-slide-up stagger-4" data-category="progress">
-                    <div class="gallery-image">
-                        <div class="image-placeholder">
-                            <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <p class="text-sm">Sapling Growth</p>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-lg font-semibold text-deep-forest">Early Growth Phase</h3>
-                            <span class="progress-badge px-3 py-1 rounded-full text-xs font-medium text-white">Progress</span>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Six months after planting &mdash; saplings showing healthy establishment.
-                        </p>
-                        <div class="flex items-center gap-2 text-xs text-gray-500">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <span>September 2025</span>
-                        </div>
-                    </div>
-                </div>
-
-                
-                <div class="gallery-card rounded-2xl overflow-hidden animate-slide-up stagger-5" data-category="after">
-                    <div class="gallery-image">
-                        <div class="image-placeholder">
-                            <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <p class="text-sm">Restored Forest</p>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-lg font-semibold text-deep-forest">Thriving Ecosystem</h3>
-                            <span class="after-badge px-3 py-1 rounded-full text-xs font-medium text-white">After</span>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Restored site with diverse species and healthy canopy development.
-                        </p>
-                        <div class="flex items-center gap-2 text-xs text-gray-500">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <span>Ongoing</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gallery-card rounded-2xl overflow-hidden animate-slide-up stagger-6" data-category="after">
-                    <div class="gallery-image">
-                        <div class="image-placeholder">
-                            <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <p class="text-sm">Wildlife Return</p>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-lg font-semibold text-deep-forest">Biodiversity Recovery</h3>
-                            <span class="after-badge px-3 py-1 rounded-full text-xs font-medium text-white">After</span>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Native wildlife returning to restored habitats at project sites.
-                        </p>
-                        <div class="flex items-center gap-2 text-xs text-gray-500">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <span>Ongoing</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gallery-card rounded-2xl overflow-hidden animate-slide-up stagger-7" data-category="progress">
-                    <div class="gallery-image">
-                        <div class="image-placeholder">
-                            <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <p class="text-sm">Team Photo</p>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-lg font-semibold text-deep-forest">Volunteer Team</h3>
-                            <span class="progress-badge px-3 py-1 rounded-full text-xs font-medium text-white">Progress</span>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Volunteers and specialists on-site during a planting session.
-                        </p>
-                        <div class="flex items-center gap-2 text-xs text-gray-500">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
-                            <span>Team Photo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gallery-card rounded-2xl overflow-hidden animate-slide-up stagger-8" data-category="before">
-                    <div class="gallery-image">
-                        <div class="image-placeholder">
-                            <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <p class="text-sm">Degraded Land</p>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-lg font-semibold text-deep-forest">EcoSearch Site</h3>
-                            <span class="before-badge px-3 py-1 rounded-full text-xs font-medium text-white">Before</span>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-3">
-                            EcoSearch carbon offset project area before planting began.
-                        </p>
-                        <div class="flex items-center gap-2 text-xs text-gray-500">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                            <span>Canada</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gallery-card rounded-2xl overflow-hidden animate-slide-up stagger-9" data-category="after">
-                    <div class="gallery-image">
-                        <div class="image-placeholder">
-                            <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <p class="text-sm">Carbon Forest</p>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-lg font-semibold text-deep-forest">Carbon Sequestration</h3>
-                            <span class="after-badge px-3 py-1 rounded-full text-xs font-medium text-white">After</span>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Maturing forest actively sequestering carbon at scale.
-                        </p>
-                        <div class="flex items-center gap-2 text-xs text-gray-500">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <span>Ongoing</span>
-                        </div>
+                    <p class="text-sm text-gray-500 mb-4 leading-relaxed">
+                        Forest restoration area in Canada prior to planting.
+                    </p>
+                    <div class="card-meta">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span>Canada</span>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <section class="mb-16">
-            <div class="gallery-card rounded-2xl p-8">
-                <h2 class="text-2xl font-semibold text-deep-forest mb-6 text-center">Visual Impact Summary</h2>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-lg font-semibold text-deep-forest mb-2">Before Restoration</h3>
-                        <p class="text-sm text-gray-600">Documenting site conditions before any planting work begins.</p>
+            <!-- Card 2 -->
+            <div class="gallery-card fade-in-up delay-2" data-category="before">
+                <div class="gallery-image before-bg">
+                    <div class="icon-wrap">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
                     </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-lg font-semibold text-deep-forest mb-2">Active Progress</h3>
-                        <p class="text-sm text-gray-600">Planting days, early growth, and the teams making it happen.</p>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-base font-semibold text-deep-forest">Stanley Park Site</h3>
+                        <span class="badge badge-before"><span class="badge-dot"></span>Before</span>
                     </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-lg font-semibold text-deep-forest mb-2">Thriving Results</h3>
-                        <p class="text-sm text-gray-600">Established canopy, returning wildlife, and measurable carbon capture.</p>
+                    <p class="text-sm text-gray-500 mb-4 leading-relaxed">
+                        Urban forest area in Vancouver before restoration work began.
+                    </p>
+                    <div class="card-meta">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span>Vancouver, Canada</span>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <section class="text-center">
-            <div class="gallery-card rounded-2xl p-8">
-                <h2 class="text-2xl font-semibold text-deep-forest mb-4">Explore the Data</h2>
-                <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
-                    See verified planting numbers, project locations, and the species being planted across our sites.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="/index.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-brand-green text-white font-medium hover:opacity-90 transition">
-                        View Dashboard
-                    </a>
-                    <a href="/species.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-deep-forest font-medium border border-gray-300 hover:bg-gray-50 transition">
-                        Browse Species
-                    </a>
+            <!-- Card 3 -->
+            <div class="gallery-card fade-in-up delay-3" data-category="progress">
+                <div class="gallery-image progress-bg">
+                    <div class="icon-wrap">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-base font-semibold text-deep-forest">Tree Planting Day</h3>
+                        <span class="badge badge-progress"><span class="badge-dot"></span>Progress</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4 leading-relaxed">
+                        Volunteers and team members actively planting Douglas Fir and Western Red Cedar saplings.
+                    </p>
+                    <div class="card-meta">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        <span>March 2025</span>
+                    </div>
                 </div>
             </div>
-        </section>
+
+            <!-- Card 4 -->
+            <div class="gallery-card fade-in-up delay-4" data-category="progress">
+                <div class="gallery-image progress-bg">
+                    <div class="icon-wrap">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-base font-semibold text-deep-forest">Early Growth Phase</h3>
+                        <span class="badge badge-progress"><span class="badge-dot"></span>Progress</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4 leading-relaxed">
+                        Six months after planting &mdash; saplings showing healthy establishment.
+                    </p>
+                    <div class="card-meta">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        <span>September 2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="gallery-card fade-in-up delay-5" data-category="after">
+                <div class="gallery-image after-bg">
+                    <div class="icon-wrap">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-base font-semibold text-deep-forest">Thriving Ecosystem</h3>
+                        <span class="badge badge-after"><span class="badge-dot"></span>After</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4 leading-relaxed">
+                        Restored site with diverse species and healthy canopy development.
+                    </p>
+                    <div class="card-meta">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>Ongoing</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="gallery-card fade-in-up delay-6" data-category="after">
+                <div class="gallery-image after-bg">
+                    <div class="icon-wrap">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-base font-semibold text-deep-forest">Biodiversity Recovery</h3>
+                        <span class="badge badge-after"><span class="badge-dot"></span>After</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4 leading-relaxed">
+                        Native wildlife returning to restored habitats at project sites.
+                    </p>
+                    <div class="card-meta">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>Ongoing</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="gallery-card fade-in-up delay-7" data-category="progress">
+                <div class="gallery-image progress-bg">
+                    <div class="icon-wrap">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-base font-semibold text-deep-forest">Volunteer Team</h3>
+                        <span class="badge badge-progress"><span class="badge-dot"></span>Progress</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4 leading-relaxed">
+                        Volunteers and specialists on-site during a planting session.
+                    </p>
+                    <div class="card-meta">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span>Team Photo</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="gallery-card fade-in-up delay-8" data-category="before">
+                <div class="gallery-image before-bg">
+                    <div class="icon-wrap">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-base font-semibold text-deep-forest">EcoSearch Site</h3>
+                        <span class="badge badge-before"><span class="badge-dot"></span>Before</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4 leading-relaxed">
+                        EcoSearch carbon offset project area before planting began.
+                    </p>
+                    <div class="card-meta">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span>Canada</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 9 -->
+            <div class="gallery-card fade-in-up delay-9" data-category="after">
+                <div class="gallery-image after-bg">
+                    <div class="icon-wrap">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-base font-semibold text-deep-forest">Carbon Sequestration</h3>
+                        <span class="badge badge-after"><span class="badge-dot"></span>After</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4 leading-relaxed">
+                        Maturing forest actively sequestering carbon at scale.
+                    </p>
+                    <div class="card-meta">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>Ongoing</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </main>
 
     <script>
@@ -497,21 +509,16 @@
         })();
 
         function filterGallery(category) {
-            const cards = document.querySelectorAll('.gallery-card');
-            const buttons = document.querySelectorAll('.filter-btn');
-            
-            buttons.forEach(btn => {
-                btn.classList.remove('active', 'bg-brand-green', 'text-white');
-                btn.classList.add('bg-gray-100', 'text-gray-700');
-            });
-            
-            event.target.classList.add('active', 'bg-brand-green', 'text-white');
-            event.target.classList.remove('bg-gray-100', 'text-gray-700');
-            
+            const cards = document.querySelectorAll('#gallery-grid .gallery-card');
+            const buttons = document.querySelectorAll('.filter-pill');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.filter-pill').classList.add('active');
+
             cards.forEach(card => {
                 if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'block';
-                    card.style.animation = 'slideUp 0.6s ease-out forwards';
+                    card.style.display = '';
+                    card.style.animation = 'fadeInUp 0.4s ease-out forwards';
                 } else {
                     card.style.display = 'none';
                 }
@@ -522,20 +529,13 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.style.opacity = '0';
-                        entry.target.style.transform = 'translateY(20px)';
-                        setTimeout(() => {
-                            entry.target.style.transition = 'all 0.6s ease-out';
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                        }, 100);
+                        entry.target.classList.add('fade-in-up');
+                        observer.unobserve(entry.target);
                     }
                 });
-            });
+            }, { threshold: 0.1 });
 
-            document.querySelectorAll('.animate-slide-up').forEach(el => {
-                observer.observe(el);
-            });
+            document.querySelectorAll('.gallery-card').forEach(el => observer.observe(el));
         });
     </script>
 </body>
