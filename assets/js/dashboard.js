@@ -130,7 +130,6 @@ function createSpeciesCard(title, badgeClass, items) {
     return div;
 }
 
-// ─── Tabs ────────────────────────────────────────────────────────────────────
 function switchTab(tabName) {
     document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
     document.querySelectorAll('.tab-button').forEach(b => {
@@ -275,7 +274,6 @@ function animateCount() {
     requestAnimationFrame(step);
 }
 
-// ─── Keyboard navigation for tabs ────────────────────────────────────────────
 document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         const cur = document.querySelector('.tab-button.text-brand-green, .tab-button.text-yellow-700');

@@ -66,10 +66,8 @@ function populateCertificates() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Populate certificates from centralized data
     populateCertificates();
     
-    // Add click animations to download buttons
     document.addEventListener('click', function(e) {
         if (e.target.closest('.download-btn')) {
             const button = e.target.closest('.download-btn');
