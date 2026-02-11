@@ -5,8 +5,8 @@ function initializeTreeData() {
     }
     const lastUpdatedEl = document.getElementById('last-updated-date');
     if (lastUpdatedEl) lastUpdatedEl.textContent = TreeData.lastUpdated;
-    const lastUpdated = new Date('2025-09-10T00:00:00-07:00');
-    const diffDay = Math.floor((Date.now() - lastUpdated) / 86400000);
+    const lastUpdated = parseLastUpdatedDate(TreeData.lastUpdated) || parseLastUpdatedDate(document.lastModified);
+    const diffDay = lastUpdated ? Math.floor((Date.now() - lastUpdated) / 86400000) : 0;
     const diffMonth = Math.floor(diffDay / 30.44);
     const diffYear = Math.floor(diffDay / 365.25);
     let rel = 'just now';
@@ -17,6 +17,13 @@ function initializeTreeData() {
     if (relEl) relEl.textContent = '(' + rel + ')';
 
     updateUI();
+}
+
+function parseLastUpdatedDate(value) {
+    if (!value) return null;
+    const normalized = String(value).replace(/(\d+)(st|nd|rd|th)/gi, '$1');
+    const date = new Date(normalized);
+    return Number.isNaN(date.getTime()) ? null : date;
 }
 
 function updateUI() {
