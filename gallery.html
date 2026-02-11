@@ -42,10 +42,14 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.08) 0%, transparent 50%),
-                         radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 40%),
-                         radial-gradient(circle at 60% 80%, rgba(255,255,255,0.04) 0%, transparent 45%);
-            opacity: 0.5;
+            background: url('assets/images/bg-image.avif') center/cover no-repeat;
+            opacity: 0.25;
+        }
+        .gallery-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,51,38,0.6) 0%, rgba(0,71,52,0.8) 100%);
         }
 
         .gallery-card {
