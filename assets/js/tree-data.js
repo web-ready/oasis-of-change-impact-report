@@ -1,20 +1,17 @@
 const TreeData = {
-    lastUpdated: "September 10th, 2025",
+    lastUpdated: "February 10th, 2026",
     totals: {
         totalTrees: 8870,
         verifiedTrees: 1532,
         legacyTrees: 7338,
         goalTrees: 10000,
-        speciesCount: 67,
-        co2Captured: 0,
-        co2PerTree: 14.93
+        speciesCount: 67
     },
     
     verifiedProjects: [
         {
             id: "web-ready",
             name: "Web-Ready",
-            description: "Forest restoration project",
             location: "Canada",
             trees: 924,
             co2Offset: 71500,
@@ -23,7 +20,6 @@ const TreeData = {
         {
             id: "spes",
             name: "Stanley Park Ecology Society (SPES)",
-            description: "Urban forest restoration",
             location: "Canada", 
             trees: 232,
             co2Offset: 21440,
@@ -32,7 +28,6 @@ const TreeData = {
         {
             id: "sustainable-www",
             name: "Sustainable WWW",
-            description: "Digital sustainability initiative",
             location: "Sweden",
             trees: 170,
             co2Offset: 24560, 
@@ -41,7 +36,6 @@ const TreeData = {
         {
             id: "mst",
             name: "Mittler Senior Technology (MST)",
-            description: "Corporate sustainability program",
             location: "United States",
             trees: 124,
             co2Offset: 16250,
@@ -50,7 +44,6 @@ const TreeData = {
         {
             id: "ecosearch",
             name: "EcoSearch",
-            description: "Search engine carbon offset",
             location: "Canada",
             trees: 101,
             co2Offset: 5050,
@@ -428,7 +421,7 @@ const TreeData = {
     },
     
     getCo2Captured: function() {
-        return Math.round(this.totals.totalTrees * 80);
+        return this.verifiedProjects.reduce((sum, p) => sum + (p.co2Offset || 0), 0);
     },
     
     getSpeciesCount: function() {

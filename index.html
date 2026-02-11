@@ -61,12 +61,11 @@
         </div>
     </header>
 
-    <div id="mobile-menu" class="md:hidden hidden fixed inset-0 z-[2000] bg-black/90 backdrop-blur-sm">
+    <div id="mobile-menu" class="md:hidden hidden fixed inset-0 z-[2000] bg-black/90 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
         <div class="w-full h-full flex items-center justify-center p-6" id="mobile-menu-backdrop">
             <div class="text-center text-white max-w-sm mx-auto">
-                <h2 class="font-serif text-4xl mb-8">Navigate</h2>
-                <nav class="space-y-6 text-lg">
-                    <a href="/index.html" class="block py-2 px-4 rounded-lg bg-brand-green/20 text-white border border-brand-green/30">Dashboard</a>
+                <h2 id="mobile-menu-title" class="font-serif text-4xl mb-8">Navigate</h2>
+                <nav class="space-y-4 text-lg">
                     <a href="/certificates.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Certificates</a>
                     <a href="/species.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Tree Species</a>
                     <a href="/gallery.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Gallery</a>
@@ -109,6 +108,11 @@
                 <div class="text-center">
                     <div class="tabular-nums text-2xl font-bold text-deep-forest" id="species-count">0</div>
                     <div class="text-xs text-gray-500 mt-1">Species</div>
+                </div>
+                <div class="w-px bg-gray-200"></div>
+                <div class="text-center">
+                    <div class="tabular-nums text-2xl font-bold text-brand-green" id="co2-offset">0</div>
+                    <div class="text-xs text-gray-500 mt-1">Verified CO₂ offset (kg)</div>
                 </div>
             </div>
         </section>
