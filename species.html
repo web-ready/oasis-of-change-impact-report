@@ -28,6 +28,7 @@
         }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="assets/css/design-tokens.css" rel="stylesheet">
     <style>
         .popup-h1 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
         .species-card { transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
@@ -92,18 +93,16 @@
 
     <section class="p-6 bg-white">
         <div class="max-w-4xl mx-auto">
-            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6">
-            <div class="flex">
-                <div class="flex-shrink-0">
-                    <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+            <div class="ooc-alert" role="note" aria-label="Data transparency notice">
+            <div class="ooc-alert__row">
+                <div class="ooc-alert__icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                 </div>
-                <div class="ml-3">
-                    <h3 class="text-sm font-medium text-yellow-800">Data Transparency Notice</h3>
-                    <div class="mt-2 text-sm text-yellow-700">
-                        <p>This database combines verified species data from Tree-Nation projects with legacy data from Refoorest partner projects. While we strive for accuracy, some legacy data may require verification. Species marked as "Verified" have been confirmed through our Tree-Nation platform, while "Legacy Partner" data comes from our Refoorest partnership.</p>
-                    </div>
+                <div>
+                    <h3 class="ooc-alert__title">Data Transparency Notice</h3>
+                    <p class="ooc-alert__body">This database combines verified species data from Tree-Nation projects with legacy data from Refoorest partner projects. While we strive for accuracy, some legacy data may require verification. Species marked as "Verified" have been confirmed through our Tree-Nation platform, while "Legacy Partner" data comes from our Refoorest partnership.</p>
                 </div>
             </div>
             </div>

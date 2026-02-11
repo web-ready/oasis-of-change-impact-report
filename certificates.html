@@ -119,54 +119,6 @@
             box-shadow: 0 4px 10px rgba(0, 71, 52, 0.12);
         }
 
-        .overview-card {
-            border-radius: 1rem;
-            padding: 1.2rem;
-            border: 1px solid #c8d9d2;
-        }
-
-        .overview-card--primary {
-            background: #edf5f2;
-            box-shadow: 0 3px 10px rgba(0, 71, 52, 0.06);
-        }
-
-        .overview-card--secondary {
-            background: #f2f7f4;
-            box-shadow: 0 3px 10px rgba(0, 71, 52, 0.05);
-        }
-
-        .overview-icon {
-            width: 1.9rem;
-            height: 1.9rem;
-            border-radius: 9999px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            color: #ffffff;
-            box-shadow: 0 2px 6px rgba(0, 71, 52, 0.16);
-        }
-
-        .overview-icon--primary {
-            background: linear-gradient(145deg, #0f6d54 0%, var(--color-brand-green) 100%);
-        }
-
-        .overview-icon--secondary {
-            background: linear-gradient(145deg, #178e70 0%, #0f6d54 100%);
-        }
-
-        .overview-heading {
-            color: #0c4334;
-            letter-spacing: 0;
-            font-weight: 500;
-        }
-
-        .overview-body {
-            color: #1f5848;
-            font-weight: 400;
-        }
-        
-        
         @media (max-width: 768px) {
             .certificate-card {
                 padding: 1rem;
@@ -276,16 +228,16 @@
         </div>
 
         <div id="detailed-info" class="mt-12">
-            <div class="mb-6 overview-card overview-card--primary" role="note" aria-label="Certificate details">
-            <div class="flex items-start space-x-4">
-                <div class="overview-icon overview-icon--primary mt-0.5" aria-hidden="true">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <div class="mb-6 ooc-alert" role="note" aria-label="Certificate details">
+            <div class="ooc-alert__row">
+                <div class="ooc-alert__icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                 </div>
                 <div>
-                    <h4 class="text-base overview-heading mb-1">Third-Party Verification</h4>
-                    <p class="overview-body text-sm leading-relaxed">
+                    <h4 class="ooc-alert__title">Third-Party Verification</h4>
+                    <p class="ooc-alert__body">
                         All tree-planting certificates are independently verified and authenticated through Tree-Nation's 
                         comprehensive verification platform. These official documents provide transparent, auditable proof 
                         of our environmental impact and measurable carbon offset contributions to global reforestation efforts.
@@ -294,16 +246,16 @@
             </div>
         </div>
 
-            <div class="mb-8 overview-card overview-card--secondary">
-            <div class="flex items-start space-x-4">
-                <div class="overview-icon overview-icon--secondary mt-0.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="white" stroke-width="2" fill="none"/>
+            <div class="mb-8 ooc-alert" role="note" aria-label="Impact documentation standards">
+            <div class="ooc-alert__row">
+                <div class="ooc-alert__icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                 </div>
                 <div>
-                    <h4 class="text-base overview-heading mb-1">Impact Documentation Standards</h4>
-                    <p class="overview-body text-sm leading-relaxed">
+                    <h4 class="ooc-alert__title">Impact Documentation Standards</h4>
+                    <p class="ooc-alert__body">
                             Our certificate portfolio focuses on substantial reforestation projects of 50 trees or greater, 
                         representing our commitment to meaningful environmental impact. While we maintain numerous smaller-scale 
                         plantings, we prioritize documentation of significant contributions that demonstrate measurable 
