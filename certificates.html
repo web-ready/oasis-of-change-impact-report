@@ -56,28 +56,114 @@
         }
         
         .download-btn {
-            background: linear-gradient(135deg, var(--color-brand-green) 0%, var(--color-brand-green-light) 100%);
-            color: white;
-            border: none;
-            border-radius: 0.5rem;
-            padding: 0.75rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            max-width: 15rem;
+            background: linear-gradient(145deg, #00543e 0%, var(--color-brand-green) 70%, #00372a 100%);
+            color: #ffffff;
+            border: 1px solid rgba(0, 71, 52, 0.28);
+            border-radius: 0.85rem;
+            padding: 0.82rem 1.2rem;
+            font-size: 0.96rem;
             font-weight: 500;
-            transition: all 0.2s ease;
+            letter-spacing: 0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
             cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0, 71, 52, 0.18);
         }
         
+        .download-btn .download-icon {
+            display: inline-flex;
+            width: 1.2rem;
+            height: 1.2rem;
+            opacity: 0.95;
+        }
+
         .download-btn:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 71, 52, 0.3);
+            filter: brightness(1.03);
+            box-shadow: 0 13px 24px rgba(0, 71, 52, 0.22);
         }
         
         .download-btn:focus-visible {
             outline: none;
-            box-shadow: var(--focus-ring);
+            box-shadow: var(--focus-ring), 0 13px 24px rgba(0, 71, 52, 0.22);
         }
         
         .download-btn:active {
             transform: translateY(0);
+            box-shadow: 0 6px 12px rgba(0, 71, 52, 0.18);
+        }
+
+        .ui-pill-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            border-radius: 9999px;
+            padding: 0.45rem 0.95rem;
+            border: 1px solid rgba(0, 71, 52, 0.14);
+            background: linear-gradient(180deg, #ffffff 0%, #f4f8f6 100%);
+            color: var(--color-brand-green);
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 2px rgba(2, 6, 23, 0.06);
+        }
+
+        .ui-pill-btn:hover {
+            border-color: rgba(0, 71, 52, 0.26);
+            background: linear-gradient(180deg, #ffffff 0%, #ecf4f0 100%);
+            box-shadow: 0 4px 10px rgba(0, 71, 52, 0.12);
+        }
+
+        .overview-card {
+            border-radius: 1rem;
+            padding: 1.2rem;
+            border: 1px solid #c8d9d2;
+        }
+
+        .overview-card--primary {
+            background: #edf5f2;
+            box-shadow: 0 3px 10px rgba(0, 71, 52, 0.06);
+        }
+
+        .overview-card--secondary {
+            background: #f2f7f4;
+            box-shadow: 0 3px 10px rgba(0, 71, 52, 0.05);
+        }
+
+        .overview-icon {
+            width: 1.9rem;
+            height: 1.9rem;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 71, 52, 0.16);
+        }
+
+        .overview-icon--primary {
+            background: linear-gradient(145deg, #0f6d54 0%, var(--color-brand-green) 100%);
+        }
+
+        .overview-icon--secondary {
+            background: linear-gradient(145deg, #178e70 0%, #0f6d54 100%);
+        }
+
+        .overview-heading {
+            color: #0c4334;
+            letter-spacing: 0;
+            font-weight: 500;
+        }
+
+        .overview-body {
+            color: #1f5848;
+            font-weight: 400;
         }
         
         
@@ -177,7 +263,7 @@
                         <span>50+ trees per project</span>
                     </div>
                 </div>
-                <button onclick="scrollToDetails()" class="text-sm text-brand-green hover:text-green-700 font-medium transition-colors">
+                <button onclick="scrollToDetails()" class="ui-pill-btn">
                     Learn more ↓
                 </button>
             </div>
@@ -190,16 +276,16 @@
         </div>
 
         <div id="detailed-info" class="mt-12">
-            <div class="mb-6 p-6 bg-info-bg border border-info rounded-2xl" role="note" aria-label="Certificate details">
+            <div class="mb-6 overview-card overview-card--primary" role="note" aria-label="Certificate details">
             <div class="flex items-start space-x-4">
-                <div class="w-6 h-6 bg-info rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" aria-hidden="true">
+                <div class="overview-icon overview-icon--primary mt-0.5" aria-hidden="true">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
                         <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                 </div>
                 <div>
-                    <h4 class="font-medium text-info-text mb-1">Third-Party Verification</h4>
-                    <p class="text-info-text text-sm leading-relaxed opacity-90">
+                    <h4 class="text-base overview-heading mb-1">Third-Party Verification</h4>
+                    <p class="overview-body text-sm leading-relaxed">
                         All tree-planting certificates are independently verified and authenticated through Tree-Nation's 
                         comprehensive verification platform. These official documents provide transparent, auditable proof 
                         of our environmental impact and measurable carbon offset contributions to global reforestation efforts.
@@ -208,16 +294,16 @@
             </div>
         </div>
 
-            <div class="mb-8 p-6 bg-green-50 border border-green-200 rounded-2xl">
+            <div class="mb-8 overview-card overview-card--secondary">
             <div class="flex items-start space-x-4">
-                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div class="overview-icon overview-icon--secondary mt-0.5">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                         <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="white" stroke-width="2" fill="none"/>
                     </svg>
                 </div>
                 <div>
-                    <h4 class="font-medium text-green-900 mb-1">Impact Documentation Standards</h4>
-                    <p class="text-green-800 text-sm leading-relaxed">
+                    <h4 class="text-base overview-heading mb-1">Impact Documentation Standards</h4>
+                    <p class="overview-body text-sm leading-relaxed">
                             Our certificate portfolio focuses on substantial reforestation projects of 50 trees or greater, 
                         representing our commitment to meaningful environmental impact. While we maintain numerous smaller-scale 
                         plantings, we prioritize documentation of significant contributions that demonstrate measurable 
