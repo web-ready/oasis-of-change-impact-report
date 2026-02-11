@@ -5,18 +5,30 @@ function initializeTreeData() {
     }
     const lastUpdatedEl = document.getElementById('last-updated-date');
     if (lastUpdatedEl) lastUpdatedEl.textContent = TreeData.lastUpdated;
-    const lastUpdated = new Date('2025-09-10T00:00:00-07:00');
-    const diffDay = Math.floor((Date.now() - lastUpdated) / 86400000);
-    const diffMonth = Math.floor(diffDay / 30.44);
-    const diffYear = Math.floor(diffDay / 365.25);
-    let rel = 'just now';
-    if (diffYear > 0) rel = diffYear === 1 ? '1 year ago' : diffYear + ' years ago';
-    else if (diffMonth > 0) rel = diffMonth === 1 ? '1 month ago' : diffMonth + ' months ago';
-    else if (diffDay > 0) rel = diffDay === 1 ? '1 day ago' : diffDay + ' days ago';
+    const lastUpdated = parseDisplayDate(TreeData.lastUpdated) || new Date(document.lastModified);
+    const rel = getRelativeTimeLabel(lastUpdated);
     const relEl = document.getElementById('last-updated-relative');
     if (relEl) relEl.textContent = '(' + rel + ')';
 
     updateUI();
+}
+
+function parseDisplayDate(dateText) {
+    if (!dateText || typeof dateText !== 'string') return null;
+    const normalized = dateText.replace(/(\d+)(st|nd|rd|th)/gi, '$1');
+    const parsed = new Date(normalized);
+    return Number.isNaN(parsed.getTime()) ? null : parsed;
+}
+
+function getRelativeTimeLabel(date) {
+    if (!(date instanceof Date) || Number.isNaN(date.getTime())) return 'just now';
+    const diffDay = Math.max(0, Math.floor((Date.now() - date.getTime()) / 86400000));
+    const diffMonth = Math.floor(diffDay / 30.44);
+    const diffYear = Math.floor(diffDay / 365.25);
+    if (diffYear > 0) return diffYear === 1 ? '1 year ago' : diffYear + ' years ago';
+    if (diffMonth > 0) return diffMonth === 1 ? '1 month ago' : diffMonth + ' months ago';
+    if (diffDay > 0) return diffDay === 1 ? '1 day ago' : diffDay + ' days ago';
+    return 'just now';
 }
 
 function updateUI() {
@@ -263,7 +275,17 @@ function animateCount() {
     const el = document.getElementById('total-count');
     if (!el) return;
     const target = TreeData.getTotalTrees();
-    let current = 0;
+    const shown = parseInt(el.textContent.replace(/,/g, ''), 10);
+    if (!Number.isNaN(shown) && shown >= target) {
+        el.textContent = target.toLocaleString();
+        return;
+    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        el.textContent = target.toLocaleString();
+        return;
+    }
+
+    let current = Number.isNaN(shown) ? 0 : shown;
     const inc = target / 60;
     function step() {
         current += inc;
