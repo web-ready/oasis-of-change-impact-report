@@ -404,22 +404,6 @@ const TreeData = {
         return this.totals.legacyTrees;
     },
     
-    getProgressPercentage: function() {
-        return Math.round((this.totals.totalTrees / this.totals.goalTrees) * 100 * 10) / 10;
-    },
-    
-    getRemainingTrees: function() {
-        return this.totals.goalTrees - this.totals.totalTrees;
-    },
-    
-    getVerifiedPercentage: function() {
-        return Math.round((this.totals.verifiedTrees / this.totals.totalTrees) * 100);
-    },
-    
-    getLegacyPercentage: function() {
-        return Math.round((this.totals.legacyTrees / this.totals.totalTrees) * 100);
-    },
-    
     getCo2Captured: function() {
         return this.verifiedProjects.reduce((sum, p) => sum + (p.co2Offset || 0), 0);
     },
@@ -446,38 +430,6 @@ const TreeData = {
     
     getSpeciesData: function() {
         return this.species;
-    },
-    updateTotalTrees: function(newTotal) {
-        this.totals.totalTrees = newTotal;
-        this.recalculateTotals();
-    },
-    
-    updateVerifiedTrees: function(newVerified) {
-        this.totals.verifiedTrees = newVerified;
-        this.totals.legacyTrees = this.totals.totalTrees - newVerified;
-    },
-    
-    updateProjectTrees: function(projectId, newTreeCount) {
-        const verifiedProject = this.verifiedProjects.find(p => p.id === projectId);
-        if (verifiedProject) {
-            verifiedProject.trees = newTreeCount;
-            verifiedProject.co2Offset = Math.round(newTreeCount * 250);
-            this.recalculateTotals();
-            return;
-        }
-        const legacyProject = this.legacyProjects.find(p => p.id === projectId);
-        if (legacyProject) {
-            legacyProject.trees = newTreeCount;
-            legacyProject.co2Offset = Math.round(newTreeCount * 250);
-            this.recalculateTotals();
-            return;
-        }
-    },
-    
-    recalculateTotals: function() {
-        this.totals.verifiedTrees = this.verifiedProjects.reduce((sum, project) => sum + project.trees, 0);
-        this.totals.legacyTrees = this.legacyProjects.reduce((sum, project) => sum + project.trees, 0);
-        this.totals.totalTrees = this.totals.verifiedTrees + this.totals.legacyTrees;
     }
 };
 

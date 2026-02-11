@@ -45,11 +45,6 @@
     --focus-ring-offset: 2px;
 }
 
-.alert-success { background-color: var(--color-success-bg); border-color: var(--color-success-border); color: var(--color-success-text); }
-.alert-warning { background-color: var(--color-warning-bg); border-color: var(--color-warning-border); color: var(--color-warning-text); }
-.alert-error { background-color: var(--color-error-bg); border-color: var(--color-error-border); color: var(--color-error-text); }
-.alert-info { background-color: var(--color-info-bg); border-color: var(--color-info-border); color: var(--color-info-text); }
-
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,

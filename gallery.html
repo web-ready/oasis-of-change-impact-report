@@ -202,7 +202,7 @@
 
         <section class="mb-16">
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
-                <!-- Before Images -->
+                
                 <div class="gallery-card rounded-2xl overflow-hidden animate-slide-up stagger-1" data-category="before">
                     <div class="gallery-image">
                         <div class="image-placeholder">
@@ -309,7 +309,7 @@
                     </div>
                 </div>
 
-                <!-- After Images -->
+                
                 <div class="gallery-card rounded-2xl overflow-hidden animate-slide-up stagger-5" data-category="after">
                     <div class="gallery-image">
                         <div class="image-placeholder">
@@ -497,7 +497,6 @@
     </main>
 
     <script>
-        // Mobile menu toggle
         (function(){
             const toggleBtn = document.getElementById('mobile-menu-toggle');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -515,12 +514,10 @@
             }
         })();
 
-        // Gallery filtering functionality
         function filterGallery(category) {
             const cards = document.querySelectorAll('.gallery-card');
             const buttons = document.querySelectorAll('.filter-btn');
             
-            // Update button states
             buttons.forEach(btn => {
                 btn.classList.remove('active', 'bg-brand-green', 'text-white');
                 btn.classList.add('bg-gray-100', 'text-gray-700');
@@ -529,7 +526,6 @@
             event.target.classList.add('active', 'bg-brand-green', 'text-white');
             event.target.classList.remove('bg-gray-100', 'text-gray-700');
             
-            // Filter cards
             cards.forEach(card => {
                 if (category === 'all' || card.dataset.category === category) {
                     card.style.display = 'block';
@@ -540,7 +536,6 @@
             });
         }
 
-        // Animate cards on scroll
         document.addEventListener('DOMContentLoaded', function() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
