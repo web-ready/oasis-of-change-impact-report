@@ -49,6 +49,7 @@
                 <a href="/index.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
                 <div class="hidden md:flex items-center gap-3">
                     <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Certificates</a>
+                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Tree Species</a>
                     <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Gallery</a>
                 </div>
                 <button id="mobile-menu-toggle" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50" aria-label="Open menu" aria-expanded="false">
@@ -67,6 +68,7 @@
                 <nav class="space-y-6 text-lg">
                     <a href="/index.html" class="block py-2 px-4 rounded-lg bg-brand-green/20 text-white border border-brand-green/30">Dashboard</a>
                     <a href="/certificates.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Certificates</a>
+                    <a href="/species.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Tree Species</a>
                     <a href="/gallery.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Gallery</a>
                 </nav>
                 <button id="mobile-menu-close" class="mt-12 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-200">
@@ -227,21 +229,6 @@
                     </div>
                     <div class="mobile-cards" id="legacy-mobile-cards"></div>
                 </div>
-            </div>
-        </section>
-
-        <section class="mb-12" id="species-section">
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                <h2 class="text-xl font-semibold text-deep-forest mb-2">Tree Species</h2>
-                <p class="text-sm text-gray-500 mb-6">67 species across verified and legacy partner projects</p>
-
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <button class="species-filter-btn active px-3 py-1.5 rounded-lg border border-brand-green bg-brand-green text-white text-xs font-medium" data-filter="all">All</button>
-                    <button class="species-filter-btn px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 text-xs font-medium bg-white hover:border-brand-green" data-filter="verified">Verified</button>
-                    <button class="species-filter-btn px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 text-xs font-medium bg-white hover:border-brand-green" data-filter="legacy">Legacy</button>
-                </div>
-
-                <div id="species-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
             </div>
         </section>
 

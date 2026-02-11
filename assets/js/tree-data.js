@@ -17,6 +17,7 @@ const TreeData = {
             description: "Forest restoration project",
             location: "Canada",
             trees: 924,
+            co2Offset: 71500,
             url: "https://tree-nation.com/profile/impact/web-ready"
         },
         {
@@ -24,8 +25,8 @@ const TreeData = {
             name: "Stanley Park Ecology Society (SPES)",
             description: "Urban forest restoration",
             location: "Canada", 
-            trees: 230,
-            co2Offset: 21380,
+            trees: 232,
+            co2Offset: 21440,
             url: "https://tree-nation.com/profile/impact/stanley-park-ecology-society"
         },
         {
@@ -33,8 +34,8 @@ const TreeData = {
             name: "Sustainable WWW",
             description: "Digital sustainability initiative",
             location: "Sweden",
-            trees: 159,
-            co2Offset: 13500, 
+            trees: 170,
+            co2Offset: 24560, 
             url: "https://tree-nation.com/profile/impact/sustainable-www"
         },
         {
@@ -42,8 +43,8 @@ const TreeData = {
             name: "Mittler Senior Technology (MST)",
             description: "Corporate sustainability program",
             location: "United States",
-            trees: 123,
-            co2Offset: 15000,
+            trees: 124,
+            co2Offset: 16250,
             url: "https://tree-nation.com/profile/impact/mittler-senior-technology"
         },
         {
@@ -52,7 +53,7 @@ const TreeData = {
             description: "Search engine carbon offset",
             location: "Canada",
             trees: 101,
-            co2Offset: 5000,
+            co2Offset: 5050,
             date: "2024-06-26",
             certificate: "Eden Reforestation",
             url: "https://tree-nation.com/profile/impact/ecosearch"
