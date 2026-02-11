@@ -270,12 +270,22 @@ function animateCount() {
     if (typeof TreeData === 'undefined') return;
     const el = document.getElementById('total-count');
     if (!el) return;
+
     const target = TreeData.getTotalTrees();
-    let current = 0;
-    const inc = target / 60;
+    const shown = parseInt(el.textContent.replace(/,/g, ''), 10) || 0;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || shown >= target) {
+        el.textContent = target.toLocaleString();
+        return;
+    }
+
+    let current = shown;
+    const inc = Math.max((target - shown) / 60, 1);
     function step() {
         current += inc;
-        if (current >= target) { el.textContent = target.toLocaleString(); return; }
+        if (current >= target) {
+            el.textContent = target.toLocaleString();
+            return;
+        }
         el.textContent = Math.floor(current).toLocaleString();
         requestAnimationFrame(step);
     }
