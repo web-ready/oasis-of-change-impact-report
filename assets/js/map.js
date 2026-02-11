@@ -382,7 +382,7 @@ function renderTotals() {
           <div class="text-xs text-gray-500 mt-1">Tree-Nation certified</div>
         </div>
         <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 text-center">
-          <div class="text-2xl sm:text-3xl font-bold text-legacy-gold mb-2">${totals.legacyTrees.toLocaleString()}</div>
+          <div class="text-2xl sm:text-3xl font-bold text-brand-green mb-2">${totals.legacyTrees.toLocaleString()}</div>
           <div class="text-xs sm:text-sm text-gray-600">Legacy Trees</div>
           <div class="text-xs text-gray-500 mt-1">Partner organizations</div>
         </div>
@@ -428,7 +428,7 @@ function renderTotals() {
           <div class="text-xs text-gray-500 mt-1">Tree-Nation plantings</div>
         </div>
         <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 text-center sm:col-span-2 lg:col-span-1">
-          <div class="text-2xl sm:text-3xl font-bold text-legacy-gold mb-2">${totals.supportedSites}</div>
+          <div class="text-2xl sm:text-3xl font-bold text-brand-green mb-2">${totals.supportedSites}</div>
           <div class="text-xs sm:text-sm text-gray-600">Supported Sites</div>
           <div class="text-xs text-gray-500 mt-1">Legacy partner projects</div>
         </div>
@@ -465,7 +465,7 @@ function initializeMap() {
         markerColor = '#004734';
         markerLabel = 'Confirmed';
       } else if (site.type === 'mixed') {
-        markerColor = '#7c3aed';
+        markerColor = '#006B50';
         markerLabel = 'Mixed';
       } else {
         markerColor = '#ca8a04';
@@ -484,7 +484,7 @@ function initializeMap() {
       const popupHTML = `
         <div class="popup-h1">${title}</div>
         <div class="text-xs">
-          <span class="font-semibold ${site.type === 'confirmed' ? 'text-green-700' : site.type === 'mixed' ? 'text-purple-700' : 'text-yellow-700'}">${markerLabel}</span><br>
+          <span class="font-semibold ${site.type === 'confirmed' ? 'text-green-700' : site.type === 'mixed' ? 'text-emerald-700' : 'text-yellow-700'}">${markerLabel}</span><br>
           <span class="text-gray-600">Source: ${site.source}</span><br>
           <span class="text-gray-600">${site.country}</span>
         </div>
@@ -502,7 +502,7 @@ function initializeMap() {
         markerColor = '#004734';
         markerLabel = 'Confirmed';
       } else if (cfg.type === 'mixed') {
-        markerColor = '#7c3aed';
+        markerColor = '#006B50';
         markerLabel = 'Mixed';
       } else {
         markerColor = '#ca8a04';
@@ -521,7 +521,7 @@ function initializeMap() {
       const popupHTML = `
         <div class="popup-h1">${title}</div>
         <div class="text-xs">
-          <span class="font-semibold ${cfg.type === 'confirmed' ? 'text-green-700' : cfg.type === 'mixed' ? 'text-purple-700' : 'text-yellow-700'}">${markerLabel}</span><br>
+          <span class="font-semibold ${cfg.type === 'confirmed' ? 'text-green-700' : cfg.type === 'mixed' ? 'text-emerald-700' : 'text-yellow-700'}">${markerLabel}</span><br>
           <span class="text-gray-600">Source: ${cfg.source}</span><br>
           Country code: <b>${cc}</b>
         </div>
@@ -608,9 +608,9 @@ function renderSiteLists() {
         statusBg = 'bg-emerald-50';
         statusText = 'text-emerald-800';
       } else if (cfg.type === 'mixed') {
-        statusColor = 'bg-purple-500';
-        statusBg = 'bg-purple-100';
-        statusText = 'text-purple-700';
+        statusColor = 'bg-emerald-600';
+        statusBg = 'bg-emerald-50';
+        statusText = 'text-emerald-700';
       } else {
         statusColor = 'bg-legacy-gold';
         statusBg = 'bg-yellow-100';
