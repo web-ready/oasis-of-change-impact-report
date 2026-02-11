@@ -302,7 +302,6 @@ function countLabel(sites) {
 }
 
 function calculateTotals() {
-  // Use centralized tree data if available, otherwise fall back to plantingData
   if (typeof TreeData !== 'undefined') {
     const mapSites = TreeData.getMapSites();
     const countries = [...new Set(mapSites.map(site => site.country))];
@@ -323,8 +322,6 @@ function calculateTotals() {
       legacyTrees: TreeData.getLegacyTrees()
     };
   }
-  
-  // Fallback to original calculation
   const countries = Object.keys(plantingData).length;
   const confirmedCountries = Object.values(plantingData).filter(cfg => cfg.type === 'confirmed').length;
   const supportedCountries = Object.values(plantingData).filter(cfg => cfg.type === 'supported').length;
@@ -372,7 +369,6 @@ function renderTotals() {
   const totalsContainer = document.getElementById('totals-summary');
   
   if (totalsContainer) {
-    // Enhanced totals display with tree counts if available
     const treeStatsHtml = totals.totalTrees ? `
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-4 sm:mb-6">
         <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 text-center">
@@ -452,7 +448,6 @@ function initializeMap() {
     { attribution: '&copy; OpenStreetMap contributors' }
   ).addTo(map);
 
-  // Handle map resize on window resize
   window.addEventListener('resize', () => {
     setTimeout(() => {
       map.invalidateSize();
@@ -461,14 +456,13 @@ function initializeMap() {
 
   const clusterGroup = L.markerClusterGroup();
 
-  // Use centralized data if available, otherwise fall back to plantingData
   if (typeof TreeData !== 'undefined') {
     const mapSites = TreeData.getMapSites();
     
     mapSites.forEach(site => {
       let markerColor, markerLabel;
       if (site.type === 'confirmed') {
-        markerColor = '#16a34a';
+        markerColor = '#004734';
         markerLabel = 'Confirmed';
       } else if (site.type === 'mixed') {
         markerColor = '#7c3aed';
@@ -492,8 +486,7 @@ function initializeMap() {
         <div class="text-xs">
           <span class="font-semibold ${site.type === 'confirmed' ? 'text-green-700' : site.type === 'mixed' ? 'text-purple-700' : 'text-yellow-700'}">${markerLabel}</span><br>
           <span class="text-gray-600">Source: ${site.source}</span><br>
-          <span class="text-gray-600">Location: ${site.country}</span><br>
-          <span class="text-gray-600">${site.description}</span>
+          <span class="text-gray-600">${site.country}</span>
         </div>
       `;
 
@@ -501,13 +494,12 @@ function initializeMap() {
       clusterGroup.addLayer(marker);
     });
   } else {
-    // Fallback to original plantingData
     Object.entries(plantingData).forEach(([cc, cfg]) => {
       const [lat, lng] = cfg.centroid;
 
       let markerColor, markerLabel;
       if (cfg.type === 'confirmed') {
-        markerColor = '#16a34a';
+        markerColor = '#004734';
         markerLabel = 'Confirmed';
       } else if (cfg.type === 'mixed') {
         markerColor = '#7c3aed';
@@ -544,7 +536,6 @@ function initializeMap() {
   return map;
 }
 
-// Global filter state
 let currentFilters = {
   type: 'all',
   source: 'all'
@@ -552,15 +543,11 @@ let currentFilters = {
 
 function getFilteredData() {
   return Object.entries(plantingData).filter(([cc, cfg]) => {
-    // Type filter
     if (currentFilters.type !== 'all' && cfg.type !== currentFilters.type) {
       return false;
     }
-    
-    // Source filter
     if (currentFilters.source !== 'all') {
       if (cfg.type === 'mixed') {
-        // For mixed countries, check if any site matches the source filter
         const hasMatchingSource = cfg.sites.some(site => {
           if (typeof site === 'string') {
             return cfg.source === currentFilters.source;
@@ -571,7 +558,6 @@ function getFilteredData() {
           return false;
         }
       } else {
-        // For non-mixed countries, check the country's source
         if (cfg.source !== currentFilters.source) {
           return false;
         }
@@ -598,7 +584,8 @@ function updateFilterResults() {
 
 function renderSiteLists() {
   const siteLists = document.getElementById('site-lists');
-  siteLists.innerHTML = ''; // Clear existing content
+  if (!siteLists) return;
+  siteLists.innerHTML = '';
 
   const filteredData = getFilteredData();
 
@@ -618,8 +605,8 @@ function renderSiteLists() {
       let statusColor, statusBg, statusText;
       if (cfg.type === 'confirmed') {
         statusColor = 'bg-brand-green';
-        statusBg = 'bg-green-100';
-        statusText = 'text-green-700';
+        statusBg = 'bg-emerald-50';
+        statusText = 'text-emerald-800';
       } else if (cfg.type === 'mixed') {
         statusColor = 'bg-purple-500';
         statusBg = 'bg-purple-100';
@@ -694,7 +681,10 @@ function initializeMobileMenu() {
   const toggleBtn = document.getElementById('mobile-menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   const closeBtn = document.getElementById('mobile-menu-close');
-  
+  if (!toggleBtn || !mobileMenu) return;
+  if (toggleBtn.dataset.menuInit) return;
+  toggleBtn.dataset.menuInit = '1';
+
   function toggleMenu() {
     const isOpen = !mobileMenu.classList.contains('hidden');
     mobileMenu.classList.toggle('hidden');
@@ -702,13 +692,9 @@ function initializeMobileMenu() {
     document.body.style.overflow = isOpen ? '' : 'hidden';
     toggleBtn.setAttribute('aria-expanded', String(!isOpen));
   }
-  
-  if (toggleBtn && mobileMenu) {
-    toggleBtn.addEventListener('click', toggleMenu);
-  }
-  if (closeBtn) {
-    closeBtn.addEventListener('click', toggleMenu);
-  }
+
+  toggleBtn.addEventListener('click', toggleMenu);
+  if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
 }
 
 function initializeFilters() {
@@ -746,8 +732,6 @@ function initializeFilters() {
       applyFilters();
     });
   }
-  
-  // Initialize filter results display
   updateFilterResults();
 }
 

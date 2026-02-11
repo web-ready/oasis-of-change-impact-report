@@ -6,7 +6,6 @@
   z-index: 10;
 }
 
-/* Mobile responsive map heights */
 @media (max-width: 640px) {
   #map {
     height: 256px;
@@ -44,7 +43,6 @@
   margin-bottom: .25rem; 
 }
 
-/* Mobile responsive popup */
 @media (max-width: 640px) {
   .popup-h1 {
     font-size: 0.875rem;
@@ -104,15 +102,15 @@ details[open] summary svg {
 }
 
 #site-lists::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: var(--color-surface-muted, #f1f5f9);
   border-radius: 3px;
 }
 
 #site-lists::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--color-border-muted, #cbd5e1);
   border-radius: 3px;
 }
 
 #site-lists::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: var(--color-text-muted, #94a3b8);
 }

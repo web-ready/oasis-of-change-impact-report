@@ -8,55 +8,48 @@
     <meta property="og:site_name" content="Oasis of Change, Inc.">
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="assets/css/design-tokens.css" rel="stylesheet">
     <link href="assets/css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+    <link rel="stylesheet" href="assets/css/map.css"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'brand-green': '#16A34A',
+                        'brand-green': '#004734',
+                        'brand-green-light': '#006B50',
                         'legacy-gold': '#EAB308',
                         'deep-forest': '#0F172A',
                         'cloud-white': '#FFFFFF',
-                        'mist-gray': '#F8FAFC'
+                        'mist-gray': '#F8FAFC',
+                        'success': { DEFAULT: '#059669', light: '#10b981', bg: '#ECFDF5', text: '#065F46' },
+                        'warning': { DEFAULT: '#D97706', light: '#F59E0B', bg: '#FFFBEB', text: '#92400E' },
+                        'error': { DEFAULT: '#DC2626', light: '#EF4444', bg: '#FEF2F2', text: '#991B1B' },
+                        'info': { DEFAULT: '#2563EB', light: '#3B82F6', bg: '#EFF6FF', text: '#1E40AF' }
                     },
                     fontFamily: {
                         'serif': ['DM Serif Display', 'serif'],
                         'sans': ['Poppins', 'sans-serif']
-                    },
-                    backdropBlur: {
-                        xs: '2px'
                     }
                 }
             }
         }
     </script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 </head>
 <body class="bg-mist-gray font-sans antialiased">
+
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="flex items-center justify-between h-14 relative">
-                <div class="flex items-center gap-2">
-                    <a href="/final_dashboard.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
-                </div>
-
+                <a href="/index.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
                 <div class="hidden md:flex items-center gap-3">
-                    <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
-                        Certificates
-                    </a>
-                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
-                        Tree Species
-                    </a>
-                    <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
-                        Gallery
-                    </a>
-                    <a href="/map.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:opacity-90 transition">
-                        View Map
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </a>
+                    <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Certificates</a>
+                    <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Gallery</a>
                 </div>
                 <button id="mobile-menu-toggle" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50" aria-label="Open menu" aria-expanded="false">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
@@ -72,11 +65,9 @@
             <div class="text-center text-white max-w-sm mx-auto">
                 <h2 class="font-serif text-4xl mb-8">Navigate</h2>
                 <nav class="space-y-6 text-lg">
-                    <a href="/index.html" class="block py-2 px-4 rounded-lg bg-brand-green/20 text-brand-green border border-brand-green/30">Dashboard</a>
+                    <a href="/index.html" class="block py-2 px-4 rounded-lg bg-brand-green/20 text-white border border-brand-green/30">Dashboard</a>
                     <a href="/certificates.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Certificates</a>
-                    <a href="/species.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Tree Species</a>
                     <a href="/gallery.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Gallery</a>
-                    <a href="/map.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">View Map</a>
                 </nav>
                 <button id="mobile-menu-close" class="mt-12 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-200">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -87,328 +78,188 @@
             </div>
         </div>
     </div>
-    <header class="md:hidden w-full text-center py-12 px-4">
-        <h1 class="font-serif font-semibold text-deep-forest text-4xl md:text-5xl mb-4">
-            Tree-Planting Impact Report
-        </h1>
-        <div class="text-gray-600 text-sm space-y-1">
-            <p>
-                <b>Last updated: September 10th, 2025</b>
-                <span id="last-updated-relative-mobile" class="text-gray-500 text-xs ml-2"></span>
-            </p>
-            <p>Published under the Oasis of Change, Inc., Sustainability Charter and overseen by our Board of Directors.</p>
-        </div>
-    </header>
 
-    <main class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
-        <section class="hidden md:block hero-gradient rounded-3xl p-12 mb-12 text-white relative overflow-hidden">
-            <div class="absolute inset-0">
-                <div 
-                    class="w-full h-full"
-                    style="
-                        background-image: url('/assets/images/bg-image.avif');
-                        background-size: cover;
-                        background-position: center;
-                        width: 100%;
-                        height: 100%;
-                        position: absolute;
-                        inset: 0;
-                        z-index: 0;
-                    ">
-                    <div class="absolute inset-0 bg-black opacity-45"></div>
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+        <section class="text-center mb-12">
+            <h1 class="font-serif text-4xl md:text-5xl text-deep-forest mb-4">Tree-Planting Impact Report</h1>
+            <p class="text-gray-500 text-sm mb-8">Last updated: <span id="last-updated-date"></span> <span id="last-updated-relative" class="text-xs ml-1"></span></p>
+            <div class="inline-block bg-white rounded-2xl shadow-sm border border-gray-100 px-10 py-8">
+                <div class="tabular-nums text-6xl md:text-7xl font-bold text-brand-green mb-2 count-up" id="total-count">0</div>
+                <div class="text-lg font-medium text-deep-forest">Trees Planted</div>
+            </div>
+            <div class="flex justify-center gap-8 mt-8">
+                <div class="text-center">
+                    <div class="tabular-nums text-2xl font-bold text-brand-green" id="verified-count">0</div>
+                    <div class="text-xs text-gray-500 mt-1">Verified (Tree-Nation)</div>
+                </div>
+                <div class="w-px bg-gray-200"></div>
+                <div class="text-center">
+                    <div class="tabular-nums text-2xl font-bold text-legacy-gold" id="legacy-count">0</div>
+                    <div class="text-xs text-gray-500 mt-1">Legacy Partners</div>
+                </div>
+                <div class="w-px bg-gray-200"></div>
+                <div class="text-center">
+                    <div class="tabular-nums text-2xl font-bold text-deep-forest" id="countries-count">0</div>
+                    <div class="text-xs text-gray-500 mt-1">Countries</div>
+                </div>
+                <div class="w-px bg-gray-200"></div>
+                <div class="text-center">
+                    <div class="tabular-nums text-2xl font-bold text-deep-forest" id="species-count">0</div>
+                    <div class="text-xs text-gray-500 mt-1">Species</div>
                 </div>
             </div>
-            
-            <div class="relative z-10">
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <h2 class="font-serif text-5xl lg:text-6xl mb-6 leading-tight">Tree-Planting Impact Report</h2>
-                        <p class="text-xl mb-8">Comprehensive analysis of our environmental restoration efforts and verified impact metrics.</p>
-                        <div class="flex items-center space-x-4 text-sm">
-                            <div class="flex items-center space-x-2">
-                                <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                                <span>Live Data</span>
-                            </div>
-                            <span>•</span>
-                            <span>Last updated: <span id="last-updated-date"></span></span>
-                            <span id="last-updated-relative" class="text-xs ml-2"></span>
+        </section>
+
+        <section class="mb-12">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xl font-semibold text-deep-forest">Planting Locations</h2>
+                    <div class="flex items-center gap-4 text-xs text-gray-500">
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-brand-green inline-block"></span> Confirmed</span>
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-purple-500 inline-block"></span> Mixed</span>
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-legacy-gold inline-block"></span> Supported</span>
+                    </div>
+                </div>
+                <div id="map" class="w-full rounded-xl overflow-hidden" style="height:420px;"></div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <div class="mb-4">
+                    <h2 class="text-xl font-semibold text-deep-forest mb-2">Project Sites by Country</h2>
+                    <p class="text-sm text-gray-600">Click a country to view planting sites and project status.</p>
+                </div>
+                <div class="mb-4 p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                    <div class="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto">
+                            <label class="text-xs sm:text-sm font-medium text-gray-700 whitespace-nowrap">Filter by type:</label>
+                            <select id="type-filter" class="w-full sm:w-auto px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-green focus:border-brand-green">
+                                <option value="all">All Types</option>
+                                <option value="confirmed">Confirmed</option>
+                                <option value="supported">Supported</option>
+                                <option value="mixed">Mixed</option>
+                            </select>
                         </div>
-                    </div>
-                    
-                    <div class="text-center lg:text-right">
-                        <div class="inline-block">
-                            <div class="tabular-nums text-7xl lg:text-8xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent count-up" id="total-count"></div>
-                            <div class="text-2xl font-medium mb-2">Trees Planted</div>
-                            <div>Making a measurable impact on our planet's future</div>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto">
+                            <label class="text-xs sm:text-sm font-medium text-gray-700 whitespace-nowrap">Filter by source:</label>
+                            <select id="source-filter" class="w-full sm:w-auto px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-green focus:border-brand-green">
+                                <option value="all">All Sources</option>
+                                <option value="Tree-Nation">Tree-Nation</option>
+                                <option value="Eden Reforestation">Eden Reforestation</option>
+                                <option value="Legacy Partner (Tero)">Legacy Partner (Tero)</option>
+                                <option value="Legacy Partner (Refoorest)">Legacy Partner (Refoorest)</option>
+                            </select>
                         </div>
+                        <button id="clear-filters" class="w-full sm:w-auto px-3 py-1.5 text-sm text-gray-600 hover:text-gray-800 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">Clear Filters</button>
                     </div>
+                    <div id="filter-results" class="text-xs sm:text-sm text-gray-600"></div>
                 </div>
+                <div class="mb-4 p-3 sm:p-4 bg-warning-bg border border-warning/40 rounded-lg">
+                    <p class="text-xs sm:text-sm text-warning-text">Some information is provided by third-party partners and may not be up to date or accurate.</p>
+                </div>
+                <div id="site-lists" class="space-y-3 sm:space-y-4"></div>
             </div>
         </section>
 
-        <section class="md:hidden bg-cloud-white rounded-xl shadow-lg border border-gray-100 p-6 md:p-12 mb-8 relative overflow-hidden">
-            <div class="text-center">
-                <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-deep-forest mb-4">
-                    <span class="count-up font-tabular" id="total-count-mobile"></span>
-                </h2>
-                <p class="text-xl sm:text-2xl md:text-3xl font-semibold text-brand-green mb-2">Trees Planted</p>
-                <p class="text-gray-600 text-base sm:text-lg">Making a positive environmental impact worldwide</p>
-            </div>
-        </section>
-
-        <section class="grid lg:grid-cols-4 gap-6 mb-12">
-            <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div class="metric-card rounded-2xl p-8 animate-slide-up stagger-1">
-                    <div class="flex items-start justify-between mb-6">
-                        <span class="text-xs font-medium px-3 py-1 bg-brand-green/10 text-brand-green rounded-full">Verified</span>
-                    </div>
-                    <div class="tabular-nums text-4xl font-bold text-deep-forest mb-2" id="verified-count"></div>
-                    <div class="text-sm text-gray-600 mb-4">Tree-Nation Certified</div>
-                    <div class="w-full bg-gray-100 rounded-full h-2">
-                        <div class="bg-gradient-to-r from-brand-green to-green-500 h-2 rounded-full progress-glow bar-animation transition-all duration-1000" style="width: 0%" id="verified-progress-bar"></div>
-                    </div>
-                    <div class="flex justify-between text-xs text-gray-500 mt-2">
-                        <span id="verified-percentage">% of total</span>
-                        <span class="tabular-nums" id="verified-trees-text">trees</span>
-                    </div>
-                </div>
-
-                <div class="metric-card rounded-2xl p-8 animate-slide-up stagger-2">
-                    <div class="flex items-start justify-between mb-6">
-                        <span class="text-xs font-medium px-3 py-1 bg-legacy-gold/10 text-yellow-700 rounded-full">Legacy</span>
-                    </div>
-                    <div class="tabular-nums text-4xl font-bold text-deep-forest mb-2" id="legacy-count"></div>
-                    <div class="text-sm text-gray-600 mb-4">Partner Organizations</div>
-                    <div class="w-full bg-gray-100 rounded-full h-2">
-                        <div class="bg-gradient-to-r from-legacy-gold to-yellow-400 h-2 rounded-full bar-animation transition-all duration-1000" style="width: 0%" id="legacy-progress-bar"></div>
-                    </div>
-                    <div class="flex justify-between text-xs text-gray-500 mt-2">
-                        <span id="legacy-percentage">% of total</span>
-                        <span class="tabular-nums" id="legacy-trees-text">trees</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Environmental Impact Section -->
-            <div class="lg:col-span-2 metric-card rounded-2xl p-8 animate-slide-up stagger-3">
-                <h3 class="text-xl font-semibold text-deep-forest mb-8">Environmental Impact</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                    <div class="text-center">
-                        <!-- CO₂ Calculation: 10,000 trees × 80 kg CO₂/tree (10-year conservative) = 800,000 kg total -->
-                        <div class="tabular-nums text-3xl font-bold text-deep-forest mb-1" id="co2-simple"></div>
-                        <div class="text-sm text-gray-600">kg CO₂ Captured</div>
-                        <div class="text-xs text-gray-500 mt-1">Over 10-year period</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="tabular-nums text-3xl font-bold text-deep-forest mb-1" id="species-count"></div>
-                        <div class="text-sm text-gray-600">Tree Species Combinations</div>
-                        <div class="text-xs text-gray-500 mt-1">Native & adaptive varieties</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CO₂ Equivalencies Section -->
-        <section class="metric-card rounded-2xl p-8 mb-12 animate-slide-up stagger-4">
-            <h3 class="text-2xl font-semibold text-deep-forest mb-8">CO₂ Impact Equivalencies</h3>
-            <p class="text-gray-600 mb-6">Our <span id="co2-equivalency-trees" class="font-semibold text-brand-green">trees</span> planted will capture CO₂ equivalent to:</p>
-            
-            <!-- CO₂ Totals Display -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-                <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200">
-                    <div class="text-sm font-medium text-blue-800 mb-2">10-Year Conservative Estimate</div>
-                    <div class="text-3xl font-bold text-blue-900 tabular-nums" id="co2-total-10yr">0</div>
-                    <div class="text-sm text-blue-700">kg CO₂ (<span id="co2-total-10yr-tonnes">0</span> tonnes)</div>
-                </div>
-                <div class="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-6 border border-green-200">
-                    <div class="text-sm font-medium text-green-800 mb-2">Lifetime Average Estimate</div>
-                    <div class="text-3xl font-bold text-green-900 tabular-nums" id="co2-total-lifetime">0</div>
-                    <div class="text-sm text-green-700">kg CO₂ (<span id="co2-total-lifetime-tonnes">0</span> tonnes)</div>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="co2-equivalencies-grid">
-                <!-- CO₂ equivalencies will be populated dynamically -->
-            </div>
-            
-            <div class="mt-6 p-4 bg-gray-50 rounded-lg">
-                <p class="text-xs text-gray-600 text-center">
-                    <strong>Tree-Nation Methodology:</strong> Conservative estimate: 80 kg CO₂ per tree (10 years)<sup><a href="https://kb.tree-nation.com/knowledge/co2-capture" target="_blank" rel="noopener" class="text-blue-600 hover:underline">1</a></sup>. 
-                    Average lifetime: 250 kg CO₂ per tree<sup><a href="https://kb.tree-nation.com/knowledge/co2-offset-methodology" target="_blank" rel="noopener" class="text-blue-600 hover:underline">2</a></sup>. 
-                    Equivalencies based on:
-                </p>
-                <div class="mt-2 text-xs text-gray-600 text-center space-y-1">
-                    <p><sup>1</sup> <a href="https://kb.tree-nation.com/knowledge/co2-capture" target="_blank" rel="noopener" class="text-blue-600 hover:underline">Tree-Nation CO₂ Capture Methodology</a></p>
-                    <p><sup>2</sup> <a href="https://kb.tree-nation.com/knowledge/co2-offset-methodology" target="_blank" rel="noopener" class="text-blue-600 hover:underline">Tree-Nation Offset Methodology</a></p>
-                    <p><sup>3</sup> <a href="https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator-calculations-and-references" target="_blank" rel="noopener" class="text-blue-600 hover:underline">US EPA 2024 Emission Factors</a></p>
-                    <p><sup>4</sup> <a href="https://www.epa.gov/warm" target="_blank" rel="noopener" class="text-blue-600 hover:underline">US EPA WARM 2024</a></p>
-                </div>
-            </div>
-        </section>
-
-        <section class="metric-card rounded-2xl p-8 mb-12 animate-slide-up stagger-5">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
-                <div>
-                    <h3 class="text-2xl font-semibold text-deep-forest mb-2">Progress to 10,000 Tree Goal</h3>
-                    <p class="text-gray-600" id="remaining-trees-text">trees remaining to reach our milestone</p>
-                </div>
-                <div class="text-right mt-4 sm:mt-0">
-                    <div class="text-3xl font-bold text-brand-green tabular-nums" id="progress-percentage"></div>
-                    <div class="text-sm text-gray-500">Complete</div>
-                </div>
-            </div>
-            
-            <div class="relative mb-4">
-                <div class="w-full bg-gray-100 rounded-full h-4">
-                    <div class="bg-gradient-to-r from-brand-green via-green-500 to-emerald-400 h-4 rounded-full progress-glow transition-all duration-2000 relative overflow-hidden" id="main-progress-bar">
-                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="flex justify-between text-sm">
-                <span class="text-gray-600">
-                    <span class="tabular-nums font-medium text-deep-forest" id="progress-trees-planted"></span> trees planted
-                </span>
-                <span class="text-gray-600">
-                    Goal: <span class="tabular-nums font-medium text-deep-forest" id="progress-goal"></span>
-                </span>
-            </div>
-        </section>
-
-        <section class="metric-card rounded-2xl overflow-hidden">
-            <div class="border-b border-gray-100 relative">
-                <nav class="flex">
-                    <button onclick="switchTab('verified')" id="verified-tab" class="tab-button flex-1 py-6 px-8 text-left font-medium text-brand-green bg-brand-green/5 min-h-[44px] relative">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-2 h-2 bg-brand-green rounded-full"></div>
+        <section class="mb-12">
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                <div class="border-b border-gray-100 relative">
+                    <nav class="flex">
+                        <button onclick="switchTab('verified')" id="verified-tab" class="tab-button flex-1 py-5 px-6 text-center font-medium text-brand-green bg-brand-green/5 min-h-[44px] relative">
                             <span>Verified Plantings</span>
-                        </div>
-                    </button>
-                    <button onclick="switchTab('legacy')" id="legacy-tab" class="tab-button flex-1 py-6 px-8 text-left font-medium text-gray-500 hover:text-gray-700 min-h-[44px] relative">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+                        </button>
+                        <button onclick="switchTab('legacy')" id="legacy-tab" class="tab-button flex-1 py-5 px-6 text-center font-medium text-gray-500 hover:text-gray-700 min-h-[44px] relative">
                             <span>Legacy Partners</span>
-                        </div>
-                    </button>
-                </nav>
-                <div id="tab-indicator" class="tab-indicator" style="width: 50%;"></div>
-            </div>
+                        </button>
+                    </nav>
+                    <div id="tab-indicator" class="tab-indicator" style="width:50%;"></div>
+                </div>
 
-            <div id="verified-content" class="tab-content p-8">
-                <div class="mb-4 desktop-table">
-                    <input type="text" 
-                           placeholder="Search forests, countries, or certificate numbers..." 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent"
-                           id="verified-search">
+                <div id="verified-content" class="tab-content p-6">
+                    <div class="mb-4">
+                        <input type="text" placeholder="Search projects or HQ locations..." 
+                               class="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-brand-green focus:border-transparent"
+                               id="verified-search">
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full" id="verified-table">
+                            <thead>
+                                <tr class="border-b border-gray-100">
+                                    <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="forest">
+                                        <div class="flex items-center gap-1"><span>Project</span><span class="text-xs">↕</span></div>
+                                    </th>
+                                    <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="country">
+                                        <div class="flex items-center gap-1"><span>HQ Location</span><span class="text-xs">↕</span></div>
+                                    </th>
+                                    <th class="text-right py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="trees">
+                                        <div class="flex items-center justify-end gap-1"><span>Trees</span><span class="text-xs">↕</span></div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="verified-data" id="verified-table-body"></tbody>
+                        </table>
+                    </div>
+                    <div class="mobile-cards" id="verified-mobile-cards"></div>
                 </div>
-                
-                <div class="mobile-search-container">
-                    <input type="text" 
-                           placeholder="Search projects, countries, or certificates..." 
-                           class="mobile-search-input"
-                           id="verified-search-mobile">
-                </div>
-                
-                <div class="overflow-x-auto desktop-table">
-                    <table class="w-full" id="verified-table">
-                        <thead>
-                            <tr class="border-b border-gray-100">
-                                <th class="text-left py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="forest">
-                                    <div class="flex items-center gap-1">
-                                        <span>Project</span>
-                                        <span class="text-xs">↕</span>
-                                    </div>
-                                </th>
-                                <th class="text-left py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="country">
-                                    <div class="flex items-center gap-1">
-                                        <span>Location</span>
-                                        <span class="text-xs">↕</span>
-                                    </div>
-                                </th>
-                                <th class="text-right py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="trees">
-                                    <div class="flex items-center justify-end gap-1">
-                                        <span>Trees</span>
-                                        <span class="text-xs">↕</span>
-                                    </div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="verified-data" id="verified-table-body">
-                            <!-- Verified projects will be populated dynamically -->
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="mobile-cards" id="verified-mobile-cards">
-                    <!-- Verified mobile cards will be populated dynamically -->
-                </div>
-            </div>
 
-            <div id="legacy-content" class="tab-content p-8 hidden">
-                <div class="mb-4 desktop-table">
-                    <input type="text" 
-                           placeholder="Search partner organizations..." 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-legacy-gold focus:border-transparent"
-                           id="legacy-search">
-                </div>
-                
-                <div class="mobile-search-container">
-                    <input type="text" 
-                           placeholder="Search partner organizations..." 
-                           class="mobile-search-input"
-                           id="legacy-search-mobile">
-                </div>
-                
-                <div class="overflow-x-auto desktop-table">
-                    <table class="w-full" id="legacy-table">
-                        <thead>
-                            <tr class="border-b border-gray-100">
-                                <th class="text-left py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-legacy-gold" data-sort="partner">
-                                    <div class="flex items-center gap-1">
-                                        <span>Organization</span>
-                                        <span class="text-xs">↕</span>
-                                    </div>
-                                </th>
-                                <th class="text-right py-4 px-2 font-semibold text-deep-forest text-sm uppercase tracking-wide cursor-pointer hover:text-legacy-gold" data-sort="trees">
-                                    <div class="flex items-center justify-end gap-1">
-                                        <span>Trees Planted</span>
-                                        <span class="text-xs">↕</span>
-                                    </div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="legacy-data" id="legacy-table-body">
-                            <!-- Legacy projects will be populated dynamically -->
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="mobile-cards" id="legacy-mobile-cards">
-                    <!-- Legacy mobile cards will be populated dynamically -->
+                <div id="legacy-content" class="tab-content p-6 hidden">
+                    <div class="mb-4">
+                        <input type="text" placeholder="Search partner organizations..." 
+                               class="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-brand-green focus:border-transparent"
+                               id="legacy-search">
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full" id="legacy-table">
+                            <thead>
+                                <tr class="border-b border-gray-100">
+                                    <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-legacy-gold" data-sort="partner">
+                                        <div class="flex items-center gap-1"><span>Organization</span><span class="text-xs">↕</span></div>
+                                    </th>
+                                    <th class="text-right py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-legacy-gold" data-sort="trees">
+                                        <div class="flex items-center justify-end gap-1"><span>Trees Planted</span><span class="text-xs">↕</span></div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="legacy-data" id="legacy-table-body"></tbody>
+                        </table>
+                    </div>
+                    <div class="mobile-cards" id="legacy-mobile-cards"></div>
                 </div>
             </div>
         </section>
 
-        <div class="mt-12 p-6 bg-blue-50 border border-blue-200 rounded-2xl">
-            <div class="flex items-start space-x-4">
-                <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                        <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="white" stroke-width="2" fill="none"/>
-                    </svg>
+        <section class="mb-12" id="species-section">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <h2 class="text-xl font-semibold text-deep-forest mb-2">Tree Species</h2>
+                <p class="text-sm text-gray-500 mb-6">67 species across verified and legacy partner projects</p>
+
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <button class="species-filter-btn active px-3 py-1.5 rounded-lg border border-brand-green bg-brand-green text-white text-xs font-medium" data-filter="all">All</button>
+                    <button class="species-filter-btn px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 text-xs font-medium bg-white hover:border-brand-green" data-filter="verified">Verified</button>
+                    <button class="species-filter-btn px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 text-xs font-medium bg-white hover:border-brand-green" data-filter="legacy">Legacy</button>
+                </div>
+
+                <div id="species-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+            </div>
+        </section>
+
+        <div class="p-5 bg-info-bg border border-info/30 rounded-2xl" role="note" aria-label="Verification notice">
+            <div class="flex items-start gap-3">
+                <div class="w-5 h-5 bg-info rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
                 <div>
-                    <h4 class="font-medium text-blue-900 mb-1">Verification Notice</h4>
-                    <p class="text-blue-800 text-sm leading-relaxed">
-                        From July 2025 onward, all plantings are verified via Tree-Nation certificates to ensure transparency and accountability in our environmental impact reporting.
-                    </p>
+                    <h4 class="font-medium text-info-text text-sm mb-0.5">Verification Notice</h4>
+                    <p class="text-info-text text-xs leading-relaxed opacity-90">From July 2025 onward, all plantings are verified via Tree-Nation certificates to ensure transparency and accountability.</p>
                 </div>
             </div>
-            
         </div>
     </main>
 
     <script src="assets/js/tree-data.js"></script>
+    <script src="assets/js/map.js"></script>
     <script src="assets/js/dashboard.js"></script>
 </body>
 </html>

@@ -6,17 +6,22 @@
     <title>Gallery - Oasis of Change, Inc.</title>
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="assets/css/design-tokens.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'brand-green': '#16A34A',
+                        'brand-green': '#004734',
                         'legacy-gold': '#EAB308',
                         'deep-forest': '#0F172A',
                         'cloud-white': '#FFFFFF',
-                        'mist-gray': '#F8FAFC'
+                        'mist-gray': '#F8FAFC',
+                        'success': { DEFAULT: '#059669', bg: '#ECFDF5', text: '#065F46' },
+                        'warning': { DEFAULT: '#D97706', bg: '#FFFBEB', text: '#92400E' },
+                        'error': { DEFAULT: '#DC2626', bg: '#FEF2F2', text: '#991B1B' },
+                        'info': { DEFAULT: '#2563EB', bg: '#EFF6FF', text: '#1E40AF' }
                     },
                     fontFamily: {
                         'serif': ['DM Serif Display', 'serif'],
@@ -28,8 +33,8 @@
     </script>
     <style>
         .gallery-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            border: 1px solid #e2e8f0;
+            background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-muted) 100%);
+            border: 1px solid var(--color-border);
             transition: all 0.3s ease;
             overflow: hidden;
         }
@@ -40,7 +45,7 @@
         }
         
         .gallery-image {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            background: linear-gradient(135deg, var(--color-info-bg) 0%, #e0f2fe 100%);
             height: 200px;
             display: flex;
             align-items: center;
@@ -64,24 +69,27 @@
             position: relative;
             z-index: 1;
             text-align: center;
-            color: #64748b;
+            color: var(--color-text-muted);
         }
         
         .category-badge {
-            background: linear-gradient(135deg, #16A34A, #22c55e);
+            background: linear-gradient(135deg, var(--color-brand-green), var(--color-brand-green-light));
             color: white;
         }
         
         .before-badge {
-            background: linear-gradient(135deg, #dc2626, #ef4444);
+            background: linear-gradient(135deg, var(--color-error), var(--color-error-light));
+            color: white;
         }
         
         .after-badge {
-            background: linear-gradient(135deg, #059669, #10b981);
+            background: linear-gradient(135deg, var(--color-success), var(--color-success-light));
+            color: white;
         }
         
         .progress-badge {
-            background: linear-gradient(135deg, #0891b2, #06b6d4);
+            background: linear-gradient(135deg, var(--color-info), var(--color-info-light));
+            color: white;
         }
         
         @keyframes slideUp {
@@ -105,7 +113,6 @@
     </style>
 </head>
 <body class="bg-mist-gray font-sans antialiased">
-    <!-- Header -->
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="flex items-center justify-between h-14 relative">
@@ -113,18 +120,17 @@
                     <a href="/final_dashboard.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
                 </div>
 
-                <!-- Desktop Nav -->
                 <div class="hidden md:flex items-center gap-3">
                     <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
                         Certificates
                     </a>
-                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+                    <a href="/index.html#species-section" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
                         Tree Species
                     </a>
                     <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
                         Gallery
                     </a>
-                    <a href="/map.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:opacity-90 transition">
+                    <a href="/index.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:opacity-90 transition">
                         View Map
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -132,7 +138,6 @@
                     </a>
                 </div>
                 
-                <!-- Mobile Nav -->
                 <button id="mobile-menu-toggle" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50" aria-label="Open menu" aria-expanded="false">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -152,9 +157,9 @@
                 <nav class="space-y-6 text-lg">
                     <a href="/index.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Dashboard</a>
                     <a href="/certificates.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Certificates</a>
-                    <a href="/species.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Tree Species</a>
+                    <a href="/index.html#species-section" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Tree Species</a>
                     <a href="/gallery.html" class="block py-2 px-4 rounded-lg bg-brand-green/20 text-brand-green border border-brand-green/30">Gallery</a>
-                    <a href="/map.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">View Map</a>
+                    <a href="/index.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">View Map</a>
                 </nav>
                 <button id="mobile-menu-close" class="mt-12 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-200">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -167,7 +172,6 @@
     </div>
 
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        <!-- Hero Section -->
         <section class="text-center mb-12">
             <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-deep-forest mb-6">
                 Project Gallery
@@ -191,7 +195,6 @@
             </div>
         </section>
 
-        <!-- Filter Tabs -->
         <section class="mb-12">
             <div class="flex flex-wrap justify-center gap-2 mb-8">
                 <button onclick="filterGallery('all')" class="filter-btn active px-4 py-2 rounded-lg bg-brand-green text-white text-sm font-medium transition">
@@ -209,7 +212,6 @@
             </div>
         </section>
 
-        <!-- Gallery Grid -->
         <section class="mb-16">
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
                 <!-- Before Images -->
@@ -267,7 +269,6 @@
                     </div>
                 </div>
 
-                <!-- Progress Images -->
                 <div class="gallery-card rounded-2xl overflow-hidden animate-slide-up stagger-3" data-category="progress">
                     <div class="gallery-image">
                         <div class="image-placeholder">
@@ -454,7 +455,6 @@
             </div>
         </section>
 
-        <!-- Impact Summary -->
         <section class="mb-16">
             <div class="gallery-card rounded-2xl p-8">
                 <h2 class="text-2xl font-semibold text-deep-forest mb-6 text-center">Visual Impact Summary</h2>
@@ -490,7 +490,6 @@
             </div>
         </section>
 
-        <!-- Call to Action -->
         <section class="text-center">
             <div class="gallery-card rounded-2xl p-8">
                 <h2 class="text-2xl font-semibold text-deep-forest mb-4">See Our Impact in Action</h2>
