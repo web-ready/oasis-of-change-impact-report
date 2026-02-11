@@ -40,34 +40,19 @@
         }
         
         .gallery-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
         }
         
         .gallery-image {
-            background: linear-gradient(135deg, var(--color-info-bg) 0%, #e0f2fe 100%);
-            height: 200px;
+            background: #f1f5f9;
+            height: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .gallery-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="%23cbd5e1" opacity="0.3"/><circle cx="80" cy="80" r="1" fill="%23cbd5e1" opacity="0.3"/><circle cx="40" cy="60" r="0.5" fill="%23cbd5e1" opacity="0.2"/><circle cx="70" cy="30" r="0.5" fill="%23cbd5e1" opacity="0.2"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.5;
         }
         
         .image-placeholder {
-            position: relative;
-            z-index: 1;
             text-align: center;
             color: var(--color-text-muted);
         }
@@ -121,12 +106,9 @@
                 </div>
 
                 <div class="hidden md:flex items-center gap-3">
-                    <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
-                        Certificates
-                    </a>
-                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
-                        Tree Species
-                    </a>
+                    <a href="/index.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Dashboard</a>
+                    <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Certificates</a>
+                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Tree Species</a>
                 </div>
                 
                 <button id="mobile-menu-toggle" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50" aria-label="Open menu" aria-expanded="false">
@@ -161,11 +143,11 @@
 
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <section class="text-center mb-12">
-            <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-deep-forest mb-6">
+            <h1 class="font-serif text-3xl md:text-4xl text-deep-forest mb-4">
                 Project Gallery
             </h1>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                Witness the transformation of landscapes through our tree planting initiatives. See the before, during, and after moments that capture our environmental impact.
+            <p class="text-base text-gray-600 max-w-2xl mx-auto mb-8">
+                Before, during, and after documentation from our reforestation projects.
             </p>
             <div class="flex flex-wrap justify-center gap-4">
                 <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200">
@@ -218,7 +200,7 @@
                             <span class="before-badge px-3 py-1 rounded-full text-xs font-medium text-white">Before</span>
                         </div>
                         <p class="text-sm text-gray-600 mb-3">
-                            Initial state of the forest restoration area in Canada, showing the need for reforestation efforts.
+                            Forest restoration area in Canada prior to planting.
                         </p>
                         <div class="flex items-center gap-2 text-xs text-gray-500">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -245,7 +227,7 @@
                             <span class="before-badge px-3 py-1 rounded-full text-xs font-medium text-white">Before</span>
                         </div>
                         <p class="text-sm text-gray-600 mb-3">
-                            Urban forest area in Vancouver showing degraded conditions before our restoration efforts began.
+                            Urban forest area in Vancouver before restoration work began.
                         </p>
                         <div class="flex items-center gap-2 text-xs text-gray-500">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -298,7 +280,7 @@
                             <span class="progress-badge px-3 py-1 rounded-full text-xs font-medium text-white">Progress</span>
                         </div>
                         <p class="text-sm text-gray-600 mb-3">
-                            Young trees showing healthy growth 6 months after initial planting, demonstrating successful establishment.
+                            Six months after planting &mdash; saplings showing healthy establishment.
                         </p>
                         <div class="flex items-center gap-2 text-xs text-gray-500">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -325,13 +307,13 @@
                             <span class="after-badge px-3 py-1 rounded-full text-xs font-medium text-white">After</span>
                         </div>
                         <p class="text-sm text-gray-600 mb-3">
-                            Mature forest restoration showing diverse species and healthy ecosystem development after 2 years.
+                            Restored site with diverse species and healthy canopy development.
                         </p>
                         <div class="flex items-center gap-2 text-xs text-gray-500">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            <span>2027</span>
+                            <span>Ongoing</span>
                         </div>
                     </div>
                 </div>
@@ -351,13 +333,13 @@
                             <span class="after-badge px-3 py-1 rounded-full text-xs font-medium text-white">After</span>
                         </div>
                         <p class="text-sm text-gray-600 mb-3">
-                            Native wildlife returning to restored habitats, demonstrating the success of our ecosystem restoration efforts.
+                            Native wildlife returning to restored habitats at project sites.
                         </p>
                         <div class="flex items-center gap-2 text-xs text-gray-500">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            <span>2027</span>
+                            <span>Ongoing</span>
                         </div>
                     </div>
                 </div>
@@ -377,7 +359,7 @@
                             <span class="progress-badge px-3 py-1 rounded-full text-xs font-medium text-white">Progress</span>
                         </div>
                         <p class="text-sm text-gray-600 mb-3">
-                            Our dedicated team of volunteers and environmental specialists working together on restoration projects.
+                            Volunteers and specialists on-site during a planting session.
                         </p>
                         <div class="flex items-center gap-2 text-xs text-gray-500">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -403,7 +385,7 @@
                             <span class="before-badge px-3 py-1 rounded-full text-xs font-medium text-white">Before</span>
                         </div>
                         <p class="text-sm text-gray-600 mb-3">
-                            Initial assessment of the EcoSearch carbon offset project area showing degraded soil conditions.
+                            EcoSearch carbon offset project area before planting began.
                         </p>
                         <div class="flex items-center gap-2 text-xs text-gray-500">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -430,13 +412,13 @@
                             <span class="after-badge px-3 py-1 rounded-full text-xs font-medium text-white">After</span>
                         </div>
                         <p class="text-sm text-gray-600 mb-3">
-                            Mature forest actively sequestering carbon, demonstrating the long-term environmental impact of our efforts.
+                            Maturing forest actively sequestering carbon at scale.
                         </p>
                         <div class="flex items-center gap-2 text-xs text-gray-500">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            <span>2027</span>
+                            <span>Ongoing</span>
                         </div>
                     </div>
                 </div>
@@ -454,7 +436,7 @@
                             </svg>
                         </div>
                         <h3 class="text-lg font-semibold text-deep-forest mb-2">Before Restoration</h3>
-                        <p class="text-sm text-gray-600">Degraded landscapes showing clear need for environmental intervention and restoration efforts.</p>
+                        <p class="text-sm text-gray-600">Documenting site conditions before any planting work begins.</p>
                     </div>
                     <div class="text-center">
                         <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -463,7 +445,7 @@
                             </svg>
                         </div>
                         <h3 class="text-lg font-semibold text-deep-forest mb-2">Active Progress</h3>
-                        <p class="text-sm text-gray-600">Documented planting activities and early growth stages showing successful establishment of new forests.</p>
+                        <p class="text-sm text-gray-600">Planting days, early growth, and the teams making it happen.</p>
                     </div>
                     <div class="text-center">
                         <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -472,7 +454,7 @@
                             </svg>
                         </div>
                         <h3 class="text-lg font-semibold text-deep-forest mb-2">Thriving Results</h3>
-                        <p class="text-sm text-gray-600">Mature forests demonstrating successful restoration with biodiversity recovery and carbon sequestration.</p>
+                        <p class="text-sm text-gray-600">Established canopy, returning wildlife, and measurable carbon capture.</p>
                     </div>
                 </div>
             </div>
@@ -480,16 +462,16 @@
 
         <section class="text-center">
             <div class="gallery-card rounded-2xl p-8">
-                <h2 class="text-2xl font-semibold text-deep-forest mb-4">See Our Impact in Action</h2>
+                <h2 class="text-2xl font-semibold text-deep-forest mb-4">Explore the Data</h2>
                 <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
-                    These images tell the story of transformation - from degraded landscapes to thriving ecosystems. Explore our projects and learn more about our environmental impact.
+                    See verified planting numbers, project locations, and the species being planted across our sites.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="/final_dashboard.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-brand-green text-white font-medium hover:opacity-90 transition">
+                    <a href="/index.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-brand-green text-white font-medium hover:opacity-90 transition">
                         View Dashboard
                     </a>
-                    <a href="/trees.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-deep-forest font-medium border border-gray-300 hover:bg-gray-50 transition">
-                        Learn About Species
+                    <a href="/species.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-deep-forest font-medium border border-gray-300 hover:bg-gray-50 transition">
+                        Browse Species
                     </a>
                 </div>
             </div>
