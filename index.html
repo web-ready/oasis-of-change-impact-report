@@ -84,49 +84,129 @@
 
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
 
-        <section class="hero-section relative mb-12 -mx-4 sm:-mx-6 lg:-mx-8 -mt-8 sm:-mt-12 px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-10 sm:pb-12 overflow-hidden">
-            <div class="hero-bg absolute inset-0"></div>
-            <div class="hero-pattern absolute inset-0 opacity-[0.03]"></div>
-            <div class="relative z-10 max-w-5xl mx-auto">
-                <div class="text-center mb-8 sm:mb-10">
-                    <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm text-white/90 text-xs font-medium px-3 py-1.5 rounded-full mb-5 border border-white/10">
-                        <span class="w-1.5 h-1.5 bg-emerald-300 rounded-full animate-pulse"></span>
-                        Last updated: <span id="last-updated-date"></span> <span id="last-updated-relative" class="ml-0.5"></span>
-                    </div>
-                    <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl text-white mb-4 tracking-tight">Tree Transparency Report</h1>
-                    <p class="text-white/70 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">Verified planting data, partner contributions, and climate outcomes &mdash; all in one place.</p>
+        <section class="hero-carousel" aria-roledescription="carousel" aria-label="Planting sites showcase">
+            <!-- Background image slides -->
+            <div class="hero-carousel__viewport" aria-live="off">
+                <div class="hero-carousel__slide hero-carousel__slide--active"
+                     role="group" aria-roledescription="slide" aria-label="Slide 1 of 5: Madagascar"
+                     data-caption="Eden Reforestation Project, Madagascar"
+                     data-subcaption="Mangrove &amp; coastal forest restoration &mdash; 2,525 trees planted"
+                     style="background-image: url('https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1920&q=80');">
                 </div>
-
-                <div class="flex justify-center mb-8 sm:mb-10">
-                    <div class="hero-total-card text-center bg-white/10 backdrop-blur-sm rounded-2xl px-8 sm:px-12 py-5 sm:py-6 border border-white/15">
-                        <div class="tabular-nums text-3xl sm:text-4xl font-bold text-white mb-0.5 count-up" id="total-count">0</div>
-                        <div class="text-sm font-medium text-white/70 tracking-wide uppercase">Trees Planted</div>
-                    </div>
+                <div class="hero-carousel__slide"
+                     role="group" aria-roledescription="slide" aria-label="Slide 2 of 5: Tanzania"
+                     data-caption="Usambara Biodiversity, Tanzania"
+                     data-subcaption="Mountain ecosystem conservation &mdash; 512 verified trees"
+                     style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1920&q=80');">
                 </div>
+                <div class="hero-carousel__slide"
+                     role="group" aria-roledescription="slide" aria-label="Slide 3 of 5: Nepal"
+                     data-caption="Community Reforestation, Nepal"
+                     data-subcaption="Restoring Himalayan hillside forests &mdash; 2,000 trees planted"
+                     style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1920&q=80');">
+                </div>
+                <div class="hero-carousel__slide"
+                     role="group" aria-roledescription="slide" aria-label="Slide 4 of 5: Indonesia"
+                     data-caption="Mangrove Conservation, Indonesia"
+                     data-subcaption="Coastal ecosystem protection &mdash; 1,000 trees planted"
+                     style="background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1920&q=80');">
+                </div>
+                <div class="hero-carousel__slide"
+                     role="group" aria-roledescription="slide" aria-label="Slide 5 of 5: Haiti"
+                     data-caption="Tropical Reforestation, Haiti"
+                     data-subcaption="Rebuilding island ecosystems &mdash; 1,200 trees planted"
+                     style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80');">
+                </div>
+            </div>
 
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 max-w-4xl mx-auto">
-                    <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center">
-                        <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="verified-count">0</div>
-                        <div class="text-[11px] sm:text-xs text-white/55 font-medium">Verified (Tree-Nation)</div>
+            <!-- Dark gradient overlay for text readability -->
+            <div class="hero-carousel__overlay" aria-hidden="true"></div>
+
+            <!-- Foreground content -->
+            <div class="hero-carousel__content">
+                <div class="relative z-10 max-w-5xl mx-auto">
+                    <div class="text-center mb-8 sm:mb-10">
+                        <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm text-white/90 text-xs font-medium px-3 py-1.5 rounded-full mb-5 border border-white/10">
+                            <span class="w-1.5 h-1.5 bg-emerald-300 rounded-full animate-pulse"></span>
+                            Last updated: <span id="last-updated-date"></span> <span id="last-updated-relative" class="ml-0.5"></span>
+                        </div>
+                        <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl text-white mb-4 tracking-tight">Tree Transparency Report</h1>
+                        <p class="text-white/70 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">Verified planting data, partner contributions, and climate outcomes &mdash; all in one place.</p>
                     </div>
-                    <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center">
-                        <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="legacy-count">0</div>
-                        <div class="text-[11px] sm:text-xs text-white/55 font-medium">Legacy Partners</div>
+
+                    <div class="flex justify-center mb-8 sm:mb-10">
+                        <div class="hero-total-card text-center bg-white/10 backdrop-blur-sm rounded-2xl px-8 sm:px-12 py-5 sm:py-6 border border-white/15">
+                            <div class="tabular-nums text-3xl sm:text-4xl font-bold text-white mb-0.5 count-up" id="total-count">0</div>
+                            <div class="text-sm font-medium text-white/70 tracking-wide uppercase">Trees Planted</div>
+                        </div>
                     </div>
-                    <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center">
-                        <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="countries-count">0</div>
-                        <div class="text-[11px] sm:text-xs text-white/55 font-medium">Countries</div>
-                    </div>
-                    <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center">
-                        <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="species-count">0</div>
-                        <div class="text-[11px] sm:text-xs text-white/55 font-medium">Species</div>
-                    </div>
-                    <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center col-span-2 sm:col-span-3 lg:col-span-1">
-                        <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="co2-offset">0</div>
-                        <div class="text-[11px] sm:text-xs text-white/55 font-medium">Verified CO₂ offset (kg)</div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 max-w-4xl mx-auto">
+                        <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center">
+                            <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="verified-count">0</div>
+                            <div class="text-[11px] sm:text-xs text-white/55 font-medium">Verified (Tree-Nation)</div>
+                        </div>
+                        <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center">
+                            <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="legacy-count">0</div>
+                            <div class="text-[11px] sm:text-xs text-white/55 font-medium">Legacy Partners</div>
+                        </div>
+                        <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center">
+                            <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="countries-count">0</div>
+                            <div class="text-[11px] sm:text-xs text-white/55 font-medium">Countries</div>
+                        </div>
+                        <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center">
+                            <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="species-count">0</div>
+                            <div class="text-[11px] sm:text-xs text-white/55 font-medium">Species</div>
+                        </div>
+                        <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center col-span-2 sm:col-span-3 lg:col-span-1">
+                            <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="co2-offset">0</div>
+                            <div class="text-[11px] sm:text-xs text-white/55 font-medium">Verified CO₂ offset (kg)</div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Image caption -->
+            <div class="hero-carousel__caption" aria-live="polite">
+                <div class="hero-carousel__caption-inner">
+                    <svg class="hero-carousel__caption-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <div>
+                        <span class="hero-carousel__caption-title" id="carousel-caption-title">Eden Reforestation Project, Madagascar</span>
+                        <span class="hero-carousel__caption-sub" id="carousel-caption-sub">Mangrove &amp; coastal forest restoration &mdash; 2,525 trees planted</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation controls -->
+            <div class="hero-carousel__nav">
+                <button class="hero-carousel__btn hero-carousel__btn--prev" aria-label="Previous planting site" type="button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                </button>
+
+                <div class="hero-carousel__dots" role="tablist" aria-label="Choose planting site to display">
+                    <button role="tab" aria-selected="true" aria-label="Madagascar" class="hero-carousel__dot hero-carousel__dot--active" data-slide="0" type="button"></button>
+                    <button role="tab" aria-selected="false" aria-label="Tanzania" class="hero-carousel__dot" data-slide="1" type="button"></button>
+                    <button role="tab" aria-selected="false" aria-label="Nepal" class="hero-carousel__dot" data-slide="2" type="button"></button>
+                    <button role="tab" aria-selected="false" aria-label="Indonesia" class="hero-carousel__dot" data-slide="3" type="button"></button>
+                    <button role="tab" aria-selected="false" aria-label="Haiti" class="hero-carousel__dot" data-slide="4" type="button"></button>
+                </div>
+
+                <button class="hero-carousel__btn hero-carousel__btn--next" aria-label="Next planting site" type="button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Unsplash attribution (required by license) -->
+            <a class="hero-carousel__credit" href="https://unsplash.com" target="_blank" rel="noopener noreferrer" aria-label="Photos from Unsplash (opens in new tab)">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.5 6.75V0h9v6.75h-9zm9 3.75H24V24H0V10.5h7.5v6.75h9V10.5z"/></svg>
+                <span>Unsplash</span>
+            </a>
         </section>
 
         <section class="mb-12">

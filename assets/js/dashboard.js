@@ -303,6 +303,147 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+/* ============================================
+   Hero Carousel
+   ============================================ */
+function initHeroCarousel() {
+    var carousel = document.querySelector('.hero-carousel');
+    if (!carousel) return;
+
+    var slides = carousel.querySelectorAll('.hero-carousel__slide');
+    var dots = carousel.querySelectorAll('.hero-carousel__dot');
+    var prevBtn = carousel.querySelector('.hero-carousel__btn--prev');
+    var nextBtn = carousel.querySelector('.hero-carousel__btn--next');
+    var captionEl = carousel.querySelector('.hero-carousel__caption');
+    var captionTitle = document.getElementById('carousel-caption-title');
+    var captionSub = document.getElementById('carousel-caption-sub');
+
+    if (slides.length < 2) return;
+
+    var currentIndex = 0;
+    var autoplayTimer = null;
+    var AUTOPLAY_MS = 7000;
+    var isPaused = false;
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function goToSlide(index) {
+        if (index === currentIndex) return;
+        var prev = currentIndex;
+        currentIndex = index;
+
+        // Fade out caption
+        captionEl.classList.add('hero-carousel__caption--fading');
+
+        // Swap active slide
+        slides[prev].classList.remove('hero-carousel__slide--active');
+        slides[currentIndex].classList.add('hero-carousel__slide--active');
+
+        // Update dots
+        dots[prev].classList.remove('hero-carousel__dot--active');
+        dots[prev].setAttribute('aria-selected', 'false');
+        dots[currentIndex].classList.add('hero-carousel__dot--active');
+        dots[currentIndex].setAttribute('aria-selected', 'true');
+
+        // Update caption text after short delay for fade effect
+        setTimeout(function() {
+            var slide = slides[currentIndex];
+            if (captionTitle) captionTitle.innerHTML = slide.getAttribute('data-caption') || '';
+            if (captionSub) captionSub.innerHTML = slide.getAttribute('data-subcaption') || '';
+            captionEl.classList.remove('hero-carousel__caption--fading');
+        }, reducedMotion ? 50 : 350);
+    }
+
+    function nextSlide() {
+        goToSlide((currentIndex + 1) % slides.length);
+    }
+
+    function prevSlide() {
+        goToSlide((currentIndex - 1 + slides.length) % slides.length);
+    }
+
+    function startAutoplay() {
+        stopAutoplay();
+        if (reducedMotion || isPaused) return;
+        autoplayTimer = setInterval(nextSlide, AUTOPLAY_MS);
+    }
+
+    function stopAutoplay() {
+        if (autoplayTimer) {
+            clearInterval(autoplayTimer);
+            autoplayTimer = null;
+        }
+    }
+
+    function pauseAutoplay() {
+        isPaused = true;
+        stopAutoplay();
+    }
+
+    function resumeAutoplay() {
+        isPaused = false;
+        startAutoplay();
+    }
+
+    // Button clicks
+    if (nextBtn) nextBtn.addEventListener('click', function() { nextSlide(); startAutoplay(); });
+    if (prevBtn) prevBtn.addEventListener('click', function() { prevSlide(); startAutoplay(); });
+
+    // Dot clicks
+    dots.forEach(function(dot) {
+        dot.addEventListener('click', function() {
+            var idx = parseInt(dot.getAttribute('data-slide'), 10);
+            goToSlide(idx);
+            startAutoplay();
+        });
+    });
+
+    // Pause on hover and focus-within
+    carousel.addEventListener('mouseenter', pauseAutoplay);
+    carousel.addEventListener('mouseleave', resumeAutoplay);
+    carousel.addEventListener('focusin', pauseAutoplay);
+    carousel.addEventListener('focusout', function(e) {
+        if (!carousel.contains(e.relatedTarget)) resumeAutoplay();
+    });
+
+    // Keyboard navigation within carousel
+    carousel.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); e.stopPropagation(); prevSlide(); startAutoplay(); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); e.stopPropagation(); nextSlide(); startAutoplay(); }
+    });
+
+    // Touch/swipe support
+    var touchStartX = 0;
+    var touchEndX = 0;
+    var SWIPE_THRESHOLD = 50;
+
+    carousel.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        var diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > SWIPE_THRESHOLD) {
+            if (diff > 0) nextSlide(); else prevSlide();
+            startAutoplay();
+        }
+    }, { passive: true });
+
+    // Pause when page is hidden
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) stopAutoplay(); else resumeAutoplay();
+    });
+
+    // Listen for reduced motion preference changes
+    window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', function(e) {
+        reducedMotion = e.matches;
+        if (reducedMotion) stopAutoplay(); else startAutoplay();
+    });
+
+    // Start autoplay
+    startAutoplay();
+}
+
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);
 } else {
@@ -312,6 +453,7 @@ if (document.readyState === 'loading') {
 function boot() {
     initializeTreeData();
     setTimeout(animateCount, 400);
+    initHeroCarousel();
 
     setupSearch('verified-search', '#verified-table', 'verified-data');
     setupSearch('legacy-search', '#legacy-table', 'legacy-data');
