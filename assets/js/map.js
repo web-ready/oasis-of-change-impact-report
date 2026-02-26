@@ -1,7 +1,8 @@
 const plantingData = {
   MG: { 
     centroid: [-18.77, 46.87], 
-    type: 'mixed', 
+    type: 'sunset', 
+    source: 'Sunset — 2024-2025 FY',
     sites: [
       { name: 'Eden Reforestation Projects', type: 'confirmed', source: 'Eden Reforestation' },
       { name: 'Kandrany 1', type: 'supported', source: 'Legacy Partner (Refoorest)' },
@@ -127,10 +128,114 @@ const plantingData = {
     type: 'confirmed', 
     source: 'Tree-Nation',
     sites: [
+      { name: 'Replanting the burnt Mkussu Forest (CORE) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Usambara Biodiversity Conservation', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Mlola Biodiversity Restoration', type: 'confirmed', source: 'Tree-Nation' },
-      { name: 'Replanting the burnt Mkussu Forest', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Plant to Stop Poverty', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  CA: {
+    centroid: [56.13, -106.35],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Boreal Forest Habitat Restoration — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  BO: {
+    centroid: [-16.29, -63.59],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Amazon Windshields (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  NG: {
+    centroid: [9.08, 8.68],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Restoration of Ala Forest Reserve (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  BR: {
+    centroid: [-14.24, -51.93],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Reforest the Amazon Basin (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  RO: {
+    centroid: [45.94, 24.97],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Bear Groves in Transylvania (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  ZW: {
+    centroid: [-19.02, 29.15],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Zimbabwe Reforestation Initiative (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  IE: {
+    centroid: [52.84, -9.06],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Ireland Community Tree Planting, County Clare (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  MX: {
+    centroid: [23.63, -102.55],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Restoration and Social Empowerment (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  AR: {
+    centroid: [-38.42, -63.62],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Bosques de Agua (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  FR: {
+    centroid: [46.23, 2.21],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Restauration Forêts dégradées (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  AU: {
+    centroid: [-25.27, 133.78],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Big Scrub Rainforest Restoration (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  GB: {
+    centroid: [55.38, -3.44],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Community Tree Planting (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  ES: {
+    centroid: [40.46, -3.75],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Alvelal (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   UG: { 
@@ -270,6 +375,14 @@ const plantingData = {
     sites: [
       { name: 'Bosawas 3', type: 'supported', source: 'Legacy Partner (Refoorest)' }
     ]
+  },
+  CF: {
+    centroid: [6.61, 20.94],
+    type: 'supported',
+    source: 'Legacy Partner (Tero)',
+    sites: [
+      { name: 'Chinko Nature Reserve', type: 'supported', source: 'Legacy Partner (Tero)' }
+    ]
   }
 };
 
@@ -291,7 +404,21 @@ const countryName = {
   ID: 'Indonesia',
   HT: 'Haiti',
   HN: 'Honduras',
-  NI: 'Nicaragua'
+  NI: 'Nicaragua',
+  CA: 'Canada',
+  BO: 'Bolivia',
+  NG: 'Nigeria',
+  BR: 'Brazil',
+  RO: 'Romania',
+  ZW: 'Zimbabwe',
+  IE: 'Ireland',
+  MX: 'Mexico',
+  AR: 'Argentina',
+  FR: 'France',
+  AU: 'Australia',
+  GB: 'United Kingdom',
+  ES: 'Spain',
+  CF: 'Central African Republic'
 };
 
 function countLabel(sites) {
@@ -302,7 +429,6 @@ function countLabel(sites) {
 }
 
 function calculateTotals() {
-  // Use centralized tree data if available, otherwise fall back to plantingData
   if (typeof TreeData !== 'undefined') {
     const mapSites = TreeData.getMapSites();
     const countries = [...new Set(mapSites.map(site => site.country))];
@@ -323,8 +449,6 @@ function calculateTotals() {
       legacyTrees: TreeData.getLegacyTrees()
     };
   }
-  
-  // Fallback to original calculation
   const countries = Object.keys(plantingData).length;
   const confirmedCountries = Object.values(plantingData).filter(cfg => cfg.type === 'confirmed').length;
   const supportedCountries = Object.values(plantingData).filter(cfg => cfg.type === 'supported').length;
@@ -372,7 +496,6 @@ function renderTotals() {
   const totalsContainer = document.getElementById('totals-summary');
   
   if (totalsContainer) {
-    // Enhanced totals display with tree counts if available
     const treeStatsHtml = totals.totalTrees ? `
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-4 sm:mb-6">
         <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 text-center">
@@ -386,7 +509,7 @@ function renderTotals() {
           <div class="text-xs text-gray-500 mt-1">Tree-Nation certified</div>
         </div>
         <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 text-center">
-          <div class="text-2xl sm:text-3xl font-bold text-legacy-gold mb-2">${totals.legacyTrees.toLocaleString()}</div>
+          <div class="text-2xl sm:text-3xl font-bold text-brand-green mb-2">${totals.legacyTrees.toLocaleString()}</div>
           <div class="text-xs sm:text-sm text-gray-600">Legacy Trees</div>
           <div class="text-xs text-gray-500 mt-1">Partner organizations</div>
         </div>
@@ -432,7 +555,7 @@ function renderTotals() {
           <div class="text-xs text-gray-500 mt-1">Tree-Nation plantings</div>
         </div>
         <div class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 text-center sm:col-span-2 lg:col-span-1">
-          <div class="text-2xl sm:text-3xl font-bold text-legacy-gold mb-2">${totals.supportedSites}</div>
+          <div class="text-2xl sm:text-3xl font-bold text-brand-green mb-2">${totals.supportedSites}</div>
           <div class="text-xs sm:text-sm text-gray-600">Supported Sites</div>
           <div class="text-xs text-gray-500 mt-1">Legacy partner projects</div>
         </div>
@@ -452,7 +575,6 @@ function initializeMap() {
     { attribution: '&copy; OpenStreetMap contributors' }
   ).addTo(map);
 
-  // Handle map resize on window resize
   window.addEventListener('resize', () => {
     setTimeout(() => {
       map.invalidateSize();
@@ -461,18 +583,20 @@ function initializeMap() {
 
   const clusterGroup = L.markerClusterGroup();
 
-  // Use centralized data if available, otherwise fall back to plantingData
   if (typeof TreeData !== 'undefined') {
     const mapSites = TreeData.getMapSites();
     
     mapSites.forEach(site => {
       let markerColor, markerLabel;
       if (site.type === 'confirmed') {
-        markerColor = '#16a34a';
+        markerColor = '#004734';
         markerLabel = 'Confirmed';
       } else if (site.type === 'mixed') {
-        markerColor = '#7c3aed';
+        markerColor = '#006B50';
         markerLabel = 'Mixed';
+      } else if (site.type === 'sunset') {
+        markerColor = '#6B7280';
+        markerLabel = 'Sunset';
       } else {
         markerColor = '#ca8a04';
         markerLabel = 'Supported';
@@ -486,14 +610,17 @@ function initializeMap() {
       });
 
       const title = site.name;
+      const siteDescription = site.description || '';
 
       const popupHTML = `
         <div class="popup-h1">${title}</div>
         <div class="text-xs">
-          <span class="font-semibold ${site.type === 'confirmed' ? 'text-green-700' : site.type === 'mixed' ? 'text-purple-700' : 'text-yellow-700'}">${markerLabel}</span><br>
+          <span class="font-semibold ${site.type === 'confirmed' ? 'text-green-700' : site.type === 'mixed' ? 'text-emerald-700' : site.type === 'sunset' ? 'text-gray-600' : 'text-yellow-700'}">${markerLabel}</span><br>
           <span class="text-gray-600">Source: ${site.source}</span><br>
-          <span class="text-gray-600">Location: ${site.country}</span><br>
-          <span class="text-gray-600">${site.description}</span>
+          <span class="text-gray-600">${site.country}</span>
+          ${siteDescription ? '<br><span class="text-gray-500" style="font-style:italic;margin-top:2px;display:inline-block">' + siteDescription + '</span>' : ''}
+          <hr style="margin:4px 0;border-color:#e5e7eb">
+          <span class="text-gray-400" style="font-size:10px">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</span>
         </div>
       `;
 
@@ -501,17 +628,19 @@ function initializeMap() {
       clusterGroup.addLayer(marker);
     });
   } else {
-    // Fallback to original plantingData
     Object.entries(plantingData).forEach(([cc, cfg]) => {
       const [lat, lng] = cfg.centroid;
 
       let markerColor, markerLabel;
       if (cfg.type === 'confirmed') {
-        markerColor = '#16a34a';
+        markerColor = '#004734';
         markerLabel = 'Confirmed';
       } else if (cfg.type === 'mixed') {
-        markerColor = '#7c3aed';
+        markerColor = '#006B50';
         markerLabel = 'Mixed';
+      } else if (cfg.type === 'sunset') {
+        markerColor = '#6B7280';
+        markerLabel = 'Sunset';
       } else {
         markerColor = '#ca8a04';
         markerLabel = 'Supported';
@@ -525,13 +654,17 @@ function initializeMap() {
       });
 
       const title = `${countryName[cc] || cc} (${countLabel(cfg.sites)})`;
+      const siteNames = (cfg.sites || []).map(s => typeof s === 'string' ? s : s.name).slice(0, 5);
+      const moreCount = (cfg.sites || []).length > 5 ? (cfg.sites.length - 5) : 0;
 
       const popupHTML = `
         <div class="popup-h1">${title}</div>
         <div class="text-xs">
-          <span class="font-semibold ${cfg.type === 'confirmed' ? 'text-green-700' : cfg.type === 'mixed' ? 'text-purple-700' : 'text-yellow-700'}">${markerLabel}</span><br>
-          <span class="text-gray-600">Source: ${cfg.source}</span><br>
-          Country code: <b>${cc}</b>
+          <span class="font-semibold ${cfg.type === 'confirmed' ? 'text-green-700' : cfg.type === 'mixed' ? 'text-emerald-700' : cfg.type === 'sunset' ? 'text-gray-600' : 'text-yellow-700'}">${markerLabel}</span><br>
+          <span class="text-gray-600">Source: ${cfg.source || 'Mixed Sources'}</span>
+          ${siteNames.length > 0 ? '<br><span class="text-gray-500" style="margin-top:2px;display:inline-block"><strong>Sites:</strong> ' + siteNames.join(', ') + (moreCount > 0 ? ' + ' + moreCount + ' more' : '') + '</span>' : ''}
+          <hr style="margin:4px 0;border-color:#e5e7eb">
+          <span class="text-gray-400" style="font-size:10px">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</span>
         </div>
       `;
 
@@ -544,7 +677,6 @@ function initializeMap() {
   return map;
 }
 
-// Global filter state
 let currentFilters = {
   type: 'all',
   source: 'all'
@@ -552,15 +684,11 @@ let currentFilters = {
 
 function getFilteredData() {
   return Object.entries(plantingData).filter(([cc, cfg]) => {
-    // Type filter
     if (currentFilters.type !== 'all' && cfg.type !== currentFilters.type) {
       return false;
     }
-    
-    // Source filter
     if (currentFilters.source !== 'all') {
       if (cfg.type === 'mixed') {
-        // For mixed countries, check if any site matches the source filter
         const hasMatchingSource = cfg.sites.some(site => {
           if (typeof site === 'string') {
             return cfg.source === currentFilters.source;
@@ -571,7 +699,6 @@ function getFilteredData() {
           return false;
         }
       } else {
-        // For non-mixed countries, check the country's source
         if (cfg.source !== currentFilters.source) {
           return false;
         }
@@ -598,7 +725,8 @@ function updateFilterResults() {
 
 function renderSiteLists() {
   const siteLists = document.getElementById('site-lists');
-  siteLists.innerHTML = ''; // Clear existing content
+  if (!siteLists) return;
+  siteLists.innerHTML = '';
 
   const filteredData = getFilteredData();
 
@@ -618,12 +746,16 @@ function renderSiteLists() {
       let statusColor, statusBg, statusText;
       if (cfg.type === 'confirmed') {
         statusColor = 'bg-brand-green';
-        statusBg = 'bg-green-100';
-        statusText = 'text-green-700';
+        statusBg = 'bg-emerald-50';
+        statusText = 'text-emerald-800';
       } else if (cfg.type === 'mixed') {
-        statusColor = 'bg-purple-500';
-        statusBg = 'bg-purple-100';
-        statusText = 'text-purple-700';
+        statusColor = 'bg-emerald-600';
+        statusBg = 'bg-emerald-50';
+        statusText = 'text-emerald-700';
+      } else if (cfg.type === 'sunset') {
+        statusColor = 'bg-gray-500';
+        statusBg = 'bg-gray-100';
+        statusText = 'text-gray-700';
       } else {
         statusColor = 'bg-legacy-gold';
         statusBg = 'bg-yellow-100';
@@ -640,7 +772,7 @@ function renderSiteLists() {
         </div>
         <div class="flex items-center gap-2 sm:gap-3 ml-5 sm:ml-0">
           <span class="text-xs px-2 sm:px-3 py-1 rounded-full font-medium ${statusBg} ${statusText}">
-            ${cfg.type === 'confirmed' ? 'Confirmed' : cfg.type === 'mixed' ? 'Mixed' : 'Supported'}
+            ${cfg.type === 'confirmed' ? 'Confirmed' : cfg.type === 'mixed' ? 'Mixed' : cfg.type === 'sunset' ? 'Sunset' : 'Supported'}
           </span>
           <span class="text-xs text-gray-500 hidden sm:inline">${cfg.source || 'Mixed Sources'}</span>
           <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -694,7 +826,10 @@ function initializeMobileMenu() {
   const toggleBtn = document.getElementById('mobile-menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   const closeBtn = document.getElementById('mobile-menu-close');
-  
+  if (!toggleBtn || !mobileMenu) return;
+  if (toggleBtn.dataset.menuInit) return;
+  toggleBtn.dataset.menuInit = '1';
+
   function toggleMenu() {
     const isOpen = !mobileMenu.classList.contains('hidden');
     mobileMenu.classList.toggle('hidden');
@@ -702,13 +837,9 @@ function initializeMobileMenu() {
     document.body.style.overflow = isOpen ? '' : 'hidden';
     toggleBtn.setAttribute('aria-expanded', String(!isOpen));
   }
-  
-  if (toggleBtn && mobileMenu) {
-    toggleBtn.addEventListener('click', toggleMenu);
-  }
-  if (closeBtn) {
-    closeBtn.addEventListener('click', toggleMenu);
-  }
+
+  toggleBtn.addEventListener('click', toggleMenu);
+  if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
 }
 
 function initializeFilters() {
@@ -746,8 +877,6 @@ function initializeFilters() {
       applyFilters();
     });
   }
-  
-  // Initialize filter results display
   updateFilterResults();
 }
 

@@ -1,0 +1,114 @@
+:root {
+    --color-brand-green: #004734;
+    --color-brand-green-light: #006B50;
+    --color-brand-green-hover: #00352A;
+    --color-legacy-gold: #EAB308;
+    --color-legacy-gold-light: #facc15;
+    --color-deep-forest: #0F172A;
+    --color-cloud-white: #FFFFFF;
+    --color-mist-gray: #F8FAFC;
+
+    --color-success: #059669;
+    --color-success-light: #10b981;
+    --color-success-bg: #ECFDF5;
+    --color-success-text: #065F46;
+    --color-success-border: #A7F3D0;
+
+    --color-warning: #D97706;
+    --color-warning-light: #F59E0B;
+    --color-warning-bg: #FFFBEB;
+    --color-warning-text: #92400E;
+    --color-warning-border: #FDE68A;
+
+    --color-error: #DC2626;
+    --color-error-light: #EF4444;
+    --color-error-bg: #FEF2F2;
+    --color-error-text: #991B1B;
+    --color-error-border: #FECACA;
+
+    --color-info: #2563EB;
+    --color-info-light: #3B82F6;
+    --color-info-bg: #EFF6FF;
+    --color-info-text: #1E40AF;
+    --color-info-border: #BFDBFE;
+
+    --color-border: #e2e8f0;
+    --color-border-muted: #e5e7eb;
+    --color-surface: #ffffff;
+    --color-surface-muted: #f8fafc;
+    --color-surface-elevated: #f9fafb;
+    --color-text: #0f172a;
+    --color-text-muted: #64748b;
+    --color-text-secondary: #6b7280;
+
+    --focus-ring: 0 0 0 3px rgba(0, 71, 52, 0.25);
+    --focus-ring-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+
+.ooc-alert {
+    background-color: var(--color-brand-green);
+    border: 1px solid var(--color-brand-green);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    color: #ffffff;
+}
+
+.ooc-alert__row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+}
+
+.ooc-alert__icon {
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background-color: transparent;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+}
+
+.ooc-alert__title {
+    font-size: 1rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+}
+
+.ooc-alert__body {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.95);
+    margin-top: 0.3rem;
+    margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+    .ooc-alert {
+        padding: 1rem;
+    }
+
+    .ooc-alert__title {
+        font-size: 0.95rem;
+    }
+
+    .ooc-alert__body {
+        font-size: 0.9rem;
+    }
+}

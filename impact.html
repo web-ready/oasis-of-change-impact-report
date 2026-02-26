@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiscal Year Impact - Oasis of Change, Inc.</title>
+    <meta name="author" content="Oasis of Change, Inc.">
+    <meta property="og:site_name" content="Oasis of Change, Inc.">
+    <meta name="description" content="Fiscal year impact reports for Oasis of Change tree planting initiatives.">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="assets/css/design-tokens.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#004734',
+                        'brand-green-light': '#006B50',
+                        'legacy-gold': '#EAB308',
+                        'deep-forest': '#0F172A',
+                        'cloud-white': '#FFFFFF',
+                        'mist-gray': '#F8FAFC',
+                        'success': { DEFAULT: '#059669', light: '#10b981', bg: '#ECFDF5', text: '#065F46' },
+                        'warning': { DEFAULT: '#D97706', light: '#F59E0B', bg: '#FFFBEB', text: '#92400E' }
+                    },
+                    fontFamily: {
+                        'serif': ['DM Serif Display', 'serif'],
+                        'sans': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-mist-gray font-sans antialiased">
+
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between h-14 relative">
+                <a href="/index.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="/index.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Dashboard</a>
+                    <a href="/impact.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:bg-brand-green-light transition">FY Impact</a>
+                    <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Certificates</a>
+                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Tree Species</a>
+                    <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Gallery</a>
+                </div>
+                <button id="mobile-menu-toggle" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50" aria-label="Open menu" aria-expanded="false">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="md:hidden hidden fixed inset-0 z-[2000] bg-black/90 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
+        <div class="w-full h-full flex items-center justify-center p-6">
+            <div class="text-center text-white max-w-sm mx-auto">
+                <h2 id="mobile-menu-title" class="font-serif text-4xl mb-8">Navigate</h2>
+                <nav class="space-y-4 text-lg">
+                    <a href="/index.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Dashboard</a>
+                    <a href="/impact.html" class="block py-2 px-4 rounded-lg bg-white/15 font-semibold transition-colors duration-200">FY Impact</a>
+                    <a href="/certificates.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Certificates</a>
+                    <a href="/species.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Tree Species</a>
+                    <a href="/gallery.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Gallery</a>
+                </nav>
+                <button id="mobile-menu-close" class="mt-12 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+        <section class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-serif text-deep-forest mb-3">Fiscal Year Impact</h1>
+            <p class="text-sm text-gray-600 max-w-2xl mx-auto">Select a fiscal year to view detailed planting allocations, funding streams, and impact data.</p>
+        </section>
+
+        <!-- Year-over-Year Comparison -->
+        <section class="mb-12">
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100">
+                <h2 class="text-xl font-semibold text-deep-forest mb-6">Year-over-Year Growth</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b-2 border-gray-200">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-forest">Metric</th>
+                                <th class="text-right py-3 px-3 font-semibold text-gray-500">2024-2025 FY</th>
+                                <th class="text-right py-3 px-3 font-semibold text-brand-green">2025-2026 FY</th>
+                                <th class="text-right py-3 px-3 font-semibold text-deep-forest">Growth</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-100">
+                                <td class="py-3 px-3 font-medium">Total Trees Planted</td>
+                                <td class="py-3 px-3 text-right tabular-nums text-gray-600">675</td>
+                                <td class="py-3 px-3 text-right tabular-nums font-semibold text-brand-green">7,143</td>
+                                <td class="py-3 px-3 text-right"><span class="text-emerald-700 font-semibold">+958%</span></td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="py-3 px-3 font-medium">Countries Impacted</td>
+                                <td class="py-3 px-3 text-right tabular-nums text-gray-600">1</td>
+                                <td class="py-3 px-3 text-right tabular-nums font-semibold text-brand-green">14</td>
+                                <td class="py-3 px-3 text-right"><span class="text-emerald-700 font-semibold">14x</span></td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="py-3 px-3 font-medium">Est. CO&#8322; Offset (kg)</td>
+                                <td class="py-3 px-3 text-right tabular-nums text-gray-600">33,750</td>
+                                <td class="py-3 px-3 text-right tabular-nums font-semibold text-brand-green">358,610</td>
+                                <td class="py-3 px-3 text-right"><span class="text-emerald-700 font-semibold">+963%</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-3 font-medium">Species Planted</td>
+                                <td class="py-3 px-3 text-right tabular-nums text-gray-600">1</td>
+                                <td class="py-3 px-3 text-right tabular-nums font-semibold text-brand-green">14</td>
+                                <td class="py-3 px-3 text-right"><span class="text-emerald-700 font-semibold">14x</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- FY Cards -->
+        <section class="mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- 2025-2026 FY Card -->
+                <a href="/impact-2025-2026.html" class="group block bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md hover:border-brand-green/30 transition-all duration-200">
+                    <div class="bg-brand-green/5 px-6 py-5 border-b border-brand-green/10">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-semibold text-deep-forest">2025-2026 FY</h3>
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                Latest
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-3 gap-3 mb-4">
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-brand-green">7,143</div>
+                                <div class="text-xs text-gray-500">Trees</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-brand-green">14</div>
+                                <div class="text-xs text-gray-500">Countries</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-brand-green">358,610</div>
+                                <div class="text-xs text-gray-500">CO&#8322; (kg)</div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">Global expansion across 6 continents.</p>
+                        <span class="inline-flex items-center gap-1 text-sm text-brand-green font-medium group-hover:gap-2 transition-all">
+                            View full report
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 2024-2025 FY Card -->
+                <a href="/impact-2024-2025.html" class="group block bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md hover:border-gray-300 transition-all duration-200">
+                    <div class="bg-gray-50 px-6 py-5 border-b border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-semibold text-deep-forest">2024-2025 FY</h3>
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                Completed
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-3 gap-3 mb-4">
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-deep-forest">675</div>
+                                <div class="text-xs text-gray-500">Trees</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-deep-forest">1</div>
+                                <div class="text-xs text-gray-500">Country</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-deep-forest">33,750</div>
+                                <div class="text-xs text-gray-500">CO&#8322; (kg)</div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">Our first direct planting cycle. 675 trees in Madagascar via Eden Reforestation Projects.</p>
+                        <span class="inline-flex items-center gap-1 text-sm text-gray-600 font-medium group-hover:gap-2 group-hover:text-deep-forest transition-all">
+                            View full report
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+    (function(){
+        const toggleBtn = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeBtn = document.getElementById('mobile-menu-close');
+        if (!toggleBtn || !mobileMenu) return;
+        const toggle = () => {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden');
+            document.documentElement.style.overflow = isOpen ? '' : 'hidden';
+            document.body.style.overflow = isOpen ? '' : 'hidden';
+            toggleBtn.setAttribute('aria-expanded', String(!isOpen));
+        };
+        toggleBtn.addEventListener('click', toggle);
+        if (closeBtn) closeBtn.addEventListener('click', toggle);
+    })();
+    </script>
+</body>
+</html>
