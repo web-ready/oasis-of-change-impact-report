@@ -183,11 +183,11 @@ const plantingData = {
     ]
   },
   IE: {
-    centroid: [53.14, -7.69],
+    centroid: [52.84, -9.06],
     type: 'confirmed',
     source: 'Tree-Nation',
     sites: [
-      { name: 'Ireland Community Tree Planting (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Ireland Community Tree Planting, County Clare (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   MX: {

@@ -18,7 +18,7 @@ const TreeData = {
             co2Offset: 352850,
             fundingStream: "CORE",
             species: "Afrocarpus usambarensis",
-            url: "https://tree-nation.com"
+            url: "https://tree-nation.com/projects/replanting-the-burnt-mkussu-forest"
         },
         {
             id: "canada-boreal",
@@ -28,7 +28,7 @@ const TreeData = {
             co2Offset: 3100,
             fundingStream: "GOV. GRANT + PILOT",
             species: "Pinus banksiana",
-            url: "https://tree-nation.com"
+            url: "https://tree-nation.com/projects/boreal-forest-habitat-restauration-canada"
         },
         {
             id: "bolivia-amazon",
@@ -38,7 +38,7 @@ const TreeData = {
             co2Offset: 1000,
             fundingStream: "PILOT",
             species: "Ceiba speciosa",
-            url: "https://tree-nation.com"
+            url: "https://tree-nation.com/projects/ketrawe-bolivia"
         },
         {
             id: "nigeria-ala",
@@ -48,7 +48,7 @@ const TreeData = {
             co2Offset: 500,
             fundingStream: "PILOT",
             species: "Acacia mangium",
-            url: "https://tree-nation.com"
+            url: "https://tree-nation.com/projects/restoration-of-ala-forest-reserve"
         },
         {
             id: "brazil-amazon",
@@ -58,7 +58,7 @@ const TreeData = {
             co2Offset: 500,
             fundingStream: "PILOT",
             species: "Schizolobium amazonicum",
-            url: "https://tree-nation.com"
+            url: "https://tree-nation.com/projects/amazonia-rioterra-brazil"
         },
         {
             id: "romania-bear",
@@ -68,7 +68,7 @@ const TreeData = {
             co2Offset: 300,
             fundingStream: "PILOT",
             species: "Fagus sylvatica",
-            url: "https://tree-nation.com"
+            url: "https://tree-nation.com/projects/climate-smart-forests-transylvania"
         },
         {
             id: "zimbabwe-reforest",
@@ -78,17 +78,17 @@ const TreeData = {
             co2Offset: 100,
             fundingStream: "PILOT",
             species: "Mangifera indica",
-            url: "https://tree-nation.com"
+            url: "https://tree-nation.com/projects/zimbabwe-reforestation-initiative"
         },
         {
             id: "ireland-community",
             name: "Ireland Community Tree Planting",
-            location: "Ireland",
+            location: "County Clare, Ireland",
             trees: 2,
             co2Offset: 100,
             fundingStream: "PILOT",
             species: "Betula pendula",
-            url: "https://tree-nation.com"
+            url: "https://tree-nation.com/projects/ireland-community-tree-planting"
         },
         {
             id: "mexico-restoration",
@@ -98,7 +98,7 @@ const TreeData = {
             co2Offset: 40,
             fundingStream: "PILOT",
             species: "Prosopis laevigata",
-            url: "https://tree-nation.com"
+            url: "https://tree-nation.com/projects/restoration-and-social-empowerment-mexico"
         },
         {
             id: "argentina-bosques",
@@ -108,7 +108,7 @@ const TreeData = {
             co2Offset: 40,
             fundingStream: "PILOT",
             species: "Polylepis australis",
-            url: "https://tree-nation.com"
+            url: "https://tree-nation.com/projects/bosques-de-agua"
         },
         {
             id: "france-restauration",
@@ -118,7 +118,7 @@ const TreeData = {
             co2Offset: 20,
             fundingStream: "PILOT",
             species: "Pinus nigra",
-            url: "https://tree-nation.com"
+            url: "https://tree-nation.com/projects/reboisement-grand-est"
         },
         {
             id: "australia-big-scrub",
@@ -128,7 +128,7 @@ const TreeData = {
             co2Offset: 20,
             fundingStream: "PILOT",
             species: "Homalanthus populifolius",
-            url: "https://tree-nation.com"
+            url: "https://tree-nation.com/projects/big-scrub-rainforest-australia"
         },
         {
             id: "uk-community",
@@ -138,7 +138,7 @@ const TreeData = {
             co2Offset: 20,
             fundingStream: "PILOT",
             species: "Prunus spinosa",
-            url: "https://tree-nation.com"
+            url: "https://tree-nation.com/projects/uk-community-tree-planting"
         },
         {
             id: "spain-alvelal",
@@ -148,7 +148,7 @@ const TreeData = {
             co2Offset: 20,
             fundingStream: "PILOT",
             species: "Pistacia lentiscus",
-            url: "https://tree-nation.com"
+            url: "https://tree-nation.com/projects/alvelal"
         }
     ],
     legacyProjects: [
@@ -342,9 +342,9 @@ const TreeData = {
             type: "confirmed",
             source: "Tree-Nation",
             trees: 2,
-            lat: 53.1424,
-            lng: -7.6921,
-            description: "2025-2026 FY — Ireland Community Tree Planting (PILOT)"
+            lat: 52.8420,
+            lng: -9.0568,
+            description: "2025-2026 FY — Ireland Community Tree Planting, County Clare (PILOT)"
         },
         {
             id: "mexico",
