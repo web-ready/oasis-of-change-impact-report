@@ -175,7 +175,7 @@ const TreeData = {
         {
             id: "madagascar-2024-2025",
             name: "Madagascar",
-            description: "Eden Reforestation Projects — contributed during 2024-2025 FY tree planting cycle. Project sunset in 2025-2026 FY.",
+            description: "Eden Reforestation Projects — contributed during 2024-2025 FY tree planting cycle. Project completed during that cycle.",
             trees: 675,
             co2Offset: 33750,
             date: "2024-2025 FY",
@@ -191,7 +191,7 @@ const TreeData = {
             trees: 675,
             co2Offset: 33750,
             date: "February 26, 2025",
-            fyNote: "2024-2025 FY — Madagascar project now sunset",
+            fyNote: "2024-2025 FY — Madagascar project completed",
             filename: "2025-02-26_Web-Ready-Planting_Eden-Reforestation_Madagascar_675-Trees-33750kg-CO2.pdf"
         },
         {
@@ -242,7 +242,7 @@ const TreeData = {
             trees: 100,
             co2Offset: 5000,
             date: "June 26, 2024",
-            fyNote: "2024-2025 FY — Madagascar project now sunset",
+            fyNote: "2024-2025 FY — Madagascar project completed",
             filename: "2024-06-26_EcoSearch_Eden-Reforestation_Madagascar_100-Trees-5000kg-CO2.pdf.pdf"
         }
     ],
@@ -256,7 +256,7 @@ const TreeData = {
             trees: 2525,
             lat: -18.7669,
             lng: 46.8691,
-            description: "Previously supported in 2024-2025 FY. Project sunset in 2025-2026 FY."
+            description: "Previously supported in 2024-2025 FY. Project completed during that cycle."
         },
         {
             id: "tanzania",
@@ -666,7 +666,9 @@ const TreeData = {
     },
     
     getCo2Captured: function() {
-        return this.verifiedProjects.reduce((sum, p) => sum + (p.co2Offset || 0), 0);
+        const verified = this.verifiedProjects.reduce((sum, p) => sum + (p.co2Offset || 0), 0);
+        const sunset = (this.sunsetProjects || []).reduce((sum, p) => sum + (p.co2Offset || 0), 0);
+        return verified + sunset;
     },
     
     getSpeciesCount: function() {
