@@ -1,55 +1,154 @@
 const TreeData = {
-    lastUpdated: "February 10th, 2026",
+    lastUpdated: "February 25th, 2026",
+    fiscalYear: "2025-2026",
     totals: {
-        totalTrees: 8870,
-        verifiedTrees: 1532,
+        totalTrees: 14881,
+        verifiedTrees: 7143,
         legacyTrees: 7338,
         goalTrees: 10000,
-        speciesCount: 67
+        speciesCount: 14
     },
     
     verifiedProjects: [
         {
-            id: "web-ready",
-            name: "Web-Ready",
+            id: "tanzania-mkussu",
+            name: "Replanting the burnt Mkussu Forest",
+            location: "Tanzania",
+            trees: 7057,
+            co2Offset: 352850,
+            fundingStream: "CORE",
+            species: "Afrocarpus usambarensis",
+            url: "https://tree-nation.com"
+        },
+        {
+            id: "canada-boreal",
+            name: "Boreal Forest Habitat Restoration",
             location: "Canada",
-            trees: 924,
-            co2Offset: 71500,
-            url: "https://tree-nation.com/profile/impact/web-ready"
+            trees: 62,
+            co2Offset: 3100,
+            fundingStream: "GOV. GRANT + PILOT",
+            species: "Pinus banksiana",
+            url: "https://tree-nation.com"
         },
         {
-            id: "spes",
-            name: "Stanley Park Ecology Society (SPES)",
-            location: "Canada", 
-            trees: 232,
-            co2Offset: 21440,
-            url: "https://tree-nation.com/profile/impact/stanley-park-ecology-society"
+            id: "bolivia-amazon",
+            name: "Amazon Windshields",
+            location: "Bolivia",
+            trees: 2,
+            co2Offset: 1000,
+            fundingStream: "PILOT",
+            species: "Ceiba speciosa",
+            url: "https://tree-nation.com"
         },
         {
-            id: "sustainable-www",
-            name: "Sustainable WWW",
-            location: "Sweden",
-            trees: 170,
-            co2Offset: 24560, 
-            url: "https://tree-nation.com/profile/impact/sustainable-www"
+            id: "nigeria-ala",
+            name: "Restoration of Ala Forest Reserve",
+            location: "Nigeria",
+            trees: 2,
+            co2Offset: 500,
+            fundingStream: "PILOT",
+            species: "Acacia mangium",
+            url: "https://tree-nation.com"
         },
         {
-            id: "mst",
-            name: "Mittler Senior Technology (MST)",
-            location: "United States",
-            trees: 124,
-            co2Offset: 16250,
-            url: "https://tree-nation.com/profile/impact/mittler-senior-technology"
+            id: "brazil-amazon",
+            name: "Reforest the Amazon Basin",
+            location: "Brazil",
+            trees: 2,
+            co2Offset: 500,
+            fundingStream: "PILOT",
+            species: "Schizolobium amazonicum",
+            url: "https://tree-nation.com"
         },
         {
-            id: "ecosearch",
-            name: "EcoSearch",
-            location: "Canada",
-            trees: 101,
-            co2Offset: 5050,
-            date: "2024-06-26",
-            certificate: "Eden Reforestation",
-            url: "https://tree-nation.com/profile/impact/ecosearch"
+            id: "romania-bear",
+            name: "Bear Groves in Transylvania",
+            location: "Romania",
+            trees: 2,
+            co2Offset: 300,
+            fundingStream: "PILOT",
+            species: "Fagus sylvatica",
+            url: "https://tree-nation.com"
+        },
+        {
+            id: "zimbabwe-reforest",
+            name: "Zimbabwe Reforestation Initiative",
+            location: "Zimbabwe",
+            trees: 2,
+            co2Offset: 100,
+            fundingStream: "PILOT",
+            species: "Mangifera indica",
+            url: "https://tree-nation.com"
+        },
+        {
+            id: "ireland-community",
+            name: "Ireland Community Tree Planting",
+            location: "Ireland",
+            trees: 2,
+            co2Offset: 100,
+            fundingStream: "PILOT",
+            species: "Betula pendula",
+            url: "https://tree-nation.com"
+        },
+        {
+            id: "mexico-restoration",
+            name: "Restoration and Social Empowerment",
+            location: "Mexico",
+            trees: 2,
+            co2Offset: 40,
+            fundingStream: "PILOT",
+            species: "Prosopis laevigata",
+            url: "https://tree-nation.com"
+        },
+        {
+            id: "argentina-bosques",
+            name: "Bosques de Agua",
+            location: "Argentina",
+            trees: 2,
+            co2Offset: 40,
+            fundingStream: "PILOT",
+            species: "Polylepis australis",
+            url: "https://tree-nation.com"
+        },
+        {
+            id: "france-restauration",
+            name: "Restauration Forêts dégradées",
+            location: "France",
+            trees: 2,
+            co2Offset: 20,
+            fundingStream: "PILOT",
+            species: "Pinus nigra",
+            url: "https://tree-nation.com"
+        },
+        {
+            id: "australia-big-scrub",
+            name: "Big Scrub Rainforest Restoration",
+            location: "Australia",
+            trees: 2,
+            co2Offset: 20,
+            fundingStream: "PILOT",
+            species: "Homalanthus populifolius",
+            url: "https://tree-nation.com"
+        },
+        {
+            id: "uk-community",
+            name: "Community Tree Planting",
+            location: "United Kingdom",
+            trees: 2,
+            co2Offset: 20,
+            fundingStream: "PILOT",
+            species: "Prunus spinosa",
+            url: "https://tree-nation.com"
+        },
+        {
+            id: "spain-alvelal",
+            name: "Alvelal",
+            location: "Spain",
+            trees: 2,
+            co2Offset: 20,
+            fundingStream: "PILOT",
+            species: "Pistacia lentiscus",
+            url: "https://tree-nation.com"
         }
     ],
     legacyProjects: [
@@ -72,15 +171,27 @@ const TreeData = {
             source: "Legacy Partner (Refoorest)"
         }
     ],
+    sunsetProjects: [
+        {
+            id: "madagascar-2024-2025",
+            name: "Madagascar",
+            description: "Eden Reforestation Projects — contributed during 2024-2025 FY tree planting cycle. Project sunset in 2025-2026 FY.",
+            trees: 675,
+            co2Offset: 33750,
+            date: "2024-2025 FY",
+            country: "Madagascar"
+        }
+    ],
     certificates: [
         {
             id: "web-ready-2025-madagascar",
-            title: "Web-Ready Forest Restoration",
+            title: "Web-Ready Forest Restoration (Madagascar)",
             certificate: "Eden Reforestation",
             location: "Madagascar",
             trees: 675,
             co2Offset: 33750,
             date: "February 26, 2025",
+            fyNote: "2024-2025 FY — Madagascar project now sunset",
             filename: "2025-02-26_Web-Ready-Planting_Eden-Reforestation_Madagascar_675-Trees-33750kg-CO2.pdf"
         },
         {
@@ -131,6 +242,7 @@ const TreeData = {
             trees: 100,
             co2Offset: 5000,
             date: "June 26, 2024",
+            fyNote: "2024-2025 FY — Madagascar project now sunset",
             filename: "2024-06-26_EcoSearch_Eden-Reforestation_Madagascar_100-Trees-5000kg-CO2.pdf.pdf"
         }
     ],
@@ -139,12 +251,166 @@ const TreeData = {
             id: "madagascar",
             name: "Madagascar",
             country: "Madagascar",
-            type: "mixed",
-            source: "Mixed Sources",
+            type: "sunset",
+            source: "Sunset — 2024-2025 FY",
             trees: 2525,
             lat: -18.7669,
             lng: 46.8691,
-            description: "Mixed verified and legacy tree plantings"
+            description: "Previously supported in 2024-2025 FY. Project sunset in 2025-2026 FY."
+        },
+        {
+            id: "tanzania",
+            name: "Tanzania",
+            country: "Tanzania",
+            type: "confirmed", 
+            source: "Tree-Nation",
+            trees: 7057,
+            lat: -6.3690,
+            lng: 34.8888,
+            description: "2025-2026 FY — Replanting the burnt Mkussu Forest (CORE)"
+        },
+        {
+            id: "canada",
+            name: "Canada",
+            country: "Canada",
+            type: "confirmed",
+            source: "Tree-Nation",
+            trees: 62,
+            lat: 56.1304,
+            lng: -106.3468,
+            description: "2025-2026 FY — Boreal Forest Habitat Restoration"
+        },
+        {
+            id: "bolivia",
+            name: "Bolivia",
+            country: "Bolivia",
+            type: "confirmed",
+            source: "Tree-Nation",
+            trees: 2,
+            lat: -16.2902,
+            lng: -63.5887,
+            description: "2025-2026 FY — Amazon Windshields (PILOT)"
+        },
+        {
+            id: "nigeria",
+            name: "Nigeria",
+            country: "Nigeria",
+            type: "confirmed",
+            source: "Tree-Nation",
+            trees: 2,
+            lat: 9.0820,
+            lng: 8.6753,
+            description: "2025-2026 FY — Restoration of Ala Forest Reserve (PILOT)"
+        },
+        {
+            id: "brazil",
+            name: "Brazil",
+            country: "Brazil",
+            type: "confirmed",
+            source: "Tree-Nation",
+            trees: 2,
+            lat: -14.2350,
+            lng: -51.9253,
+            description: "2025-2026 FY — Reforest the Amazon Basin (PILOT)"
+        },
+        {
+            id: "romania",
+            name: "Romania",
+            country: "Romania",
+            type: "confirmed",
+            source: "Tree-Nation",
+            trees: 2,
+            lat: 45.9432,
+            lng: 24.9668,
+            description: "2025-2026 FY — Bear Groves in Transylvania (PILOT)"
+        },
+        {
+            id: "zimbabwe",
+            name: "Zimbabwe",
+            country: "Zimbabwe",
+            type: "confirmed",
+            source: "Tree-Nation",
+            trees: 2,
+            lat: -19.0154,
+            lng: 29.1549,
+            description: "2025-2026 FY — Zimbabwe Reforestation Initiative (PILOT)"
+        },
+        {
+            id: "ireland",
+            name: "Ireland",
+            country: "Ireland",
+            type: "confirmed",
+            source: "Tree-Nation",
+            trees: 2,
+            lat: 53.1424,
+            lng: -7.6921,
+            description: "2025-2026 FY — Ireland Community Tree Planting (PILOT)"
+        },
+        {
+            id: "mexico",
+            name: "Mexico",
+            country: "Mexico",
+            type: "confirmed",
+            source: "Tree-Nation",
+            trees: 2,
+            lat: 23.6345,
+            lng: -102.5528,
+            description: "2025-2026 FY — Restoration and Social Empowerment (PILOT)"
+        },
+        {
+            id: "argentina",
+            name: "Argentina",
+            country: "Argentina",
+            type: "confirmed",
+            source: "Tree-Nation",
+            trees: 2,
+            lat: -38.4161,
+            lng: -63.6167,
+            description: "2025-2026 FY — Bosques de Agua (PILOT)"
+        },
+        {
+            id: "france",
+            name: "France",
+            country: "France",
+            type: "confirmed",
+            source: "Tree-Nation",
+            trees: 2,
+            lat: 46.2276,
+            lng: 2.2137,
+            description: "2025-2026 FY — Restauration Forêts dégradées (PILOT)"
+        },
+        {
+            id: "australia",
+            name: "Australia",
+            country: "Australia",
+            type: "confirmed",
+            source: "Tree-Nation",
+            trees: 2,
+            lat: -25.2744,
+            lng: 133.7751,
+            description: "2025-2026 FY — Big Scrub Rainforest Restoration (PILOT)"
+        },
+        {
+            id: "uk",
+            name: "United Kingdom",
+            country: "United Kingdom",
+            type: "confirmed",
+            source: "Tree-Nation",
+            trees: 2,
+            lat: 55.3781,
+            lng: -3.4360,
+            description: "2025-2026 FY — Community Tree Planting (PILOT)"
+        },
+        {
+            id: "spain",
+            name: "Spain",
+            country: "Spain",
+            type: "confirmed",
+            source: "Tree-Nation",
+            trees: 2,
+            lat: 40.4637,
+            lng: -3.7492,
+            description: "2025-2026 FY — Alvelal (PILOT)"
         },
         {
             id: "nepal",
@@ -167,17 +433,6 @@ const TreeData = {
             lat: -0.0236,
             lng: 37.9062,
             description: "Mixed verified and legacy tree plantings"
-        },
-        {
-            id: "tanzania",
-            name: "Tanzania",
-            country: "Tanzania",
-            type: "confirmed", 
-            source: "Tree-Nation",
-            trees: 512,
-            lat: -6.3690,
-            lng: 34.8888,
-            description: "Verified tree plantings"
         },
         {
             id: "uganda",
@@ -336,16 +591,22 @@ const TreeData = {
     ],
     
     species: {
-        totalSpecies: 12,
+        totalSpecies: 14,
         verifiedSpecies: [
-            "Syzygium cumini",
-            "Rhizophora mucronata", 
-            "Ceriops tagal",
-            "Azadirachta indica",
-            "Albizia gummifera",
-            "Albizia schimperiana",
-            "Phyllanthus emblica",
-            "Citrus limon"
+            "Afrocarpus usambarensis",
+            "Pinus banksiana",
+            "Ceiba speciosa",
+            "Acacia mangium",
+            "Schizolobium amazonicum",
+            "Fagus sylvatica",
+            "Mangifera indica",
+            "Betula pendula",
+            "Prosopis laevigata",
+            "Polylepis australis",
+            "Pinus nigra",
+            "Homalanthus populifolius",
+            "Prunus spinosa",
+            "Pistacia lentiscus"
         ],
         legacySpecies: {
             "Nepal": [
@@ -418,6 +679,10 @@ const TreeData = {
     
     getLegacyProjects: function() {
         return this.legacyProjects;
+    },
+    
+    getSunsetProjects: function() {
+        return this.sunsetProjects || [];
     },
     
     getCertificates: function() {

@@ -1,7 +1,8 @@
 const plantingData = {
   MG: { 
     centroid: [-18.77, 46.87], 
-    type: 'mixed', 
+    type: 'sunset', 
+    source: 'Sunset — 2024-2025 FY',
     sites: [
       { name: 'Eden Reforestation Projects', type: 'confirmed', source: 'Eden Reforestation' },
       { name: 'Kandrany 1', type: 'supported', source: 'Legacy Partner (Refoorest)' },
@@ -127,10 +128,114 @@ const plantingData = {
     type: 'confirmed', 
     source: 'Tree-Nation',
     sites: [
+      { name: 'Replanting the burnt Mkussu Forest (CORE) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Usambara Biodiversity Conservation', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Mlola Biodiversity Restoration', type: 'confirmed', source: 'Tree-Nation' },
-      { name: 'Replanting the burnt Mkussu Forest', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Plant to Stop Poverty', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  CA: {
+    centroid: [56.13, -106.35],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Boreal Forest Habitat Restoration — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  BO: {
+    centroid: [-16.29, -63.59],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Amazon Windshields (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  NG: {
+    centroid: [9.08, 8.68],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Restoration of Ala Forest Reserve (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  BR: {
+    centroid: [-14.24, -51.93],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Reforest the Amazon Basin (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  RO: {
+    centroid: [45.94, 24.97],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Bear Groves in Transylvania (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  ZW: {
+    centroid: [-19.02, 29.15],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Zimbabwe Reforestation Initiative (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  IE: {
+    centroid: [53.14, -7.69],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Ireland Community Tree Planting (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  MX: {
+    centroid: [23.63, -102.55],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Restoration and Social Empowerment (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  AR: {
+    centroid: [-38.42, -63.62],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Bosques de Agua (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  FR: {
+    centroid: [46.23, 2.21],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Restauration Forêts dégradées (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  AU: {
+    centroid: [-25.27, 133.78],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Big Scrub Rainforest Restoration (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  GB: {
+    centroid: [55.38, -3.44],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Community Tree Planting (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  ES: {
+    centroid: [40.46, -3.75],
+    type: 'confirmed',
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Alvelal (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   UG: { 
@@ -291,7 +396,20 @@ const countryName = {
   ID: 'Indonesia',
   HT: 'Haiti',
   HN: 'Honduras',
-  NI: 'Nicaragua'
+  NI: 'Nicaragua',
+  CA: 'Canada',
+  BO: 'Bolivia',
+  NG: 'Nigeria',
+  BR: 'Brazil',
+  RO: 'Romania',
+  ZW: 'Zimbabwe',
+  IE: 'Ireland',
+  MX: 'Mexico',
+  AR: 'Argentina',
+  FR: 'France',
+  AU: 'Australia',
+  GB: 'United Kingdom',
+  ES: 'Spain'
 };
 
 function countLabel(sites) {
@@ -467,6 +585,9 @@ function initializeMap() {
       } else if (site.type === 'mixed') {
         markerColor = '#006B50';
         markerLabel = 'Mixed';
+      } else if (site.type === 'sunset') {
+        markerColor = '#6B7280';
+        markerLabel = 'Sunset';
       } else {
         markerColor = '#ca8a04';
         markerLabel = 'Supported';
@@ -484,7 +605,7 @@ function initializeMap() {
       const popupHTML = `
         <div class="popup-h1">${title}</div>
         <div class="text-xs">
-          <span class="font-semibold ${site.type === 'confirmed' ? 'text-green-700' : site.type === 'mixed' ? 'text-emerald-700' : 'text-yellow-700'}">${markerLabel}</span><br>
+          <span class="font-semibold ${site.type === 'confirmed' ? 'text-green-700' : site.type === 'mixed' ? 'text-emerald-700' : site.type === 'sunset' ? 'text-gray-600' : 'text-yellow-700'}">${markerLabel}</span><br>
           <span class="text-gray-600">Source: ${site.source}</span><br>
           <span class="text-gray-600">${site.country}</span>
         </div>
@@ -504,6 +625,9 @@ function initializeMap() {
       } else if (cfg.type === 'mixed') {
         markerColor = '#006B50';
         markerLabel = 'Mixed';
+      } else if (cfg.type === 'sunset') {
+        markerColor = '#6B7280';
+        markerLabel = 'Sunset';
       } else {
         markerColor = '#ca8a04';
         markerLabel = 'Supported';
@@ -611,6 +735,10 @@ function renderSiteLists() {
         statusColor = 'bg-emerald-600';
         statusBg = 'bg-emerald-50';
         statusText = 'text-emerald-700';
+      } else if (cfg.type === 'sunset') {
+        statusColor = 'bg-gray-500';
+        statusBg = 'bg-gray-100';
+        statusText = 'text-gray-700';
       } else {
         statusColor = 'bg-legacy-gold';
         statusBg = 'bg-yellow-100';
@@ -627,7 +755,7 @@ function renderSiteLists() {
         </div>
         <div class="flex items-center gap-2 sm:gap-3 ml-5 sm:ml-0">
           <span class="text-xs px-2 sm:px-3 py-1 rounded-full font-medium ${statusBg} ${statusText}">
-            ${cfg.type === 'confirmed' ? 'Confirmed' : cfg.type === 'mixed' ? 'Mixed' : 'Supported'}
+            ${cfg.type === 'confirmed' ? 'Confirmed' : cfg.type === 'mixed' ? 'Mixed' : cfg.type === 'sunset' ? 'Sunset' : 'Supported'}
           </span>
           <span class="text-xs text-gray-500 hidden sm:inline">${cfg.source || 'Mixed Sources'}</span>
           <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

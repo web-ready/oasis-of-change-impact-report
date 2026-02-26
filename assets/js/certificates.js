@@ -43,6 +43,7 @@ function populateCertificates() {
             <div class="space-y-4">
                 <div>
                     <h3 class="text-lg font-semibold text-deep-forest mb-3">${certificate.title}</h3>
+                    ${certificate.fyNote ? `<p class="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded px-2 py-1.5 mb-2">${certificate.fyNote}</p>` : ''}
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">
                         <p><strong>Certificate:</strong> ${certificate.certificate}</p>
                         <p><strong>Location:</strong> ${certificate.location}</p>
