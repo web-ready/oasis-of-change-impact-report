@@ -601,6 +601,7 @@ function initializeMap() {
       });
 
       const title = site.name;
+      const siteDescription = site.description || '';
 
       const popupHTML = `
         <div class="popup-h1">${title}</div>
@@ -608,6 +609,9 @@ function initializeMap() {
           <span class="font-semibold ${site.type === 'confirmed' ? 'text-green-700' : site.type === 'mixed' ? 'text-emerald-700' : site.type === 'sunset' ? 'text-gray-600' : 'text-yellow-700'}">${markerLabel}</span><br>
           <span class="text-gray-600">Source: ${site.source}</span><br>
           <span class="text-gray-600">${site.country}</span>
+          ${siteDescription ? '<br><span class="text-gray-500" style="font-style:italic;margin-top:2px;display:inline-block">' + siteDescription + '</span>' : ''}
+          <hr style="margin:4px 0;border-color:#e5e7eb">
+          <span class="text-gray-400" style="font-size:10px">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</span>
         </div>
       `;
 
@@ -641,13 +645,17 @@ function initializeMap() {
       });
 
       const title = `${countryName[cc] || cc} (${countLabel(cfg.sites)})`;
+      const siteNames = (cfg.sites || []).map(s => typeof s === 'string' ? s : s.name).slice(0, 5);
+      const moreCount = (cfg.sites || []).length > 5 ? (cfg.sites.length - 5) : 0;
 
       const popupHTML = `
         <div class="popup-h1">${title}</div>
         <div class="text-xs">
-          <span class="font-semibold ${cfg.type === 'confirmed' ? 'text-green-700' : cfg.type === 'mixed' ? 'text-emerald-700' : 'text-yellow-700'}">${markerLabel}</span><br>
-          <span class="text-gray-600">Source: ${cfg.source}</span><br>
-          Country code: <b>${cc}</b>
+          <span class="font-semibold ${cfg.type === 'confirmed' ? 'text-green-700' : cfg.type === 'mixed' ? 'text-emerald-700' : cfg.type === 'sunset' ? 'text-gray-600' : 'text-yellow-700'}">${markerLabel}</span><br>
+          <span class="text-gray-600">Source: ${cfg.source || 'Mixed Sources'}</span>
+          ${siteNames.length > 0 ? '<br><span class="text-gray-500" style="margin-top:2px;display:inline-block"><strong>Sites:</strong> ' + siteNames.join(', ') + (moreCount > 0 ? ' + ' + moreCount + ' more' : '') + '</span>' : ''}
+          <hr style="margin:4px 0;border-color:#e5e7eb">
+          <span class="text-gray-400" style="font-size:10px">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</span>
         </div>
       `;
 
