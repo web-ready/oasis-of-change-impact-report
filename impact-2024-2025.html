@@ -41,8 +41,8 @@
             <div class="flex items-center justify-between h-14 relative">
                 <a href="/index.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
                 <div class="hidden md:flex items-center gap-3">
-                    <a href="/impact.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:bg-brand-green-light transition">FY Impact</a>
                     <a href="/index.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Dashboard</a>
+                    <a href="/impact.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:bg-brand-green-light transition">FY Impact</a>
                     <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Certificates</a>
                     <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Tree Species</a>
                     <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Gallery</a>
@@ -61,8 +61,8 @@
             <div class="text-center text-white max-w-sm mx-auto">
                 <h2 id="mobile-menu-title" class="font-serif text-4xl mb-8">Navigate</h2>
                 <nav class="space-y-4 text-lg">
-                    <a href="/impact.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">FY Impact</a>
                     <a href="/index.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Dashboard</a>
+                    <a href="/impact.html" class="block py-2 px-4 rounded-lg bg-white/15 font-semibold transition-colors duration-200">FY Impact</a>
                     <a href="/certificates.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Certificates</a>
                     <a href="/species.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Tree Species</a>
                     <a href="/gallery.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Gallery</a>
@@ -133,27 +133,29 @@
                     <table class="w-full text-sm">
                         <thead>
                             <tr class="border-b border-gray-200">
-                                <th class="text-left py-3 px-4 sm:px-6 font-semibold text-deep-forest text-xs uppercase tracking-wide">Project</th>
-                                <th class="text-left py-3 px-4 sm:px-6 font-semibold text-deep-forest text-xs uppercase tracking-wide">Country</th>
-                                <th class="text-left py-3 px-4 sm:px-6 font-semibold text-deep-forest text-xs uppercase tracking-wide">Source</th>
-                                <th class="text-right py-3 px-4 sm:px-6 font-semibold text-deep-forest text-xs uppercase tracking-wide">Trees</th>
-                                <th class="text-right py-3 px-4 sm:px-6 font-semibold text-deep-forest text-xs uppercase tracking-wide">CO&#8322; (kg)</th>
+                                <th class="text-left py-3 px-4 font-semibold text-deep-forest text-xs uppercase tracking-wide">Project</th>
+                                <th class="text-left py-3 px-4 font-semibold text-deep-forest text-xs uppercase tracking-wide">Country</th>
+                                <th class="text-left py-3 px-4 font-semibold text-deep-forest text-xs uppercase tracking-wide">Source</th>
+                                <th class="text-right py-3 px-4 font-semibold text-deep-forest text-xs uppercase tracking-wide">Trees</th>
+                                <th class="text-right py-3 px-4 font-semibold text-deep-forest text-xs uppercase tracking-wide">CO&#8322; (kg)</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="py-4 px-4 sm:px-6 font-medium text-deep-forest">Eden Reforestation Projects</td>
-                                <td class="py-4 px-4 sm:px-6 text-gray-600">Madagascar</td>
-                                <td class="py-4 px-4 sm:px-6"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700">Eden Reforestation</span></td>
-                                <td class="py-4 px-4 sm:px-6 text-right tabular-nums font-semibold text-deep-forest">675</td>
-                                <td class="py-4 px-4 sm:px-6 text-right tabular-nums text-gray-600">33,750</td>
+                                <td class="py-3 px-4 font-medium text-deep-forest">Eden Reforestation Projects</td>
+                                <td class="py-3 px-4 text-gray-600">Madagascar</td>
+                                <td class="py-3 px-4"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700">Eden Reforestation</span></td>
+                                <td class="py-3 px-4 text-right tabular-nums font-semibold">675</td>
+                                <td class="py-3 px-4 text-right tabular-nums">33,750</td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr class="bg-gray-50 font-semibold border-t-2 border-gray-200">
-                                <td colspan="3" class="py-3 px-4 sm:px-6 text-deep-forest">Total &mdash; 1 Country</td>
-                                <td class="py-3 px-4 sm:px-6 text-right tabular-nums">675</td>
-                                <td class="py-3 px-4 sm:px-6 text-right tabular-nums">33,750</td>
+                                <td class="py-3 px-4 text-sm text-deep-forest">Total</td>
+                                <td class="py-3 px-4 text-sm text-deep-forest">1 country</td>
+                                <td class="py-3 px-4"></td>
+                                <td class="py-3 px-4 text-right tabular-nums text-sm text-deep-forest">675</td>
+                                <td class="py-3 px-4 text-right tabular-nums text-sm text-deep-forest">33,750</td>
                             </tr>
                         </tfoot>
                     </table>
