@@ -375,6 +375,14 @@ const plantingData = {
     sites: [
       { name: 'Bosawas 3', type: 'supported', source: 'Legacy Partner (Refoorest)' }
     ]
+  },
+  CF: {
+    centroid: [6.61, 20.94],
+    type: 'supported',
+    source: 'Legacy Partner (Tero)',
+    sites: [
+      { name: 'Chinko Nature Reserve', type: 'supported', source: 'Legacy Partner (Tero)' }
+    ]
   }
 };
 
@@ -409,7 +417,8 @@ const countryName = {
   FR: 'France',
   AU: 'Australia',
   GB: 'United Kingdom',
-  ES: 'Spain'
+  ES: 'Spain',
+  CF: 'Central African Republic'
 };
 
 function countLabel(sites) {

@@ -587,6 +587,17 @@ const TreeData = {
             lat: 12.8654,
             lng: -85.2072,
             description: "Legacy reforestation initiative"
+        },
+        {
+            id: "central-african-republic",
+            name: "Central African Republic",
+            country: "Central African Republic",
+            type: "supported",
+            source: "Legacy Partner (Tero)",
+            trees: 0,
+            lat: 6.6111,
+            lng: 20.9394,
+            description: "Chinko Nature Reserve — Legacy reforestation initiative"
         }
     ],
     
