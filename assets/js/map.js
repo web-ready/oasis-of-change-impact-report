@@ -564,6 +564,25 @@ function renderTotals() {
   }
 }
 
+function createClusterGroupForType(type) {
+  return L.markerClusterGroup({
+    chunkedLoading: true,
+    spiderfyOnMaxZoom: true,
+    showCoverageOnHover: false,
+    maxClusterRadius: 45,
+    iconCreateFunction: function(cluster) {
+      const count = cluster.getChildCount();
+      const size = count < 10 ? 'small' : count < 100 ? 'medium' : 'large';
+      const typeClass = 'marker-cluster-' + type;
+      return L.divIcon({
+        html: '<span><span class="cluster-count">' + count + '</span></span>',
+        className: 'marker-cluster marker-cluster-' + size + ' marker-cluster-custom ' + typeClass,
+        iconSize: L.point(40, 40)
+      });
+    }
+  });
+}
+
 function initializeMap() {
   const map = L.map('map', { 
     scrollWheelZoom: true,
@@ -571,9 +590,11 @@ function initializeMap() {
     attributionControl: true
   }).setView([11, 16], 2);
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    { attribution: '&copy; OpenStreetMap contributors' }
-  ).addTo(map);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 20
+  }).addTo(map);
 
   window.addEventListener('resize', () => {
     setTimeout(() => {
@@ -581,7 +602,17 @@ function initializeMap() {
     }, 100);
   });
 
-  const clusterGroup = L.markerClusterGroup();
+  const clusterConfirmed = createClusterGroupForType('confirmed');
+  const clusterMixed = createClusterGroupForType('mixed');
+  const clusterSupported = createClusterGroupForType('supported');
+  const clusterSunset = createClusterGroupForType('sunset');
+
+  function addMarkerToGroup(marker, type) {
+    if (type === 'confirmed') clusterConfirmed.addLayer(marker);
+    else if (type === 'mixed') clusterMixed.addLayer(marker);
+    else if (type === 'sunset') clusterSunset.addLayer(marker);
+    else clusterSupported.addLayer(marker);
+  }
 
   if (typeof TreeData !== 'undefined') {
     const mapSites = TreeData.getMapSites();
@@ -603,10 +634,12 @@ function initializeMap() {
       }
 
       const marker = L.circleMarker([site.lat, site.lng], {
-        radius: 7,
+        radius: 8,
         color: markerColor,
         weight: 2,
-        fillOpacity: 0.9
+        fillOpacity: 1,
+        fillColor: markerColor,
+        className: 'map-marker'
       });
 
       const title = site.name;
@@ -625,7 +658,7 @@ function initializeMap() {
       `;
 
       marker.bindPopup(popupHTML);
-      clusterGroup.addLayer(marker);
+      addMarkerToGroup(marker, site.type);
     });
   } else {
     Object.entries(plantingData).forEach(([cc, cfg]) => {
@@ -647,10 +680,12 @@ function initializeMap() {
       }
 
       const marker = L.circleMarker([lat, lng], {
-        radius: 7,
+        radius: 8,
         color: markerColor,
         weight: 2,
-        fillOpacity: 0.9
+        fillOpacity: 1,
+        fillColor: markerColor,
+        className: 'map-marker'
       });
 
       const title = `${countryName[cc] || cc} (${countLabel(cfg.sites)})`;
@@ -669,11 +704,14 @@ function initializeMap() {
       `;
 
       marker.bindPopup(popupHTML);
-      clusterGroup.addLayer(marker);
+      addMarkerToGroup(marker, cfg.type);
     });
   }
 
-  clusterGroup.addTo(map);
+  clusterConfirmed.addTo(map);
+  clusterMixed.addTo(map);
+  clusterSupported.addTo(map);
+  clusterSunset.addTo(map);
   return map;
 }
 
