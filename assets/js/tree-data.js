@@ -2,8 +2,8 @@ const TreeData = {
     lastUpdated: "February 26th, 2026",
     fiscalYear: "2025-2026",
     totals: {
-        totalTrees: 14881,
-        verifiedTrees: 7143,
+        totalTrees: 14882,
+        verifiedTrees: 7144,
         legacyTrees: 7338,
         goalTrees: 10000,
         speciesCount: 14
@@ -94,8 +94,8 @@ const TreeData = {
             id: "mexico-restoration",
             name: "Restoration and Social Empowerment",
             location: "Mexico",
-            trees: 2,
-            co2Offset: 40,
+            trees: 3,
+            co2Offset: 60,
             fundingStream: "PILOT",
             species: "Prosopis laevigata",
             url: "https://tree-nation.com/projects/restoration-and-social-empowerment-mexico"
@@ -352,7 +352,7 @@ const TreeData = {
             country: "Mexico",
             type: "confirmed",
             source: "Tree-Nation",
-            trees: 2,
+            trees: 3,
             lat: 23.6345,
             lng: -102.5528,
             description: "2025-2026 FY — Restoration and Social Empowerment (PILOT)"
