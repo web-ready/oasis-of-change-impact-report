@@ -708,6 +708,10 @@ const TreeData = {
     
     getSpeciesData: function() {
         return this.species;
+    },
+
+    getPlantingSitesCount: function() {
+        return this.mapSites.length;
     }
 };
 
