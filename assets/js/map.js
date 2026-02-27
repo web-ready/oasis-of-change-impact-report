@@ -616,7 +616,24 @@ function initializeMap() {
 
   if (typeof TreeData !== 'undefined') {
     const mapSites = TreeData.getMapSites();
-    
+
+    function parseSiteDescription(desc) {
+      if (!desc || typeof desc !== 'string') return null;
+      const withType = desc.match(/^(\d{4}-\d{4}\s*FY)\s*[—–-]\s*(.+?)\s*\((PILOT|CORE|GOV\.\s*GRANT(?:\s*\+\s*PILOT)?)\)$/i);
+      if (withType) {
+        return { plantingCycle: withType[1].trim(), plantingSite: withType[2].trim(), projectType: withType[3].toUpperCase() };
+      }
+      const noType = desc.match(/^(\d{4}-\d{4}\s*FY)\s*[—–-]\s*(.+)$/);
+      if (noType) {
+        return { plantingCycle: noType[1].trim(), plantingSite: noType[2].trim(), projectType: null };
+      }
+      return null;
+    }
+    function formatProjectType(s) {
+      if (!s) return '';
+      return s.replace(/\b(\w)/g, c => c.toUpperCase()).replace(/\s*\+\s*/, ' + ');
+    }
+
     mapSites.forEach(site => {
       let markerColor, markerLabel;
       if (site.type === 'confirmed') {
@@ -644,16 +661,29 @@ function initializeMap() {
 
       const title = site.name;
       const siteDescription = site.description || '';
+      const showCountry = site.country && site.country !== site.name;
+      const parsed = parseSiteDescription(siteDescription);
+      const hasStructured = parsed && (parsed.plantingCycle || parsed.plantingSite);
+
+      const structuredLines = [];
+      if (hasStructured) {
+        if (parsed.plantingSite) structuredLines.push('<div class="popup-line"><span class="popup-label">Planting site:</span> ' + parsed.plantingSite + '</div>');
+        if (parsed.projectType) structuredLines.push('<div class="popup-line"><span class="popup-label">Project type:</span> ' + formatProjectType(parsed.projectType) + '</div>');
+        if (parsed.plantingCycle) structuredLines.push('<div class="popup-line"><span class="popup-label">Planting cycle:</span> ' + parsed.plantingCycle + '</div>');
+      }
+      const fallbackDesc = !hasStructured && siteDescription ? '<div class="popup-desc">' + siteDescription + '</div>' : '';
 
       const popupHTML = `
-        <div class="popup-h1">${title}</div>
-        <div class="text-xs">
-          <span class="font-semibold ${site.type === 'confirmed' ? 'text-green-700' : site.type === 'mixed' ? 'text-emerald-700' : site.type === 'sunset' ? 'text-gray-600' : 'text-yellow-700'}">${markerLabel}</span><br>
-          <span class="text-gray-600">Source: ${site.source}</span><br>
-          <span class="text-gray-600">${site.country}</span>
-          ${siteDescription ? '<br><span class="text-gray-500" style="font-style:italic;margin-top:2px;display:inline-block">' + siteDescription + '</span>' : ''}
-          <hr style="margin:4px 0;border-color:#e5e7eb">
-          <span class="text-gray-400" style="font-size:10px">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</span>
+        <div class="map-popup">
+          <div class="popup-title">${title}</div>
+          <div class="popup-meta">
+            <span class="popup-badge popup-badge-${site.type}">${markerLabel}</span>
+            <span class="popup-source">Source: ${site.source}</span>
+          </div>
+          ${showCountry ? '<div class="popup-country">' + site.country + '</div>' : ''}
+          ${structuredLines.length ? '<div class="popup-fields">' + structuredLines.join('') + '</div>' : ''}
+          ${fallbackDesc}
+          <div class="popup-disclaimer">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</div>
         </div>
       `;
 
@@ -693,13 +723,14 @@ function initializeMap() {
       const moreCount = (cfg.sites || []).length > 5 ? (cfg.sites.length - 5) : 0;
 
       const popupHTML = `
-        <div class="popup-h1">${title}</div>
-        <div class="text-xs">
-          <span class="font-semibold ${cfg.type === 'confirmed' ? 'text-green-700' : cfg.type === 'mixed' ? 'text-emerald-700' : cfg.type === 'sunset' ? 'text-gray-600' : 'text-yellow-700'}">${markerLabel}</span><br>
-          <span class="text-gray-600">Source: ${cfg.source || 'Mixed Sources'}</span>
-          ${siteNames.length > 0 ? '<br><span class="text-gray-500" style="margin-top:2px;display:inline-block"><strong>Sites:</strong> ' + siteNames.join(', ') + (moreCount > 0 ? ' + ' + moreCount + ' more' : '') + '</span>' : ''}
-          <hr style="margin:4px 0;border-color:#e5e7eb">
-          <span class="text-gray-400" style="font-size:10px">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</span>
+        <div class="map-popup">
+          <div class="popup-title">${title}</div>
+          <div class="popup-meta">
+            <span class="popup-badge popup-badge-${cfg.type}">${markerLabel}</span>
+            <span class="popup-source">Source: ${cfg.source || 'Mixed Sources'}</span>
+          </div>
+          ${siteNames.length > 0 ? '<div class="popup-sites"><strong>Sites:</strong> ' + siteNames.join(', ') + (moreCount > 0 ? ' + ' + moreCount + ' more' : '') + '</div>' : ''}
+          <div class="popup-disclaimer">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</div>
         </div>
       `;
 
@@ -801,19 +832,19 @@ function renderSiteLists() {
       }
 
       const summary = document.createElement('summary');
-      summary.className = 'cursor-pointer px-4 sm:px-6 py-3 sm:py-4 font-medium flex flex-col sm:flex-row sm:items-center sm:justify-between text-deep-forest hover:bg-gray-50 rounded-lg sm:rounded-xl transition-colors duration-200 gap-2 sm:gap-0';
+      summary.className = 'cursor-pointer px-4 sm:px-6 py-3 sm:py-4 font-medium grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-2 sm:gap-4 items-center text-deep-forest hover:bg-gray-50 rounded-lg sm:rounded-xl transition-colors duration-200 list-none';
       summary.innerHTML = `
-        <div class="flex items-center gap-2 sm:gap-3">
-          <div class="w-3 h-3 rounded-full ${statusColor} flex-shrink-0"></div>
-          <span class="text-base sm:text-lg">${name}</span>
-          <span class="text-xs sm:text-sm text-gray-500">— ${hasList ? `${cfg.sites.length} site${cfg.sites.length===1?'':'s'}` : 'site count pending'}</span>
+        <div class="flex items-center gap-2 min-w-0">
+          <div class="w-3 h-3 rounded-full ${statusColor} flex-shrink-0" aria-hidden="true"></div>
+          <span class="truncate min-w-0" title="${name.replace(/"/g, '&quot;')}">${name}</span>
+          <span class="text-xs sm:text-sm text-gray-500 flex-shrink-0 whitespace-nowrap">— ${hasList ? `${cfg.sites.length} site${cfg.sites.length === 1 ? '' : 's'}` : 'site count pending'}</span>
         </div>
-        <div class="flex items-center gap-2 sm:gap-3 ml-5 sm:ml-0">
-          <span class="text-xs px-2 sm:px-3 py-1 rounded-full font-medium ${statusBg} ${statusText}">
+        <div class="flex items-center gap-2 sm:gap-3 justify-end sm:justify-end flex-shrink-0">
+          <span class="text-xs px-2 sm:px-3 py-1 rounded-full font-medium whitespace-nowrap ${statusBg} ${statusText}">
             ${cfg.type === 'confirmed' ? 'Confirmed' : cfg.type === 'mixed' ? 'Mixed' : cfg.type === 'sunset' ? 'Sunset' : 'Supported'}
           </span>
-          <span class="text-xs text-gray-500 hidden sm:inline">${cfg.source || 'Mixed Sources'}</span>
-          <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <span class="text-xs text-gray-500 hidden sm:inline truncate max-w-[140px]" title="${(cfg.source || 'Mixed Sources').replace(/"/g, '&quot;')}">${cfg.source || 'Mixed Sources'}</span>
+          <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </div>
