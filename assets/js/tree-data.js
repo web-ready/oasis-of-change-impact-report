@@ -601,6 +601,18 @@ const TreeData = {
         }
     ],
     
+    countryToContinent: {
+        "Madagascar": "Africa", "Tanzania": "Africa", "Nigeria": "Africa", "Zimbabwe": "Africa",
+        "Kenya": "Africa", "Uganda": "Africa", "Senegal": "Africa", "Cameroon": "Africa",
+        "Mozambique": "Africa", "Democratic Republic of the Congo": "Africa", "Central African Republic": "Africa",
+        "Canada": "North America", "United States": "North America", "Mexico": "North America",
+        "Haiti": "North America", "Honduras": "North America", "Nicaragua": "North America",
+        "Bolivia": "South America", "Brazil": "South America", "Argentina": "South America", "Peru": "South America",
+        "Romania": "Europe", "Ireland": "Europe", "France": "Europe", "United Kingdom": "Europe", "Spain": "Europe",
+        "Nepal": "Asia", "India": "Asia", "Indonesia": "Asia", "Laos": "Asia", "Thailand": "Asia",
+        "Australia": "Oceania"
+    },
+    
     species: {
         totalSpecies: 14,
         verifiedSpecies: [
@@ -683,7 +695,17 @@ const TreeData = {
     },
     
     getSpeciesCount: function() {
-        return this.totals.speciesCount;
+        const verified = this.species.verifiedSpecies || [];
+        const legacy = this.species.legacySpecies || {};
+        const legacyList = Object.values(legacy).flat();
+        const combined = [...new Set([...verified, ...legacyList])];
+        return combined.length;
+    },
+    
+    getContinentsCount: function() {
+        const countries = [...new Set(this.mapSites.map(s => s.country))];
+        const continents = new Set(countries.map(c => this.countryToContinent[c] || "Other").filter(Boolean));
+        return continents.size;
     },
     
     getVerifiedProjects: function() {
