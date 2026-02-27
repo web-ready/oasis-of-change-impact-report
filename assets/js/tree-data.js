@@ -706,6 +706,26 @@ const TreeData = {
         return this.mapSites;
     },
     
+    getPlantingSitesCount: function() {
+        // Count all sites from plantingData if available (includes legacy, mixed, and verified)
+        if (typeof plantingData !== 'undefined') {
+            let totalSites = 0;
+            Object.values(plantingData).forEach(cfg => {
+                if (cfg.type === 'mixed') {
+                    // For mixed countries, count each site individually
+                    totalSites += cfg.sites ? cfg.sites.length : 0;
+                } else {
+                    // For confirmed/supported/sunset countries, count all sites in the array
+                    const siteCount = Array.isArray(cfg.sites) && cfg.sites.length > 0 ? cfg.sites.length : 1;
+                    totalSites += siteCount;
+                }
+            });
+            return totalSites;
+        }
+        // Fallback to mapSites length if plantingData not available
+        return this.mapSites.length;
+    },
+    
     getSpeciesData: function() {
         return this.species;
     }
