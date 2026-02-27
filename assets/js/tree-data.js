@@ -601,6 +601,18 @@ const TreeData = {
         }
     ],
     
+    countryToContinent: {
+        "Madagascar": "Africa", "Tanzania": "Africa", "Nigeria": "Africa", "Zimbabwe": "Africa",
+        "Kenya": "Africa", "Uganda": "Africa", "Senegal": "Africa", "Cameroon": "Africa",
+        "Mozambique": "Africa", "Democratic Republic of the Congo": "Africa", "Central African Republic": "Africa",
+        "Canada": "North America", "United States": "North America", "Mexico": "North America",
+        "Haiti": "North America", "Honduras": "North America", "Nicaragua": "North America",
+        "Bolivia": "South America", "Brazil": "South America", "Argentina": "South America", "Peru": "South America",
+        "Romania": "Europe", "Ireland": "Europe", "France": "Europe", "United Kingdom": "Europe", "Spain": "Europe",
+        "Nepal": "Asia", "India": "Asia", "Indonesia": "Asia", "Laos": "Asia", "Thailand": "Asia",
+        "Australia": "Oceania"
+    },
+    
     species: {
         totalSpecies: 14,
         verifiedSpecies: [
@@ -683,7 +695,17 @@ const TreeData = {
     },
     
     getSpeciesCount: function() {
-        return this.totals.speciesCount;
+        const verified = this.species.verifiedSpecies || [];
+        const legacy = this.species.legacySpecies || {};
+        const legacyList = Object.values(legacy).flat();
+        const combined = [...new Set([...verified, ...legacyList])];
+        return combined.length;
+    },
+    
+    getContinentsCount: function() {
+        const countries = [...new Set(this.mapSites.map(s => s.country))];
+        const continents = new Set(countries.map(c => this.countryToContinent[c] || "Other").filter(Boolean));
+        return continents.size;
     },
     
     getVerifiedProjects: function() {
@@ -704,6 +726,26 @@ const TreeData = {
     
     getMapSites: function() {
         return this.mapSites;
+    },
+    
+    getPlantingSitesCount: function() {
+        // Count all sites from plantingData if available (includes legacy, mixed, and verified)
+        if (typeof plantingData !== 'undefined') {
+            let totalSites = 0;
+            Object.values(plantingData).forEach(cfg => {
+                if (cfg.type === 'mixed') {
+                    // For mixed countries, count each site individually
+                    totalSites += cfg.sites ? cfg.sites.length : 0;
+                } else {
+                    // For confirmed/supported/sunset countries, count all sites in the array
+                    const siteCount = Array.isArray(cfg.sites) && cfg.sites.length > 0 ? cfg.sites.length : 1;
+                    totalSites += siteCount;
+                }
+            });
+            return totalSites;
+        }
+        // Fallback to mapSites length if plantingData not available
+        return this.mapSites.length;
     },
     
     getSpeciesData: function() {

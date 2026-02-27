@@ -110,7 +110,7 @@
                 </div>
                 <div>
                     <h3 class="ooc-alert__title">Data Transparency Notice</h3>
-                    <p class="ooc-alert__body">Species marked "Verified" are confirmed through Tree-Nation. Legacy partner data comes from Refoorest and Tero and may not be fully verified.</p>
+                    <p class="ooc-alert__body">Species marked "Verified" are confirmed through Tree-Nation. Legacy partner species data comes from Refoorest and may not be fully verified.</p>
                 </div>
             </div>
             </div>
@@ -158,7 +158,6 @@
                         <span class="tag" style="border-color:#BBF7D0;color:#166534;background-color:#F0FDF4">Verified</span>
                     </div>
                     <div class="space-y-2 text-sm">
-                        <p class="text-gray-600 mb-3">14 species planted across 14 countries, verified via Tree-Nation:</p>
                         <p><strong>Afrocarpus usambarensis</strong> <span class="ml-1 text-xs text-gray-400">Tanzania</span></p>
                         <p><strong>Pinus banksiana</strong> <span class="ml-1 text-xs text-gray-400">Canada</span></p>
                         <p><strong>Ceiba speciosa</strong> <span class="ml-1 text-xs text-gray-400">Bolivia</span></p>
@@ -205,7 +204,6 @@
                         <h3 class="text-lg font-semibold text-deep-forest">2024-2025 FY Verified</h3>
                         <span class="tag" style="border-color:#BBF7D0;color:#166534;background-color:#F0FDF4">Verified</span>
                     </div>
-                    <p class="text-xs text-gray-500 mb-2">1 species planted in Madagascar via Eden Reforestation Projects.</p>
                     <div class="space-y-2 text-sm">
                         <p><strong>Rhizophora mucronata</strong> (Red Mangrove) <span class="ml-1 text-xs text-gray-400">Madagascar</span></p>
                     </div>
@@ -331,21 +329,18 @@
                     </div>
                 </div>
 
-                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="car">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-deep-forest">Central African Republic</h3>
-                        <span class="tag">Legacy partner</span>
-                    </div>
-                    <p class="text-xs text-gray-500 mb-2">Chinko Nature Reserve — Tero legacy partner.</p>
-                    <div class="space-y-2 text-sm">
-                        <p class="text-gray-500 italic text-xs">Species data pending from partner.</p>
-                    </div>
-                </div>
             </div>
         </section>
     </main>
 
+    <footer id="page-footer" class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+            <p class="text-xs text-gray-400">&copy; <span id="copyright-year"></span> Oasis of Change, Inc.</p>
+        </div>
+    </footer>
+
     <script src="assets/js/tree-data.js"></script>
     <script src="assets/js/species.js"></script>
+    <script>document.getElementById('copyright-year').textContent=new Date().getFullYear();</script>
 </body>
 </html>

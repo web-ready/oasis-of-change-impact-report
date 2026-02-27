@@ -42,6 +42,8 @@ function updateUI() {
     setText('species-count', TreeData.getSpeciesCount());
     const countries = [...new Set(TreeData.getMapSites().map(s => s.country))];
     setText('countries-count', countries.length);
+    setText('continents-count', TreeData.getContinentsCount());
+    setText('planting-sites-count', TreeData.getPlantingSitesCount());
     setText('co2-offset', TreeData.getCo2Captured().toLocaleString() + '+');
 
     populateProjectTables();
