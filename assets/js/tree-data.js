@@ -85,9 +85,9 @@ const TreeData = {
             name: "Ireland Community Tree Planting",
             location: "County Clare, Ireland",
             trees: 2,
-            co2Offset: 100,
+            co2Offset: 200,
             fundingStream: "PILOT",
-            species: "Betula pendula",
+            species: "Quercus petraea",
             url: "https://tree-nation.com/projects/ireland-community-tree-planting"
         },
         {
@@ -611,7 +611,7 @@ const TreeData = {
             "Schizolobium amazonicum",
             "Fagus sylvatica",
             "Mangifera indica",
-            "Betula pendula",
+            "Quercus petraea",
             "Prosopis laevigata",
             "Polylepis australis",
             "Pinus nigra",
