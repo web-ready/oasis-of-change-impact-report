@@ -125,9 +125,9 @@ const TreeData = {
             name: "Big Scrub Rainforest Restoration",
             location: "Australia",
             trees: 2,
-            co2Offset: 20,
+            co2Offset: 40,
             fundingStream: "PILOT",
-            species: "Homalanthus populifolius",
+            species: "Solanum aviculare",
             url: "https://tree-nation.com/projects/big-scrub-rainforest-australia"
         },
         {
@@ -615,7 +615,7 @@ const TreeData = {
             "Prosopis laevigata",
             "Polylepis australis",
             "Pinus nigra",
-            "Homalanthus populifolius",
+            "Solanum aviculare",
             "Prunus spinosa",
             "Pistacia lentiscus"
         ],
