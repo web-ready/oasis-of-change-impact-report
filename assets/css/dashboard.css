@@ -26,6 +26,11 @@
     border: 1px solid rgba(255,255,255,0.08);
     backdrop-filter: blur(4px);
     transition: background 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 .hero-stat-card:hover {
     background: rgba(255,255,255,0.12);
