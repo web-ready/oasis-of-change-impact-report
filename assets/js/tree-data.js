@@ -6,7 +6,8 @@ const TreeData = {
         verifiedTrees: 7143,
         legacyTrees: 7338,
         goalTrees: 10000,
-        speciesCount: 14
+        speciesCount: 14,
+        plantingSitesTotal: 102
     },
     
     verifiedProjects: [
@@ -711,7 +712,7 @@ const TreeData = {
     },
 
     getPlantingSitesCount: function() {
-        return this.mapSites.length;
+        return this.totals.plantingSitesTotal;
     }
 };
 
