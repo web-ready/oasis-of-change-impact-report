@@ -616,7 +616,24 @@ function initializeMap() {
 
   if (typeof TreeData !== 'undefined') {
     const mapSites = TreeData.getMapSites();
-    
+
+    function parseSiteDescription(desc) {
+      if (!desc || typeof desc !== 'string') return null;
+      const withType = desc.match(/^(\d{4}-\d{4}\s*FY)\s*[—–-]\s*(.+?)\s*\((PILOT|CORE|GOV\.\s*GRANT(?:\s*\+\s*PILOT)?)\)$/i);
+      if (withType) {
+        return { plantingCycle: withType[1].trim(), plantingSite: withType[2].trim(), projectType: withType[3].toUpperCase() };
+      }
+      const noType = desc.match(/^(\d{4}-\d{4}\s*FY)\s*[—–-]\s*(.+)$/);
+      if (noType) {
+        return { plantingCycle: noType[1].trim(), plantingSite: noType[2].trim(), projectType: null };
+      }
+      return null;
+    }
+    function formatProjectType(s) {
+      if (!s) return '';
+      return s.replace(/\b(\w)/g, c => c.toUpperCase()).replace(/\s*\+\s*/, ' + ');
+    }
+
     mapSites.forEach(site => {
       let markerColor, markerLabel;
       if (site.type === 'confirmed') {
@@ -645,6 +662,16 @@ function initializeMap() {
       const title = site.name;
       const siteDescription = site.description || '';
       const showCountry = site.country && site.country !== site.name;
+      const parsed = parseSiteDescription(siteDescription);
+      const hasStructured = parsed && (parsed.plantingCycle || parsed.plantingSite);
+
+      const structuredLines = [];
+      if (hasStructured) {
+        if (parsed.plantingSite) structuredLines.push('<div class="popup-line"><span class="popup-label">Planting site:</span> ' + parsed.plantingSite + '</div>');
+        if (parsed.projectType) structuredLines.push('<div class="popup-line"><span class="popup-label">Project type:</span> ' + formatProjectType(parsed.projectType) + '</div>');
+        if (parsed.plantingCycle) structuredLines.push('<div class="popup-line"><span class="popup-label">Planting cycle:</span> ' + parsed.plantingCycle + '</div>');
+      }
+      const fallbackDesc = !hasStructured && siteDescription ? '<div class="popup-desc">' + siteDescription + '</div>' : '';
 
       const popupHTML = `
         <div class="map-popup">
@@ -654,7 +681,8 @@ function initializeMap() {
             <span class="popup-source">Source: ${site.source}</span>
           </div>
           ${showCountry ? '<div class="popup-country">' + site.country + '</div>' : ''}
-          ${siteDescription ? '<div class="popup-desc">' + siteDescription + '</div>' : ''}
+          ${structuredLines.length ? '<div class="popup-fields">' + structuredLines.join('') + '</div>' : ''}
+          ${fallbackDesc}
           <div class="popup-disclaimer">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</div>
         </div>
       `;

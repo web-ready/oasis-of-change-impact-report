@@ -231,6 +231,21 @@
   color: #475569;
   margin-bottom: 4px;
 }
+.popup-fields {
+  margin-top: 6px;
+  margin-bottom: 8px;
+}
+.popup-line {
+  font-size: 0.75rem;
+  color: #475569;
+  line-height: 1.45;
+  margin-bottom: 2px;
+}
+.popup-line .popup-label {
+  color: #64748b;
+  font-weight: 500;
+  margin-right: 4px;
+}
 .popup-desc,
 .popup-sites {
   font-size: 0.75rem;
