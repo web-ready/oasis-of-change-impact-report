@@ -1,5 +1,5 @@
 const TreeData = {
-    lastUpdated: "February 25th, 2026",
+    lastUpdated: "February 26th, 2026",
     fiscalYear: "2025-2026",
     totals: {
         totalTrees: 14881,
