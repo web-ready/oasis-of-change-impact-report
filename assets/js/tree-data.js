@@ -6,7 +6,7 @@ const TreeData = {
         verifiedTrees: 7143,
         legacyTrees: 7338,
         goalTrees: 10000,
-        speciesCount: 14
+        speciesCount: 76
     },
     
     verifiedProjects: [
@@ -602,7 +602,7 @@ const TreeData = {
     ],
     
     species: {
-        totalSpecies: 14,
+        totalSpecies: 76,
         verifiedSpecies: [
             "Afrocarpus usambarensis",
             "Pinus banksiana",
