@@ -832,19 +832,19 @@ function renderSiteLists() {
       }
 
       const summary = document.createElement('summary');
-      summary.className = 'cursor-pointer px-4 sm:px-6 py-3 sm:py-4 font-medium flex flex-col sm:flex-row sm:items-center sm:justify-between text-deep-forest hover:bg-gray-50 rounded-lg sm:rounded-xl transition-colors duration-200 gap-2 sm:gap-0';
+      summary.className = 'cursor-pointer px-4 sm:px-6 py-3 sm:py-4 font-medium grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-2 sm:gap-4 items-center text-deep-forest hover:bg-gray-50 rounded-lg sm:rounded-xl transition-colors duration-200 list-none';
       summary.innerHTML = `
-        <div class="flex items-center gap-2 sm:gap-3">
-          <div class="w-3 h-3 rounded-full ${statusColor} flex-shrink-0"></div>
-          <span class="text-base sm:text-lg">${name}</span>
-          <span class="text-xs sm:text-sm text-gray-500">— ${hasList ? `${cfg.sites.length} site${cfg.sites.length===1?'':'s'}` : 'site count pending'}</span>
+        <div class="flex items-center gap-2 min-w-0">
+          <div class="w-3 h-3 rounded-full ${statusColor} flex-shrink-0" aria-hidden="true"></div>
+          <span class="truncate min-w-0" title="${name.replace(/"/g, '&quot;')}">${name}</span>
+          <span class="text-xs sm:text-sm text-gray-500 flex-shrink-0 whitespace-nowrap">— ${hasList ? `${cfg.sites.length} site${cfg.sites.length === 1 ? '' : 's'}` : 'site count pending'}</span>
         </div>
-        <div class="flex items-center gap-2 sm:gap-3 ml-5 sm:ml-0">
-          <span class="text-xs px-2 sm:px-3 py-1 rounded-full font-medium ${statusBg} ${statusText}">
+        <div class="flex items-center gap-2 sm:gap-3 justify-end sm:justify-end flex-shrink-0">
+          <span class="text-xs px-2 sm:px-3 py-1 rounded-full font-medium whitespace-nowrap ${statusBg} ${statusText}">
             ${cfg.type === 'confirmed' ? 'Confirmed' : cfg.type === 'mixed' ? 'Mixed' : cfg.type === 'sunset' ? 'Sunset' : 'Supported'}
           </span>
-          <span class="text-xs text-gray-500 hidden sm:inline">${cfg.source || 'Mixed Sources'}</span>
-          <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <span class="text-xs text-gray-500 hidden sm:inline truncate max-w-[140px]" title="${(cfg.source || 'Mixed Sources').replace(/"/g, '&quot;')}">${cfg.source || 'Mixed Sources'}</span>
+          <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </div>

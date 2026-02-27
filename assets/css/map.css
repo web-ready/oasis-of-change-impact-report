@@ -272,6 +272,15 @@
   transition: all 0.2s ease-in-out;
 }
 
+/* Consistent card layout: hide default details marker, allow truncation */
+.site-accordion summary {
+  display: grid;
+  list-style: none;
+}
+.site-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
 .site-accordion:hover {
   transform: translateY(-1px);
   box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
