@@ -644,16 +644,18 @@ function initializeMap() {
 
       const title = site.name;
       const siteDescription = site.description || '';
+      const showCountry = site.country && site.country !== site.name;
 
       const popupHTML = `
-        <div class="popup-h1">${title}</div>
-        <div class="text-xs">
-          <span class="font-semibold ${site.type === 'confirmed' ? 'text-green-700' : site.type === 'mixed' ? 'text-emerald-700' : site.type === 'sunset' ? 'text-gray-600' : 'text-yellow-700'}">${markerLabel}</span><br>
-          <span class="text-gray-600">Source: ${site.source}</span><br>
-          <span class="text-gray-600">${site.country}</span>
-          ${siteDescription ? '<br><span class="text-gray-500" style="font-style:italic;margin-top:2px;display:inline-block">' + siteDescription + '</span>' : ''}
-          <hr style="margin:4px 0;border-color:#e5e7eb">
-          <span class="text-gray-400" style="font-size:10px">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</span>
+        <div class="map-popup">
+          <div class="popup-title">${title}</div>
+          <div class="popup-meta">
+            <span class="popup-badge popup-badge-${site.type}">${markerLabel}</span>
+            <span class="popup-source">Source: ${site.source}</span>
+          </div>
+          ${showCountry ? '<div class="popup-country">' + site.country + '</div>' : ''}
+          ${siteDescription ? '<div class="popup-desc">' + siteDescription + '</div>' : ''}
+          <div class="popup-disclaimer">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</div>
         </div>
       `;
 
@@ -693,13 +695,14 @@ function initializeMap() {
       const moreCount = (cfg.sites || []).length > 5 ? (cfg.sites.length - 5) : 0;
 
       const popupHTML = `
-        <div class="popup-h1">${title}</div>
-        <div class="text-xs">
-          <span class="font-semibold ${cfg.type === 'confirmed' ? 'text-green-700' : cfg.type === 'mixed' ? 'text-emerald-700' : cfg.type === 'sunset' ? 'text-gray-600' : 'text-yellow-700'}">${markerLabel}</span><br>
-          <span class="text-gray-600">Source: ${cfg.source || 'Mixed Sources'}</span>
-          ${siteNames.length > 0 ? '<br><span class="text-gray-500" style="margin-top:2px;display:inline-block"><strong>Sites:</strong> ' + siteNames.join(', ') + (moreCount > 0 ? ' + ' + moreCount + ' more' : '') + '</span>' : ''}
-          <hr style="margin:4px 0;border-color:#e5e7eb">
-          <span class="text-gray-400" style="font-size:10px">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</span>
+        <div class="map-popup">
+          <div class="popup-title">${title}</div>
+          <div class="popup-meta">
+            <span class="popup-badge popup-badge-${cfg.type}">${markerLabel}</span>
+            <span class="popup-source">Source: ${cfg.source || 'Mixed Sources'}</span>
+          </div>
+          ${siteNames.length > 0 ? '<div class="popup-sites"><strong>Sites:</strong> ' + siteNames.join(', ') + (moreCount > 0 ? ' + ' + moreCount + ' more' : '') + '</div>' : ''}
+          <div class="popup-disclaimer">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</div>
         </div>
       `;
 
