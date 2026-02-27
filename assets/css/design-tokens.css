@@ -1,3 +1,13 @@
+/* Sticky footer: body fills viewport, main grows to push footer to the bottom */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1 1 0%;
+}
+
 :root {
     --color-brand-green: #004734;
     --color-brand-green-light: #006B50;
