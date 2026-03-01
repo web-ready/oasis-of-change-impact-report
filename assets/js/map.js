@@ -1,10 +1,11 @@
 const plantingData = {
   MG: { 
     centroid: [-18.77, 46.87], 
-    type: 'sunset', 
-    source: 'Sunset — 2024-2025 FY',
+    type: 'mixed', 
+    source: 'Mixed Sources',
+    fy: '2024-2025',
     sites: [
-      { name: 'Eden Reforestation Projects', type: 'confirmed', source: 'Eden Reforestation' },
+      { name: 'Eden Reforestation Projects (sunset)', type: 'confirmed', source: 'Eden Reforestation' },
       { name: 'Kandrany 1', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Akalamboro', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Ampasimarine', type: 'supported', source: 'Legacy Partner (Refoorest)' },
@@ -127,6 +128,7 @@ const plantingData = {
     centroid: [-6.37, 34.89], 
     type: 'confirmed', 
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Replanting the burnt Mkussu Forest', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Usambara Biodiversity Conservation', type: 'confirmed', source: 'Tree-Nation' },
@@ -138,6 +140,7 @@ const plantingData = {
     centroid: [56.13, -106.35],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Boreal Forest Habitat Restoration', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -146,6 +149,7 @@ const plantingData = {
     centroid: [-16.29, -63.59],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Amazon Windshields', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -154,6 +158,7 @@ const plantingData = {
     centroid: [9.08, 8.68],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Restoration of Ala Forest Reserve', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -162,6 +167,7 @@ const plantingData = {
     centroid: [-14.24, -51.93],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Reforest the Amazon Basin', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -170,6 +176,7 @@ const plantingData = {
     centroid: [45.94, 24.97],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Bear Groves in Transylvania', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -178,6 +185,7 @@ const plantingData = {
     centroid: [-19.02, 29.15],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Zimbabwe Reforestation Initiative', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -186,6 +194,7 @@ const plantingData = {
     centroid: [52.84, -9.06],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Ireland Community Tree Planting, County Clare', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -194,6 +203,7 @@ const plantingData = {
     centroid: [23.63, -102.55],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Restoration and Social Empowerment', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -202,6 +212,7 @@ const plantingData = {
     centroid: [-38.42, -63.62],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Bosques de Agua', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -210,6 +221,7 @@ const plantingData = {
     centroid: [46.23, 2.21],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Restauration Forêts dégradées', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -218,6 +230,7 @@ const plantingData = {
     centroid: [-25.27, 133.78],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Big Scrub Rainforest Restoration', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -226,6 +239,7 @@ const plantingData = {
     centroid: [55.38, -3.44],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Community Tree Planting', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -234,6 +248,7 @@ const plantingData = {
     centroid: [40.46, -3.75],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Alvelal', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -756,21 +771,26 @@ function getFilteredData() {
     if (currentFilters.type !== 'all' && cfg.type !== currentFilters.type) {
       return false;
     }
-    if (currentFilters.source !== 'all') {
-      if (cfg.type === 'mixed') {
-        const hasMatchingSource = cfg.sites.some(site => {
-          if (typeof site === 'string') {
-            return cfg.source === currentFilters.source;
-          }
-          return site.source === currentFilters.source;
-        });
-        if (!hasMatchingSource) {
-          return false;
+    if (currentFilters.source === 'all') {
+      return true;
+    }
+    if (currentFilters.source === '2024-2025 FY' || currentFilters.source === '2025-2026 FY') {
+      const fy = currentFilters.source === '2024-2025 FY' ? '2024-2025' : '2025-2026';
+      return cfg.fy === fy;
+    }
+    if (cfg.type === 'mixed') {
+      const hasMatchingSource = cfg.sites.some(site => {
+        if (typeof site === 'string') {
+          return cfg.source === currentFilters.source;
         }
-      } else {
-        if (cfg.source !== currentFilters.source) {
-          return false;
-        }
+        return site.source === currentFilters.source;
+      });
+      if (!hasMatchingSource) {
+        return false;
+      }
+    } else {
+      if (cfg.source !== currentFilters.source) {
+        return false;
       }
     }
     
