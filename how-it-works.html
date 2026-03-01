@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - Oasis of Change, Inc.</title>
+    <meta name="author" content="Oasis of Change, Inc.">
+    <meta property="og:site_name" content="Oasis of Change, Inc.">
+    <meta name="description" content="Learn how Oasis of Change funds, plants, and tracks trees — from partner sign-up to verified trees in the ground.">
+    <meta name="keywords" content="how it works, tree planting process, reforestation, Oasis of Change, Tree-Nation, partner program">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="assets/css/design-tokens.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#004734',
+                        'brand-green-light': '#006B50',
+                        'legacy-gold': '#EAB308',
+                        'deep-forest': '#0F172A',
+                        'cloud-white': '#FFFFFF',
+                        'mist-gray': '#F8FAFC',
+                        'success': { DEFAULT: '#059669', light: '#10b981', bg: '#ECFDF5', text: '#065F46' },
+                        'warning': { DEFAULT: '#D97706', light: '#F59E0B', bg: '#FFFBEB', text: '#92400E' }
+                    },
+                    fontFamily: {
+                        'serif': ['DM Serif Display', 'serif'],
+                        'sans': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hiw-hero-bg {
+            background: linear-gradient(145deg, #003326 0%, #004734 40%, #005a42 70%, #004230 100%);
+        }
+        .hiw-hero-pattern {
+            background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                               radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 40%),
+                               radial-gradient(circle at 60% 80%, rgba(255,255,255,0.04) 0%, transparent 45%);
+        }
+        .step-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 71, 52, 0.10);
+        }
+        .step-number {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 9999px;
+            background: var(--color-brand-green);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .step-icon-wrap {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2.5rem 0 1.5rem;
+        }
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+        .flow-arrow {
+            display: flex;
+            justify-content: center;
+            margin: 0.5rem 0;
+            color: #94a3b8;
+        }
+        @media (max-width: 640px) {
+            .step-icon-wrap { width: 2.75rem; height: 2.75rem; border-radius: 0.75rem; }
+        }
+    </style>
+</head>
+<body class="bg-mist-gray font-sans antialiased min-h-screen flex flex-col">
+
+    <div class="bg-brand-green text-white py-3 px-4 text-center text-sm font-medium z-[60] relative">
+        <span class="inline-flex items-center gap-2 justify-center flex-wrap">
+            <strong>2025-2026 FY Planting Complete:</strong> 7,144 trees in 14 countries <span class="hidden sm:inline">—</span> <a href="/impact-2025-2026.html" class="underline underline-offset-2 hover:text-white/80">View 2025-2026 FY Impact</a>
+        </span>
+    </div>
+
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between h-14 relative">
+                <a href="/index.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="/index.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Dashboard</a>
+                    <a href="/impact.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Impact Report</a>
+                    <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Certificates</a>
+                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Tree Species</a>
+                    <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Gallery</a>
+                    <a href="/news.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">News</a>
+                    <a href="/how-it-works.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:bg-brand-green-light transition">How It Works</a>
+                </div>
+                <button id="mobile-menu-toggle" class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-green/[0.06] text-brand-green hover:bg-brand-green hover:text-white transition-all duration-200" aria-label="Open menu" aria-expanded="false">
+                    <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h12M4 17h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="lg:hidden fixed inset-0 z-[2000]" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
+        <div class="absolute inset-0 bg-brand-green/20 backdrop-blur-sm mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
+        <div class="absolute top-0 right-0 bottom-0 w-[82%] max-w-[340px] bg-white rounded-l-[2rem] flex flex-col mobile-menu-panel" style="box-shadow:-8px 0 30px rgba(0,0,0,0.08)">
+            <div class="flex items-center justify-between px-6 pt-7 pb-4">
+                <h2 id="mobile-menu-title" class="font-serif text-2xl text-brand-green">Menu</h2>
+                <button id="mobile-menu-close" class="w-10 h-10 rounded-2xl bg-gray-50 text-gray-400 inline-flex items-center justify-center transition-all duration-200 hover:bg-brand-green hover:text-white" aria-label="Close menu">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="mx-6 h-px bg-gray-100"></div>
+            <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
+                <a href="/index.html" class="mobile-nav-link">Dashboard</a>
+                <a href="/impact.html" class="mobile-nav-link">Impact Report</a>
+                <a href="/certificates.html" class="mobile-nav-link">Certificates</a>
+                <a href="/species.html" class="mobile-nav-link">Tree Species</a>
+                <a href="/gallery.html" class="mobile-nav-link">Gallery</a>
+                <a href="/news.html" class="mobile-nav-link">News</a>
+                <a href="/how-it-works.html" class="mobile-nav-link active">How It Works</a>
+            </nav>
+            <div class="px-6 py-5 border-t border-gray-100">
+                <p class="text-xs text-gray-400 text-center font-medium tracking-wide">Oasis of Change, Inc.</p>
+            </div>
+        </div>
+    </div>
+
+    <main class="flex-1">
+
+        <!-- Hero -->
+        <section class="relative overflow-hidden">
+            <div class="hiw-hero-bg absolute inset-0"></div>
+            <div class="hiw-hero-pattern absolute inset-0 opacity-[0.03]"></div>
+            <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 text-center">
+                <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm text-white/90 text-xs font-medium px-3 py-1.5 rounded-full mb-5 border border-white/10">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    Story Guide
+                </div>
+                <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl text-white mb-4 tracking-tight">How It Works</h1>
+                <p class="text-white/70 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">From identifying verified projects to tracking every tree on our public dashboard — here's the full story of how Oasis of Change plants trees and creates real-world impact.</p>
+            </div>
+        </section>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+
+            <!-- Part 1: How We Fund and Plant Trees -->
+            <div class="section-divider">
+                <span class="text-xs font-semibold text-gray-400 uppercase tracking-widest whitespace-nowrap">Part 1 — How We Fund &amp; Plant Trees</span>
+            </div>
+
+            <div class="space-y-4">
+
+                <!-- Step 1 -->
+                <div class="step-card bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-gray-100 flex gap-4 sm:gap-5">
+                    <div class="flex flex-col items-center gap-2 pt-0.5">
+                        <span class="step-number">1</span>
+                        <div class="flex-1 w-px bg-gray-100 min-h-[1.5rem]"></div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-start gap-3 mb-2">
+                            <div class="step-icon-wrap bg-success-bg">
+                                <svg class="w-6 h-6 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <h2 class="text-lg font-semibold text-deep-forest leading-snug">We Find the Projects</h2>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">We identify verified reforestation projects through Tree-Nation across 14+ countries. Each project is evaluated for ecological credibility, geographic diversity, and community impact before funds are allocated.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-card bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-gray-100 flex gap-4 sm:gap-5">
+                    <div class="flex flex-col items-center gap-2 pt-0.5">
+                        <span class="step-number">2</span>
+                        <div class="flex-1 w-px bg-gray-100 min-h-[1.5rem]"></div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-start gap-3 mb-2">
+                            <div class="step-icon-wrap bg-warning-bg">
+                                <svg class="w-6 h-6 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <h2 class="text-lg font-semibold text-deep-forest leading-snug">We Allocate Funds</h2>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">Funds are strategically distributed to projects based on ecological and community impact. Our allocation prioritises geographic diversity, long-term survival rates, and the greatest measurable benefit to local ecosystems.</p>
+                    </div>
+                </div>
+
+                <!-- Step 6 (planting) -->
+                <div class="step-card bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-gray-100 flex gap-4 sm:gap-5">
+                    <div class="flex flex-col items-center gap-2 pt-0.5">
+                        <span class="step-number">3</span>
+                        <div class="flex-1 w-px bg-gray-100 min-h-[1.5rem]"></div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-start gap-3 mb-2">
+                            <div class="step-icon-wrap" style="background:#f0fdf4;">
+                                <svg class="w-6 h-6" style="color:#15803d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                                </svg>
+                            </div>
+                            <h2 class="text-lg font-semibold text-deep-forest leading-snug">Trees Go in the Ground</h2>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">On-the-ground project partners plant and care for trees at verified sites worldwide. Every tree is tracked, verified, and issued a certificate through Tree-Nation — creating a direct link from donation to forest.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Part 2: Our Partnership Model -->
+            <div class="section-divider">
+                <span class="text-xs font-semibold text-gray-400 uppercase tracking-widest whitespace-nowrap">Part 2 — Our Partnership Model</span>
+            </div>
+
+            <div class="space-y-4">
+
+                <!-- Step 3 -->
+                <div class="step-card bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-gray-100 flex gap-4 sm:gap-5">
+                    <div class="flex flex-col items-center gap-2 pt-0.5">
+                        <span class="step-number">4</span>
+                        <div class="flex-1 w-px bg-gray-100 min-h-[1.5rem]"></div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-start gap-3 mb-2">
+                            <div class="step-icon-wrap bg-info-bg">
+                                <svg class="w-6 h-6 text-info" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                </svg>
+                            </div>
+                            <h2 class="text-lg font-semibold text-deep-forest leading-snug">Partners Join Us</h2>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">Nonprofits and mission-driven organisations sign up to partner with Oasis of Change. Each partner receives a Tree-Nation account linked to our forest, connecting their digital presence to real-world reforestation.</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step-card bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-gray-100 flex gap-4 sm:gap-5">
+                    <div class="flex flex-col items-center gap-2 pt-0.5">
+                        <span class="step-number">5</span>
+                        <div class="flex-1 w-px bg-gray-100 min-h-[1.5rem]"></div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-start gap-3 mb-2">
+                            <div class="step-icon-wrap" style="background:#f5f3ff;">
+                                <svg class="w-6 h-6" style="color:#7c3aed;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <h2 class="text-lg font-semibold text-deep-forest leading-snug">The Badge Goes Live</h2>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">Partners place a sustainability badge on their website. This small widget serves as a public commitment to environmental impact — and the trigger that connects their digital footprint to real tree planting.</p>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="step-card bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-gray-100 flex gap-4 sm:gap-5">
+                    <div class="flex flex-col items-center gap-2 pt-0.5">
+                        <span class="step-number">6</span>
+                        <div class="flex-1 w-px bg-gray-100 min-h-[1.5rem]"></div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-start gap-3 mb-2">
+                            <div class="step-icon-wrap bg-success-bg">
+                                <svg class="w-6 h-6 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                            </div>
+                            <h2 class="text-lg font-semibold text-deep-forest leading-snug">Visits Plant Trees</h2>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">Every page visit (or other configured trigger) on a partner's website contributes to tree planting through our system. Website activity becomes direct environmental action — no extra effort required from visitors.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Part 3: The Full Picture -->
+            <div class="section-divider">
+                <span class="text-xs font-semibold text-gray-400 uppercase tracking-widest whitespace-nowrap">Part 3 — The Full Picture</span>
+            </div>
+
+            <div class="space-y-4">
+
+                <!-- Step 7 -->
+                <div class="step-card bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-gray-100 flex gap-4 sm:gap-5">
+                    <div class="flex flex-col items-center gap-2 pt-0.5">
+                        <span class="step-number">7</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-start gap-3 mb-2">
+                            <div class="step-icon-wrap bg-warning-bg">
+                                <svg class="w-6 h-6 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                            </div>
+                            <h2 class="text-lg font-semibold text-deep-forest leading-snug">Full Transparency</h2>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">Every tree is tracked, certified, and reported on our public dashboard. From badge to ground, every planting is traceable — creating a complete transparency loop that connects partner activity to verified environmental outcomes.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- End-to-end flow summary -->
+            <div class="mt-10 sm:mt-12 bg-brand-green rounded-2xl p-6 sm:p-8 text-white">
+                <h2 class="font-serif text-xl sm:text-2xl mb-4 text-center">The Complete Loop</h2>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-0 flex-wrap text-sm font-medium text-center">
+                    <span class="bg-white/15 border border-white/20 rounded-lg px-3 py-1.5">Partner signs up</span>
+                    <svg class="w-4 h-4 text-white/50 rotate-90 sm:rotate-0 flex-shrink-0 mx-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                    <span class="bg-white/15 border border-white/20 rounded-lg px-3 py-1.5">Badge goes live</span>
+                    <svg class="w-4 h-4 text-white/50 rotate-90 sm:rotate-0 flex-shrink-0 mx-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                    <span class="bg-white/15 border border-white/20 rounded-lg px-3 py-1.5">Visits trigger planting</span>
+                    <svg class="w-4 h-4 text-white/50 rotate-90 sm:rotate-0 flex-shrink-0 mx-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                    <span class="bg-white/15 border border-white/20 rounded-lg px-3 py-1.5">Trees planted</span>
+                    <svg class="w-4 h-4 text-white/50 rotate-90 sm:rotate-0 flex-shrink-0 mx-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                    <span class="bg-white/15 border border-white/20 rounded-lg px-3 py-1.5">Impact tracked &amp; reported</span>
+                </div>
+                <p class="text-white/65 text-xs text-center mt-5 leading-relaxed max-w-lg mx-auto">Every tree is traceable from badge to ground — creating accountability, transparency, and measurable climate impact at scale.</p>
+            </div>
+
+            <!-- CTA -->
+            <div class="mt-8 text-center">
+                <p class="text-sm text-gray-500 mb-4">Ready to explore the data behind every tree?</p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <a href="/index.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-green text-white text-sm font-medium hover:bg-brand-green-light transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        View the Dashboard
+                    </a>
+                    <a href="/certificates.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-gray-200 text-deep-forest text-sm font-medium hover:bg-gray-50 transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                        Browse Certificates
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 mt-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+            <p class="text-xs text-gray-400">&copy; <span id="copyright-year"></span> Oasis of Change, Inc.</p>
+        </div>
+    </footer>
+
+    <script>
+    (function(){
+        const toggleBtn = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeBtn = document.getElementById('mobile-menu-close');
+        const backdrop = document.getElementById('mobile-menu-backdrop');
+        if (!toggleBtn || !mobileMenu) return;
+        const open = () => { mobileMenu.classList.add('menu-open'); document.documentElement.style.overflow='hidden'; document.body.style.overflow='hidden'; toggleBtn.setAttribute('aria-expanded','true'); };
+        const close = () => { mobileMenu.classList.remove('menu-open'); document.documentElement.style.overflow=''; document.body.style.overflow=''; toggleBtn.setAttribute('aria-expanded','false'); };
+        toggleBtn.addEventListener('click', open);
+        if (closeBtn) closeBtn.addEventListener('click', close);
+        if (backdrop) backdrop.addEventListener('click', close);
+    })();
+    </script>
+    <script>document.getElementById('copyright-year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
