@@ -200,3 +200,12 @@ select:focus-visible,
     background-color: #F3F4F6;
     color: #6B7280;
 }
+
+/* ── Footnote highlight when linked (accessibility) ── */
+[id^="footnote-"]:target {
+    background-color: rgba(0, 71, 52, 0.06);
+    border-left: 3px solid var(--color-brand-green);
+    border-radius: 0 0.25rem 0.25rem 0;
+    padding-left: 0.5rem;
+    scroll-margin-top: 5rem;
+}
