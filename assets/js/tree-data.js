@@ -242,7 +242,6 @@ const TreeData = {
             trees: 100,
             co2Offset: 5000,
             date: "June 26, 2024",
-            fyNote: "2024-2025 FY — Madagascar project completed",
             filename: "2024-06-26_EcoSearch_Eden-Reforestation_Madagascar_100-Trees-5000kg-CO2.pdf.pdf"
         }
     ],
