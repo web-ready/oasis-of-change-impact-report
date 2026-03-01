@@ -263,13 +263,20 @@ const plantingData = {
       { name: 'Forest Gardens - Mount Elgon Region', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
-  US: { 
-    centroid: [39.83,-98.58], 
+  US_MT: { 
+    centroid: [46.89217, -114.340752], 
     type: 'confirmed', 
     source: 'Tree-Nation',
     sites: [
-      { name: 'Lost Forests Recovery in California', type: 'confirmed', source: 'Tree-Nation' },
-      { name: 'National Forest Recovery', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'National Forest Recovery', type: 'confirmed', source: 'Historical Planting (Tree-Nation)' }
+    ]
+  },
+  US_CA: { 
+    centroid: [41.490704, -123.247726], 
+    type: 'confirmed', 
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Lost Forests Recovery in California', type: 'confirmed', source: 'Sustainable WWW Partner Project (Tree-Nation)' }
     ]
   },
   IN: { 
@@ -409,7 +416,8 @@ const countryName = {
   TZ: 'Tanzania',
   UG: 'Uganda',
   SN: 'Senegal',
-  US: 'United States',
+  US_MT: 'USA - National Forest Recovery (Montana)',
+  US_CA: 'USA - Lost Forests Recovery (California)',
   CM: 'Cameroon',
   IN: 'India',
   MZ: 'Mozambique',
@@ -947,7 +955,7 @@ function renderSiteLists() {
           }
           
           const displayName = typeof site === 'string' ? site : site.name;
-          const showFootnote3 = (cc === 'NP' && displayName === 'Eden Reforestation Projects') || (cc === 'US' && displayName === 'National Forest Recovery');
+          const showFootnote3 = (cc === 'NP' && displayName === 'Eden Reforestation Projects') || (cc === 'US_MT' && displayName === 'National Forest Recovery');
           const footnoteLink = showFootnote3 ? ' <a href="#footnote-4" class="align-super text-xs text-brand-green hover:underline no-underline" aria-label="Footnote 4">4</a>' : '';
           
           li.innerHTML = `
