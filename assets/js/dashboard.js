@@ -56,10 +56,11 @@ function setText(id, val) {
 }
 
 function populateProjectTables() {
+    const verifiedProjects = [...TreeData.getVerifiedProjects()].sort((a, b) => (b.trees || 0) - (a.trees || 0));
     const vBody = document.getElementById('verified-table-body');
     if (vBody) {
         vBody.innerHTML = '';
-        TreeData.getVerifiedProjects().forEach(p => {
+        verifiedProjects.forEach(p => {
             const tr = document.createElement('tr');
             tr.className = 'data-row border-b border-gray-50 transition-all duration-200';
             tr.innerHTML = `
@@ -72,7 +73,7 @@ function populateProjectTables() {
     const vCards = document.getElementById('verified-mobile-cards');
     if (vCards) {
         vCards.innerHTML = '';
-        TreeData.getVerifiedProjects().forEach(p => {
+        verifiedProjects.forEach(p => {
             const card = document.createElement('div');
             card.className = 'mobile-data-card';
             card.setAttribute('data-search', `${p.name.toLowerCase()} ${p.location.toLowerCase()}`);
