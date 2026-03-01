@@ -45,7 +45,16 @@ const TreeData = {
 
 
     /* ────────────────────────────────────────────────
-       PLANTING PARTNERS  (also verified on Tree-Nation)
+       HISTORICAL PLANTINGS  (verified on Tree-Nation, before incorporation)
+       Planted just before Oasis of Change, Inc. was incorporated; verified on Tree-Nation.
+       ──────────────────────────────────────────────── */
+    historicalProjects: [
+        { id: "nepal-eden-historical", name: "Eden Reforestation Projects", location: "Nepal", trees: 60, species: "Phyllanthus emblica", url: "https://tree-nation.com/projects/eden-reforestation-nepal" },
+        { id: "usa-nfr-historical",     name: "National Forest Recovery",    location: "United States", trees: 10, species: "Pinus strobus", url: "https://tree-nation.com/projects/national-forest-recovery-united-states" }
+    ],
+
+
+    /* ────────────────────────────────────────────────
        Trees planted through partner organization accounts.
        Subtotal: 628 trees
        ──────────────────────────────────────────────── */
@@ -197,6 +206,7 @@ const TreeData = {
     },
 
     getVerifiedProjects:  function() { return this.verifiedProjects; },
+    getHistoricalProjects: function() { return this.historicalProjects || []; },
     getVerifiedPartners:  function() { return this.verifiedPartners; },
     getLegacyProjects:    function() { return this.legacyProjects; },
     getCertificates:      function() { return this.certificates; },

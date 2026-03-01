@@ -130,6 +130,40 @@ function populateProjectTables() {
             vCards.appendChild(card);
         });
     }
+
+    const historicalProjects = TreeData.getHistoricalProjects ? TreeData.getHistoricalProjects() : [];
+    const hBody = document.getElementById('historical-table-body');
+    if (hBody) {
+        hBody.innerHTML = '';
+        historicalProjects.forEach(p => {
+            const tr = document.createElement('tr');
+            tr.className = 'data-row border-b border-gray-50 transition-all duration-200';
+            const url = p.url || '#';
+            tr.innerHTML = `
+                <td class="py-4 px-2"><a href="${url}" target="_blank" rel="noopener" class="font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">${p.name}</a></td>
+                <td class="py-4 px-2 text-sm text-gray-600">${p.location}</td>
+                <td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">${p.trees.toLocaleString()}</td>`;
+            hBody.appendChild(tr);
+        });
+    }
+    const hCards = document.getElementById('historical-mobile-cards');
+    if (hCards) {
+        hCards.innerHTML = '';
+        historicalProjects.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'mobile-data-card';
+            card.innerHTML = `
+                <div class="mobile-card-header">
+                    <div>
+                        <div class="mobile-card-title"><a href="${p.url || '#'}" target="_blank" rel="noopener" class="hover:text-brand-green">${p.name}</a></div>
+                        <div class="mobile-card-subtitle">${p.location}</div>
+                    </div>
+                    <div class="mobile-trees-count">${p.trees.toLocaleString()}</div>
+                </div>`;
+            hCards.appendChild(card);
+        });
+    }
+
     const lBody = document.getElementById('legacy-table-body');
     if (lBody) {
         lBody.innerHTML = '';
