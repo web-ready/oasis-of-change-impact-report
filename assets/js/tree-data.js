@@ -4,14 +4,14 @@ const TreeData = {
 
     /* ────────────────────────────────────────────────
        TOTALS
-       Verified  = Oasis-funded (7,819) + Partners (628) = 8,447
+       Verified  = Oasis-funded (7,819) + Historical (70) + Partners (628) = 8,517
        Legacy    = Pre–Tree-Nation partners (fixed)       = 7,338
-       Total     = 8,447 + 7,338                          = 15,785
+       Total     = 8,517 + 7,338                          = 15,855
        ──────────────────────────────────────────────── */
     totals: {
-        verifiedTrees: 8447,    // all Tree-Nation (Oasis + partner)
+        verifiedTrees: 8517,    // all Tree-Nation (Oasis 7,819 + Historical 70 + Partners 628)
         legacyTrees:   7338,    // Tero 4,567 + Refoorest 2,771
-        totalTrees:    15785,   // verified + legacy
+        totalTrees:    15855,   // verified + legacy
         goalTrees:     10000
     },
 
@@ -179,6 +179,11 @@ const TreeData = {
         return this.verifiedProjects.reduce(function(sum, p) {
             if (p.fy === 'Historical') return sum;
             return sum + (p.trees || 0);
+        }, 0);
+    },
+    getHistoricalTrees: function() {
+        return this.verifiedProjects.reduce(function(sum, p) {
+            return p.fy === 'Historical' ? sum + (p.trees || 0) : sum;
         }, 0);
     },
     getPartnerTrees: function() {

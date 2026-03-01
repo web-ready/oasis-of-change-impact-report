@@ -40,6 +40,7 @@ function updateUI() {
     setText('verified-count', verified.toLocaleString());
     setText('legacy-count', legacy.toLocaleString());
     setText('footnote-oasis-trees', TreeData.getOasisFundedTrees().toLocaleString());
+    setText('footnote-historical-trees', TreeData.getHistoricalTrees().toLocaleString());
     setText('footnote-partner-trees', TreeData.getPartnerTrees().toLocaleString());
     setText('species-count', TreeData.getSpeciesCount());
     const countries = [...new Set(TreeData.getMapSites().map(s => s.country))];
