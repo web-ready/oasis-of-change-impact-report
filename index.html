@@ -72,24 +72,26 @@
         </div>
     </header>
 
-    <div id="mobile-menu" class="md:hidden hidden fixed inset-0 z-[2000] bg-black/90 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
-        <div class="w-full h-full flex items-center justify-center p-6" id="mobile-menu-backdrop">
-            <div class="text-center text-white max-w-sm mx-auto">
-                <h2 id="mobile-menu-title" class="font-serif text-4xl mb-8">Navigate</h2>
-                <nav class="space-y-4 text-lg">
-                    <a href="/index.html" class="block py-2 px-4 rounded-lg bg-white/15 font-semibold transition-colors duration-200">Dashboard</a>
-                    <a href="/impact.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Impact Report</a>
-                    <a href="/certificates.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Certificates</a>
-                    <a href="/species.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Tree Species</a>
-                    <a href="/gallery.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Gallery</a>
-                    <a href="/news.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">News</a>
-                </nav>
-                <button id="mobile-menu-close" class="mt-12 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-200">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                    Close
+    <div id="mobile-menu" class="md:hidden fixed inset-0 z-[2000]" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
+        <div class="absolute inset-0 bg-brand-green/20 backdrop-blur-sm mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
+        <div class="absolute top-0 right-0 bottom-0 w-[82%] max-w-[340px] bg-white rounded-l-[2rem] flex flex-col mobile-menu-panel" style="box-shadow:-8px 0 30px rgba(0,0,0,0.08)">
+            <div class="flex items-center justify-between px-6 pt-7 pb-4">
+                <h2 id="mobile-menu-title" class="font-serif text-2xl text-brand-green">Menu</h2>
+                <button id="mobile-menu-close" class="w-10 h-10 rounded-2xl bg-gray-50 text-gray-400 inline-flex items-center justify-center transition-all duration-200 hover:bg-brand-green hover:text-white" aria-label="Close menu">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
+            </div>
+            <div class="mx-6 h-px bg-gray-100"></div>
+            <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
+                <a href="/index.html" class="mobile-nav-link active">Dashboard</a>
+                <a href="/impact.html" class="mobile-nav-link">Impact Report</a>
+                <a href="/certificates.html" class="mobile-nav-link">Certificates</a>
+                <a href="/species.html" class="mobile-nav-link">Tree Species</a>
+                <a href="/gallery.html" class="mobile-nav-link">Gallery</a>
+                <a href="/news.html" class="mobile-nav-link">News</a>
+            </nav>
+            <div class="px-6 py-5 border-t border-gray-100">
+                <p class="text-xs text-gray-400 text-center font-medium tracking-wide">Oasis of Change, Inc.</p>
             </div>
         </div>
     </div>
