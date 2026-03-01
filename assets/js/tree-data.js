@@ -1,8 +1,6 @@
 const TreeData = {
 
     lastUpdated: "February 28th, 2026",
-    fiscalYear: "2025-2026",
-
 
     /* ────────────────────────────────────────────────
        TOTALS
