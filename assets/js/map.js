@@ -5,7 +5,7 @@ const plantingData = {
     source: 'Mixed Sources',
     fy: '2024-2025',
     sites: [
-      { name: 'Eden Reforestation Projects (sunset)', type: 'confirmed', source: 'Eden Reforestation (Tree-Nation)' },
+      { name: 'Eden Reforestation Projects', type: 'sunset', source: 'Eden Reforestation (Tree-Nation)' },
       { name: 'Kandrany 1', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Akalamboro', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Ampasimarine', type: 'supported', source: 'Legacy Partner (Refoorest)' },
@@ -133,7 +133,8 @@ const plantingData = {
       { name: 'Replanting the burnt Mkussu Forest', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Usambara Biodiversity Conservation', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Mlola Biodiversity Restoration', type: 'confirmed', source: 'Tree-Nation' },
-      { name: 'Plant to Stop Poverty', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Plant to Stop Poverty', type: 'confirmed', source: 'Tree-Nation' },
+      { name: 'Geita Tree Plantation for Community', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   CA: {
@@ -598,6 +599,18 @@ function createClusterGroupForType(type) {
   });
 }
 
+function getPopupOptions() {
+  var isMobile = window.innerWidth <= 640;
+  return {
+    maxWidth: isMobile ? 240 : 310,
+    minWidth: isMobile ? 160 : 200,
+    autoPan: true,
+    autoPanPadding: L.point(isMobile ? 20 : 40, isMobile ? 20 : 40),
+    closeButton: true,
+    className: 'modern-popup'
+  };
+}
+
 function initializeMap() {
   const map = L.map('map', { 
     scrollWheelZoom: true,
@@ -605,7 +618,7 @@ function initializeMap() {
     attributionControl: true
   }).setView([11, 16], 2);
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 20
@@ -666,9 +679,9 @@ function initializeMap() {
       }
 
       const marker = L.circleMarker([site.lat, site.lng], {
-        radius: 8,
-        color: markerColor,
-        weight: 2,
+        radius: 7,
+        color: '#fff',
+        weight: 2.5,
         fillOpacity: 1,
         fillColor: markerColor,
         className: 'map-marker'
@@ -682,27 +695,42 @@ function initializeMap() {
 
       const structuredLines = [];
       if (hasStructured) {
-        if (parsed.plantingSite) structuredLines.push('<div class="popup-line"><span class="popup-label">Planting site:</span> ' + parsed.plantingSite + '</div>');
-        if (parsed.projectType) structuredLines.push('<div class="popup-line"><span class="popup-label">Project type:</span> ' + formatProjectType(parsed.projectType) + '</div>');
-        if (parsed.plantingCycle) structuredLines.push('<div class="popup-line"><span class="popup-label">Planting cycle:</span> ' + parsed.plantingCycle + '</div>');
+        if (parsed.plantingSite) structuredLines.push('<div class="popup-line"><span class="popup-label">Site</span> ' + parsed.plantingSite + '</div>');
+        if (parsed.projectType) structuredLines.push('<div class="popup-line"><span class="popup-label">Type</span> ' + formatProjectType(parsed.projectType) + '</div>');
+        if (parsed.plantingCycle) structuredLines.push('<div class="popup-line"><span class="popup-label">Cycle</span> ' + parsed.plantingCycle + '</div>');
       }
       const fallbackDesc = !hasStructured && siteDescription ? '<div class="popup-desc">' + siteDescription + '</div>' : '';
 
+      let noteHtml = '';
+      if (site.note) {
+        const linkTag = site.noteLink
+          ? ' <a href="' + site.noteLink + '" class="popup-note-link">Read more &rarr;</a>'
+          : '';
+        noteHtml = '<div class="popup-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>' + site.note + linkTag + '</span></div>';
+      }
+
       const popupHTML = `
         <div class="map-popup">
-          <div class="popup-title">${title}</div>
-          <div class="popup-meta">
-            <span class="popup-badge popup-badge-${site.type}">${markerLabel}</span>
-            <span class="popup-source">Source: ${site.source}</span>
+          <div class="popup-header">
+            <div class="popup-title">${title}</div>
+            ${showCountry ? '<div class="popup-subtitle">' + site.country + '</div>' : ''}
           </div>
-          ${showCountry ? '<div class="popup-country">' + site.country + '</div>' : ''}
-          ${structuredLines.length ? '<div class="popup-fields">' + structuredLines.join('') + '</div>' : ''}
-          ${fallbackDesc}
-          <div class="popup-disclaimer">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</div>
+          <div class="popup-divider"></div>
+          <div class="popup-body">
+            <div class="popup-meta">
+              <span class="popup-badge popup-badge-${site.type}">${markerLabel}</span>
+              ${site.noteLink ? '<span class="popup-badge popup-badge-sunset">Sunset</span>' : ''}
+              <span class="popup-source">${site.source}</span>
+            </div>
+            ${structuredLines.length ? '<div class="popup-fields">' + structuredLines.join('') + '</div>' : ''}
+            ${fallbackDesc}
+            ${noteHtml}
+          </div>
+          <div class="popup-footer">Location is approximate and provided by third-party data sources.</div>
         </div>
       `;
 
-      marker.bindPopup(popupHTML);
+      marker.bindPopup(popupHTML, getPopupOptions());
       addMarkerToGroup(marker, site.type);
     });
   } else {
@@ -725,31 +753,37 @@ function initializeMap() {
       }
 
       const marker = L.circleMarker([lat, lng], {
-        radius: 8,
-        color: markerColor,
-        weight: 2,
+        radius: 7,
+        color: '#fff',
+        weight: 2.5,
         fillOpacity: 1,
         fillColor: markerColor,
         className: 'map-marker'
       });
 
-      const title = `${countryName[cc] || cc} (${countLabel(cfg.sites)})`;
+      const title = countryName[cc] || cc;
+      const siteCount = countLabel(cfg.sites);
       const siteNames = (cfg.sites || []).map(s => typeof s === 'string' ? s : s.name).slice(0, 5);
       const moreCount = (cfg.sites || []).length > 5 ? (cfg.sites.length - 5) : 0;
-
       const popupHTML = `
         <div class="map-popup">
-          <div class="popup-title">${title}</div>
-          <div class="popup-meta">
-            <span class="popup-badge popup-badge-${cfg.type}">${markerLabel}</span>
-            <span class="popup-source">Source: ${cfg.source || 'Mixed Sources'}</span>
+          <div class="popup-header">
+            <div class="popup-title">${title}</div>
+            <div class="popup-subtitle">${siteCount}</div>
           </div>
-          ${siteNames.length > 0 ? '<div class="popup-sites"><strong>Sites:</strong> ' + siteNames.join(', ') + (moreCount > 0 ? ' + ' + moreCount + ' more' : '') + '</div>' : ''}
-          <div class="popup-disclaimer">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</div>
+          <div class="popup-divider"></div>
+          <div class="popup-body">
+            <div class="popup-meta">
+              <span class="popup-badge popup-badge-${cfg.type}">${markerLabel}</span>
+              <span class="popup-source">${cfg.source || 'Mixed Sources'}</span>
+            </div>
+            ${siteNames.length > 0 ? '<div class="popup-sites"><strong>Sites:</strong> ' + siteNames.join(', ') + (moreCount > 0 ? ' + ' + moreCount + ' more' : '') + '</div>' : ''}
+          </div>
+          <div class="popup-footer">Location is approximate and provided by third-party data sources.</div>
         </div>
       `;
 
-      marker.bindPopup(popupHTML);
+      marker.bindPopup(popupHTML, getPopupOptions());
       addMarkerToGroup(marker, cfg.type);
     });
   }
@@ -900,12 +934,16 @@ function renderSiteLists() {
           li.className = 'flex items-center gap-2 text-gray-700 py-1';
           
           let siteColor, siteType;
-          if (typeof site === 'string') {
-            siteColor = cfg.type === 'confirmed' ? 'bg-brand-green' : 'bg-legacy-gold';
-            siteType = cfg.type === 'confirmed' ? 'Confirmed' : 'Supported';
+          const sType = typeof site === 'string' ? cfg.type : site.type;
+          if (sType === 'confirmed') {
+            siteColor = 'bg-brand-green';
+            siteType = 'Confirmed';
+          } else if (sType === 'sunset') {
+            siteColor = 'bg-gray-500';
+            siteType = 'Sunset';
           } else {
-            siteColor = site.type === 'confirmed' ? 'bg-brand-green' : 'bg-legacy-gold';
-            siteType = site.type === 'confirmed' ? 'Confirmed' : 'Supported';
+            siteColor = 'bg-legacy-gold';
+            siteType = 'Supported';
           }
           
           const displayName = typeof site === 'string' ? site : site.name;
