@@ -67,13 +67,16 @@ function fyBadge(fy) {
 function populateProjectTables() {
     var partners = (TreeData.getVerifiedPartners ? TreeData.getVerifiedPartners() : []).slice().sort(function(a,b){ return (b.trees||0)-(a.trees||0); });
     var pBody = document.getElementById('partners-table-body');
-    if (pBody) {
-        pBody.innerHTML = '';
+    if (pBody && pBody.children.length === 0) {
         partners.forEach(function(p) {
             var tr = document.createElement('tr');
             tr.className = 'data-row border-b border-gray-50 transition-all duration-200';
+            var extIcon = '<span class="partner-link-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span>';
+            var nameCell = p.profileUrl
+                ? '<a href="' + p.profileUrl + '" target="_blank" rel="noopener" class="partner-profile-link font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">' + p.name + extIcon + '</a>'
+                : p.name;
             tr.innerHTML =
-                '<td class="py-4 px-2 font-medium text-deep-forest">' + p.name + '</td>' +
+                '<td class="py-4 px-2">' + nameCell + '</td>' +
                 '<td class="py-4 px-2 text-sm text-gray-600">' + p.baseLocation + '</td>' +
                 '<td class="py-4 px-2 text-sm text-gray-600">' + p.countries + '</td>' +
                 '<td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">' + p.trees.toLocaleString() + '</td>';
@@ -81,16 +84,19 @@ function populateProjectTables() {
         });
     }
     var pCards = document.getElementById('partners-mobile-cards');
-    if (pCards) {
-        pCards.innerHTML = '';
+    if (pCards && pCards.children.length === 0) {
         partners.forEach(function(p) {
             var card = document.createElement('div');
             card.className = 'mobile-data-card';
             card.setAttribute('data-search', (p.name + ' ' + p.baseLocation + ' ' + p.countries).toLowerCase());
+            var extIcon = '<span class="partner-link-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span>';
+            var nameBlock = p.profileUrl
+                ? '<a href="' + p.profileUrl + '" target="_blank" rel="noopener" class="partner-profile-link mobile-card-title text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">' + p.name + extIcon + '</a>'
+                : '<div class="mobile-card-title">' + p.name + '</div>';
             card.innerHTML =
                 '<div class="mobile-card-header">' +
                     '<div>' +
-                        '<div class="mobile-card-title">' + p.name + '</div>' +
+                        nameBlock +
                         '<div class="mobile-card-subtitle">' + p.baseLocation + ' · ' + p.countries + '</div>' +
                     '</div>' +
                     '<div class="mobile-trees-count">' + p.trees.toLocaleString() + '</div>' +
@@ -101,13 +107,14 @@ function populateProjectTables() {
 
     const verifiedProjects = [...TreeData.getVerifiedProjects()].sort((a, b) => (b.trees || 0) - (a.trees || 0));
     const vBody = document.getElementById('verified-table-body');
+    const extIconSvg = '<span class="partner-link-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span>';
     if (vBody) {
         vBody.innerHTML = '';
         verifiedProjects.forEach(p => {
             const tr = document.createElement('tr');
             tr.className = 'data-row border-b border-gray-50 transition-all duration-200';
             tr.innerHTML = `
-                <td class="py-4 px-2"><a href="${p.url}" target="_blank" rel="noopener" class="font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">${p.name}</a>${fyBadge(p.fy)}</td>
+                <td class="py-4 px-2"><a href="${p.url}" target="_blank" rel="noopener" class="partner-profile-link font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">${p.name}${extIconSvg}</a>${fyBadge(p.fy)}</td>
                 <td class="py-4 px-2 text-sm text-gray-600">${p.location}</td>
                 <td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">${p.trees.toLocaleString()}</td>`;
             vBody.appendChild(tr);
@@ -123,7 +130,7 @@ function populateProjectTables() {
             card.innerHTML = `
                 <div class="mobile-card-header">
                     <div>
-                        <div class="mobile-card-title"><a href="${p.url}" target="_blank" rel="noopener" class="hover:text-brand-green">${p.name}</a>${fyBadge(p.fy)}</div>
+                        <div class="mobile-card-title"><a href="${p.url}" target="_blank" rel="noopener" class="partner-profile-link text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">${p.name}${extIconSvg}</a>${fyBadge(p.fy)}</div>
                         <div class="mobile-card-subtitle">${p.location}</div>
                     </div>
                     <div class="mobile-trees-count">${p.trees.toLocaleString()}</div>
