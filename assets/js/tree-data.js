@@ -43,8 +43,8 @@ const TreeData = {
         { id: "spain-alvelal",    name: "Alvelal",                            location: "Spain",              trees: 2,    co2Offset: 20,     fy: "2025-2026", fundingStream: "PILOT",             species: "Pistacia lentiscus",        url: "https://tree-nation.com/projects/alvelal" },
 
         // ── Historical (verified on Tree-Nation, before incorporation) ──
-        { id: "nepal-eden-historical", name: "Eden Reforestation Projects", location: "Nepal",           trees: 60,  co2Offset: 0, fy: "Historical", species: "Phyllanthus emblica", url: "https://tree-nation.com/projects/eden-reforestation-nepal" },
-        { id: "usa-nfr-historical",     name: "National Forest Recovery",    location: "United States", trees: 10,  co2Offset: 0, fy: "Historical", species: "Pinus strobus",       url: "https://tree-nation.com/projects/shoshone-national-forest-wyoming" }
+        { id: "nepal-eden-historical", name: "Eden Reforestation Projects", location: "Nepal",           trees: 60,  co2Offset: 10800, fy: "Historical", species: "Phyllanthus emblica", url: "https://tree-nation.com/projects/eden-reforestation-nepal" },
+        { id: "usa-nfr-historical",     name: "National Forest Recovery",    location: "United States", trees: 10,  co2Offset: 150,   fy: "Historical", species: "Pinus strobus",       url: "https://tree-nation.com/projects/shoshone-national-forest-wyoming" }
     ],
 
 
@@ -61,12 +61,13 @@ const TreeData = {
 
 
     /* ────────────────────────────────────────────────
-       LEGACY PARTNERS  (pre–Tree-Nation, fixed)
+       LEGACY PARTNERS  (pre–Tree-Nation, fixed, tree counts only)
        Subtotal: 7,338 trees
+       CO₂ data unavailable — unverified legacy sources
        ──────────────────────────────────────────────── */
     legacyProjects: [
-        { id: "tero-partner",     name: "Tero Partner",     trees: 4567, co2Offset: 68000,  date: "2023-2024", source: "Legacy Partner (Tero)" },
-        { id: "refoorest-partner", name: "Refoorest Partner", trees: 2771, co2Offset: 41500, date: "2023-2024", source: "Legacy Partner (Refoorest)" }
+        { id: "tero-partner",     name: "Tero Partner",     trees: 4567, date: "2023-2024", source: "Legacy Partner (Tero)" },
+        { id: "refoorest-partner", name: "Refoorest Partner", trees: 2771, date: "2023-2024", source: "Legacy Partner (Refoorest)" }
     ],
 
 
@@ -191,7 +192,9 @@ const TreeData = {
     },
 
     getCo2Captured: function() {
-        return this.verifiedProjects.reduce(function(sum, p) { return sum + (p.co2Offset || 0); }, 0);
+        var projectKg = this.verifiedProjects.reduce(function(sum, p) { return sum + (p.co2Offset || 0); }, 0);
+        var partnerKg = (this.verifiedPartners || []).reduce(function(sum, p) { return sum + ((p.co2Tonnes || 0) * 1000); }, 0);
+        return projectKg + partnerKg;
     },
 
     getSpeciesCount: function() {
