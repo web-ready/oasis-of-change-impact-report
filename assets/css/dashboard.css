@@ -415,3 +415,48 @@ input:focus-visible {
     from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* Partner profile link – external icon on hover (right side), responsive */
+.partner-profile-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    transition: transform 0.2s ease;
+}
+.partner-link-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    color: currentColor;
+}
+.partner-profile-link:hover .partner-link-icon,
+.partner-profile-link:focus-visible .partner-link-icon {
+    opacity: 1;
+}
+.partner-link-icon svg {
+    width: 0.875em;
+    height: 0.875em;
+}
+
+/* Hover-only animation: label shifts left, icon slides in (skip on touch devices) */
+@media (hover: hover) {
+    .partner-link-icon {
+        transform: translateX(0.25em);
+    }
+    .partner-profile-link:hover,
+    .partner-profile-link:focus-visible {
+        transform: translateX(-3px);
+    }
+    .partner-profile-link:hover .partner-link-icon,
+    .partner-profile-link:focus-visible .partner-link-icon {
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 640px) {
+    .partner-link-icon svg {
+        width: 0.75em;
+        height: 0.75em;
+    }
+}

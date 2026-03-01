@@ -43,8 +43,8 @@ const TreeData = {
         { id: "spain-alvelal",    name: "Alvelal",                            location: "Spain",              trees: 2,    co2Offset: 20,     fy: "2025-2026", fundingStream: "PILOT",             species: "Pistacia lentiscus",        url: "https://tree-nation.com/projects/alvelal" },
 
         // ── Historical (verified on Tree-Nation, before incorporation) ──
-        { id: "nepal-eden-historical", name: "Eden Reforestation Projects", location: "Nepal",           trees: 60,  co2Offset: 0, fy: "Historical", species: "Phyllanthus emblica", url: "https://tree-nation.com/projects/eden-reforestation-nepal" },
-        { id: "usa-nfr-historical",     name: "National Forest Recovery",    location: "United States", trees: 10,  co2Offset: 0, fy: "Historical", species: "Pinus strobus",       url: "https://tree-nation.com/projects/shoshone-national-forest-wyoming" }
+        { id: "nepal-eden-historical", name: "Eden Reforestation Projects", location: "Nepal",           trees: 60,  co2Offset: 10800, fy: "Historical", species: "Phyllanthus emblica", url: "https://tree-nation.com/projects/eden-reforestation-nepal" },
+        { id: "usa-nfr-historical",     name: "National Forest Recovery",    location: "United States", trees: 10,  co2Offset: 150,   fy: "Historical", species: "Pinus strobus",       url: "https://tree-nation.com/projects/shoshone-national-forest-wyoming" }
     ],
 
 
@@ -61,12 +61,13 @@ const TreeData = {
 
 
     /* ────────────────────────────────────────────────
-       LEGACY PARTNERS  (pre–Tree-Nation, fixed)
+       LEGACY PARTNERS  (pre–Tree-Nation, fixed, tree counts only)
        Subtotal: 7,338 trees
+       CO₂ data unavailable — unverified legacy sources
        ──────────────────────────────────────────────── */
     legacyProjects: [
-        { id: "tero-partner",     name: "Tero Partner",     trees: 4567, co2Offset: 68000,  date: "2023-2024", source: "Legacy Partner (Tero)" },
-        { id: "refoorest-partner", name: "Refoorest Partner", trees: 2771, co2Offset: 41500, date: "2023-2024", source: "Legacy Partner (Refoorest)" }
+        { id: "tero-partner",     name: "Tero Partner",     trees: 4567, date: "2023-2024", source: "Legacy Partner (Tero)" },
+        { id: "refoorest-partner", name: "Refoorest Partner", trees: 2771, date: "2023-2024", source: "Legacy Partner (Refoorest)" }
     ],
 
 
@@ -93,38 +94,38 @@ const TreeData = {
        Pre-incorporation: 60 trees Eden Reforestation (Nepal), 10 trees National Forest Recovery (USA), planted before Oasis of Change, Inc. was legally incorporated.
        ──────────────────────────────────────────────── */
     mapSites: [
-        { id: "madagascar",  name: "Madagascar",  country: "Madagascar",  type: "mixed",     source: "Mixed Sources",             trees: 2525, lat: -18.7669, lng: 46.8691,   description: "2024-2025 FY — Eden Reforestation (verified). Includes verified historical plantings. Mixed verified and legacy partner sites." },
-        { id: "tanzania",    name: "Tanzania",     country: "Tanzania",    type: "confirmed", source: "Tree-Nation",               trees: 7057, lat: -6.3690,  lng: 34.8888,  description: "2025-2026 FY — Replanting the burnt Mkussu Forest (CORE)" },
-        { id: "canada",      name: "Canada",       country: "Canada",      type: "confirmed", source: "Tree-Nation",               trees: 62,   lat: 56.1304,  lng: -106.3468, description: "2025-2026 FY — Boreal Forest Habitat Restoration" },
-        { id: "bolivia",     name: "Bolivia",      country: "Bolivia",     type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: -16.2902, lng: -63.5887, description: "2025-2026 FY — Amazon Windshields (PILOT)" },
-        { id: "nigeria",     name: "Nigeria",      country: "Nigeria",     type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: 9.0820,   lng: 8.6753,   description: "2025-2026 FY — Restoration of Ala Forest Reserve (PILOT)" },
-        { id: "brazil",      name: "Brazil",       country: "Brazil",      type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: -14.2350, lng: -51.9253, description: "2025-2026 FY — Reforest the Amazon Basin (PILOT)" },
-        { id: "romania",     name: "Romania",      country: "Romania",     type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: 45.9432,  lng: 24.9668,  description: "2025-2026 FY — Bear Groves in Transylvania (PILOT)" },
-        { id: "zimbabwe",    name: "Zimbabwe",     country: "Zimbabwe",    type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: -19.0154, lng: 29.1549,  description: "2025-2026 FY — Zimbabwe Reforestation Initiative (PILOT)" },
-        { id: "ireland",     name: "Ireland",      country: "Ireland",     type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: 52.8420,  lng: -9.0568,  description: "2025-2026 FY — Ireland Community Tree Planting, County Clare (PILOT)" },
-        { id: "mexico",      name: "Mexico",       country: "Mexico",      type: "confirmed", source: "Tree-Nation",               trees: 3,    lat: 23.6345,  lng: -102.5528, description: "2025-2026 FY — Restoration and Social Empowerment (PILOT)" },
-        { id: "argentina",   name: "Argentina",    country: "Argentina",   type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: -38.4161, lng: -63.6167, description: "2025-2026 FY — Bosques de Agua (PILOT)" },
-        { id: "france",      name: "France",       country: "France",      type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: 46.2276,  lng: 2.2137,   description: "2025-2026 FY — Restauration Forêts dégradées (PILOT)" },
-        { id: "australia",   name: "Australia",    country: "Australia",   type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: -25.2744, lng: 133.7751, description: "2025-2026 FY — Big Scrub Rainforest Restoration (PILOT)" },
-        { id: "uk",          name: "United Kingdom", country: "United Kingdom", type: "confirmed", source: "Tree-Nation",          trees: 2,    lat: 55.3781,  lng: -3.4360,  description: "2025-2026 FY — Community Tree Planting (PILOT)" },
-        { id: "spain",       name: "Spain",        country: "Spain",       type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: 40.4637,  lng: -3.7492,  description: "2025-2026 FY — Alvelal (PILOT)" },
-        { id: "nepal",       name: "Nepal",        country: "Nepal",       type: "mixed",     source: "Mixed Sources",             trees: 2000, lat: 28.3949,  lng: 84.1240,  description: "Includes 60 trees (Eden Reforestation, Phyllanthus emblica) planted before legal incorporation. Mixed verified and legacy partner plantings." },
-        { id: "kenya",       name: "Kenya",        country: "Kenya",       type: "mixed",     source: "Mixed Sources",             trees: 0,    lat: -0.0236,  lng: 37.9062,  description: "Mixed verified and legacy tree plantings" },
-        { id: "uganda",      name: "Uganda",       country: "Uganda",      type: "confirmed", source: "Tree-Nation",               trees: 0,    lat: 1.3733,   lng: 32.2903,  description: "Verified tree plantings" },
-        { id: "united-states", name: "United States", country: "United States", type: "confirmed", source: "Tree-Nation",          trees: 0,    lat: 39.8283,  lng: -98.5795, description: "Includes 10 trees (National Forest Recovery, Pinus strobus) planted before legal incorporation. Verified tree plantings." },
-        { id: "india",       name: "India",        country: "India",       type: "confirmed", source: "Tree-Nation",               trees: 0,    lat: 20.5937,  lng: 78.9629,  description: "Verified tree plantings" },
-        { id: "indonesia",   name: "Indonesia",    country: "Indonesia",   type: "mixed",     source: "Mixed Sources",             trees: 1000, lat: -0.7893,  lng: 113.9213, description: "Mixed verified and legacy tree plantings" },
-        { id: "haiti",       name: "Haiti",        country: "Haiti",       type: "supported", source: "Legacy Partner (Refoorest)", trees: 1200, lat: 18.9712,  lng: -72.2852, description: "Legacy reforestation initiative" },
-        { id: "honduras",    name: "Honduras",     country: "Honduras",    type: "supported", source: "Legacy Partner (Refoorest)", trees: 0,    lat: 15.2000,  lng: -86.2419, description: "Legacy reforestation initiative" },
-        { id: "senegal",     name: "Senegal",      country: "Senegal",     type: "confirmed", source: "Tree-Nation",               trees: 0,    lat: 14.4974,  lng: -14.4524, description: "Verified tree plantings" },
-        { id: "cameroon",    name: "Cameroon",     country: "Cameroon",    type: "confirmed", source: "Tree-Nation",               trees: 0,    lat: 7.3697,   lng: 12.3547,  description: "Verified tree plantings" },
-        { id: "mozambique",  name: "Mozambique",   country: "Mozambique",  type: "supported", source: "Legacy Partner (Tero)",     trees: 0,    lat: -18.6657, lng: 35.5296,  description: "Legacy reforestation initiative" },
-        { id: "laos",        name: "Laos",         country: "Laos",        type: "supported", source: "Legacy Partner (Tero)",     trees: 0,    lat: 19.8563,  lng: 102.4955, description: "Legacy reforestation initiative" },
-        { id: "drc",         name: "Democratic Republic of the Congo", country: "Democratic Republic of the Congo", type: "supported", source: "Legacy Partner (Tero)", trees: 0, lat: -4.0383, lng: 21.7587, description: "Legacy reforestation initiative" },
-        { id: "thailand",    name: "Thailand",     country: "Thailand",    type: "supported", source: "Legacy Partner (Tero)",     trees: 0,    lat: 15.8700,  lng: 100.9925, description: "Legacy reforestation initiative" },
-        { id: "peru",        name: "Peru",         country: "Peru",        type: "supported", source: "Legacy Partner (Tero)",     trees: 0,    lat: -9.1900,  lng: -75.0152, description: "Legacy reforestation initiative" },
-        { id: "nicaragua",   name: "Nicaragua",    country: "Nicaragua",   type: "supported", source: "Legacy Partner (Refoorest)", trees: 0,   lat: 12.8654,  lng: -85.2072, description: "Legacy reforestation initiative" },
-        { id: "central-african-republic", name: "Central African Republic", country: "Central African Republic", type: "supported", source: "Legacy Partner (Tero)", trees: 0, lat: 6.6111, lng: 20.9394, description: "Chinko Nature Reserve — Legacy reforestation initiative" }
+        { id: "madagascar",  name: "Madagascar",  country: "Madagascar",  type: "mixed",     source: "Mixed Sources",             trees: 2525, lat: -18.7669, lng: 46.8691,   description: "Funded by Oasis of Change (2024-2025 FY), Stanley Park Ecology Society, The Sustainable WWW, Mittler Senior Technology, EcoSearch (planting partners), and Refoorest (legacy partner).", note: "Eden Reforestation Projects was sunset after the project reached full planting capacity. Oasis of Change redirected future allocations to new geographies.", noteLink: "/news.html#eden-sunset" },
+        { id: "tanzania",    name: "Tanzania",     country: "Tanzania",    type: "confirmed", source: "Tree-Nation",               trees: 7057, lat: -4.798667, lng: 38.290218, description: "2025-2026 FY — Replanting the burnt Mkussu Forest (CORE)" },
+        { id: "canada",      name: "Canada",       country: "Canada",      type: "confirmed", source: "Tree-Nation",               trees: 62,   lat: 52.405426, lng: -98.917091, description: "2025-2026 FY — Boreal Forest Habitat Restoration" },
+        { id: "bolivia",     name: "Bolivia",      country: "Bolivia",     type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: -17.270603, lng: -62.805347, description: "2025-2026 FY — Amazon Windshields (PILOT)" },
+        { id: "nigeria",     name: "Nigeria",      country: "Nigeria",     type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: 7.550622, lng: 4.852035, description: "2025-2026 FY — Restoration of Ala Forest Reserve (PILOT)" },
+        { id: "brazil",      name: "Brazil",       country: "Brazil",      type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: -9.188258, lng: -63.175442, description: "2025-2026 FY — Reforest the Amazon Basin (PILOT)" },
+        { id: "romania",     name: "Romania",      country: "Romania",     type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: 46.168808, lng: 25.911007, description: "2025-2026 FY — Bear Groves in Transylvania (PILOT)" },
+        { id: "zimbabwe",    name: "Zimbabwe",     country: "Zimbabwe",    type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: -17.830269, lng: 31.026451, description: "2025-2026 FY — Zimbabwe Reforestation Initiative (PILOT)" },
+        { id: "ireland",     name: "Ireland",      country: "Ireland",     type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: 52.984489, lng: -9.269574, description: "2025-2026 FY — Ireland Community Tree Planting, County Clare (PILOT)" },
+        { id: "mexico",      name: "Mexico",       country: "Mexico",      type: "confirmed", source: "Tree-Nation",               trees: 3,    lat: 17.976389, lng: -97.373886, description: "2025-2026 FY — Restoration and Social Empowerment (PILOT)" },
+        { id: "argentina",   name: "Argentina",    country: "Argentina",   type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: -31.491564, lng: -64.835419, description: "2025-2026 FY — Bosques de Agua (PILOT)" },
+        { id: "france",      name: "France",       country: "France",      type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: 47.267403, lng: 3.305741, description: "2025-2026 FY — Restauration Forêts dégradées (PILOT)" },
+        { id: "australia",   name: "Australia",    country: "Australia",   type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: -28.746443, lng: 153.450165, description: "2025-2026 FY — Big Scrub Rainforest Restoration (PILOT)" },
+        { id: "uk",          name: "United Kingdom", country: "United Kingdom", type: "confirmed", source: "Tree-Nation",          trees: 2,    lat: 51.771252, lng: -1.324433, description: "2025-2026 FY — Community Tree Planting (PILOT)" },
+        { id: "spain",       name: "Spain",        country: "Spain",       type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: 38.102879, lng: -2.75392, description: "2025-2026 FY — Alvelal (PILOT)" },
+        { id: "nepal",       name: "Nepal",        country: "Nepal",       type: "mixed",     source: "Mixed Sources",             trees: 2000, lat: 28.3949,  lng: 84.1240,  description: "Funded by Oasis of Change (historical), Mittler Senior Technology (planting partner), and Refoorest (legacy partner)." },
+        { id: "kenya",       name: "Kenya",        country: "Kenya",       type: "mixed",     source: "Mixed Sources",             trees: 0,    lat: -0.0236,  lng: 37.9062,  description: "Planted by Stanley Park Ecology Society and The Sustainable WWW (planting partners), plus Tero (legacy partner)." },
+        { id: "uganda",      name: "Uganda",       country: "Uganda",      type: "confirmed", source: "Tree-Nation",               trees: 0,    lat: 1.3733,   lng: 32.2903,  description: "Planted by The Sustainable WWW and Mittler Senior Technology (planting partners)." },
+        { id: "united-states", name: "United States", country: "United States", type: "confirmed", source: "Tree-Nation",          trees: 0,    lat: 39.8283,  lng: -98.5795, description: "Funded by Oasis of Change (historical) and The Sustainable WWW (planting partner)." },
+        { id: "india",       name: "India",        country: "India",       type: "confirmed", source: "Tree-Nation",               trees: 0,    lat: 20.5937,  lng: 78.9629,  description: "Planted by The Sustainable WWW (planting partner)." },
+        { id: "indonesia",   name: "Indonesia",    country: "Indonesia",   type: "mixed",     source: "Mixed Sources",             trees: 1000, lat: -0.7893,  lng: 113.9213, description: "Planted by Mittler Senior Technology (planting partner), Tero and Refoorest (legacy partners)." },
+        { id: "haiti",       name: "Haiti",        country: "Haiti",       type: "supported", source: "Legacy Partner (Refoorest)", trees: 1200, lat: 18.9712,  lng: -72.2852, description: "Funded by Refoorest (legacy partner)." },
+        { id: "honduras",    name: "Honduras",     country: "Honduras",    type: "supported", source: "Legacy Partner (Refoorest)", trees: 0,    lat: 15.2000,  lng: -86.2419, description: "Funded by Refoorest (legacy partner)." },
+        { id: "senegal",     name: "Senegal",      country: "Senegal",     type: "confirmed", source: "Tree-Nation",               trees: 0,    lat: 14.4974,  lng: -14.4524, description: "Planted by Stanley Park Ecology Society and Mittler Senior Technology (planting partners)." },
+        { id: "cameroon",    name: "Cameroon",     country: "Cameroon",    type: "confirmed", source: "Tree-Nation",               trees: 0,    lat: 7.3697,   lng: 12.3547,  description: "Planting partner project via Tree-Nation." },
+        { id: "mozambique",  name: "Mozambique",   country: "Mozambique",  type: "supported", source: "Legacy Partner (Tero)",     trees: 0,    lat: -18.6657, lng: 35.5296,  description: "Funded by Tero (legacy partner)." },
+        { id: "laos",        name: "Laos",         country: "Laos",        type: "supported", source: "Legacy Partner (Tero)",     trees: 0,    lat: 19.8563,  lng: 102.4955, description: "Funded by Tero (legacy partner)." },
+        { id: "drc",         name: "Democratic Republic of the Congo", country: "Democratic Republic of the Congo", type: "supported", source: "Legacy Partner (Tero)", trees: 0, lat: -4.0383, lng: 21.7587, description: "Funded by Tero (legacy partner)." },
+        { id: "thailand",    name: "Thailand",     country: "Thailand",    type: "supported", source: "Legacy Partner (Tero)",     trees: 0,    lat: 15.8700,  lng: 100.9925, description: "Funded by Tero (legacy partner)." },
+        { id: "peru",        name: "Peru",         country: "Peru",        type: "supported", source: "Legacy Partner (Tero)",     trees: 0,    lat: -9.1900,  lng: -75.0152, description: "Funded by Tero (legacy partner)." },
+        { id: "nicaragua",   name: "Nicaragua",    country: "Nicaragua",   type: "supported", source: "Legacy Partner (Refoorest)", trees: 0,   lat: 12.8654,  lng: -85.2072, description: "Funded by Refoorest (legacy partner)." },
+        { id: "central-african-republic", name: "Central African Republic", country: "Central African Republic", type: "supported", source: "Legacy Partner (Tero)", trees: 0, lat: 6.6111, lng: 20.9394, description: "Funded by Tero (legacy partner)." }
     ],
 
 
@@ -191,7 +192,9 @@ const TreeData = {
     },
 
     getCo2Captured: function() {
-        return this.verifiedProjects.reduce(function(sum, p) { return sum + (p.co2Offset || 0); }, 0);
+        var projectKg = this.verifiedProjects.reduce(function(sum, p) { return sum + (p.co2Offset || 0); }, 0);
+        var partnerKg = (this.verifiedPartners || []).reduce(function(sum, p) { return sum + ((p.co2Tonnes || 0) * 1000); }, 0);
+        return projectKg + partnerKg;
     },
 
     getSpeciesCount: function() {
