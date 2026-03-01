@@ -5,7 +5,7 @@ const plantingData = {
     source: 'Mixed Sources',
     fy: '2024-2025',
     sites: [
-      { name: 'Eden Reforestation Projects (sunset)', type: 'confirmed', source: 'Eden Reforestation' },
+      { name: 'Eden Reforestation Projects (sunset)', type: 'confirmed', source: 'Eden Reforestation (Tree-Nation)' },
       { name: 'Kandrany 1', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Akalamboro', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Ampasimarine', type: 'supported', source: 'Legacy Partner (Refoorest)' },
@@ -45,7 +45,7 @@ const plantingData = {
     centroid: [28.39, 84.12], 
     type: 'mixed', 
     sites: [
-      { name: 'Eden Reforestation Projects', type: 'confirmed', source: 'Eden Reforestation' },
+      { name: 'Eden Reforestation Projects', type: 'confirmed', source: 'Eden Reforestation (Tree-Nation)' },
       { name: 'Amaltari', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Attarpur', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Bachhauli', type: 'supported', source: 'Legacy Partner (Refoorest)' },
@@ -774,22 +774,25 @@ function getFilteredData() {
     if (currentFilters.source === 'all') {
       return true;
     }
-    if (currentFilters.source === '2024-2025 FY' || currentFilters.source === '2025-2026 FY') {
-      const fy = currentFilters.source === '2024-2025 FY' ? '2024-2025' : '2025-2026';
-      return cfg.fy === fy;
+    function sourceMatches(src) {
+      if (currentFilters.source === 'Tree-Nation') {
+        return src === 'Tree-Nation' || (src && src.includes('(Tree-Nation)'));
+      }
+      return src === currentFilters.source;
     }
+
     if (cfg.type === 'mixed') {
       const hasMatchingSource = cfg.sites.some(site => {
         if (typeof site === 'string') {
-          return cfg.source === currentFilters.source;
+          return sourceMatches(cfg.source || '');
         }
-        return site.source === currentFilters.source;
+        return sourceMatches(site.source || '');
       });
       if (!hasMatchingSource) {
         return false;
       }
     } else {
-      if (cfg.source !== currentFilters.source) {
+      if (!sourceMatches(cfg.source || '')) {
         return false;
       }
     }
@@ -812,10 +815,24 @@ function updateFilterResults() {
   }
 }
 
+function showSiteListSkeleton() {
+  const siteLists = document.getElementById('site-lists');
+  if (!siteLists) return;
+  siteLists.classList.remove('fade-in');
+  siteLists.innerHTML = '';
+  for (let i = 0; i < 3; i++) {
+    const row = document.createElement('div');
+    row.className = 'skeleton-row';
+    row.innerHTML = '<div class="skeleton-dot"></div><div class="skeleton-bar skeleton-bar-sm"></div><div class="skeleton-bar skeleton-bar-md"></div><div class="skeleton-bar-tag"></div>';
+    siteLists.appendChild(row);
+  }
+}
+
 function renderSiteLists() {
   const siteLists = document.getElementById('site-lists');
   if (!siteLists) return;
   siteLists.innerHTML = '';
+  siteLists.classList.add('fade-in');
 
   const filteredData = getFilteredData();
 
@@ -942,41 +959,91 @@ function initializeMobileMenu() {
   if (backdrop) backdrop.addEventListener('click', closeMenu);
 }
 
+function toggleClearButton() {
+  const btn = document.getElementById('clear-filters');
+  if (!btn) return;
+  const hasActiveFilter = currentFilters.type !== 'all' || currentFilters.source !== 'all';
+  btn.classList.toggle('visible', hasActiveFilter);
+}
+
 function initializeFilters() {
-  const typeFilter = document.getElementById('type-filter');
-  const sourceFilter = document.getElementById('source-filter');
   const clearFiltersBtn = document.getElementById('clear-filters');
-  
-  function applyFilters() {
-    renderSiteLists();
-    updateFilterResults();
-  }
-  
-  if (typeFilter) {
-    typeFilter.addEventListener('change', (e) => {
-      currentFilters.type = e.target.value;
-      applyFilters();
+
+  document.querySelectorAll('.custom-select').forEach(dropdown => {
+    const trigger = dropdown.querySelector('.select-trigger');
+    const panel = dropdown.querySelector('.select-panel');
+    const valueEl = dropdown.querySelector('.select-value');
+    const filterKey = dropdown.dataset.filter;
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const wasOpen = dropdown.classList.contains('open');
+      document.querySelectorAll('.custom-select.open').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.select-trigger').setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen) {
+        dropdown.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
     });
-  }
-  
-  if (sourceFilter) {
-    sourceFilter.addEventListener('change', (e) => {
-      currentFilters.source = e.target.value;
-      applyFilters();
+
+    panel.addEventListener('click', (e) => e.stopPropagation());
+
+    panel.querySelectorAll('.select-option').forEach(option => {
+      option.addEventListener('click', () => {
+        panel.querySelectorAll('.select-option').forEach(o => o.classList.remove('active'));
+        option.classList.add('active');
+        valueEl.textContent = option.querySelector('.option-text').textContent;
+        currentFilters[filterKey] = option.dataset.value;
+        dropdown.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+        toggleClearButton();
+        showSiteListSkeleton();
+        updateFilterResults();
+        setTimeout(() => { renderSiteLists(); }, 300);
+      });
     });
-  }
-  
+  });
+
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.custom-select.open').forEach(d => {
+      d.classList.remove('open');
+      d.querySelector('.select-trigger').setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.custom-select.open').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.select-trigger').setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
   if (clearFiltersBtn) {
     clearFiltersBtn.addEventListener('click', () => {
       currentFilters.type = 'all';
       currentFilters.source = 'all';
-      
-      if (typeFilter) typeFilter.value = 'all';
-      if (sourceFilter) sourceFilter.value = 'all';
-      
-      applyFilters();
+      document.querySelectorAll('.custom-select').forEach(dropdown => {
+        const panel = dropdown.querySelector('.select-panel');
+        const valueEl = dropdown.querySelector('.select-value');
+        const firstOption = panel.querySelector('.select-option');
+        panel.querySelectorAll('.select-option').forEach(o => o.classList.remove('active'));
+        if (firstOption) {
+          firstOption.classList.add('active');
+          valueEl.textContent = firstOption.querySelector('.option-text').textContent;
+        }
+      });
+      toggleClearButton();
+      showSiteListSkeleton();
+      updateFilterResults();
+      setTimeout(() => { renderSiteLists(); }, 300);
     });
   }
+
+  toggleClearButton();
   updateFilterResults();
 }
 
