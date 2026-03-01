@@ -125,7 +125,7 @@ const plantingData = {
   },
 
   TZ: { 
-    centroid: [-6.37, 34.89], 
+    centroid: [-4.798667, 38.290218], 
     type: 'confirmed', 
     source: 'Tree-Nation',
     fy: '2025-2026',
@@ -137,7 +137,7 @@ const plantingData = {
     ]
   },
   CA: {
-    centroid: [56.13, -106.35],
+    centroid: [52.405426, -98.917091],
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
@@ -146,7 +146,7 @@ const plantingData = {
     ]
   },
   BO: {
-    centroid: [-16.29, -63.59],
+    centroid: [-17.270603, -62.805347],
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
@@ -155,7 +155,7 @@ const plantingData = {
     ]
   },
   NG: {
-    centroid: [9.08, 8.68],
+    centroid: [7.550622, 4.852035],
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
@@ -164,7 +164,7 @@ const plantingData = {
     ]
   },
   BR: {
-    centroid: [-14.24, -51.93],
+    centroid: [-9.188258, -63.175442],
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
@@ -173,7 +173,7 @@ const plantingData = {
     ]
   },
   RO: {
-    centroid: [45.94, 24.97],
+    centroid: [46.168808, 25.911007],
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
@@ -182,7 +182,7 @@ const plantingData = {
     ]
   },
   ZW: {
-    centroid: [-19.02, 29.15],
+    centroid: [-17.830269, 31.026451],
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
@@ -191,7 +191,7 @@ const plantingData = {
     ]
   },
   IE: {
-    centroid: [52.84, -9.06],
+    centroid: [52.984489, -9.269574],
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
@@ -200,7 +200,7 @@ const plantingData = {
     ]
   },
   MX: {
-    centroid: [23.63, -102.55],
+    centroid: [17.976389, -97.373886],
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
@@ -209,7 +209,7 @@ const plantingData = {
     ]
   },
   AR: {
-    centroid: [-38.42, -63.62],
+    centroid: [-31.491564, -64.835419],
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
@@ -218,7 +218,7 @@ const plantingData = {
     ]
   },
   FR: {
-    centroid: [46.23, 2.21],
+    centroid: [47.267403, 3.305741],
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
@@ -227,7 +227,7 @@ const plantingData = {
     ]
   },
   AU: {
-    centroid: [-25.27, 133.78],
+    centroid: [-28.746443, 153.450165],
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
@@ -236,7 +236,7 @@ const plantingData = {
     ]
   },
   GB: {
-    centroid: [55.38, -3.44],
+    centroid: [51.771252, -1.324433],
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
@@ -245,7 +245,7 @@ const plantingData = {
     ]
   },
   ES: {
-    centroid: [40.46, -3.75],
+    centroid: [38.102879, -2.75392],
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
