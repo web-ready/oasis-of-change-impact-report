@@ -128,7 +128,7 @@ const plantingData = {
     type: 'confirmed', 
     source: 'Tree-Nation',
     sites: [
-      { name: 'Replanting the burnt Mkussu Forest (CORE) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' },
+      { name: 'Replanting the burnt Mkussu Forest', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Usambara Biodiversity Conservation', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Mlola Biodiversity Restoration', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Plant to Stop Poverty', type: 'confirmed', source: 'Tree-Nation' }
@@ -139,7 +139,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     sites: [
-      { name: 'Boreal Forest Habitat Restoration — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Boreal Forest Habitat Restoration', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   BO: {
@@ -147,7 +147,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     sites: [
-      { name: 'Amazon Windshields (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Amazon Windshields', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   NG: {
@@ -155,7 +155,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     sites: [
-      { name: 'Restoration of Ala Forest Reserve (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Restoration of Ala Forest Reserve', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   BR: {
@@ -163,7 +163,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     sites: [
-      { name: 'Reforest the Amazon Basin (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Reforest the Amazon Basin', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   RO: {
@@ -171,7 +171,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     sites: [
-      { name: 'Bear Groves in Transylvania (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Bear Groves in Transylvania', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   ZW: {
@@ -179,7 +179,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     sites: [
-      { name: 'Zimbabwe Reforestation Initiative (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Zimbabwe Reforestation Initiative', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   IE: {
@@ -187,7 +187,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     sites: [
-      { name: 'Ireland Community Tree Planting, County Clare (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Ireland Community Tree Planting, County Clare', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   MX: {
@@ -195,7 +195,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     sites: [
-      { name: 'Restoration and Social Empowerment (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Restoration and Social Empowerment', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   AR: {
@@ -203,7 +203,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     sites: [
-      { name: 'Bosques de Agua (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Bosques de Agua', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   FR: {
@@ -211,7 +211,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     sites: [
-      { name: 'Restauration Forêts dégradées (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Restauration Forêts dégradées', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   AU: {
@@ -219,7 +219,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     sites: [
-      { name: 'Big Scrub Rainforest Restoration (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Big Scrub Rainforest Restoration', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   GB: {
@@ -227,7 +227,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     sites: [
-      { name: 'Community Tree Planting (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Community Tree Planting', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   ES: {
@@ -235,7 +235,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     sites: [
-      { name: 'Alvelal (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Alvelal', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   UG: { 
@@ -871,9 +871,13 @@ function renderSiteLists() {
             siteType = site.type === 'confirmed' ? 'Confirmed' : 'Supported';
           }
           
+          const displayName = typeof site === 'string' ? site : site.name;
+          const showFootnote3 = (cc === 'NP' && displayName === 'Eden Reforestation Projects') || (cc === 'US' && displayName === 'National Forest Recovery');
+          const footnoteLink = showFootnote3 ? ' <a href="#footnote-3" class="align-super text-xs text-brand-green hover:underline no-underline" aria-label="Footnote 3">3</a>' : '';
+          
           li.innerHTML = `
             <div class="w-1.5 h-1.5 rounded-full ${siteColor} flex-shrink-0"></div>
-            <span class="flex-1 truncate">${typeof site === 'string' ? site : site.name}</span>
+            <span class="flex-1 truncate">${displayName}${footnoteLink}</span>
             <span class="text-xs text-gray-500 ml-2 flex-shrink-0">${siteType}</span>
           `;
           ul.appendChild(li);

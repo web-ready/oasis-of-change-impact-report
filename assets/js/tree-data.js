@@ -87,6 +87,7 @@ const TreeData = {
 
     /* ────────────────────────────────────────────────
        MAP SITES  (drives Countries + Continents counts)
+       Pre-incorporation: 60 trees Eden Reforestation (Nepal), 10 trees National Forest Recovery (USA), planted before Oasis of Change, Inc. was legally incorporated.
        ──────────────────────────────────────────────── */
     mapSites: [
         { id: "madagascar",  name: "Madagascar",  country: "Madagascar",  type: "sunset",    source: "Sunset — 2024-2025 FY",    trees: 2525, lat: -18.7669, lng: 46.8691,   description: "Previously supported in 2024-2025 FY. Project completed during that cycle." },
@@ -104,10 +105,10 @@ const TreeData = {
         { id: "australia",   name: "Australia",    country: "Australia",   type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: -25.2744, lng: 133.7751, description: "2025-2026 FY — Big Scrub Rainforest Restoration (PILOT)" },
         { id: "uk",          name: "United Kingdom", country: "United Kingdom", type: "confirmed", source: "Tree-Nation",          trees: 2,    lat: 55.3781,  lng: -3.4360,  description: "2025-2026 FY — Community Tree Planting (PILOT)" },
         { id: "spain",       name: "Spain",        country: "Spain",       type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: 40.4637,  lng: -3.7492,  description: "2025-2026 FY — Alvelal (PILOT)" },
-        { id: "nepal",       name: "Nepal",        country: "Nepal",       type: "mixed",     source: "Mixed Sources",             trees: 2000, lat: 28.3949,  lng: 84.1240,  description: "Mixed verified and legacy tree plantings" },
+        { id: "nepal",       name: "Nepal",        country: "Nepal",       type: "mixed",     source: "Mixed Sources",             trees: 2000, lat: 28.3949,  lng: 84.1240,  description: "Includes 60 trees (Eden Reforestation, Phyllanthus emblica) planted before legal incorporation. Mixed verified and legacy partner plantings." },
         { id: "kenya",       name: "Kenya",        country: "Kenya",       type: "mixed",     source: "Mixed Sources",             trees: 0,    lat: -0.0236,  lng: 37.9062,  description: "Mixed verified and legacy tree plantings" },
         { id: "uganda",      name: "Uganda",       country: "Uganda",      type: "confirmed", source: "Tree-Nation",               trees: 0,    lat: 1.3733,   lng: 32.2903,  description: "Verified tree plantings" },
-        { id: "united-states", name: "United States", country: "United States", type: "confirmed", source: "Tree-Nation",          trees: 0,    lat: 39.8283,  lng: -98.5795, description: "Verified tree plantings" },
+        { id: "united-states", name: "United States", country: "United States", type: "confirmed", source: "Tree-Nation",          trees: 0,    lat: 39.8283,  lng: -98.5795, description: "Includes 10 trees (National Forest Recovery, Pinus strobus) planted before legal incorporation. Verified tree plantings." },
         { id: "india",       name: "India",        country: "India",       type: "confirmed", source: "Tree-Nation",               trees: 0,    lat: 20.5937,  lng: 78.9629,  description: "Verified tree plantings" },
         { id: "indonesia",   name: "Indonesia",    country: "Indonesia",   type: "mixed",     source: "Mixed Sources",             trees: 1000, lat: -0.7893,  lng: 113.9213, description: "Mixed verified and legacy tree plantings" },
         { id: "haiti",       name: "Haiti",        country: "Haiti",       type: "supported", source: "Legacy Partner (Refoorest)", trees: 1200, lat: 18.9712,  lng: -72.2852, description: "Legacy reforestation initiative" },
