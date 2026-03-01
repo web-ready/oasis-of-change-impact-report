@@ -59,7 +59,7 @@ function setText(id, val) {
 
 function fyBadge(fy) {
     if (!fy) return '';
-    var cls = fy === '2025-2026' ? 'fy-current' : 'fy-previous';
+    var cls = fy === '2025-2026' ? 'fy-current' : (fy === 'Historical' ? 'fy-historical' : 'fy-previous');
     return ' <span class="fy-badge ' + cls + '">' + fy + '</span>';
 }
 
@@ -130,6 +130,7 @@ function populateProjectTables() {
             vCards.appendChild(card);
         });
     }
+
     const lBody = document.getElementById('legacy-table-body');
     if (lBody) {
         lBody.innerHTML = '';

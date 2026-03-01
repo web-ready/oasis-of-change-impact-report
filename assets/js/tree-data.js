@@ -40,12 +40,15 @@ const TreeData = {
         { id: "france-restauration", name: "Restauration Forêts dégradées",   location: "France",             trees: 2,    co2Offset: 20,     fy: "2025-2026", fundingStream: "PILOT",             species: "Pinus nigra",               url: "https://tree-nation.com/projects/reboisement-grand-est" },
         { id: "australia-big-scrub", name: "Big Scrub Rainforest Restoration", location: "Australia",          trees: 2,    co2Offset: 40,     fy: "2025-2026", fundingStream: "PILOT",             species: "Solanum aviculare",         url: "https://tree-nation.com/projects/big-scrub-rainforest-australia" },
         { id: "uk-community",     name: "Community Tree Planting",            location: "United Kingdom",     trees: 2,    co2Offset: 20,     fy: "2025-2026", fundingStream: "PILOT",             species: "Prunus spinosa",            url: "https://tree-nation.com/projects/uk-community-tree-planting" },
-        { id: "spain-alvelal",    name: "Alvelal",                            location: "Spain",              trees: 2,    co2Offset: 20,     fy: "2025-2026", fundingStream: "PILOT",             species: "Pistacia lentiscus",        url: "https://tree-nation.com/projects/alvelal" }
+        { id: "spain-alvelal",    name: "Alvelal",                            location: "Spain",              trees: 2,    co2Offset: 20,     fy: "2025-2026", fundingStream: "PILOT",             species: "Pistacia lentiscus",        url: "https://tree-nation.com/projects/alvelal" },
+
+        // ── Historical (verified on Tree-Nation, before incorporation) ──
+        { id: "nepal-eden-historical", name: "Eden Reforestation Projects", location: "Nepal",           trees: 60,  co2Offset: 0, fy: "Historical", species: "Phyllanthus emblica", url: "https://tree-nation.com/projects/eden-reforestation-nepal" },
+        { id: "usa-nfr-historical",     name: "National Forest Recovery",    location: "United States", trees: 10,  co2Offset: 0, fy: "Historical", species: "Pinus strobus",       url: "https://tree-nation.com/projects/shoshone-national-forest-wyoming" }
     ],
 
 
     /* ────────────────────────────────────────────────
-       PLANTING PARTNERS  (also verified on Tree-Nation)
        Trees planted through partner organization accounts.
        Subtotal: 628 trees
        ──────────────────────────────────────────────── */
@@ -173,7 +176,10 @@ const TreeData = {
     getLegacyTrees:   function() { return this.totals.legacyTrees; },
 
     getOasisFundedTrees: function() {
-        return this.verifiedProjects.reduce(function(sum, p) { return sum + (p.trees || 0); }, 0);
+        return this.verifiedProjects.reduce(function(sum, p) {
+            if (p.fy === 'Historical') return sum;
+            return sum + (p.trees || 0);
+        }, 0);
     },
     getPartnerTrees: function() {
         return (this.verifiedPartners || []).reduce(function(sum, p) { return sum + (p.trees || 0); }, 0);
