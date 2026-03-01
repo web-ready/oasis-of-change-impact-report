@@ -172,18 +172,25 @@ function switchTab(tabName) {
     const toggleBtn = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     const closeBtn = document.getElementById('mobile-menu-close');
+    const backdrop = document.getElementById('mobile-menu-backdrop');
     if (!toggleBtn || !mobileMenu) return;
     if (toggleBtn.dataset.menuInit) return;
     toggleBtn.dataset.menuInit = '1';
-    const toggle = () => {
-        const isOpen = !mobileMenu.classList.contains('hidden');
-        mobileMenu.classList.toggle('hidden');
-        document.documentElement.style.overflow = isOpen ? '' : 'hidden';
-        document.body.style.overflow = isOpen ? '' : 'hidden';
-        toggleBtn.setAttribute('aria-expanded', String(!isOpen));
+    const open = () => {
+        mobileMenu.classList.add('menu-open');
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        toggleBtn.setAttribute('aria-expanded', 'true');
     };
-    toggleBtn.addEventListener('click', toggle);
-    if (closeBtn) closeBtn.addEventListener('click', toggle);
+    const close = () => {
+        mobileMenu.classList.remove('menu-open');
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        toggleBtn.setAttribute('aria-expanded', 'false');
+    };
+    toggleBtn.addEventListener('click', open);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    if (backdrop) backdrop.addEventListener('click', close);
 })();
 
 function setupSearch(searchId, tableId, dataClass) {
