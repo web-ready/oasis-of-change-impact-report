@@ -39,6 +39,8 @@ function updateUI() {
     setText('total-count', total.toLocaleString());
     setText('verified-count', verified.toLocaleString());
     setText('legacy-count', legacy.toLocaleString());
+    setText('footnote-oasis-trees', TreeData.getOasisFundedTrees().toLocaleString());
+    setText('footnote-partner-trees', TreeData.getPartnerTrees().toLocaleString());
     setText('species-count', TreeData.getSpeciesCount());
     const countries = [...new Set(TreeData.getMapSites().map(s => s.country))];
     setText('countries-count', countries.length);
@@ -55,7 +57,47 @@ function setText(id, val) {
     if (el) el.textContent = val;
 }
 
+function fyBadge(fy) {
+    if (!fy) return '';
+    var cls = fy === '2025-2026' ? 'fy-current' : 'fy-previous';
+    return ' <span class="fy-badge ' + cls + '">' + fy + '</span>';
+}
+
 function populateProjectTables() {
+    var partners = (TreeData.getVerifiedPartners ? TreeData.getVerifiedPartners() : []).slice().sort(function(a,b){ return (b.trees||0)-(a.trees||0); });
+    var pBody = document.getElementById('partners-table-body');
+    if (pBody) {
+        pBody.innerHTML = '';
+        partners.forEach(function(p) {
+            var tr = document.createElement('tr');
+            tr.className = 'data-row border-b border-gray-50 transition-all duration-200';
+            tr.innerHTML =
+                '<td class="py-4 px-2 font-medium text-deep-forest">' + p.name + '</td>' +
+                '<td class="py-4 px-2 text-sm text-gray-600">' + p.baseLocation + '</td>' +
+                '<td class="py-4 px-2 text-sm text-gray-600">' + p.countries + '</td>' +
+                '<td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">' + p.trees.toLocaleString() + '</td>';
+            pBody.appendChild(tr);
+        });
+    }
+    var pCards = document.getElementById('partners-mobile-cards');
+    if (pCards) {
+        pCards.innerHTML = '';
+        partners.forEach(function(p) {
+            var card = document.createElement('div');
+            card.className = 'mobile-data-card';
+            card.setAttribute('data-search', (p.name + ' ' + p.baseLocation + ' ' + p.countries).toLowerCase());
+            card.innerHTML =
+                '<div class="mobile-card-header">' +
+                    '<div>' +
+                        '<div class="mobile-card-title">' + p.name + '</div>' +
+                        '<div class="mobile-card-subtitle">' + p.baseLocation + ' · ' + p.countries + '</div>' +
+                    '</div>' +
+                    '<div class="mobile-trees-count">' + p.trees.toLocaleString() + '</div>' +
+                '</div>';
+            pCards.appendChild(card);
+        });
+    }
+
     const verifiedProjects = [...TreeData.getVerifiedProjects()].sort((a, b) => (b.trees || 0) - (a.trees || 0));
     const vBody = document.getElementById('verified-table-body');
     if (vBody) {
@@ -64,7 +106,7 @@ function populateProjectTables() {
             const tr = document.createElement('tr');
             tr.className = 'data-row border-b border-gray-50 transition-all duration-200';
             tr.innerHTML = `
-                <td class="py-4 px-2"><a href="${p.url}" target="_blank" rel="noopener" class="font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">${p.name}</a></td>
+                <td class="py-4 px-2"><a href="${p.url}" target="_blank" rel="noopener" class="font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">${p.name}</a>${fyBadge(p.fy)}</td>
                 <td class="py-4 px-2 text-sm text-gray-600">${p.location}</td>
                 <td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">${p.trees.toLocaleString()}</td>`;
             vBody.appendChild(tr);
@@ -80,7 +122,7 @@ function populateProjectTables() {
             card.innerHTML = `
                 <div class="mobile-card-header">
                     <div>
-                        <div class="mobile-card-title"><a href="${p.url}" target="_blank" rel="noopener" class="hover:text-brand-green">${p.name}</a></div>
+                        <div class="mobile-card-title"><a href="${p.url}" target="_blank" rel="noopener" class="hover:text-brand-green">${p.name}</a>${fyBadge(p.fy)}</div>
                         <div class="mobile-card-subtitle">${p.location}</div>
                     </div>
                     <div class="mobile-trees-count">${p.trees.toLocaleString()}</div>
