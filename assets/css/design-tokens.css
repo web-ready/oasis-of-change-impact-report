@@ -201,6 +201,11 @@ select:focus-visible,
     color: #6B7280;
 }
 
+.fy-historical {
+    background-color: #FEF3C7;
+    color: #92400E;
+}
+
 /* ── Footnote highlight when linked (accessibility) ── */
 [id^="footnote-"]:target {
     background-color: rgba(0, 71, 52, 0.06);
