@@ -121,7 +121,7 @@
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2.5 sm:gap-3 max-w-5xl mx-auto">
                     <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center">
                         <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="verified-count">0</div>
-                        <div class="text-[11px] sm:text-xs text-white/55 font-medium">Verified</div>
+                        <div class="text-[11px] sm:text-xs text-white/55 font-medium">Verified <a href="#footnote-2" class="align-super text-xs text-white/80 hover:text-white ml-0.5 no-underline" aria-label="Footnote 2">2</a></div>
                     </div>
                     <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center">
                         <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="legacy-count">0</div>
@@ -222,29 +222,53 @@
 
                 <div id="verified-content" class="tab-content p-6">
                     <div class="mb-4">
-                        <input type="text" placeholder="Search projects or HQ locations..." 
+                        <input type="text" placeholder="Search projects or locations..." 
                                class="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-brand-green focus:border-transparent"
                                id="verified-search">
                     </div>
-                    <div class="overflow-x-auto desktop-table">
-                        <table class="w-full" id="verified-table">
-                            <thead>
-                                <tr class="border-b border-gray-100">
-                                    <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="forest">
-                                        <div class="flex items-center gap-1"><span>Project</span><span class="text-xs">↕</span></div>
-                                    </th>
-                                    <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="country">
-                                        <div class="flex items-center gap-1"><span>HQ Location</span><span class="text-xs">↕</span></div>
-                                    </th>
-                                    <th class="text-right py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="trees">
-                                        <div class="flex items-center justify-end gap-1"><span>Trees</span><span class="text-xs">↕</span></div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="verified-data" id="verified-table-body"></tbody>
-                        </table>
+
+                    <div class="mb-6">
+                        <h3 class="text-sm font-semibold text-brand-green uppercase tracking-wide mb-3">Planting Partners</h3>
+                        <p class="text-xs text-gray-500 mb-3">Organizations planting through their own Tree-Nation accounts, facilitated by Oasis of Change.</p>
+                        <div class="overflow-x-auto desktop-table">
+                            <table class="w-full" id="partners-table">
+                                <thead>
+                                    <tr class="border-b border-gray-100">
+                                        <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide">Organization</th>
+                                        <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide">Base</th>
+                                        <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide">Countries</th>
+                                        <th class="text-right py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide">Trees</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="partners-table-body"></tbody>
+                            </table>
+                        </div>
+                        <div class="mobile-cards" id="partners-mobile-cards"></div>
                     </div>
-                    <div class="mobile-cards" id="verified-mobile-cards"></div>
+
+                    <div>
+                        <h3 class="text-sm font-semibold text-brand-green uppercase tracking-wide mb-3">Planting Sites</h3>
+                        <p class="text-xs text-gray-500 mb-3">Oasis-funded Tree-Nation planting sites across fiscal years.</p>
+                        <div class="overflow-x-auto desktop-table">
+                            <table class="w-full" id="verified-table">
+                                <thead>
+                                    <tr class="border-b border-gray-100">
+                                        <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="forest">
+                                            <div class="flex items-center gap-1"><span>Project</span><span class="text-xs">↕</span></div>
+                                        </th>
+                                        <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="country">
+                                            <div class="flex items-center gap-1"><span>Location</span><span class="text-xs">↕</span></div>
+                                        </th>
+                                        <th class="text-right py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="trees">
+                                            <div class="flex items-center justify-end gap-1"><span>Trees</span><span class="text-xs">↕</span></div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="verified-data" id="verified-table-body"></tbody>
+                            </table>
+                        </div>
+                        <div class="mobile-cards" id="verified-mobile-cards"></div>
+                    </div>
                 </div>
 
                 <div id="legacy-content" class="tab-content p-6 hidden">
@@ -293,6 +317,7 @@
             <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Notes</h2>
             <ol class="space-y-2 text-sm text-gray-600 list-none">
                 <li id="footnote-1" class="scroll-mt-20"><sup class="text-gray-400 font-medium">1</sup> Planting Sites includes all legacy, mixed, and verified sites across Tree-Nation and legacy partners.</li>
+                <li id="footnote-2" class="scroll-mt-20"><sup class="text-gray-400 font-medium">2</sup> Verified includes all Tree-Nation plantings: Oasis-funded projects (<span id="footnote-oasis-trees">0</span> trees) and planting partners (<span id="footnote-partner-trees">0</span> trees).</li>
             </ol>
             <p class="mt-6 text-xs text-gray-400">&copy; <span id="copyright-year"></span> Oasis of Change, Inc.</p>
         </div>

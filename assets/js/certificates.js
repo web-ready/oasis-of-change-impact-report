@@ -1,10 +1,3 @@
-function scrollToDetails() {
-    document.getElementById('detailed-info').scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-    });
-}
-
 function downloadCertificate(certificateId) {
     if (typeof TreeData === 'undefined') {
         console.error('TreeData not loaded');
