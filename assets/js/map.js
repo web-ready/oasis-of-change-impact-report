@@ -873,7 +873,7 @@ function renderSiteLists() {
           
           const displayName = typeof site === 'string' ? site : site.name;
           const showFootnote3 = (cc === 'NP' && displayName === 'Eden Reforestation Projects') || (cc === 'US' && displayName === 'National Forest Recovery');
-          const footnoteLink = showFootnote3 ? ' <a href="#footnote-3" class="align-super text-xs text-brand-green hover:underline no-underline" aria-label="Footnote 3">3</a>' : '';
+          const footnoteLink = showFootnote3 ? ' <a href="#footnote-2" class="align-super text-xs text-brand-green hover:underline no-underline" aria-label="Footnote 2">2</a>' : '';
           
           li.innerHTML = `
             <div class="w-1.5 h-1.5 rounded-full ${siteColor} flex-shrink-0"></div>
