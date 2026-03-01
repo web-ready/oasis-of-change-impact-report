@@ -1,10 +1,11 @@
 const plantingData = {
   MG: { 
     centroid: [-18.77, 46.87], 
-    type: 'sunset', 
-    source: 'Sunset — 2024-2025 FY',
+    type: 'mixed', 
+    source: 'Mixed Sources',
+    fy: '2024-2025',
     sites: [
-      { name: 'Eden Reforestation Projects', type: 'confirmed', source: 'Eden Reforestation' },
+      { name: 'Eden Reforestation Projects (sunset)', type: 'confirmed', source: 'Eden Reforestation (Tree-Nation)' },
       { name: 'Kandrany 1', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Akalamboro', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Ampasimarine', type: 'supported', source: 'Legacy Partner (Refoorest)' },
@@ -44,7 +45,7 @@ const plantingData = {
     centroid: [28.39, 84.12], 
     type: 'mixed', 
     sites: [
-      { name: 'Eden Reforestation Projects', type: 'confirmed', source: 'Eden Reforestation' },
+      { name: 'Eden Reforestation Projects', type: 'confirmed', source: 'Eden Reforestation (Tree-Nation)' },
       { name: 'Amaltari', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Attarpur', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Bachhauli', type: 'supported', source: 'Legacy Partner (Refoorest)' },
@@ -127,6 +128,7 @@ const plantingData = {
     centroid: [-6.37, 34.89], 
     type: 'confirmed', 
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Replanting the burnt Mkussu Forest', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Usambara Biodiversity Conservation', type: 'confirmed', source: 'Tree-Nation' },
@@ -138,6 +140,7 @@ const plantingData = {
     centroid: [56.13, -106.35],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Boreal Forest Habitat Restoration', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -146,6 +149,7 @@ const plantingData = {
     centroid: [-16.29, -63.59],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Amazon Windshields', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -154,6 +158,7 @@ const plantingData = {
     centroid: [9.08, 8.68],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Restoration of Ala Forest Reserve', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -162,6 +167,7 @@ const plantingData = {
     centroid: [-14.24, -51.93],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Reforest the Amazon Basin', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -170,6 +176,7 @@ const plantingData = {
     centroid: [45.94, 24.97],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Bear Groves in Transylvania', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -178,6 +185,7 @@ const plantingData = {
     centroid: [-19.02, 29.15],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Zimbabwe Reforestation Initiative', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -186,6 +194,7 @@ const plantingData = {
     centroid: [52.84, -9.06],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Ireland Community Tree Planting, County Clare', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -194,6 +203,7 @@ const plantingData = {
     centroid: [23.63, -102.55],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Restoration and Social Empowerment', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -202,6 +212,7 @@ const plantingData = {
     centroid: [-38.42, -63.62],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Bosques de Agua', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -210,6 +221,7 @@ const plantingData = {
     centroid: [46.23, 2.21],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Restauration Forêts dégradées', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -218,6 +230,7 @@ const plantingData = {
     centroid: [-25.27, 133.78],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Big Scrub Rainforest Restoration', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -226,6 +239,7 @@ const plantingData = {
     centroid: [55.38, -3.44],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Community Tree Planting', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -234,6 +248,7 @@ const plantingData = {
     centroid: [40.46, -3.75],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
       { name: 'Alvelal', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -756,21 +771,29 @@ function getFilteredData() {
     if (currentFilters.type !== 'all' && cfg.type !== currentFilters.type) {
       return false;
     }
-    if (currentFilters.source !== 'all') {
-      if (cfg.type === 'mixed') {
-        const hasMatchingSource = cfg.sites.some(site => {
-          if (typeof site === 'string') {
-            return cfg.source === currentFilters.source;
-          }
-          return site.source === currentFilters.source;
-        });
-        if (!hasMatchingSource) {
-          return false;
+    if (currentFilters.source === 'all') {
+      return true;
+    }
+    function sourceMatches(src) {
+      if (currentFilters.source === 'Tree-Nation') {
+        return src === 'Tree-Nation' || (src && src.includes('(Tree-Nation)'));
+      }
+      return src === currentFilters.source;
+    }
+
+    if (cfg.type === 'mixed') {
+      const hasMatchingSource = cfg.sites.some(site => {
+        if (typeof site === 'string') {
+          return sourceMatches(cfg.source || '');
         }
-      } else {
-        if (cfg.source !== currentFilters.source) {
-          return false;
-        }
+        return sourceMatches(site.source || '');
+      });
+      if (!hasMatchingSource) {
+        return false;
+      }
+    } else {
+      if (!sourceMatches(cfg.source || '')) {
+        return false;
       }
     }
     
@@ -792,10 +815,24 @@ function updateFilterResults() {
   }
 }
 
+function showSiteListSkeleton() {
+  const siteLists = document.getElementById('site-lists');
+  if (!siteLists) return;
+  siteLists.classList.remove('fade-in');
+  siteLists.innerHTML = '';
+  for (let i = 0; i < 3; i++) {
+    const row = document.createElement('div');
+    row.className = 'skeleton-row';
+    row.innerHTML = '<div class="skeleton-dot"></div><div class="skeleton-bar skeleton-bar-sm"></div><div class="skeleton-bar skeleton-bar-md"></div><div class="skeleton-bar-tag"></div>';
+    siteLists.appendChild(row);
+  }
+}
+
 function renderSiteLists() {
   const siteLists = document.getElementById('site-lists');
   if (!siteLists) return;
   siteLists.innerHTML = '';
+  siteLists.classList.add('fade-in');
 
   const filteredData = getFilteredData();
 
@@ -922,41 +959,91 @@ function initializeMobileMenu() {
   if (backdrop) backdrop.addEventListener('click', closeMenu);
 }
 
+function toggleClearButton() {
+  const btn = document.getElementById('clear-filters');
+  if (!btn) return;
+  const hasActiveFilter = currentFilters.type !== 'all' || currentFilters.source !== 'all';
+  btn.classList.toggle('visible', hasActiveFilter);
+}
+
 function initializeFilters() {
-  const typeFilter = document.getElementById('type-filter');
-  const sourceFilter = document.getElementById('source-filter');
   const clearFiltersBtn = document.getElementById('clear-filters');
-  
-  function applyFilters() {
-    renderSiteLists();
-    updateFilterResults();
-  }
-  
-  if (typeFilter) {
-    typeFilter.addEventListener('change', (e) => {
-      currentFilters.type = e.target.value;
-      applyFilters();
+
+  document.querySelectorAll('.custom-select').forEach(dropdown => {
+    const trigger = dropdown.querySelector('.select-trigger');
+    const panel = dropdown.querySelector('.select-panel');
+    const valueEl = dropdown.querySelector('.select-value');
+    const filterKey = dropdown.dataset.filter;
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const wasOpen = dropdown.classList.contains('open');
+      document.querySelectorAll('.custom-select.open').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.select-trigger').setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen) {
+        dropdown.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
     });
-  }
-  
-  if (sourceFilter) {
-    sourceFilter.addEventListener('change', (e) => {
-      currentFilters.source = e.target.value;
-      applyFilters();
+
+    panel.addEventListener('click', (e) => e.stopPropagation());
+
+    panel.querySelectorAll('.select-option').forEach(option => {
+      option.addEventListener('click', () => {
+        panel.querySelectorAll('.select-option').forEach(o => o.classList.remove('active'));
+        option.classList.add('active');
+        valueEl.textContent = option.querySelector('.option-text').textContent;
+        currentFilters[filterKey] = option.dataset.value;
+        dropdown.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+        toggleClearButton();
+        showSiteListSkeleton();
+        updateFilterResults();
+        setTimeout(() => { renderSiteLists(); }, 300);
+      });
     });
-  }
-  
+  });
+
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.custom-select.open').forEach(d => {
+      d.classList.remove('open');
+      d.querySelector('.select-trigger').setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.custom-select.open').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.select-trigger').setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
   if (clearFiltersBtn) {
     clearFiltersBtn.addEventListener('click', () => {
       currentFilters.type = 'all';
       currentFilters.source = 'all';
-      
-      if (typeFilter) typeFilter.value = 'all';
-      if (sourceFilter) sourceFilter.value = 'all';
-      
-      applyFilters();
+      document.querySelectorAll('.custom-select').forEach(dropdown => {
+        const panel = dropdown.querySelector('.select-panel');
+        const valueEl = dropdown.querySelector('.select-value');
+        const firstOption = panel.querySelector('.select-option');
+        panel.querySelectorAll('.select-option').forEach(o => o.classList.remove('active'));
+        if (firstOption) {
+          firstOption.classList.add('active');
+          valueEl.textContent = firstOption.querySelector('.option-text').textContent;
+        }
+      });
+      toggleClearButton();
+      showSiteListSkeleton();
+      updateFilterResults();
+      setTimeout(() => { renderSiteLists(); }, 300);
     });
   }
+
+  toggleClearButton();
   updateFilterResults();
 }
 

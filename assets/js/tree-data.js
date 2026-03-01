@@ -90,7 +90,7 @@ const TreeData = {
        Pre-incorporation: 60 trees Eden Reforestation (Nepal), 10 trees National Forest Recovery (USA), planted before Oasis of Change, Inc. was legally incorporated.
        ──────────────────────────────────────────────── */
     mapSites: [
-        { id: "madagascar",  name: "Madagascar",  country: "Madagascar",  type: "sunset",    source: "Sunset — 2024-2025 FY",    trees: 2525, lat: -18.7669, lng: 46.8691,   description: "Previously supported in 2024-2025 FY. Project completed during that cycle." },
+        { id: "madagascar",  name: "Madagascar",  country: "Madagascar",  type: "mixed",     source: "Mixed Sources",             trees: 2525, lat: -18.7669, lng: 46.8691,   description: "2024-2025 FY — Eden Reforestation (verified). Includes verified historical plantings. Mixed verified and legacy partner sites." },
         { id: "tanzania",    name: "Tanzania",     country: "Tanzania",    type: "confirmed", source: "Tree-Nation",               trees: 7057, lat: -6.3690,  lng: 34.8888,  description: "2025-2026 FY — Replanting the burnt Mkussu Forest (CORE)" },
         { id: "canada",      name: "Canada",       country: "Canada",      type: "confirmed", source: "Tree-Nation",               trees: 62,   lat: 56.1304,  lng: -106.3468, description: "2025-2026 FY — Boreal Forest Habitat Restoration" },
         { id: "bolivia",     name: "Bolivia",      country: "Bolivia",     type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: -16.2902, lng: -63.5887, description: "2025-2026 FY — Amazon Windshields (PILOT)" },

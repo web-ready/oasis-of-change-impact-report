@@ -170,37 +170,73 @@
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                 <div class="mb-4">
                     <h2 class="text-xl font-semibold text-deep-forest mb-2">Project Sites by Country</h2>
-                    <p class="text-sm text-gray-600">Click a country to view its planting sites.</p>
+                    <p class="text-sm text-gray-600">Click a country to view its planting sites. <a href="#footnote-3" class="align-super text-xs text-brand-green hover:underline no-underline" aria-label="Footnote 3">3</a></p>
                 </div>
-                <div class="mb-4 p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                    <div class="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto">
-                            <label class="text-xs sm:text-sm font-medium text-gray-700 whitespace-nowrap">Filter by type:</label>
-                            <select id="type-filter" class="w-full sm:w-auto px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-green focus:border-brand-green">
-                                <option value="all">All Types</option>
-                                <option value="confirmed">Confirmed</option>
-                                <option value="supported">Supported</option>
-                                <option value="mixed">Mixed</option>
-                                <option value="sunset">Sunset</option>
-                            </select>
+                <div class="filter-bar mb-4">
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                        <div class="custom-select" data-filter="type">
+                            <button type="button" class="select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                                <span class="select-label">Type</span>
+                                <span class="select-divider"></span>
+                                <span class="select-value">All Types</span>
+                                <svg class="select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="select-panel" role="listbox">
+                                <button type="button" class="select-option active" data-value="all" role="option">
+                                    <span class="option-text">All Types</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <button type="button" class="select-option" data-value="confirmed" role="option">
+                                    <span class="option-dot" style="background:#004734"></span>
+                                    <span class="option-text">Confirmed</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <button type="button" class="select-option" data-value="supported" role="option">
+                                    <span class="option-dot" style="background:#EAB308"></span>
+                                    <span class="option-text">Supported</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <button type="button" class="select-option" data-value="mixed" role="option">
+                                    <span class="option-dot" style="background:#006B50"></span>
+                                    <span class="option-text">Mixed</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                            </div>
                         </div>
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto">
-                            <label class="text-xs sm:text-sm font-medium text-gray-700 whitespace-nowrap">Filter by source:</label>
-                            <select id="source-filter" class="w-full sm:w-auto px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-green focus:border-brand-green">
-                                <option value="all">All Sources</option>
-                                <option value="Tree-Nation">Tree-Nation</option>
-                                <option value="Eden Reforestation">Eden Reforestation</option>
-                                <option value="Legacy Partner (Tero)">Legacy Partner (Tero)</option>
-                                <option value="Legacy Partner (Refoorest)">Legacy Partner (Refoorest)</option>
-                                <option value="Sunset — 2024-2025 FY">Sunset — 2024-2025 FY</option>
-                            </select>
+                        <div class="custom-select" data-filter="source">
+                            <button type="button" class="select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                                <span class="select-label">Source</span>
+                                <span class="select-divider"></span>
+                                <span class="select-value">All Sources</span>
+                                <svg class="select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="select-panel" role="listbox">
+                                <button type="button" class="select-option active" data-value="all" role="option">
+                                    <span class="option-text">All Sources</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <div class="select-separator"></div>
+                                <button type="button" class="select-option" data-value="Tree-Nation" role="option">
+                                    <span class="option-text">Tree-Nation</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <div class="select-separator"></div>
+                                <button type="button" class="select-option" data-value="Legacy Partner (Refoorest)" role="option">
+                                    <span class="option-text">Legacy Partner (Refoorest)</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <button type="button" class="select-option" data-value="Legacy Partner (Tero)" role="option">
+                                    <span class="option-text">Legacy Partner (Tero)</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                            </div>
                         </div>
-                        <button id="clear-filters" class="w-full sm:w-auto px-3 py-1.5 text-sm text-gray-600 hover:text-gray-800 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">Clear Filters</button>
+                        <button type="button" id="clear-filters" class="filter-clear-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                            <span>Clear</span>
+                        </button>
                     </div>
-                    <div id="filter-results" class="text-xs sm:text-sm text-gray-600"></div>
-                </div>
-                <div class="mb-4 p-3 sm:p-4 bg-warning-bg border border-warning/40 rounded-lg">
-                    <p class="text-xs sm:text-sm text-warning-text">Some data comes from third-party partners and may not be current.</p>
+                    <div id="filter-results" class="filter-results-text"></div>
                 </div>
                 <div id="site-lists" class="space-y-3 sm:space-y-4"></div>
             </div>
@@ -248,7 +284,8 @@
 
                     <div>
                         <h3 class="text-sm font-semibold text-brand-green uppercase tracking-wide mb-3">Planting Sites</h3>
-                        <p class="text-xs text-gray-500 mb-3">Oasis-funded Tree-Nation planting sites across fiscal years.</p>
+                        <p class="text-xs text-gray-500 mb-3">Oasis-funded Tree-Nation planting sites across fiscal years, including historical plantings (pre-incorporation).</p>
+                        <span class="inline-block text-xs font-medium text-gray-600 bg-gray-100 px-2 py-1 rounded mb-3">Historical plantings</span>
                         <div class="overflow-x-auto desktop-table">
                             <table class="w-full" id="verified-table">
                                 <thead>
@@ -318,6 +355,7 @@
             <ol class="space-y-2 text-sm text-gray-600 list-none">
                 <li id="footnote-1" class="scroll-mt-20"><sup class="text-gray-400 font-medium">1</sup> Trees recorded through Tree-Nation: Oasis-funded projects (<span id="footnote-oasis-trees">0</span> trees) and planting partners (<span id="footnote-partner-trees">0</span> trees).</li>
                 <li id="footnote-2" class="scroll-mt-20"><sup class="text-gray-400 font-medium">2</sup> All reported planting locations (legacy, mixed, and verified). Some sites include trees from before Oasis of Change, Inc. was incorporated (Eden Reforestation Projects, Nepal; National Forest Recovery, United States).</li>
+                <li id="footnote-3" class="scroll-mt-20"><sup class="text-gray-400 font-medium">3</sup> Some data comes from third-party partners and may not be current.</li>
             </ol>
             <p class="mt-6 text-xs text-gray-400">&copy; <span id="copyright-year"></span> Oasis of Change, Inc.</p>
         </div>
