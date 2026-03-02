@@ -602,7 +602,7 @@ function createClusterGroupForType(type) {
     chunkedLoading: true,
     spiderfyOnMaxZoom: true,
     showCoverageOnHover: false,
-    maxClusterRadius: 45,
+    maxClusterRadius: 30,
     iconCreateFunction: function(cluster) {
       const count = cluster.getChildCount();
       const size = count < 10 ? 'small' : count < 100 ? 'medium' : 'large';
@@ -616,7 +616,7 @@ function createClusterGroupForType(type) {
   });
 }
 
-// Single cluster group that shows highest-priority type when markers overlap (confirmed > mixed > completed > sunset > supported)
+// Single cluster group — uses "mixed" style when markers of different types are grouped together
 const CLUSTER_TYPE_PRIORITY = { 'confirmed': 5, 'mixed': 4, 'completed': 3, 'sunset': 2, 'supported': 1 };
 
 function createSingleClusterGroupWithPriority() {
@@ -624,22 +624,23 @@ function createSingleClusterGroupWithPriority() {
     chunkedLoading: true,
     spiderfyOnMaxZoom: true,
     showCoverageOnHover: false,
-    maxClusterRadius: 45,
+    maxClusterRadius: 30,
     iconCreateFunction: function(cluster) {
       const count = cluster.getChildCount();
       const size = count < 10 ? 'small' : count < 100 ? 'medium' : 'large';
-      // Use highest-priority type among child markers so verified (green) shows over legacy (yellow)
-      let topType = 'supported';
-      let topPriority = 0;
+      // Collect distinct marker types in this cluster
+      const types = new Set();
       cluster.getAllChildMarkers().forEach(function(m) {
-        const t = (m.options && m.options.markerType) || 'supported';
-        const p = CLUSTER_TYPE_PRIORITY[t] || 0;
-        if (p > topPriority) {
-          topPriority = p;
-          topType = t;
-        }
+        types.add((m.options && m.options.markerType) || 'supported');
       });
-      const typeClass = 'marker-cluster-' + topType;
+      // If all markers share the same type, use that type; otherwise use neutral style
+      let clusterType;
+      if (types.size === 1) {
+        clusterType = types.values().next().value;
+      } else {
+        clusterType = 'neutral';
+      }
+      const typeClass = 'marker-cluster-' + clusterType;
       return L.divIcon({
         html: '<span><span class="cluster-count">' + count + '</span></span>',
         className: 'marker-cluster marker-cluster-' + size + ' marker-cluster-custom ' + typeClass,
