@@ -280,7 +280,7 @@ const plantingData = {
     ]
   },
   IN: { 
-    centroid: [20.59, 78.96], 
+    centroid: [22.006382, 86.039948], 
     type: 'confirmed', 
     source: 'Tree-Nation',
     sites: [
@@ -711,16 +711,20 @@ function initializeMap() {
       const title = site.name;
       const siteDescription = site.description || '';
       const showCountry = site.country && site.country !== site.name;
+      const projectName = site.projectName || '';
       const parsed = parseSiteDescription(siteDescription);
       const hasStructured = parsed && (parsed.plantingCycle || parsed.plantingSite);
 
       const structuredLines = [];
-      if (hasStructured) {
-        if (parsed.plantingSite) structuredLines.push('<div class="popup-line"><span class="popup-label">Site</span> ' + parsed.plantingSite + '</div>');
-        if (parsed.projectType) structuredLines.push('<div class="popup-line"><span class="popup-label">Type</span> ' + formatProjectType(parsed.projectType) + '</div>');
-        if (parsed.plantingCycle) structuredLines.push('<div class="popup-line"><span class="popup-label">Cycle</span> ' + parsed.plantingCycle + '</div>');
+      if (projectName) {
+        structuredLines.push('<div class="popup-line"><span class="popup-label">Project:</span> ' + projectName + '</div>');
       }
-      const fallbackDesc = !hasStructured && siteDescription ? '<div class="popup-desc">' + siteDescription + '</div>' : '';
+      if (hasStructured) {
+        if (parsed.plantingSite) structuredLines.push('<div class="popup-line"><span class="popup-label">Site:</span> ' + parsed.plantingSite + '</div>');
+        if (parsed.projectType) structuredLines.push('<div class="popup-line"><span class="popup-label">Type:</span> ' + formatProjectType(parsed.projectType) + '</div>');
+        if (parsed.plantingCycle) structuredLines.push('<div class="popup-line"><span class="popup-label">Cycle:</span> ' + parsed.plantingCycle + '</div>');
+      }
+      const fallbackDesc = siteDescription ? '<div class="popup-desc">' + siteDescription + '</div>' : '';
 
       let noteHtml = '';
       if (site.note) {
