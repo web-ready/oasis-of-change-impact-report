@@ -41,11 +41,19 @@ const plantingData = {
     ]
   },
 
-  NP: { 
-    centroid: [28.39, 84.12], 
-    type: 'mixed', 
+  NP_Eden: { 
+    centroid: [27.775871, 84.103767], 
+    type: 'confirmed', 
+    source: 'Tree-Nation',
     sites: [
-      { name: 'Eden Reforestation Projects', type: 'confirmed', source: 'Eden Reforestation (Tree-Nation)' },
+      { name: 'Eden Reforestation Projects', type: 'confirmed', source: 'Eden Reforestation (Tree-Nation)' }
+    ]
+  },
+  NP_Refoorest: { 
+    centroid: [28.3949, 84.1240], 
+    type: 'supported', 
+    source: 'Legacy Partner (Refoorest)',
+    sites: [
       { name: 'Amaltari', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Attarpur', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Bachhauli', type: 'supported', source: 'Legacy Partner (Refoorest)' },
@@ -418,7 +426,8 @@ const plantingData = {
 
 const countryName = {
   MG: 'Madagascar',
-  NP: 'Nepal',
+  NP_Eden: 'Nepal - Eden Reforestation Projects',
+  NP_Refoorest: 'Nepal - Refoorest',
   KE: 'Kenya',
   TZ: 'Tanzania',
   UG: 'Uganda',
@@ -615,6 +624,39 @@ function createClusterGroupForType(type) {
   });
 }
 
+// Single cluster group that shows highest-priority type when markers overlap (confirmed > mixed > sunset > supported)
+const CLUSTER_TYPE_PRIORITY = { 'confirmed': 4, 'mixed': 3, 'sunset': 2, 'supported': 1 };
+
+function createSingleClusterGroupWithPriority() {
+  return L.markerClusterGroup({
+    chunkedLoading: true,
+    spiderfyOnMaxZoom: true,
+    showCoverageOnHover: false,
+    maxClusterRadius: 45,
+    iconCreateFunction: function(cluster) {
+      const count = cluster.getChildCount();
+      const size = count < 10 ? 'small' : count < 100 ? 'medium' : 'large';
+      // Use highest-priority type among child markers so verified (green) shows over legacy (yellow)
+      let topType = 'supported';
+      let topPriority = 0;
+      cluster.getAllChildMarkers().forEach(function(m) {
+        const t = (m.options && m.options.markerType) || 'supported';
+        const p = CLUSTER_TYPE_PRIORITY[t] || 0;
+        if (p > topPriority) {
+          topPriority = p;
+          topType = t;
+        }
+      });
+      const typeClass = 'marker-cluster-' + topType;
+      return L.divIcon({
+        html: '<span><span class="cluster-count">' + count + '</span></span>',
+        className: 'marker-cluster marker-cluster-' + size + ' marker-cluster-custom ' + typeClass,
+        iconSize: L.point(40, 40)
+      });
+    }
+  });
+}
+
 function getPopupOptions() {
   var isMobile = window.innerWidth <= 640;
   return {
@@ -659,20 +701,25 @@ function initializeMap() {
     }, 100);
   });
 
-  const clusterConfirmed = createClusterGroupForType('confirmed');
-  const clusterMixed = createClusterGroupForType('mixed');
-  const clusterSupported = createClusterGroupForType('supported');
-  const clusterSunset = createClusterGroupForType('sunset');
+  const singleClusterGroup = createSingleClusterGroupWithPriority();
 
   function addMarkerToGroup(marker, type) {
-    if (type === 'confirmed') clusterConfirmed.addLayer(marker);
-    else if (type === 'mixed') clusterMixed.addLayer(marker);
-    else if (type === 'sunset') clusterSunset.addLayer(marker);
-    else clusterSupported.addLayer(marker);
+    marker.options = marker.options || {};
+    marker.options.markerType = type;
+    singleClusterGroup.addLayer(marker);
   }
 
   if (typeof TreeData !== 'undefined') {
     const mapSites = TreeData.getMapSites();
+    
+    // Sort markers so confirmed markers are added last (appear on top when overlapping)
+    // Priority order: supported < sunset < mixed < confirmed
+    const typePriority = { 'supported': 1, 'sunset': 2, 'mixed': 3, 'confirmed': 4 };
+    mapSites.sort((a, b) => {
+      const priorityA = typePriority[a.type] || 0;
+      const priorityB = typePriority[b.type] || 0;
+      return priorityA - priorityB; // Lower priority first, higher priority last
+    });
 
     function parseSiteDescription(desc) {
       if (!desc || typeof desc !== 'string') return null;
@@ -713,12 +760,12 @@ function initializeMap() {
         weight: 2.5,
         fillOpacity: 1,
         fillColor: markerColor,
-        className: 'map-marker'
+        className: 'map-marker map-marker-' + site.type
       });
 
       const title = site.name;
       const siteDescription = site.description || '';
-      const showCountry = site.country && site.country !== site.name;
+      const showCountry = site.country && site.country !== site.name && !site.name.includes(site.country);
       const projectName = site.projectName || '';
       const parsed = parseSiteDescription(siteDescription);
       const hasStructured = parsed && (parsed.plantingCycle || parsed.plantingSite);
@@ -791,7 +838,7 @@ function initializeMap() {
         weight: 2.5,
         fillOpacity: 1,
         fillColor: markerColor,
-        className: 'map-marker'
+        className: 'map-marker map-marker-' + cfg.type
       });
 
       const title = countryName[cc] || cc;
@@ -821,10 +868,7 @@ function initializeMap() {
     });
   }
 
-  clusterConfirmed.addTo(map);
-  clusterMixed.addTo(map);
-  clusterSupported.addTo(map);
-  clusterSunset.addTo(map);
+  singleClusterGroup.addTo(map);
   return map;
 }
 
@@ -980,7 +1024,7 @@ function renderSiteLists() {
           }
           
           const displayName = typeof site === 'string' ? site : site.name;
-          const showFootnote3 = (cc === 'NP' && displayName === 'Eden Reforestation Projects') || (cc === 'US_MT' && displayName === 'National Forest Recovery');
+          const showFootnote3 = (cc === 'NP_Eden' && displayName === 'Eden Reforestation Projects') || (cc === 'US_MT' && displayName === 'National Forest Recovery');
           const footnoteLink = showFootnote3 ? ' <a href="#footnote-4" class="align-super text-xs text-brand-green hover:underline no-underline" aria-label="Footnote 4">4</a>' : '';
           
           li.innerHTML = `

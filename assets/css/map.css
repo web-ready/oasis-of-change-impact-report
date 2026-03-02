@@ -135,6 +135,23 @@
   transition: filter 0.2s ease;
 }
 
+/* Prioritize confirmed markers over supported/legacy markers when overlapping */
+.map-marker-confirmed {
+  z-index: 1000 !important;
+}
+
+.map-marker-mixed {
+  z-index: 800 !important;
+}
+
+.map-marker-sunset {
+  z-index: 600 !important;
+}
+
+.map-marker-supported {
+  z-index: 400 !important;
+}
+
 @keyframes marker-pulse {
   0%   { r: 8; opacity: 0.9; }
   50%  { r: 12; opacity: 0.35; }
