@@ -61,6 +61,56 @@
 
 
 /* ═══════════════════════════════════════════════
+   LAYER CONTROL  –  map / satellite toggle
+   ═══════════════════════════════════════════════ */
+.leaflet-control-layers {
+  border: none !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.85) !important;
+  border: 1px solid rgba(0,0,0,0.06) !important;
+  font-family: 'Poppins', sans-serif;
+}
+
+.leaflet-control-layers-toggle {
+  width: 38px !important;
+  height: 38px !important;
+  background-size: 22px 22px !important;
+}
+
+.leaflet-control-layers-expanded {
+  padding: 8px 12px 8px 8px !important;
+}
+
+.leaflet-control-layers label {
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 4px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #0F172A;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+.leaflet-control-layers label:hover {
+  background: rgba(0, 71, 52, 0.06);
+}
+
+.leaflet-control-layers-selector {
+  margin: 0 !important;
+  accent-color: #004734;
+}
+
+.leaflet-control-layers-separator {
+  display: none !important;
+}
+
+/* ═══════════════════════════════════════════════
    ATTRIBUTION  –  subtle pill
    ═══════════════════════════════════════════════ */
 .leaflet-control-attribution {
