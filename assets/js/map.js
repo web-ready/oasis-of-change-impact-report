@@ -279,13 +279,20 @@ const plantingData = {
       { name: 'Lost Forests Recovery in California', type: 'confirmed', source: 'Sustainable WWW Partner Project (Tree-Nation)' }
     ]
   },
-  IN: { 
+  IN_Tigers: { 
     centroid: [22.006382, 86.039948], 
     type: 'confirmed', 
     source: 'Tree-Nation',
     sites: [
-      { name: 'Trees for Tribals', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Trees for Tigers', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  IN_Tribals: { 
+    centroid: [19.055958, 81.986229], 
+    type: 'confirmed', 
+    source: 'Sustainable WWW Partner Project (Tree-Nation)',
+    sites: [
+      { name: 'Trees for Tribals', type: 'confirmed', source: 'Sustainable WWW Partner Project (Tree-Nation)' }
     ]
   },
   
@@ -419,7 +426,8 @@ const countryName = {
   US_MT: 'USA - National Forest Recovery (Montana)',
   US_CA: 'USA - Lost Forests Recovery (California)',
   CM: 'Cameroon',
-  IN: 'India',
+  IN_Tigers: 'India - Trees for Tigers',
+  IN_Tribals: 'India - Trees for Tribals',
   MZ: 'Mozambique',
   LA: 'Laos',
   CD: 'Democratic Republic of the Congo',
