@@ -626,11 +626,24 @@ function initializeMap() {
     attributionControl: true
   }).setView([11, 16], 2);
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+  const streetLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 20
-  }).addTo(map);
+  });
+
+  const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: '&copy; <a href="https://www.esri.com/">Esri</a> &mdash; Sources: Esri, Maxar, Earthstar Geographics',
+    maxZoom: 19
+  });
+
+  streetLayer.addTo(map);
+
+  L.control.layers(
+    { 'Map': streetLayer, 'Satellite': satelliteLayer },
+    null,
+    { position: 'topright', collapsed: true }
+  ).addTo(map);
 
   window.addEventListener('resize', () => {
     setTimeout(() => {
