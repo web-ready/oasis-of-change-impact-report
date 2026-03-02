@@ -5,7 +5,7 @@ const plantingData = {
     source: 'Mixed Sources',
     fy: '2024-2025',
     sites: [
-      { name: 'Eden Reforestation Projects', type: 'sunset', source: 'Eden Reforestation (Tree-Nation)' },
+      { name: 'Eden Reforestation Projects', type: 'completed', source: 'Eden Reforestation (Tree-Nation)' },
       { name: 'Kandrany 1', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Akalamboro', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Ampasimarine', type: 'supported', source: 'Legacy Partner (Refoorest)' },
@@ -41,19 +41,12 @@ const plantingData = {
     ]
   },
 
-  NP_Eden: { 
+  NP: { 
     centroid: [27.775871, 84.103767], 
-    type: 'confirmed', 
-    source: 'Tree-Nation',
+    type: 'mixed', 
+    source: 'Mixed Sources',
     sites: [
-      { name: 'Eden Reforestation Projects', type: 'confirmed', source: 'Eden Reforestation (Tree-Nation)' }
-    ]
-  },
-  NP_Refoorest: { 
-    centroid: [28.3949, 84.1240], 
-    type: 'supported', 
-    source: 'Legacy Partner (Refoorest)',
-    sites: [
+      { name: 'Eden Reforestation Projects', type: 'completed', source: 'Eden Reforestation (Tree-Nation)' },
       { name: 'Amaltari', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Attarpur', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Bachhauli', type: 'supported', source: 'Legacy Partner (Refoorest)' },
@@ -426,8 +419,7 @@ const plantingData = {
 
 const countryName = {
   MG: 'Madagascar',
-  NP_Eden: 'Nepal - Eden Reforestation Projects',
-  NP_Refoorest: 'Nepal - Refoorest',
+  NP: 'Nepal',
   KE: 'Kenya',
   TZ: 'Tanzania',
   UG: 'Uganda',
@@ -624,8 +616,8 @@ function createClusterGroupForType(type) {
   });
 }
 
-// Single cluster group that shows highest-priority type when markers overlap (confirmed > mixed > sunset > supported)
-const CLUSTER_TYPE_PRIORITY = { 'confirmed': 4, 'mixed': 3, 'sunset': 2, 'supported': 1 };
+// Single cluster group that shows highest-priority type when markers overlap (confirmed > mixed > completed > sunset > supported)
+const CLUSTER_TYPE_PRIORITY = { 'confirmed': 5, 'mixed': 4, 'completed': 3, 'sunset': 2, 'supported': 1 };
 
 function createSingleClusterGroupWithPriority() {
   return L.markerClusterGroup({
@@ -739,16 +731,19 @@ function initializeMap() {
     }
 
     mapSites.forEach(site => {
-      let markerColor, markerLabel;
-      if (site.type === 'confirmed') {
+      let markerColor, markerLabel, isCompleted;
+      // Check if site is completed (has noteLink indicating completion)
+      isCompleted = !!site.noteLink || site.type === 'sunset' || site.type === 'completed';
+      
+      if (isCompleted) {
+        markerColor = '#2563EB';
+        markerLabel = 'Completed';
+      } else if (site.type === 'confirmed') {
         markerColor = '#004734';
-        markerLabel = 'Confirmed';
+        markerLabel = 'Verified';
       } else if (site.type === 'mixed') {
         markerColor = '#006B50';
         markerLabel = 'Mixed';
-      } else if (site.type === 'sunset') {
-        markerColor = '#6B7280';
-        markerLabel = 'Sunset';
       } else {
         markerColor = '#ca8a04';
         markerLabel = 'Supported';
@@ -789,6 +784,25 @@ function initializeMap() {
         noteHtml = '<div class="popup-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>' + site.note + linkTag + '</span></div>';
       }
 
+      // Determine primary and secondary badges
+      const isCompletedSite = !!site.noteLink || site.type === 'sunset' || site.type === 'completed';
+      let primaryBadge, secondaryBadge;
+      
+      if (isCompletedSite) {
+        primaryBadge = '<span class="popup-badge popup-badge-sunset">Completed</span>';
+        // Show type badge as secondary only if it's different from completed
+        if (site.type !== 'sunset' && site.type !== 'completed') {
+          const typeLabel = site.type === 'confirmed' ? 'Verified' : site.type === 'mixed' ? 'Mixed' : 'Supported';
+          const typeClass = site.type === 'confirmed' ? 'popup-badge-confirmed' : site.type === 'mixed' ? 'popup-badge-mixed' : 'popup-badge-supported';
+          secondaryBadge = `<span class="popup-badge ${typeClass}">${typeLabel}</span>`;
+        } else {
+          secondaryBadge = '';
+        }
+      } else {
+        primaryBadge = `<span class="popup-badge popup-badge-${site.type}">${markerLabel}</span>`;
+        secondaryBadge = '';
+      }
+
       const popupHTML = `
         <div class="map-popup">
           <div class="popup-header">
@@ -798,8 +812,8 @@ function initializeMap() {
           <div class="popup-divider"></div>
           <div class="popup-body">
             <div class="popup-meta">
-              <span class="popup-badge popup-badge-${site.type}">${markerLabel}</span>
-              ${site.noteLink ? '<span class="popup-badge popup-badge-sunset">Sunset</span>' : ''}
+              ${primaryBadge}
+              ${secondaryBadge}
               <span class="popup-source">${site.source}</span>
             </div>
             ${structuredLines.length ? '<div class="popup-fields">' + structuredLines.join('') + '</div>' : ''}
@@ -811,22 +825,31 @@ function initializeMap() {
       `;
 
       marker.bindPopup(popupHTML, getPopupOptions());
-      addMarkerToGroup(marker, site.type);
+      // Use completed type for clustering if applicable
+      const clusterType = isCompleted ? 'sunset' : site.type;
+      addMarkerToGroup(marker, clusterType);
     });
   } else {
     Object.entries(plantingData).forEach(([cc, cfg]) => {
       const [lat, lng] = cfg.centroid;
 
-      let markerColor, markerLabel;
-      if (cfg.type === 'confirmed') {
+      let markerColor, markerLabel, isCompleted;
+      // Check if this country/region has completed sites
+      isCompleted = cfg.type === 'completed' || cfg.type === 'sunset' || 
+                    (cfg.sites && cfg.sites.some(s => {
+                      const siteType = typeof s === 'string' ? cfg.type : s.type;
+                      return siteType === 'completed' || siteType === 'sunset';
+                    }));
+      
+      if (isCompleted) {
+        markerColor = '#2563EB';
+        markerLabel = 'Completed';
+      } else if (cfg.type === 'confirmed') {
         markerColor = '#004734';
-        markerLabel = 'Confirmed';
+        markerLabel = 'Verified';
       } else if (cfg.type === 'mixed') {
         markerColor = '#006B50';
         markerLabel = 'Mixed';
-      } else if (cfg.type === 'sunset') {
-        markerColor = '#6B7280';
-        markerLabel = 'Sunset';
       } else {
         markerColor = '#ca8a04';
         markerLabel = 'Supported';
@@ -854,7 +877,8 @@ function initializeMap() {
           <div class="popup-divider"></div>
           <div class="popup-body">
             <div class="popup-meta">
-              <span class="popup-badge popup-badge-${cfg.type}">${markerLabel}</span>
+              ${isCompleted ? `<span class="popup-badge popup-badge-sunset">Completed</span>` : ''}
+              ${isCompleted && cfg.type !== 'completed' && cfg.type !== 'sunset' ? `<span class="popup-badge popup-badge-${cfg.type}">${cfg.type === 'confirmed' ? 'Verified' : cfg.type === 'mixed' ? 'Mixed' : 'Supported'}</span>` : !isCompleted ? `<span class="popup-badge popup-badge-${cfg.type}">${markerLabel}</span>` : ''}
               <span class="popup-source">${cfg.source || 'Mixed Sources'}</span>
             </div>
             ${siteNames.length > 0 ? '<div class="popup-sites"><strong>Sites:</strong> ' + siteNames.join(', ') + (moreCount > 0 ? ' + ' + moreCount + ' more' : '') + '</div>' : ''}
@@ -864,7 +888,9 @@ function initializeMap() {
       `;
 
       marker.bindPopup(popupHTML, getPopupOptions());
-      addMarkerToGroup(marker, cfg.type);
+      // Use completed type for clustering if applicable
+      const clusterType = isCompleted ? 'sunset' : cfg.type;
+      addMarkerToGroup(marker, clusterType);
     });
   }
 
@@ -965,14 +991,18 @@ function renderSiteLists() {
         statusColor = 'bg-brand-green';
         statusBg = 'bg-emerald-50';
         statusText = 'text-emerald-800';
+      } else if (cfg.type === 'completed') {
+        statusColor = 'bg-info';
+        statusBg = 'bg-blue-50';
+        statusText = 'text-blue-800';
       } else if (cfg.type === 'mixed') {
         statusColor = 'bg-emerald-600';
         statusBg = 'bg-emerald-50';
         statusText = 'text-emerald-700';
       } else if (cfg.type === 'sunset') {
-        statusColor = 'bg-gray-500';
-        statusBg = 'bg-gray-100';
-        statusText = 'text-gray-700';
+        statusColor = 'bg-info';
+        statusBg = 'bg-blue-50';
+        statusText = 'text-blue-800';
       } else {
         statusColor = 'bg-legacy-gold';
         statusBg = 'bg-yellow-100';
@@ -989,7 +1019,7 @@ function renderSiteLists() {
         </div>
         <div class="flex items-center gap-2 sm:gap-3 justify-end sm:justify-end flex-shrink-0">
           <span class="text-xs px-2 sm:px-3 py-1 rounded-full font-medium whitespace-nowrap ${statusBg} ${statusText}">
-            ${cfg.type === 'confirmed' ? 'Confirmed' : cfg.type === 'mixed' ? 'Mixed' : cfg.type === 'sunset' ? 'Sunset' : 'Supported'}
+            ${cfg.type === 'confirmed' ? 'Verified' : cfg.type === 'completed' ? 'Completed' : cfg.type === 'mixed' ? 'Mixed' : cfg.type === 'sunset' ? 'Completed' : 'Supported'}
           </span>
           <span class="text-xs text-gray-500 hidden sm:inline truncate max-w-[140px]" title="${(cfg.source || 'Mixed Sources').replace(/"/g, '&quot;')}">${cfg.source || 'Mixed Sources'}</span>
           <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -1010,27 +1040,37 @@ function renderSiteLists() {
           const li = document.createElement('li');
           li.className = 'flex items-center gap-2 text-gray-700 py-1';
           
-          let siteColor, siteType;
+          let siteColor, siteType, siteExtraTag;
           const sType = typeof site === 'string' ? cfg.type : site.type;
+          siteExtraTag = '';
           if (sType === 'confirmed') {
             siteColor = 'bg-brand-green';
-            siteType = 'Confirmed';
+            siteType = 'Verified';
+          } else if (sType === 'completed') {
+            siteColor = 'bg-brand-green';
+            siteType = '<span class="text-xs text-white bg-info px-1.5 py-0.5 rounded-full">Completed</span>';
+            siteExtraTag = '<span class="text-xs text-white bg-brand-green px-1.5 py-0.5 rounded-full ml-1 flex-shrink-0">Verified</span>';
           } else if (sType === 'sunset') {
-            siteColor = 'bg-gray-500';
-            siteType = 'Sunset';
+            siteColor = 'bg-info';
+            siteType = '<span class="text-xs text-white bg-info px-1.5 py-0.5 rounded-full">Completed</span>';
           } else {
             siteColor = 'bg-legacy-gold';
             siteType = 'Supported';
           }
           
           const displayName = typeof site === 'string' ? site : site.name;
-          const showFootnote3 = (cc === 'NP_Eden' && displayName === 'Eden Reforestation Projects') || (cc === 'US_MT' && displayName === 'National Forest Recovery');
+          const showFootnote3 = (cc === 'NP' && displayName === 'Eden Reforestation Projects') || (cc === 'US_MT' && displayName === 'National Forest Recovery');
           const footnoteLink = showFootnote3 ? ' <a href="#footnote-4" class="align-super text-xs text-brand-green hover:underline no-underline" aria-label="Footnote 4">4</a>' : '';
+          
+          const siteTypeDisplay = typeof siteType === 'string' && siteType.includes('<span') 
+            ? `<span class="ml-2 flex-shrink-0">${siteType}</span>`
+            : `<span class="text-xs text-gray-500 ml-2 flex-shrink-0">${siteType}</span>`;
           
           li.innerHTML = `
             <div class="w-1.5 h-1.5 rounded-full ${siteColor} flex-shrink-0"></div>
             <span class="flex-1 truncate">${displayName}${footnoteLink}</span>
-            <span class="text-xs text-gray-500 ml-2 flex-shrink-0">${siteType}</span>
+            ${siteTypeDisplay}
+            ${siteExtraTag}
           `;
           ul.appendChild(li);
         });

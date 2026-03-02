@@ -156,7 +156,8 @@
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-xl font-semibold text-deep-forest">Planting Locations</h2>
                     <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-500 justify-start sm:justify-end">
-                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-brand-green inline-block"></span> Confirmed</span>
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-info inline-block"></span> Completed</span>
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-brand-green inline-block"></span> Verified</span>
                         <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-brand-green-light inline-block"></span> Mixed</span>
                         <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-legacy-gold inline-block"></span> Supported</span>
                     </div>
@@ -187,7 +188,12 @@
                                 </button>
                                 <button type="button" class="select-option" data-value="confirmed" role="option">
                                     <span class="option-dot" style="background:#004734"></span>
-                                    <span class="option-text">Confirmed</span>
+                                    <span class="option-text">Verified</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <button type="button" class="select-option" data-value="completed" role="option">
+                                    <span class="option-dot" style="background:#2563EB"></span>
+                                    <span class="option-text">Completed</span>
                                     <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                 </button>
                                 <button type="button" class="select-option" data-value="supported" role="option">
