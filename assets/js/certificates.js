@@ -22,7 +22,7 @@ function downloadCertificate(certificateId) {
     }
 }
 
-function populateCertificates() {
+function populateCertificates(filterValue) {
     if (typeof TreeData === 'undefined') {
         console.error('TreeData not loaded');
         return;
@@ -31,9 +31,13 @@ function populateCertificates() {
     const container = document.getElementById('certificates-container');
     if (!container) return;
     
+    let certificates = [...TreeData.getCertificates()]
+        .filter(cert => filterValue === 'all' || cert.category === filterValue)
+        .sort((a, b) => (b.trees || 0) - (a.trees || 0));
+    
     container.innerHTML = '';
     
-    TreeData.getCertificates().forEach(certificate => {
+    certificates.forEach(certificate => {
         const certificateCard = document.createElement('div');
         certificateCard.className = 'certificate-card';
         const filePath = certificatePath(certificate.filename);
@@ -74,7 +78,16 @@ function populateCertificates() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    populateCertificates();
+    populateCertificates('all');
+    
+    const filterBtns = document.querySelectorAll('.cert-filter-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            populateCertificates(this.getAttribute('data-filter'));
+        });
+    });
     
     document.addEventListener('click', function(e) {
         if (e.target.closest('.download-btn')) {
