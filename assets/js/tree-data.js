@@ -221,8 +221,8 @@ const TreeData = {
             title: "Government Grant Contributions",
             certificate: "Tree-Nation",
             location: "Multiple countries",
-            trees: 0,
-            co2Offset: 0,
+            trees: 52,
+            co2Offset: 2600,
             date: "2025-2026 FY",
             fyNote: "2025-2026 FY — Summary of government grant contributions",
             filename: "2025-2026_FY/Grant/GOV-Grant-Contributions.pdf"
@@ -240,11 +240,11 @@ const TreeData = {
         },
         {
             id: "canada-2025-2026-gov-grant",
-            title: "Canada — GLOCAL Government Grant",
+            title: "Canada — 2025-2026 Government Grant",
             certificate: "Tree-Nation",
             location: "Canada",
-            trees: 0,
-            co2Offset: 0,
+            trees: 52,
+            co2Offset: 2600,
             date: "2025-2026 FY",
             fyNote: "2025-2026 FY — Government grant planting proof",
             filename: "2025-2026_FY/Pilot/Canada/GLOCAL GRANT/Canada_Planting_Proof_GOV-Grant.pdf"
