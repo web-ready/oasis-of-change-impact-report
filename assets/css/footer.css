@@ -1,0 +1,36 @@
+/**
+ * Oasis of Change — Footer
+ * Tagline + copyright (and optional notes)
+ */
+
+.ooc-footer__inner {
+    position: relative;
+}
+
+/* Tagline and copyright block */
+.ooc-footer__brand {
+    text-align: center;
+    padding-top: 0.5rem;
+}
+
+.ooc-footer__tagline {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.02em;
+    margin: 0 0 0.5rem 0;
+}
+
+.ooc-footer__copyright {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+.ooc-footer .bg-brand-green > .max-w-6xl > .ooc-footer__brand {
+    margin-top: 0;
+}
+
+.ooc-footer [id^="footnote-"] {
+    scroll-margin-top: 5rem;
+}
