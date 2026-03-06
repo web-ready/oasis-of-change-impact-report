@@ -100,6 +100,20 @@
             border-color: var(--color-brand-green);
         }
 
+        .cert-filter-active {
+            background: var(--color-brand-green) !important;
+            border-color: var(--color-brand-green) !important;
+            color: #ffffff !important;
+        }
+        .cert-filter-inactive {
+            background: #ffffff;
+            border: 1px solid var(--color-border);
+            color: var(--color-brand-green);
+        }
+        .cert-filter-inactive:hover {
+            border-color: var(--color-brand-green);
+        }
+
         @media (max-width: 768px) {
             .certificate-card {
                 padding: 1rem;
@@ -211,7 +225,40 @@
         </div>
 
         <div class="mb-8">
-            <h2 class="text-2xl font-semibold text-deep-forest mb-6">Certificates</h2>
+            <h2 class="text-2xl font-semibold text-deep-forest mb-4">Certificates</h2>
+
+            <div class="flex flex-col sm:flex-row gap-4 mb-6">
+                <div class="flex flex-wrap gap-2 items-center">
+                    <span class="text-sm text-gray-600 mr-1">Show:</span>
+                    <button type="button" data-cert-filter="all" class="cert-filter-active px-4 py-2 rounded-lg border text-sm font-medium transition">
+                        All
+                    </button>
+                    <button type="button" data-cert-filter="historical" class="cert-filter-inactive px-4 py-2 rounded-lg border text-sm font-medium transition">
+                        Historical
+                    </button>
+                    <button type="button" data-cert-filter="2024-2025" class="cert-filter-inactive px-4 py-2 rounded-lg border text-sm font-medium transition">
+                        2024–2025 FY
+                    </button>
+                    <button type="button" data-cert-filter="2025-2026" class="cert-filter-inactive px-4 py-2 rounded-lg border text-sm font-medium transition">
+                        2025–2026 FY
+                    </button>
+                    <button type="button" data-cert-filter="partners" class="cert-filter-inactive px-4 py-2 rounded-lg border text-sm font-medium transition">
+                        Partners
+                    </button>
+                </div>
+                <div class="sm:ml-auto flex-1 sm:max-w-xs">
+                    <label for="certificates-search" class="sr-only">Search certificates</label>
+                    <input type="text" id="certificates-search" placeholder="Search by title, location, date…"
+                           class="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-brand-green focus:border-transparent"
+                           aria-label="Search certificates">
+                </div>
+            </div>
+
+            <p class="text-sm text-gray-500 mb-4">Sorted by trees planted (highest first).</p>
+
+            <div id="certificates-empty" class="hidden py-12 text-center text-gray-500 border border-dashed border-gray-200 rounded-xl bg-gray-50/50">
+                No certificates match your filter or search. Try a different category or search term.
+            </div>
             <div id="certificates-container">
             </div>
         </div>
@@ -250,6 +297,29 @@
             </div>
         </div>
     </main>
+
+    <footer class="bg-deep-forest text-gray-300 mt-16" role="contentinfo">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <h2 class="font-serif text-lg text-white mb-6">Disclaimers &amp; Notes</h2>
+            <div class="space-y-6 text-sm">
+                <div>
+                    <h3 class="font-semibold text-white mb-1">Verification notice</h3>
+                    <p>All certificates shown are independently verified through Tree-Nation or the stated issuing body (e.g. Eden Reforestation, Usambara Biodiversity). CO&#8322; offset values are estimates provided by project partners based on species and geography and are not guaranteed outcomes.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-white mb-1">Impact documentation standards</h3>
+                    <p>Certificates are issued for projects of 50 trees or more where documentation is available. Smaller plantings are tracked in our impact reports but may not have a separate certificate on this page.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-white mb-1">Fiscal year and historical data</h3>
+                    <p>Planting cycles are reported by fiscal year (FY). Historical plantings (e.g. pre-2024) and partner certificates are included for transparency and may use different verification or reporting standards.</p>
+                </div>
+                <p class="pt-4 border-t border-gray-600 text-xs text-gray-400">
+                    © Oasis of Change, Inc. Certificate data is subject to change. Last updated February 2026.
+                </p>
+            </div>
+        </div>
+    </footer>
 
     <script src="assets/js/tree-data.js"></script>
     <script src="assets/js/certificates.js"></script>

@@ -192,7 +192,194 @@ const TreeData = {
             co2Offset: 33750,
             date: "February 26, 2025",
             fyNote: "2024-2025 FY — Madagascar project completed",
-            filename: "2025-02-26_Web-Ready-Planting_Eden-Reforestation_Madagascar_675-Trees-33750kg-CO2.pdf"
+            filename: "2024-2025_FY/2025-02-26_Web-Ready-Planting_Eden-Reforestation_Madagascar_675-Trees-33750kg-CO2.pdf"
+        },
+        {
+            id: "nepal-2023-eden",
+            title: "Web-Ready Planting (Nepal)",
+            certificate: "Eden Reforestation",
+            location: "Nepal",
+            trees: 60,
+            co2Offset: 10800,
+            date: "June 18, 2023",
+            fyNote: "Historical planting — 2023",
+            filename: "Historical_Planting/2023 Planting/2023-06-18_Web-Ready-Planting_Eden-Reforestation_Nepal_60-Trees-10800kg-CO2.pdf.pdf"
+        },
+        {
+            id: "tanzania-2025-2026-core",
+            title: "Replanting the burnt Mkussu Forest (Tanzania)",
+            certificate: "Tree-Nation",
+            location: "Tanzania",
+            trees: 7057,
+            co2Offset: 352850,
+            date: "2025-2026 FY",
+            fyNote: "2025-2026 FY — CORE project",
+            filename: "2025-2026_FY/Core/Tanzania_Planting_Proof.pdf"
+        },
+        {
+            id: "gov-grant-2025-2026",
+            title: "Government Grant Contributions",
+            certificate: "Tree-Nation",
+            location: "Multiple countries",
+            trees: 0,
+            co2Offset: 0,
+            date: "2025-2026 FY",
+            fyNote: "2025-2026 FY — Summary of government grant contributions",
+            filename: "2025-2026_FY/Grant/GOV-Grant-Contributions.pdf"
+        },
+        {
+            id: "canada-2025-2026-pilot",
+            title: "Boreal Forest Habitat Restoration (Canada)",
+            certificate: "Tree-Nation",
+            location: "Canada",
+            trees: 62,
+            co2Offset: 3100,
+            date: "2025-2026 FY",
+            fyNote: "2025-2026 FY — PILOT",
+            filename: "2025-2026_FY/Pilot/Canada/Canada_Planting_Proof.pdf"
+        },
+        {
+            id: "canada-2025-2026-gov-grant",
+            title: "Canada — GLOCAL Government Grant",
+            certificate: "Tree-Nation",
+            location: "Canada",
+            trees: 0,
+            co2Offset: 0,
+            date: "2025-2026 FY",
+            fyNote: "2025-2026 FY — Government grant planting proof",
+            filename: "2025-2026_FY/Pilot/Canada/GLOCAL GRANT/Canada_Planting_Proof_GOV-Grant.pdf"
+        },
+        {
+            id: "argentina-2025-2026-pilot",
+            title: "Bosques de Agua (Argentina)",
+            certificate: "Tree-Nation",
+            location: "Argentina",
+            trees: 2,
+            co2Offset: 40,
+            date: "2025-2026 FY",
+            fyNote: "2025-2026 FY — PILOT",
+            filename: "2025-2026_FY/Pilot/Argentina/Argentina_Planting_Proof.pdf"
+        },
+        {
+            id: "australia-2025-2026-pilot",
+            title: "Big Scrub Rainforest Restoration (Australia)",
+            certificate: "Tree-Nation",
+            location: "Australia",
+            trees: 2,
+            co2Offset: 20,
+            date: "2025-2026 FY",
+            fyNote: "2025-2026 FY — PILOT",
+            filename: "2025-2026_FY/Pilot/Australia/Australia_Planting_Proof.pdf"
+        },
+        {
+            id: "bolivia-2025-2026-pilot",
+            title: "Amazon Windshields (Bolivia)",
+            certificate: "Tree-Nation",
+            location: "Bolivia",
+            trees: 2,
+            co2Offset: 1000,
+            date: "2025-2026 FY",
+            fyNote: "2025-2026 FY — PILOT",
+            filename: "2025-2026_FY/Pilot/Bolivia/Bolivia_Planting_Proof.pdf"
+        },
+        {
+            id: "brazil-2025-2026-pilot",
+            title: "Reforest the Amazon Basin (Brazil)",
+            certificate: "Tree-Nation",
+            location: "Brazil",
+            trees: 2,
+            co2Offset: 500,
+            date: "2025-2026 FY",
+            fyNote: "2025-2026 FY — PILOT",
+            filename: "2025-2026_FY/Pilot/Brazil/Brazil_Planting_Proof.pdf"
+        },
+        {
+            id: "france-2025-2026-pilot",
+            title: "Restauration Forêts dégradées (France)",
+            certificate: "Tree-Nation",
+            location: "France",
+            trees: 2,
+            co2Offset: 20,
+            date: "2025-2026 FY",
+            fyNote: "2025-2026 FY — PILOT",
+            filename: "2025-2026_FY/Pilot/France/France_Planting_Proof.pdf"
+        },
+        {
+            id: "ireland-2025-2026-pilot",
+            title: "Ireland Community Tree Planting",
+            certificate: "Tree-Nation",
+            location: "County Clare, Ireland",
+            trees: 2,
+            co2Offset: 200,
+            date: "2025-2026 FY",
+            fyNote: "2025-2026 FY — PILOT",
+            filename: "2025-2026_FY/Pilot/Ireland/Ireland_Planting_Proof.pdf"
+        },
+        {
+            id: "mexico-2025-2026-pilot",
+            title: "Restoration and Social Empowerment (Mexico)",
+            certificate: "Tree-Nation",
+            location: "Mexico",
+            trees: 2,
+            co2Offset: 40,
+            date: "2025-2026 FY",
+            fyNote: "2025-2026 FY — PILOT",
+            filename: "2025-2026_FY/Pilot/Mexico/Mexico_Planting_Proof.pdf"
+        },
+        {
+            id: "nigeria-2025-2026-pilot",
+            title: "Restoration of Ala Forest Reserve (Nigeria)",
+            certificate: "Tree-Nation",
+            location: "Nigeria",
+            trees: 2,
+            co2Offset: 500,
+            date: "2025-2026 FY",
+            fyNote: "2025-2026 FY — PILOT",
+            filename: "2025-2026_FY/Pilot/Nigeria/Nigeria_Planting_Proof.pdf"
+        },
+        {
+            id: "romania-2025-2026-pilot",
+            title: "Bear Groves in Transylvania (Romania)",
+            certificate: "Tree-Nation",
+            location: "Romania",
+            trees: 2,
+            co2Offset: 300,
+            date: "2025-2026 FY",
+            fyNote: "2025-2026 FY — PILOT",
+            filename: "2025-2026_FY/Pilot/Romania/Romania_Planting_Proof.pdf"
+        },
+        {
+            id: "spain-2025-2026-pilot",
+            title: "Alvelal (Spain)",
+            certificate: "Tree-Nation",
+            location: "Spain",
+            trees: 2,
+            co2Offset: 20,
+            date: "2025-2026 FY",
+            fyNote: "2025-2026 FY — PILOT",
+            filename: "2025-2026_FY/Pilot/Spain/Spain_Planting_Proof.pdf"
+        },
+        {
+            id: "uk-2025-2026-pilot",
+            title: "Community Tree Planting (United Kingdom)",
+            certificate: "Tree-Nation",
+            location: "United Kingdom",
+            trees: 2,
+            co2Offset: 20,
+            date: "2025-2026 FY",
+            fyNote: "2025-2026 FY — PILOT",
+            filename: "2025-2026_FY/Pilot/United Kingdom/United_Kingdom_Planting_Proof.pdf"
+        },
+        {
+            id: "zimbabwe-2025-2026-pilot",
+            title: "Zimbabwe Reforestation Initiative",
+            certificate: "Tree-Nation",
+            location: "Zimbabwe",
+            trees: 2,
+            co2Offset: 100,
+            date: "2025-2026 FY",
+            fyNote: "2025-2026 FY — PILOT",
+            filename: "2025-2026_FY/Pilot/Zimbabwe/Zimbabwe_Planting_Proof.pdf"
         },
         {
             id: "spes-2024-tanzania",
@@ -202,7 +389,7 @@ const TreeData = {
             trees: 100,
             co2Offset: 15000,
             date: "January 26, 2024",
-            filename: "2024-01-26_Stanley-Park-Ecology-Society_Usambara-Biodiversity_Tanzania_100-Trees-15000kg-CO2.pdf.pdf"
+            filename: "Partners/SPES/2024-01-26_Stanley-Park-Ecology-Society_Usambara-Biodiversity_Tanzania_100-Trees-15000kg-CO2.pdf.pdf"
         },
         {
             id: "sustainable-www-2023-tanzania-1",
@@ -212,7 +399,7 @@ const TreeData = {
             trees: 50,
             co2Offset: 6000,
             date: "December 29, 2023",
-            filename: "2023-12-29_Sustainable-WWW_Usambara-Biodiversity_Tanzania_50-Trees-6000kg-CO2.pdf.pdf"
+            filename: "Partners/Sustainable_WWW/2023-12-29_Sustainable-WWW_Usambara-Biodiversity_Tanzania_50-Trees-6000kg-CO2.pdf.pdf"
         },
         {
             id: "sustainable-www-2023-tanzania-2",
@@ -222,7 +409,7 @@ const TreeData = {
             trees: 50,
             co2Offset: 7500,
             date: "December 29, 2023",
-            filename: "2023-12-29_Sustainable-WWW_Usambara-Biodiversity_Tanzania_50-Trees-7500kg-CO2.pdf.pdf"
+            filename: "Partners/Sustainable_WWW/2023-12-29_Sustainable-WWW_Usambara-Biodiversity_Tanzania_50-Trees-7500kg-CO2.pdf.pdf"
         },
         {
             id: "mst-2024-tanzania",
@@ -232,7 +419,7 @@ const TreeData = {
             trees: 100,
             co2Offset: 15000,
             date: "January 17, 2024",
-            filename: "2024-01-17_Mittler-Senior-Technology_Usambara-Biodiversity_Tanzania_100-Trees-15000kg-CO2.pdf.pdf"
+            filename: "Partners/MST/2024-01-17_Mittler-Senior-Technology_Usambara-Biodiversity_Tanzania_100-Trees-15000kg-CO2.pdf.pdf"
         },
         {
             id: "ecosearch-2024-madagascar",
@@ -243,7 +430,7 @@ const TreeData = {
             co2Offset: 5000,
             date: "June 26, 2024",
             fyNote: "2024-2025 FY — Madagascar project completed",
-            filename: "2024-06-26_EcoSearch_Eden-Reforestation_Madagascar_100-Trees-5000kg-CO2.pdf.pdf"
+            filename: "Partners/EcoSearch/2024-06-26_EcoSearch_Eden-Reforestation_Madagascar_100-Trees-5000kg-CO2.pdf.pdf"
         }
     ],
     mapSites: [
