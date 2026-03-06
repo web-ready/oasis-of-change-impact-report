@@ -1,8 +1,6 @@
 function scrollToDetails() {
-    document.getElementById('detailed-info').scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-    });
+    var footer = document.querySelector('footer[role="contentinfo"]');
+    if (footer) footer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function getCertificateCategory(filename) {
