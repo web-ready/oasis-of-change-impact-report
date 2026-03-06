@@ -43,11 +43,11 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 </head>
-<body class="bg-mist-gray font-sans antialiased">
+<body class="bg-mist-gray font-sans antialiased min-h-screen flex flex-col">
 
     <div class="bg-brand-green text-white py-3 px-4 text-center text-sm font-medium z-[60] relative">
         <span class="inline-flex items-center gap-2 justify-center flex-wrap">
-            <strong>2025-2026 FY Planting Complete:</strong> 7,143 trees in 14 countries <span class="hidden sm:inline">—</span> <a href="/impact-2025-2026.html" class="underline underline-offset-2 hover:text-white/80">View 2025-2026 FY Impact</a>
+            <strong>2025-2026 FY Planting Complete:</strong> 7,144 trees in 14 countries <span class="hidden sm:inline">—</span> <a href="/impact-2025-2026.html" class="underline underline-offset-2 hover:text-white/80">View 2025-2026 FY Impact</a>
         </span>
     </div>
 
@@ -55,7 +55,7 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="flex items-center justify-between h-14 relative">
                 <a href="/index.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
-                <div class="hidden md:flex items-center gap-3">
+                <div class="hidden lg:flex items-center gap-3">
                     <a href="/index.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:bg-brand-green-light transition">Dashboard</a>
                     <a href="/impact.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Impact Report</a>
                     <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Certificates</a>
@@ -63,38 +63,40 @@
                     <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Gallery</a>
                     <a href="/news.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">News</a>
                 </div>
-                <button id="mobile-menu-toggle" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50" aria-label="Open menu" aria-expanded="false">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                <button id="mobile-menu-toggle" class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-green/[0.06] text-brand-green hover:bg-brand-green hover:text-white transition-all duration-200" aria-label="Open menu" aria-expanded="false">
+                    <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h12M4 17h16" />
                     </svg>
                 </button>
             </div>
         </div>
     </header>
 
-    <div id="mobile-menu" class="md:hidden hidden fixed inset-0 z-[2000] bg-black/90 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
-        <div class="w-full h-full flex items-center justify-center p-6" id="mobile-menu-backdrop">
-            <div class="text-center text-white max-w-sm mx-auto">
-                <h2 id="mobile-menu-title" class="font-serif text-4xl mb-8">Navigate</h2>
-                <nav class="space-y-4 text-lg">
-                    <a href="/index.html" class="block py-2 px-4 rounded-lg bg-white/15 font-semibold transition-colors duration-200">Dashboard</a>
-                    <a href="/impact.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Impact Report</a>
-                    <a href="/certificates.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Certificates</a>
-                    <a href="/species.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Tree Species</a>
-                    <a href="/gallery.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Gallery</a>
-                    <a href="/news.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">News</a>
-                </nav>
-                <button id="mobile-menu-close" class="mt-12 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-200">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                    Close
+    <div id="mobile-menu" class="lg:hidden fixed inset-0 z-[2000]" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
+        <div class="absolute inset-0 bg-brand-green/20 backdrop-blur-sm mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
+        <div class="absolute top-0 right-0 bottom-0 w-[82%] max-w-[340px] bg-white rounded-l-[2rem] flex flex-col mobile-menu-panel" style="box-shadow:-8px 0 30px rgba(0,0,0,0.08)">
+            <div class="flex items-center justify-between px-6 pt-7 pb-4">
+                <h2 id="mobile-menu-title" class="font-serif text-2xl text-brand-green">Menu</h2>
+                <button id="mobile-menu-close" class="w-10 h-10 rounded-2xl bg-gray-50 text-gray-400 inline-flex items-center justify-center transition-all duration-200 hover:bg-brand-green hover:text-white" aria-label="Close menu">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
+            </div>
+            <div class="mx-6 h-px bg-gray-100"></div>
+            <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
+                <a href="/index.html" class="mobile-nav-link active">Dashboard</a>
+                <a href="/impact.html" class="mobile-nav-link">Impact Report</a>
+                <a href="/certificates.html" class="mobile-nav-link">Certificates</a>
+                <a href="/species.html" class="mobile-nav-link">Tree Species</a>
+                <a href="/gallery.html" class="mobile-nav-link">Gallery</a>
+                <a href="/news.html" class="mobile-nav-link">News</a>
+            </nav>
+            <div class="px-6 py-5 border-t border-gray-100">
+                <p class="text-xs text-gray-400 text-center font-medium tracking-wide">Oasis of Change, Inc.</p>
             </div>
         </div>
     </div>
 
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <main class="flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
 
         <section class="hero-section relative mb-12 -mx-4 sm:-mx-6 lg:-mx-8 -mt-8 sm:-mt-12 px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-10 sm:pb-12 overflow-hidden">
             <div class="hero-bg absolute inset-0"></div>
@@ -116,24 +118,32 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 max-w-4xl mx-auto">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2.5 sm:gap-3 max-w-5xl mx-auto">
                     <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center">
                         <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="verified-count">0</div>
-                        <div class="text-[11px] sm:text-xs text-white/55 font-medium">Verified (Tree-Nation)</div>
+                        <div class="text-[11px] sm:text-xs text-white/55 font-medium">Verified <a href="#footnote-1" class="align-super text-xs text-white/80 hover:text-white ml-0.5 no-underline" aria-label="Footnote 1">1</a></div>
                     </div>
                     <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center">
                         <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="legacy-count">0</div>
-                        <div class="text-[11px] sm:text-xs text-white/55 font-medium">Legacy Partners</div>
+                        <div class="text-[11px] sm:text-xs text-white/55 font-medium">Legacy Partner Trees</div>
                     </div>
                     <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center">
                         <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="countries-count">0</div>
                         <div class="text-[11px] sm:text-xs text-white/55 font-medium">Countries</div>
                     </div>
-                    <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center lg:col-span-1">
+                    <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center">
+                        <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="continents-count">0</div>
+                        <div class="text-[11px] sm:text-xs text-white/55 font-medium">Continents</div>
+                    </div>
+                    <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center">
                         <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="species-count">0</div>
                         <div class="text-[11px] sm:text-xs text-white/55 font-medium">Species</div>
                     </div>
-                    <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center col-span-2 sm:col-span-2 lg:col-span-1">
+                    <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center">
+                        <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="planting-sites-count">0</div>
+                        <div class="text-[11px] sm:text-xs text-white/55 font-medium">Planting Sites <a href="#footnote-2" class="align-super text-xs text-white/80 hover:text-white ml-0.5 no-underline" aria-label="Footnote 2">2</a></div>
+                    </div>
+                    <div class="hero-stat-card group rounded-xl p-3 sm:p-4 text-center col-span-2 sm:col-span-3 lg:col-span-1">
                         <div class="tabular-nums text-xl sm:text-2xl font-bold text-white mb-0.5" id="co2-offset">0</div>
                         <div class="text-[11px] sm:text-xs text-white/55 font-medium">Verified CO₂ offset (kg)</div>
                     </div>
@@ -146,13 +156,14 @@
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-xl font-semibold text-deep-forest">Planting Locations</h2>
                     <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-500 justify-start sm:justify-end">
-                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-brand-green inline-block"></span> Confirmed</span>
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-info inline-block"></span> Completed</span>
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-brand-green inline-block"></span> Verified</span>
                         <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-brand-green-light inline-block"></span> Mixed</span>
                         <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-legacy-gold inline-block"></span> Supported</span>
-                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-gray-500 inline-block"></span> Sunset</span>
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full inline-block" style="background:#7C3AED"></span> Grouped (multiple types)</span>
                     </div>
                 </div>
-                <div id="map" class="w-full rounded-xl overflow-hidden" style="height:420px;"></div>
+                <div id="map" class="w-full rounded-xl overflow-hidden"></div>
             </div>
         </section>
 
@@ -160,37 +171,78 @@
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                 <div class="mb-4">
                     <h2 class="text-xl font-semibold text-deep-forest mb-2">Project Sites by Country</h2>
-                    <p class="text-sm text-gray-600">Click a country to view its planting sites.</p>
+                    <p class="text-sm text-gray-600">Click a country to view its planting sites. <a href="#footnote-3" class="align-super text-xs text-brand-green hover:underline no-underline" aria-label="Footnote 3">3</a></p>
                 </div>
-                <div class="mb-4 p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                    <div class="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto">
-                            <label class="text-xs sm:text-sm font-medium text-gray-700 whitespace-nowrap">Filter by type:</label>
-                            <select id="type-filter" class="w-full sm:w-auto px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-green focus:border-brand-green">
-                                <option value="all">All Types</option>
-                                <option value="confirmed">Confirmed</option>
-                                <option value="supported">Supported</option>
-                                <option value="mixed">Mixed</option>
-                                <option value="sunset">Sunset</option>
-                            </select>
+                <div class="filter-bar mb-4">
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                        <div class="custom-select" data-filter="type">
+                            <button type="button" class="select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                                <span class="select-label">Type</span>
+                                <span class="select-divider"></span>
+                                <span class="select-value">All Types</span>
+                                <svg class="select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="select-panel" role="listbox">
+                                <button type="button" class="select-option active" data-value="all" role="option">
+                                    <span class="option-text">All Types</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <button type="button" class="select-option" data-value="confirmed" role="option">
+                                    <span class="option-dot" style="background:#004734"></span>
+                                    <span class="option-text">Verified</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <button type="button" class="select-option" data-value="completed" role="option">
+                                    <span class="option-dot" style="background:#2563EB"></span>
+                                    <span class="option-text">Completed</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <button type="button" class="select-option" data-value="supported" role="option">
+                                    <span class="option-dot" style="background:#EAB308"></span>
+                                    <span class="option-text">Supported</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <button type="button" class="select-option" data-value="mixed" role="option">
+                                    <span class="option-dot" style="background:#006B50"></span>
+                                    <span class="option-text">Mixed</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                            </div>
                         </div>
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto">
-                            <label class="text-xs sm:text-sm font-medium text-gray-700 whitespace-nowrap">Filter by source:</label>
-                            <select id="source-filter" class="w-full sm:w-auto px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-green focus:border-brand-green">
-                                <option value="all">All Sources</option>
-                                <option value="Tree-Nation">Tree-Nation</option>
-                                <option value="Eden Reforestation">Eden Reforestation</option>
-                                <option value="Legacy Partner (Tero)">Legacy Partner (Tero)</option>
-                                <option value="Legacy Partner (Refoorest)">Legacy Partner (Refoorest)</option>
-                                <option value="Sunset — 2024-2025 FY">Sunset — 2024-2025 FY</option>
-                            </select>
+                        <div class="custom-select" data-filter="source">
+                            <button type="button" class="select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                                <span class="select-label">Source</span>
+                                <span class="select-divider"></span>
+                                <span class="select-value">All Sources</span>
+                                <svg class="select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="select-panel" role="listbox">
+                                <button type="button" class="select-option active" data-value="all" role="option">
+                                    <span class="option-text">All Sources</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <div class="select-separator"></div>
+                                <button type="button" class="select-option" data-value="Tree-Nation" role="option">
+                                    <span class="option-text">Tree-Nation</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <div class="select-separator"></div>
+                                <button type="button" class="select-option" data-value="Legacy Partner (Refoorest)" role="option">
+                                    <span class="option-text">Legacy Partner (Refoorest)</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                                <button type="button" class="select-option" data-value="Legacy Partner (Tero)" role="option">
+                                    <span class="option-text">Legacy Partner (Tero)</span>
+                                    <svg class="option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </button>
+                            </div>
                         </div>
-                        <button id="clear-filters" class="w-full sm:w-auto px-3 py-1.5 text-sm text-gray-600 hover:text-gray-800 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">Clear Filters</button>
+                        <button type="button" id="clear-filters" class="filter-clear-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                            <span>Clear</span>
+                        </button>
                     </div>
-                    <div id="filter-results" class="text-xs sm:text-sm text-gray-600"></div>
-                </div>
-                <div class="mb-4 p-3 sm:p-4 bg-warning-bg border border-warning/40 rounded-lg">
-                    <p class="text-xs sm:text-sm text-warning-text">Some data comes from third-party partners and may not be current.</p>
+                    <div id="filter-results" class="filter-results-text"></div>
                 </div>
                 <div id="site-lists" class="space-y-3 sm:space-y-4"></div>
             </div>
@@ -212,29 +264,86 @@
 
                 <div id="verified-content" class="tab-content p-6">
                     <div class="mb-4">
-                        <input type="text" placeholder="Search projects or HQ locations..." 
+                        <input type="text" placeholder="Search projects or locations..." 
                                class="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-brand-green focus:border-transparent"
                                id="verified-search">
                     </div>
-                    <div class="overflow-x-auto desktop-table">
-                        <table class="w-full" id="verified-table">
-                            <thead>
-                                <tr class="border-b border-gray-100">
-                                    <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="forest">
-                                        <div class="flex items-center gap-1"><span>Project</span><span class="text-xs">↕</span></div>
-                                    </th>
-                                    <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="country">
-                                        <div class="flex items-center gap-1"><span>HQ Location</span><span class="text-xs">↕</span></div>
-                                    </th>
-                                    <th class="text-right py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="trees">
-                                        <div class="flex items-center justify-end gap-1"><span>Trees</span><span class="text-xs">↕</span></div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="verified-data" id="verified-table-body"></tbody>
-                        </table>
+
+                    <div class="mb-6">
+                        <h3 class="text-sm font-semibold text-brand-green uppercase tracking-wide mb-3">Planting Partners</h3>
+                        <p class="text-xs text-gray-500 mb-3">Organizations planting through their own Tree-Nation accounts, facilitated by Oasis of Change.</p>
+                        <div class="overflow-x-auto desktop-table">
+                            <table class="w-full" id="partners-table">
+                                <thead>
+                                    <tr class="border-b border-gray-100">
+                                        <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide">Organization</th>
+                                        <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide">Base</th>
+                                        <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide">Countries</th>
+                                        <th class="text-right py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide">Trees</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="partners-table-body">
+                                    <tr class="data-row border-b border-gray-50 transition-all duration-200">
+                                        <td class="py-4 px-2">
+                                            <a href="https://tree-nation.com/profile/stanley-park-ecology-society" target="_blank" rel="noopener" class="partner-profile-link font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">Stanley Park Ecology Society<span class="partner-link-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span></a>
+                                        </td>
+                                        <td class="py-4 px-2 text-sm text-gray-600">Canada</td>
+                                        <td class="py-4 px-2 text-sm text-gray-600">Madagascar, Tanzania, Senegal, Kenya</td>
+                                        <td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">233</td>
+                                    </tr>
+                                    <tr class="data-row border-b border-gray-50 transition-all duration-200">
+                                        <td class="py-4 px-2">
+                                            <a href="https://tree-nation.com/profile/sustainable-www" target="_blank" rel="noopener" class="partner-profile-link font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">Sustainable WWW<span class="partner-link-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span></a>
+                                        </td>
+                                        <td class="py-4 px-2 text-sm text-gray-600">Sweden</td>
+                                        <td class="py-4 px-2 text-sm text-gray-600">Tanzania, Kenya, Madagascar, Uganda, India, United States</td>
+                                        <td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">170</td>
+                                    </tr>
+                                    <tr class="data-row border-b border-gray-50 transition-all duration-200">
+                                        <td class="py-4 px-2">
+                                            <a href="https://tree-nation.com/profile/mittler-senior-technology" target="_blank" rel="noopener" class="partner-profile-link font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">Mittler Senior Technology<span class="partner-link-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span></a>
+                                        </td>
+                                        <td class="py-4 px-2 text-sm text-gray-600">United States</td>
+                                        <td class="py-4 px-2 text-sm text-gray-600">Tanzania, Senegal, Madagascar, Indonesia, Uganda, Nepal</td>
+                                        <td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">124</td>
+                                    </tr>
+                                    <tr class="data-row border-b border-gray-50 transition-all duration-200">
+                                        <td class="py-4 px-2">
+                                            <a href="https://tree-nation.com/profile/ecosearch" target="_blank" rel="noopener" class="partner-profile-link font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">EcoSearch<span class="partner-link-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span></a>
+                                        </td>
+                                        <td class="py-4 px-2 text-sm text-gray-600">Canada</td>
+                                        <td class="py-4 px-2 text-sm text-gray-600">Madagascar</td>
+                                        <td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">101</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mobile-cards" id="partners-mobile-cards"></div>
                     </div>
-                    <div class="mobile-cards" id="verified-mobile-cards"></div>
+
+                    <div>
+                        <h3 class="text-sm font-semibold text-brand-green uppercase tracking-wide mb-3">Planting Sites</h3>
+                        <p class="text-xs text-gray-500 mb-3">Tree-Nation planting sites across fiscal years, including historical plantings.</p>
+                        <div class="overflow-x-auto desktop-table">
+                            <table class="w-full" id="verified-table">
+                                <thead>
+                                    <tr class="border-b border-gray-100">
+                                        <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="forest">
+                                            <div class="flex items-center gap-1"><span>Project</span><span class="text-xs">↕</span></div>
+                                        </th>
+                                        <th class="text-left py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="country">
+                                            <div class="flex items-center gap-1"><span>Location</span><span class="text-xs">↕</span></div>
+                                        </th>
+                                        <th class="text-right py-3 px-2 font-semibold text-deep-forest text-xs uppercase tracking-wide cursor-pointer hover:text-brand-green" data-sort="trees">
+                                            <div class="flex items-center justify-end gap-1"><span>Trees</span><span class="text-xs">↕</span></div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="verified-data" id="verified-table-body"></tbody>
+                            </table>
+                        </div>
+                        <div class="mobile-cards" id="verified-mobile-cards"></div>
+                    </div>
                 </div>
 
                 <div id="legacy-content" class="tab-content p-6 hidden">
@@ -278,8 +387,23 @@
         </div>
     </main>
 
+    <footer id="page-footer" class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+            <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Notes</h2>
+            <ol class="space-y-2 text-sm text-gray-600 list-none">
+                <li id="footnote-1" class="scroll-mt-20"><sup class="text-gray-400 font-medium">1</sup> Trees recorded through Tree-Nation: Oasis-funded projects (<span id="footnote-oasis-trees">0</span> trees), historical plantings (<span id="footnote-historical-trees">0</span> trees), and planting partners (<span id="footnote-partner-trees">0</span> trees).</li>
+                <li id="footnote-2" class="scroll-mt-20"><sup class="text-gray-400 font-medium">2</sup> Planting sites include all reported locations: legacy, mixed, and verified.</li>
+                <li id="footnote-3" class="scroll-mt-20"><sup class="text-gray-400 font-medium">3</sup> Some data comes from third-party partners and may not be current.</li>
+                <li id="footnote-4" class="scroll-mt-20"><sup class="text-gray-400 font-medium">4</sup> Some sites include trees planted before Oasis of Change, Inc. was incorporated (e.g. Eden Reforestation Projects, Nepal; National Forest Recovery, United States).</li>
+            </ol>
+            <p class="mt-6 text-xs text-gray-400">&copy; <span id="copyright-year"></span> Oasis of Change, Inc.</p>
+        </div>
+    </footer>
+
     <script src="assets/js/tree-data.js"></script>
     <script src="assets/js/map.js"></script>
     <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/footnotes.js"></script>
+    <script>document.getElementById('copyright-year').textContent=new Date().getFullYear();</script>
 </body>
 </html>

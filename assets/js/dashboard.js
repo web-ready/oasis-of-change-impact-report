@@ -39,9 +39,14 @@ function updateUI() {
     setText('total-count', total.toLocaleString());
     setText('verified-count', verified.toLocaleString());
     setText('legacy-count', legacy.toLocaleString());
+    setText('footnote-oasis-trees', TreeData.getOasisFundedTrees().toLocaleString());
+    setText('footnote-historical-trees', TreeData.getHistoricalTrees().toLocaleString());
+    setText('footnote-partner-trees', TreeData.getPartnerTrees().toLocaleString());
     setText('species-count', TreeData.getSpeciesCount());
     const countries = [...new Set(TreeData.getMapSites().map(s => s.country))];
     setText('countries-count', countries.length);
+    setText('continents-count', TreeData.getContinentsCount());
+    setText('planting-sites-count', TreeData.getPlantingSitesCount());
     setText('co2-offset', TreeData.getCo2Captured().toLocaleString() + '+');
 
     populateProjectTables();
@@ -53,15 +58,63 @@ function setText(id, val) {
     if (el) el.textContent = val;
 }
 
+function fyBadge(fy) {
+    if (!fy) return '';
+    var cls = fy === '2025-2026' ? 'fy-current' : (fy === 'Historical' ? 'fy-historical' : 'fy-previous');
+    return ' <span class="fy-badge ' + cls + '">' + fy + '</span>';
+}
+
 function populateProjectTables() {
+    var partners = (TreeData.getVerifiedPartners ? TreeData.getVerifiedPartners() : []).slice().sort(function(a,b){ return (b.trees||0)-(a.trees||0); });
+    var pBody = document.getElementById('partners-table-body');
+    if (pBody && pBody.children.length === 0) {
+        partners.forEach(function(p) {
+            var tr = document.createElement('tr');
+            tr.className = 'data-row border-b border-gray-50 transition-all duration-200';
+            var extIcon = '<span class="partner-link-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span>';
+            var nameCell = p.profileUrl
+                ? '<a href="' + p.profileUrl + '" target="_blank" rel="noopener" class="partner-profile-link font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">' + p.name + extIcon + '</a>'
+                : p.name;
+            tr.innerHTML =
+                '<td class="py-4 px-2">' + nameCell + '</td>' +
+                '<td class="py-4 px-2 text-sm text-gray-600">' + p.baseLocation + '</td>' +
+                '<td class="py-4 px-2 text-sm text-gray-600">' + p.countries + '</td>' +
+                '<td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">' + p.trees.toLocaleString() + '</td>';
+            pBody.appendChild(tr);
+        });
+    }
+    var pCards = document.getElementById('partners-mobile-cards');
+    if (pCards && pCards.children.length === 0) {
+        partners.forEach(function(p) {
+            var card = document.createElement('div');
+            card.className = 'mobile-data-card';
+            card.setAttribute('data-search', (p.name + ' ' + p.baseLocation + ' ' + p.countries).toLowerCase());
+            var extIcon = '<span class="partner-link-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span>';
+            var nameBlock = p.profileUrl
+                ? '<a href="' + p.profileUrl + '" target="_blank" rel="noopener" class="partner-profile-link mobile-card-title text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">' + p.name + extIcon + '</a>'
+                : '<div class="mobile-card-title">' + p.name + '</div>';
+            card.innerHTML =
+                '<div class="mobile-card-header">' +
+                    '<div>' +
+                        nameBlock +
+                        '<div class="mobile-card-subtitle">' + p.baseLocation + ' · ' + p.countries + '</div>' +
+                    '</div>' +
+                    '<div class="mobile-trees-count">' + p.trees.toLocaleString() + '</div>' +
+                '</div>';
+            pCards.appendChild(card);
+        });
+    }
+
+    const verifiedProjects = [...TreeData.getVerifiedProjects()].sort((a, b) => (b.trees || 0) - (a.trees || 0));
     const vBody = document.getElementById('verified-table-body');
+    const extIconSvg = '<span class="partner-link-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span>';
     if (vBody) {
         vBody.innerHTML = '';
-        TreeData.getVerifiedProjects().forEach(p => {
+        verifiedProjects.forEach(p => {
             const tr = document.createElement('tr');
             tr.className = 'data-row border-b border-gray-50 transition-all duration-200';
             tr.innerHTML = `
-                <td class="py-4 px-2"><a href="${p.url}" target="_blank" rel="noopener" class="font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">${p.name}</a></td>
+                <td class="py-4 px-2"><a href="${p.url}" target="_blank" rel="noopener" class="partner-profile-link font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">${p.name}${extIconSvg}</a>${fyBadge(p.fy)}</td>
                 <td class="py-4 px-2 text-sm text-gray-600">${p.location}</td>
                 <td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">${p.trees.toLocaleString()}</td>`;
             vBody.appendChild(tr);
@@ -70,14 +123,14 @@ function populateProjectTables() {
     const vCards = document.getElementById('verified-mobile-cards');
     if (vCards) {
         vCards.innerHTML = '';
-        TreeData.getVerifiedProjects().forEach(p => {
+        verifiedProjects.forEach(p => {
             const card = document.createElement('div');
             card.className = 'mobile-data-card';
             card.setAttribute('data-search', `${p.name.toLowerCase()} ${p.location.toLowerCase()}`);
             card.innerHTML = `
                 <div class="mobile-card-header">
                     <div>
-                        <div class="mobile-card-title"><a href="${p.url}" target="_blank" rel="noopener" class="hover:text-brand-green">${p.name}</a></div>
+                        <div class="mobile-card-title"><a href="${p.url}" target="_blank" rel="noopener" class="partner-profile-link text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">${p.name}${extIconSvg}</a>${fyBadge(p.fy)}</div>
                         <div class="mobile-card-subtitle">${p.location}</div>
                     </div>
                     <div class="mobile-trees-count">${p.trees.toLocaleString()}</div>
@@ -85,6 +138,7 @@ function populateProjectTables() {
             vCards.appendChild(card);
         });
     }
+
     const lBody = document.getElementById('legacy-table-body');
     if (lBody) {
         lBody.innerHTML = '';
@@ -169,18 +223,25 @@ function switchTab(tabName) {
     const toggleBtn = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     const closeBtn = document.getElementById('mobile-menu-close');
+    const backdrop = document.getElementById('mobile-menu-backdrop');
     if (!toggleBtn || !mobileMenu) return;
     if (toggleBtn.dataset.menuInit) return;
     toggleBtn.dataset.menuInit = '1';
-    const toggle = () => {
-        const isOpen = !mobileMenu.classList.contains('hidden');
-        mobileMenu.classList.toggle('hidden');
-        document.documentElement.style.overflow = isOpen ? '' : 'hidden';
-        document.body.style.overflow = isOpen ? '' : 'hidden';
-        toggleBtn.setAttribute('aria-expanded', String(!isOpen));
+    const open = () => {
+        mobileMenu.classList.add('menu-open');
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        toggleBtn.setAttribute('aria-expanded', 'true');
     };
-    toggleBtn.addEventListener('click', toggle);
-    if (closeBtn) closeBtn.addEventListener('click', toggle);
+    const close = () => {
+        mobileMenu.classList.remove('menu-open');
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        toggleBtn.setAttribute('aria-expanded', 'false');
+    };
+    toggleBtn.addEventListener('click', open);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    if (backdrop) backdrop.addEventListener('click', close);
 })();
 
 function setupSearch(searchId, tableId, dataClass) {

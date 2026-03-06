@@ -32,11 +32,11 @@
         }
     </script>
 </head>
-<body class="bg-mist-gray font-sans antialiased">
+<body class="bg-mist-gray font-sans antialiased min-h-screen flex flex-col">
 
     <div class="bg-brand-green text-white py-3 px-4 text-center text-sm font-medium z-[60] relative">
         <span class="inline-flex items-center gap-2 justify-center flex-wrap">
-            <strong>2025-2026 FY Planting Complete:</strong> 7,143 trees in 14 countries <span class="hidden sm:inline">—</span> <a href="/impact-2025-2026.html" class="underline underline-offset-2 hover:text-white/80">View 2025-2026 FY Impact</a>
+            <strong>2025-2026 FY Planting Complete:</strong> 7,144 trees in 14 countries <span class="hidden sm:inline">—</span> <a href="/impact-2025-2026.html" class="underline underline-offset-2 hover:text-white/80">View 2025-2026 FY Impact</a>
         </span>
     </div>
 
@@ -44,7 +44,7 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="flex items-center justify-between h-14 relative">
                 <a href="/index.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
-                <div class="hidden md:flex items-center gap-3">
+                <div class="hidden lg:flex items-center gap-3">
                     <a href="/index.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Dashboard</a>
                     <a href="/impact.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Impact Report</a>
                     <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Certificates</a>
@@ -52,85 +52,111 @@
                     <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Gallery</a>
                     <a href="/news.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:bg-brand-green-light transition">News</a>
                 </div>
-                <button id="mobile-menu-toggle" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50" aria-label="Open menu" aria-expanded="false">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                <button id="mobile-menu-toggle" class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-green/[0.06] text-brand-green hover:bg-brand-green hover:text-white transition-all duration-200" aria-label="Open menu" aria-expanded="false">
+                    <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h12M4 17h16" />
                     </svg>
                 </button>
             </div>
         </div>
     </header>
 
-    <div id="mobile-menu" class="md:hidden hidden fixed inset-0 z-[2000] bg-black/90 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
-        <div class="w-full h-full flex items-center justify-center p-6">
-            <div class="text-center text-white max-w-sm mx-auto">
-                <h2 id="mobile-menu-title" class="font-serif text-4xl mb-8">Navigate</h2>
-                <nav class="space-y-4 text-lg">
-                    <a href="/index.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Dashboard</a>
-                    <a href="/impact.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Impact Report</a>
-                    <a href="/certificates.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Certificates</a>
-                    <a href="/species.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Tree Species</a>
-                    <a href="/gallery.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Gallery</a>
-                    <a href="/news.html" class="block py-2 px-4 rounded-lg bg-white/15 font-semibold transition-colors duration-200">News</a>
-                </nav>
-                <button id="mobile-menu-close" class="mt-12 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-200">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    Close
+    <div id="mobile-menu" class="lg:hidden fixed inset-0 z-[2000]" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
+        <div class="absolute inset-0 bg-brand-green/20 backdrop-blur-sm mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
+        <div class="absolute top-0 right-0 bottom-0 w-[82%] max-w-[340px] bg-white rounded-l-[2rem] flex flex-col mobile-menu-panel" style="box-shadow:-8px 0 30px rgba(0,0,0,0.08)">
+            <div class="flex items-center justify-between px-6 pt-7 pb-4">
+                <h2 id="mobile-menu-title" class="font-serif text-2xl text-brand-green">Menu</h2>
+                <button id="mobile-menu-close" class="w-10 h-10 rounded-2xl bg-gray-50 text-gray-400 inline-flex items-center justify-center transition-all duration-200 hover:bg-brand-green hover:text-white" aria-label="Close menu">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
+            </div>
+            <div class="mx-6 h-px bg-gray-100"></div>
+            <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
+                <a href="/index.html" class="mobile-nav-link">Dashboard</a>
+                <a href="/impact.html" class="mobile-nav-link">Impact Report</a>
+                <a href="/certificates.html" class="mobile-nav-link">Certificates</a>
+                <a href="/species.html" class="mobile-nav-link">Tree Species</a>
+                <a href="/gallery.html" class="mobile-nav-link">Gallery</a>
+                <a href="/news.html" class="mobile-nav-link active">News</a>
+            </nav>
+            <div class="px-6 py-5 border-t border-gray-100">
+                <p class="text-xs text-gray-400 text-center font-medium tracking-wide">Oasis of Change, Inc.</p>
             </div>
         </div>
     </div>
 
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <main class="flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
 
         <section class="text-center mb-10">
             <h1 class="text-3xl md:text-4xl font-serif text-deep-forest mb-3">News &amp; Updates</h1>
             <p class="text-sm text-gray-600 max-w-2xl mx-auto">Project milestones, partner updates, and reforestation news.</p>
         </section>
 
-        <section class="mb-10">
+        <section class="mb-10" id="eden-sunset">
             <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
                 <div class="px-6 py-5 border-b border-gray-100 flex items-center justify-between flex-wrap gap-2">
-                    <h2 class="text-xl font-semibold text-deep-forest">Madagascar project completed</h2>
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    <div>
+                        <h2 class="text-xl font-semibold text-deep-forest">Eden Reforestation Projects — Madagascar Reaches Full Planting Capacity</h2>
+                        <p class="text-xs text-gray-400 mt-1">Press Release &mdash; Vancouver, Canada</p>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium text-white" style="background-color: #2563EB;">
+                        <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
                         Completed
                     </span>
                 </div>
                 <div class="p-6 sm:p-8">
                     <p class="text-gray-700 leading-relaxed mb-4">
-                        We contributed to Eden Reforestation Projects in Madagascar during the 2024-2025 FY tree planting cycle (675 trees). The project was completed during that cycle. We continued our reforestation work in new geographies for 2025-2026.
+                        <strong>VANCOUVER, CANADA</strong> &mdash; Oasis of Change, Inc. announces that the Eden Reforestation Projects planting site in Madagascar has been sunset after reaching full planting capacity. During the 2024-2025 fiscal year, Oasis of Change contributed 675 verified trees to the project through Tree-Nation, planting <em>Rhizophora mucronata</em> mangroves in one of the world's most critical biodiversity regions.
                     </p>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Eden completed the project during that cycle, so we were unable to allocate there again this year. Madagascar remained a priority geography for us; we redirected our 2025-2026 allocation to 14 countries across six continents.
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        "Madagascar was our first direct planting geography, and seeing the Eden project reach completion is a meaningful milestone," said Gabriel Dalton, Oasis of Change. "It demonstrates that focused, verified reforestation investment can deliver real outcomes. We're proud to have contributed to that success."
                     </p>
-                    <p class="mt-4">
-                        <a href="/impact-2024-2025.html" class="text-brand-green font-medium hover:underline">View 2024-2025 FY impact</a>
-                        <span class="text-gray-400 mx-2">·</span>
-                        <a href="/impact-2025-2026.html" class="text-brand-green font-medium hover:underline">View 2025-2026 FY impact</a>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Following the project's sunset, Oasis of Change redirected its reforestation allocations to 14 countries across six continents for the 2025-2026 fiscal year, planting 7,144 trees &mdash; a 958% increase over the prior cycle.
                     </p>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        The term "sunset" indicates that the planting site has reached its full capacity and is no longer accepting new tree allocations. All trees planted through the project remain verified and tracked via Tree-Nation certificates.
+                    </p>
+                    <div class="flex flex-wrap items-center gap-3 pt-2">
+                        <a href="/impact-2024-2025.html" class="inline-flex items-center gap-1 text-brand-green font-medium hover:underline text-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            View 2024-2025 FY Impact
+                        </a>
+                        <a href="/impact-2025-2026.html" class="inline-flex items-center gap-1 text-brand-green font-medium hover:underline text-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            View 2025-2026 FY Impact
+                        </a>
+                        <a href="https://tree-nation.com/projects/eden-reforestation-madagascar" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-brand-green font-medium hover:underline text-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            View on Tree-Nation
+                        </a>
+                    </div>
                 </div>
             </article>
         </section>
 
     </main>
 
+    <footer id="page-footer" class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+            <p class="text-xs text-gray-400">&copy; <span id="copyright-year"></span> Oasis of Change, Inc.</p>
+        </div>
+    </footer>
+
     <script>
     (function(){
         const toggleBtn = document.getElementById('mobile-menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         const closeBtn = document.getElementById('mobile-menu-close');
+        const backdrop = document.getElementById('mobile-menu-backdrop');
         if (!toggleBtn || !mobileMenu) return;
-        const toggle = () => {
-            const isOpen = !mobileMenu.classList.contains('hidden');
-            mobileMenu.classList.toggle('hidden');
-            document.documentElement.style.overflow = isOpen ? '' : 'hidden';
-            document.body.style.overflow = isOpen ? '' : 'hidden';
-            toggleBtn.setAttribute('aria-expanded', String(!isOpen));
-        };
-        toggleBtn.addEventListener('click', toggle);
-        if (closeBtn) closeBtn.addEventListener('click', toggle);
+        const open = () => { mobileMenu.classList.add('menu-open'); document.documentElement.style.overflow='hidden'; document.body.style.overflow='hidden'; toggleBtn.setAttribute('aria-expanded','true'); };
+        const close = () => { mobileMenu.classList.remove('menu-open'); document.documentElement.style.overflow=''; document.body.style.overflow=''; toggleBtn.setAttribute('aria-expanded','false'); };
+        toggleBtn.addEventListener('click', open);
+        if (closeBtn) closeBtn.addEventListener('click', close);
+        if (backdrop) backdrop.addEventListener('click', close);
     })();
     </script>
+    <script>document.getElementById('copyright-year').textContent=new Date().getFullYear();</script>
 </body>
 </html>

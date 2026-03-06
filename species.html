@@ -36,11 +36,11 @@
         .chip { font-size: 10px; padding: 2px 8px; border-radius: 9999px; color: #065F46; background-color: #ECFDF5; }
     </style>
 </head>
-<body class="bg-mist-gray font-sans antialiased">
+<body class="bg-mist-gray font-sans antialiased min-h-screen flex flex-col">
 
     <div class="bg-brand-green text-white py-3 px-4 text-center text-sm font-medium z-[60] relative">
         <span class="inline-flex items-center gap-2 justify-center flex-wrap">
-            <strong>2025-2026 FY Planting Complete:</strong> 7,143 trees in 14 countries <span class="hidden sm:inline">—</span> <a href="/impact-2025-2026.html" class="underline underline-offset-2 hover:text-white/80">View 2025-2026 FY Impact</a>
+            <strong>2025-2026 FY Planting Complete:</strong> 7,144 trees in 14 countries <span class="hidden sm:inline">—</span> <a href="/impact-2025-2026.html" class="underline underline-offset-2 hover:text-white/80">View 2025-2026 FY Impact</a>
         </span>
     </div>
 
@@ -51,7 +51,7 @@
                     <a href="/index.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
                 </div>
                 
-                <div class="hidden md:flex items-center gap-3">
+                <div class="hidden lg:flex items-center gap-3">
                     <a href="/index.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Dashboard</a>
                     <a href="/impact.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Impact Report</a>
                     <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Certificates</a>
@@ -60,9 +60,9 @@
                     <a href="/news.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">News</a>
                 </div>
                 
-                <button id="mobile-menu-toggle" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50" aria-label="Open menu" aria-expanded="false">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                <button id="mobile-menu-toggle" class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-green/[0.06] text-brand-green hover:bg-brand-green hover:text-white transition-all duration-200" aria-label="Open menu" aria-expanded="false">
+                    <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h12M4 17h16" />
                     </svg>
                 </button>
 
@@ -70,29 +70,31 @@
         </div>
     </header>
 
-    <div id="mobile-menu" class="md:hidden hidden fixed inset-0 z-[2000] bg-black/90 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
-        <div class="w-full h-full flex items-center justify-center p-6" id="mobile-menu-backdrop">
-            <div class="text-center text-white max-w-sm mx-auto">
-                <h2 id="mobile-menu-title" class="font-serif text-4xl mb-8">Navigate</h2>
-                <nav class="space-y-4 text-lg">
-                    <a href="/index.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Dashboard</a>
-                    <a href="/impact.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Impact Report</a>
-                    <a href="/certificates.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Certificates</a>
-                    <a href="/species.html" class="block py-2 px-4 rounded-lg bg-white/15 font-semibold transition-colors duration-200">Tree Species</a>
-                    <a href="/gallery.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">Gallery</a>
-                    <a href="/news.html" class="block py-2 px-4 rounded-lg hover:bg-white/10 transition-colors duration-200">News</a>
-                </nav>
-                <button id="mobile-menu-close" class="mt-12 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-200">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                    Close
+    <div id="mobile-menu" class="lg:hidden fixed inset-0 z-[2000]" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
+        <div class="absolute inset-0 bg-brand-green/20 backdrop-blur-sm mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
+        <div class="absolute top-0 right-0 bottom-0 w-[82%] max-w-[340px] bg-white rounded-l-[2rem] flex flex-col mobile-menu-panel" style="box-shadow:-8px 0 30px rgba(0,0,0,0.08)">
+            <div class="flex items-center justify-between px-6 pt-7 pb-4">
+                <h2 id="mobile-menu-title" class="font-serif text-2xl text-brand-green">Menu</h2>
+                <button id="mobile-menu-close" class="w-10 h-10 rounded-2xl bg-gray-50 text-gray-400 inline-flex items-center justify-center transition-all duration-200 hover:bg-brand-green hover:text-white" aria-label="Close menu">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
+            </div>
+            <div class="mx-6 h-px bg-gray-100"></div>
+            <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
+                <a href="/index.html" class="mobile-nav-link">Dashboard</a>
+                <a href="/impact.html" class="mobile-nav-link">Impact Report</a>
+                <a href="/certificates.html" class="mobile-nav-link">Certificates</a>
+                <a href="/species.html" class="mobile-nav-link active">Tree Species</a>
+                <a href="/gallery.html" class="mobile-nav-link">Gallery</a>
+                <a href="/news.html" class="mobile-nav-link">News</a>
+            </nav>
+            <div class="px-6 py-5 border-t border-gray-100">
+                <p class="text-xs text-gray-400 text-center font-medium tracking-wide">Oasis of Change, Inc.</p>
             </div>
         </div>
     </div>
 
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <main class="flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
 
         <section class="text-center mb-8">
             <h1 class="text-3xl md:text-4xl font-serif text-deep-forest">Tree Species</h1>
@@ -110,7 +112,7 @@
                 </div>
                 <div>
                     <h3 class="ooc-alert__title">Data Transparency Notice</h3>
-                    <p class="ooc-alert__body">Species marked "Verified" are confirmed through Tree-Nation. Legacy partner data comes from Refoorest and Tero and may not be fully verified.</p>
+                    <p class="ooc-alert__body">Species marked "Verified" are confirmed through Tree-Nation. Legacy partner species data comes from Refoorest and may not be fully verified.</p>
                 </div>
             </div>
             </div>
@@ -130,6 +132,10 @@
                 <button class="filter-btn px-4 py-2 rounded border border-gray-300 text-gray-700 text-sm bg-white hover:border-brand-green focus:outline-none"
                     data-filter="legacy">
                     Legacy Partners
+                </button>
+                <button class="filter-btn px-4 py-2 rounded border border-gray-300 text-gray-700 text-sm bg-white hover:border-brand-green focus:outline-none"
+                    data-filter="preincorporation">
+                    Pre-incorporation
                 </button>
             </div>
         </section>
@@ -158,28 +164,49 @@
                         <span class="tag" style="border-color:#BBF7D0;color:#166534;background-color:#F0FDF4">Verified</span>
                     </div>
                     <div class="space-y-2 text-sm">
-                        <p class="text-gray-600 mb-3">14 species planted across 14 countries, verified via Tree-Nation:</p>
-                        <p><strong>Afrocarpus usambarensis</strong> <span class="ml-1 text-xs text-gray-400">Tanzania</span></p>
-                        <p><strong>Pinus banksiana</strong> <span class="ml-1 text-xs text-gray-400">Canada</span></p>
-                        <p><strong>Ceiba speciosa</strong> <span class="ml-1 text-xs text-gray-400">Bolivia</span></p>
-                        <p><strong>Acacia mangium</strong> <span class="ml-1 text-xs text-gray-400">Nigeria</span></p>
-                        <p><strong>Schizolobium amazonicum</strong> <span class="ml-1 text-xs text-gray-400">Brazil</span></p>
-                        <p><strong>Fagus sylvatica</strong> <span class="ml-1 text-xs text-gray-400">Romania</span></p>
-                        <p><strong>Mangifera indica</strong> <span class="ml-1 text-xs text-gray-400">Zimbabwe</span></p>
-                        <p><strong>Quercus petraea</strong> <span class="ml-1 text-xs text-gray-400">Ireland</span></p>
-                        <p><strong>Prosopis laevigata</strong> <span class="ml-1 text-xs text-gray-400">Mexico</span></p>
-                        <p><strong>Polylepis australis</strong> <span class="ml-1 text-xs text-gray-400">Argentina</span></p>
-                        <p><strong>Pinus nigra</strong> <span class="ml-1 text-xs text-gray-400">France</span></p>
-                        <p><strong>Homalanthus populifolius</strong> <span class="ml-1 text-xs text-gray-400">Australia</span></p>
-                        <p><strong>Prunus spinosa</strong> <span class="ml-1 text-xs text-gray-400">United Kingdom</span></p>
-                        <p><strong>Pistacia lentiscus</strong> <span class="ml-1 text-xs text-gray-400">Spain</span></p>
+                        <p><strong>Afrocarpus usambarensis</strong> (East African Yellowwood)<span class="block text-xs text-gray-400 mt-0.5">Tanzania</span></p>
+                        <p><strong>Pinus banksiana</strong> (Jack Pine)<span class="block text-xs text-gray-400 mt-0.5">Canada</span></p>
+                        <p><strong>Ceiba speciosa</strong> (Silk Floss Tree)<span class="block text-xs text-gray-400 mt-0.5">Bolivia</span></p>
+                        <p><strong>Acacia mangium</strong> (Mangium)<span class="block text-xs text-gray-400 mt-0.5">Nigeria</span></p>
+                        <p><strong>Schizolobium amazonicum</strong> (Paricá)<span class="block text-xs text-gray-400 mt-0.5">Brazil</span></p>
+                        <p><strong>Fagus sylvatica</strong> (European Beech)<span class="block text-xs text-gray-400 mt-0.5">Romania</span></p>
+                        <p><strong>Mangifera indica</strong> (Mango Tree)<span class="block text-xs text-gray-400 mt-0.5">Zimbabwe</span></p>
+                        <p><strong>Quercus petraea</strong> (Sessile Oak)<span class="block text-xs text-gray-400 mt-0.5">Ireland</span></p>
+                        <p><strong>Prosopis laevigata</strong> (Smooth Mesquite)<span class="block text-xs text-gray-400 mt-0.5">Mexico</span></p>
+                        <p><strong>Polylepis australis</strong> (Tabaquillo)<span class="block text-xs text-gray-400 mt-0.5">Argentina</span></p>
+                        <p><strong>Pinus nigra</strong> (Black Pine)<span class="block text-xs text-gray-400 mt-0.5">France</span></p>
+                        <p><strong>Solanum aviculare</strong> (Kangaroo Apple)<span class="block text-xs text-gray-400 mt-0.5">Australia</span></p>
+                        <p><strong>Prunus spinosa</strong> (Blackthorn)<span class="block text-xs text-gray-400 mt-0.5">United Kingdom</span></p>
+                        <p><strong>Pistacia lentiscus</strong> (Mastic Tree)<span class="block text-xs text-gray-400 mt-0.5">Spain</span></p>
+                    </div>
+                </div>
+
+                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="verified" data-country="madagascar">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-deep-forest">2024-2025 FY Verified</h3>
+                        <span class="tag" style="border-color:#BBF7D0;color:#166534;background-color:#F0FDF4">Verified</span>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Rhizophora mucronata</strong> (Red Mangrove)<span class="block text-xs text-gray-400 mt-0.5">Madagascar</span></p>
+                    </div>
+                </div>
+
+                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="preincorporation" data-country="preincorporation">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-deep-forest">Historical Plantings <a href="#footnote-1" class="align-super text-[10px] text-gray-400 hover:text-gray-600 no-underline" aria-label="Footnote 1">1</a></h3>
+                        <span class="tag" style="border-color:#E5E7EB;color:#6B7280;background-color:#F9FAFB">Pre-incorporation</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-3">Species attributed to planting activities prior to the legal incorporation of Oasis of Change, Inc.</p>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Phyllanthus emblica</strong> (Indian gooseberry / Amla)<span class="block text-xs text-gray-400 mt-0.5">Nepal</span></p>
+                        <p><strong>Pinus strobus</strong> (Eastern white pine)<span class="block text-xs text-gray-400 mt-0.5">United States</span></p>
                     </div>
                 </div>
 
                 <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="nepal">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-deep-forest">Nepal</h3>
-                        <span class="tag">Legacy partner</span>
+                        <span class="tag">Legacy partner</span><a href="#footnote-2" class="align-super text-[10px] text-gray-400 hover:text-gray-600 ml-0.5 no-underline" aria-label="Footnote 2">2</a>
                     </div>
                     <div class="space-y-2 text-sm">
                         <p><strong>Acacia katechu</strong> (Khair)</p>
@@ -200,27 +227,15 @@
                     </div>
                 </div>
 
-                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="verified" data-country="madagascar">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-deep-forest">2024-2025 FY Verified</h3>
-                        <span class="tag" style="border-color:#BBF7D0;color:#166534;background-color:#F0FDF4">Verified</span>
-                    </div>
-                    <p class="text-xs text-gray-500 mb-2">1 species planted in Madagascar via Eden Reforestation Projects.</p>
-                    <div class="space-y-2 text-sm">
-                        <p><strong>Rhizophora mucronata</strong> (Red Mangrove) <span class="ml-1 text-xs text-gray-400">Madagascar</span></p>
-                    </div>
-                </div>
-
                 <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="madagascar">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-deep-forest">Madagascar</h3>
-                        <span class="tag">Legacy partner</span>
+                        <span class="tag">Legacy partner</span><a href="#footnote-2" class="align-super text-[10px] text-gray-400 hover:text-gray-600 ml-0.5 no-underline" aria-label="Footnote 2">2</a>
                     </div>
-                    <p class="text-xs text-gray-500 mb-2">Species reported by Refoorest legacy partner.</p>
                     <div class="space-y-2 text-sm">
                         <p><strong>Anacardium occidentale</strong> (Cashew)</p>
                         <p><strong>Carica papaya</strong> (Papaya)</p>
-                        <p><strong>Mangifera indica</strong> (Mango)</p>
+                        <p><strong>Mangifera indica</strong> (Mango Tree)</p>
                         <p><strong>Adansonia sp</strong> (Baobab)</p>
                         <p><strong>Albizia saman</strong> (Rain Tree)</p>
                         <p><strong>Bismarckia nobilis</strong> (Bismarck Palm)</p>
@@ -237,7 +252,7 @@
                 <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="haiti">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-deep-forest">Haiti</h3>
-                        <span class="tag">Legacy partner</span>
+                        <span class="tag">Legacy partner</span><a href="#footnote-2" class="align-super text-[10px] text-gray-400 hover:text-gray-600 ml-0.5 no-underline" aria-label="Footnote 2">2</a>
                     </div>
                     <div class="space-y-2 text-sm">
                         <p><strong>Annona muricata</strong> (Soursop)</p>
@@ -251,7 +266,7 @@
                         <p><strong>Coffea arabica</strong> (Coffee)</p>
                         <p><strong>Delonix regia</strong> (Flame Tree)</p>
                         <p><strong>Leucaena leucocephala</strong> (Lead Tree)</p>
-                        <p><strong>Mangifera indica</strong> (Mango)</p>
+                        <p><strong>Mangifera indica</strong> (Mango Tree)</p>
                         <p><strong>Theobroma cacao</strong> (Cocoa)</p>
                     </div>
                 </div>
@@ -259,7 +274,7 @@
                 <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="indonesia">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-deep-forest">Indonesia</h3>
-                        <span class="tag">Legacy partner</span>
+                        <span class="tag">Legacy partner</span><a href="#footnote-2" class="align-super text-[10px] text-gray-400 hover:text-gray-600 ml-0.5 no-underline" aria-label="Footnote 2">2</a>
                     </div>
                     <div class="space-y-2 text-sm">
                         <p><strong>Avicennia marina</strong> (Grey Mangrove)</p>
@@ -274,7 +289,7 @@
                 <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="mozambique">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-deep-forest">Mozambique</h3>
-                        <span class="tag">Legacy partner</span>
+                        <span class="tag">Legacy partner</span><a href="#footnote-2" class="align-super text-[10px] text-gray-400 hover:text-gray-600 ml-0.5 no-underline" aria-label="Footnote 2">2</a>
                     </div>
                     <div class="space-y-2 text-sm">
                         <p><strong>Avicennia marina</strong> (Grey Mangrove)</p>
@@ -286,7 +301,7 @@
                         <p><strong>Anacardium occidentale</strong> (Cashew)</p>
                         <p><strong>Citrus sinensis</strong> (Orange)</p>
                         <p><strong>Colophospermum mopane</strong> (Mopane)</p>
-                        <p><strong>Mangifera indica</strong> (Mango)</p>
+                        <p><strong>Mangifera indica</strong> (Mango Tree)</p>
                         <p><strong>Moringa oleifera</strong> (Moringa)</p>
                         <p><strong>Sclerocarya birrea</strong> (Marula)</p>
                     </div>
@@ -295,7 +310,7 @@
                 <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="kenya">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-deep-forest">Kenya</h3>
-                        <span class="tag">Legacy partner</span>
+                        <span class="tag">Legacy partner</span><a href="#footnote-2" class="align-super text-[10px] text-gray-400 hover:text-gray-600 ml-0.5 no-underline" aria-label="Footnote 2">2</a>
                     </div>
                     <div class="space-y-2 text-sm">
                         <p><strong>Acacia gerrardii</strong> (Grey Thorn)</p>
@@ -319,7 +334,7 @@
                 <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="central-america">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-deep-forest">Central America</h3>
-                        <span class="tag">Legacy partner</span>
+                        <span class="tag">Legacy partner</span><a href="#footnote-2" class="align-super text-[10px] text-gray-400 hover:text-gray-600 ml-0.5 no-underline" aria-label="Footnote 2">2</a>
                     </div>
                     <div class="space-y-2 text-sm">
                         <p><strong>Liquidambar styraciflua</strong> (Sweetgum)</p>
@@ -334,7 +349,20 @@
         </section>
     </main>
 
+    <footer id="page-footer" class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+            <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Notes</h2>
+            <ol class="space-y-2 text-sm text-gray-600 list-none">
+                <li id="footnote-1" class="scroll-mt-20"><sup class="text-gray-400 font-medium">1</sup> Certain species listed under Historical Plantings are attributed to planting activities prior to the legal incorporation of Oasis of Change, Inc. (Eden Reforestation Projects, Nepal; National Forest Recovery, United States).</li>
+                <li id="footnote-2" class="scroll-mt-20"><sup class="text-gray-400 font-medium">2</sup> Legacy partner species data is reported by Refoorest and has not been independently verified by Oasis of Change, Inc.</li>
+            </ol>
+            <p class="mt-6 text-xs text-gray-400">&copy; <span id="copyright-year"></span> Oasis of Change, Inc.</p>
+        </div>
+    </footer>
+
     <script src="assets/js/tree-data.js"></script>
     <script src="assets/js/species.js"></script>
+    <script src="assets/js/footnotes.js"></script>
+    <script>document.getElementById('copyright-year').textContent=new Date().getFullYear();</script>
 </body>
 </html>

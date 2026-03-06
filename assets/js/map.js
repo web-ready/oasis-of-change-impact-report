@@ -1,10 +1,11 @@
 const plantingData = {
   MG: { 
     centroid: [-18.77, 46.87], 
-    type: 'sunset', 
-    source: 'Sunset — 2024-2025 FY',
+    type: 'mixed', 
+    source: 'Mixed Sources',
+    fy: '2024-2025',
     sites: [
-      { name: 'Eden Reforestation Projects', type: 'confirmed', source: 'Eden Reforestation' },
+      { name: 'Eden Reforestation Projects', type: 'completed', source: 'Eden Reforestation (Tree-Nation)' },
       { name: 'Kandrany 1', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Akalamboro', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Ampasimarine', type: 'supported', source: 'Legacy Partner (Refoorest)' },
@@ -41,10 +42,11 @@ const plantingData = {
   },
 
   NP: { 
-    centroid: [28.39, 84.12], 
+    centroid: [27.775871, 84.103767], 
     type: 'mixed', 
+    source: 'Mixed Sources',
     sites: [
-      { name: 'Eden Reforestation Projects', type: 'confirmed', source: 'Eden Reforestation' },
+      { name: 'Eden Reforestation Projects', type: 'completed', source: 'Eden Reforestation (Tree-Nation)' },
       { name: 'Amaltari', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Attarpur', type: 'supported', source: 'Legacy Partner (Refoorest)' },
       { name: 'Bachhauli', type: 'supported', source: 'Legacy Partner (Refoorest)' },
@@ -124,118 +126,133 @@ const plantingData = {
   },
 
   TZ: { 
-    centroid: [-6.37, 34.89], 
+    centroid: [-4.798667, 38.290218], 
     type: 'confirmed', 
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
-      { name: 'Replanting the burnt Mkussu Forest (CORE) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' },
+      { name: 'Replanting the burnt Mkussu Forest', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Usambara Biodiversity Conservation', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Mlola Biodiversity Restoration', type: 'confirmed', source: 'Tree-Nation' },
-      { name: 'Plant to Stop Poverty', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Plant to Stop Poverty', type: 'confirmed', source: 'Tree-Nation' },
+      { name: 'Geita Tree Plantation for Community', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   CA: {
-    centroid: [56.13, -106.35],
+    centroid: [52.405426, -98.917091],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
-      { name: 'Boreal Forest Habitat Restoration — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Boreal Forest Habitat Restoration', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   BO: {
-    centroid: [-16.29, -63.59],
+    centroid: [-17.270603, -62.805347],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
-      { name: 'Amazon Windshields (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Amazon Windshields', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   NG: {
-    centroid: [9.08, 8.68],
+    centroid: [7.550622, 4.852035],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
-      { name: 'Restoration of Ala Forest Reserve (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Restoration of Ala Forest Reserve', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   BR: {
-    centroid: [-14.24, -51.93],
+    centroid: [-9.188258, -63.175442],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
-      { name: 'Reforest the Amazon Basin (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Reforest the Amazon Basin', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   RO: {
-    centroid: [45.94, 24.97],
+    centroid: [46.168808, 25.911007],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
-      { name: 'Bear Groves in Transylvania (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Bear Groves in Transylvania', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   ZW: {
-    centroid: [-19.02, 29.15],
+    centroid: [-17.830269, 31.026451],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
-      { name: 'Zimbabwe Reforestation Initiative (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Zimbabwe Reforestation Initiative', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   IE: {
-    centroid: [52.84, -9.06],
+    centroid: [52.984489, -9.269574],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
-      { name: 'Ireland Community Tree Planting, County Clare (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Ireland Community Tree Planting, County Clare', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   MX: {
-    centroid: [23.63, -102.55],
+    centroid: [17.976389, -97.373886],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
-      { name: 'Restoration and Social Empowerment (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Restoration and Social Empowerment', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   AR: {
-    centroid: [-38.42, -63.62],
+    centroid: [-31.491564, -64.835419],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
-      { name: 'Bosques de Agua (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Bosques de Agua', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   FR: {
-    centroid: [46.23, 2.21],
+    centroid: [47.267403, 3.305741],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
-      { name: 'Restauration Forêts dégradées (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Restauration Forêts dégradées', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   AU: {
-    centroid: [-25.27, 133.78],
+    centroid: [-28.746443, 153.450165],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
-      { name: 'Big Scrub Rainforest Restoration (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Big Scrub Rainforest Restoration', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   GB: {
-    centroid: [55.38, -3.44],
+    centroid: [51.771252, -1.324433],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
-      { name: 'Community Tree Planting (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Community Tree Planting', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   ES: {
-    centroid: [40.46, -3.75],
+    centroid: [38.102879, -2.75392],
     type: 'confirmed',
     source: 'Tree-Nation',
+    fy: '2025-2026',
     sites: [
-      { name: 'Alvelal (PILOT) — 2025-2026 FY', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Alvelal', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
   UG: { 
@@ -247,22 +264,36 @@ const plantingData = {
       { name: 'Forest Gardens - Mount Elgon Region', type: 'confirmed', source: 'Tree-Nation' }
     ]
   },
-  US: { 
-    centroid: [39.83,-98.58], 
+  US_MT: { 
+    centroid: [46.89217, -114.340752], 
     type: 'confirmed', 
     source: 'Tree-Nation',
     sites: [
-      { name: 'Lost Forests Recovery in California', type: 'confirmed', source: 'Tree-Nation' },
-      { name: 'National Forest Recovery', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'National Forest Recovery', type: 'confirmed', source: 'Historical Planting (Tree-Nation)' }
     ]
   },
-  IN: { 
-    centroid: [20.59, 78.96], 
+  US_CA: { 
+    centroid: [41.490704, -123.247726], 
     type: 'confirmed', 
     source: 'Tree-Nation',
     sites: [
-      { name: 'Trees for Tribals', type: 'confirmed', source: 'Tree-Nation' },
+      { name: 'Lost Forests Recovery in California', type: 'confirmed', source: 'Sustainable WWW Partner Project (Tree-Nation)' }
+    ]
+  },
+  IN_Tigers: { 
+    centroid: [22.006382, 86.039948], 
+    type: 'confirmed', 
+    source: 'Tree-Nation',
+    sites: [
       { name: 'Trees for Tigers', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  IN_Tribals: { 
+    centroid: [19.055958, 81.986229], 
+    type: 'confirmed', 
+    source: 'Sustainable WWW Partner Project (Tree-Nation)',
+    sites: [
+      { name: 'Trees for Tribals', type: 'confirmed', source: 'Sustainable WWW Partner Project (Tree-Nation)' }
     ]
   },
   
@@ -393,9 +424,11 @@ const countryName = {
   TZ: 'Tanzania',
   UG: 'Uganda',
   SN: 'Senegal',
-  US: 'United States',
+  US_MT: 'USA - National Forest Recovery (Montana)',
+  US_CA: 'USA - Lost Forests Recovery (California)',
   CM: 'Cameroon',
-  IN: 'India',
+  IN_Tigers: 'India - Trees for Tigers',
+  IN_Tribals: 'India - Trees for Tribals',
   MZ: 'Mozambique',
   LA: 'Laos',
   CD: 'Democratic Republic of the Congo',
@@ -569,7 +602,7 @@ function createClusterGroupForType(type) {
     chunkedLoading: true,
     spiderfyOnMaxZoom: true,
     showCoverageOnHover: false,
-    maxClusterRadius: 45,
+    maxClusterRadius: 30,
     iconCreateFunction: function(cluster) {
       const count = cluster.getChildCount();
       const size = count < 10 ? 'small' : count < 100 ? 'medium' : 'large';
@@ -583,6 +616,52 @@ function createClusterGroupForType(type) {
   });
 }
 
+// Single cluster group — uses "mixed" style when markers of different types are grouped together
+const CLUSTER_TYPE_PRIORITY = { 'confirmed': 5, 'mixed': 4, 'completed': 3, 'sunset': 2, 'supported': 1 };
+
+function createSingleClusterGroupWithPriority() {
+  return L.markerClusterGroup({
+    chunkedLoading: true,
+    spiderfyOnMaxZoom: true,
+    showCoverageOnHover: false,
+    maxClusterRadius: 30,
+    iconCreateFunction: function(cluster) {
+      const count = cluster.getChildCount();
+      const size = count < 10 ? 'small' : count < 100 ? 'medium' : 'large';
+      // Collect distinct marker types in this cluster
+      const types = new Set();
+      cluster.getAllChildMarkers().forEach(function(m) {
+        types.add((m.options && m.options.markerType) || 'supported');
+      });
+      // If all markers share the same type, use that type; otherwise use neutral style
+      let clusterType;
+      if (types.size === 1) {
+        clusterType = types.values().next().value;
+      } else {
+        clusterType = 'neutral';
+      }
+      const typeClass = 'marker-cluster-' + clusterType;
+      return L.divIcon({
+        html: '<span><span class="cluster-count">' + count + '</span></span>',
+        className: 'marker-cluster marker-cluster-' + size + ' marker-cluster-custom ' + typeClass,
+        iconSize: L.point(40, 40)
+      });
+    }
+  });
+}
+
+function getPopupOptions() {
+  var isMobile = window.innerWidth <= 640;
+  return {
+    maxWidth: isMobile ? 240 : 310,
+    minWidth: isMobile ? 160 : 200,
+    autoPan: true,
+    autoPanPadding: L.point(isMobile ? 20 : 40, isMobile ? 20 : 40),
+    closeButton: true,
+    className: 'modern-popup'
+  };
+}
+
 function initializeMap() {
   const map = L.map('map', { 
     scrollWheelZoom: true,
@@ -590,11 +669,24 @@ function initializeMap() {
     attributionControl: true
   }).setView([11, 16], 2);
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  const streetLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 20
-  }).addTo(map);
+  });
+
+  const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: '&copy; <a href="https://www.esri.com/">Esri</a> &mdash; Sources: Esri, Maxar, Earthstar Geographics',
+    maxZoom: 19
+  });
+
+  streetLayer.addTo(map);
+
+  L.control.layers(
+    { 'Map': streetLayer, 'Satellite': satelliteLayer },
+    null,
+    { position: 'topright', collapsed: true }
+  ).addTo(map);
 
   window.addEventListener('resize', () => {
     setTimeout(() => {
@@ -602,20 +694,25 @@ function initializeMap() {
     }, 100);
   });
 
-  const clusterConfirmed = createClusterGroupForType('confirmed');
-  const clusterMixed = createClusterGroupForType('mixed');
-  const clusterSupported = createClusterGroupForType('supported');
-  const clusterSunset = createClusterGroupForType('sunset');
+  const singleClusterGroup = createSingleClusterGroupWithPriority();
 
   function addMarkerToGroup(marker, type) {
-    if (type === 'confirmed') clusterConfirmed.addLayer(marker);
-    else if (type === 'mixed') clusterMixed.addLayer(marker);
-    else if (type === 'sunset') clusterSunset.addLayer(marker);
-    else clusterSupported.addLayer(marker);
+    marker.options = marker.options || {};
+    marker.options.markerType = type;
+    singleClusterGroup.addLayer(marker);
   }
 
   if (typeof TreeData !== 'undefined') {
     const mapSites = TreeData.getMapSites();
+    
+    // Sort markers so confirmed markers are added last (appear on top when overlapping)
+    // Priority order: supported < sunset < mixed < confirmed
+    const typePriority = { 'supported': 1, 'sunset': 2, 'mixed': 3, 'confirmed': 4 };
+    mapSites.sort((a, b) => {
+      const priorityA = typePriority[a.type] || 0;
+      const priorityB = typePriority[b.type] || 0;
+      return priorityA - priorityB; // Lower priority first, higher priority last
+    });
 
     function parseSiteDescription(desc) {
       if (!desc || typeof desc !== 'string') return null;
@@ -635,114 +732,170 @@ function initializeMap() {
     }
 
     mapSites.forEach(site => {
-      let markerColor, markerLabel;
-      if (site.type === 'confirmed') {
+      let markerColor, markerLabel, isCompleted;
+      // Check if site is completed (has noteLink indicating completion)
+      isCompleted = !!site.noteLink || site.type === 'sunset' || site.type === 'completed';
+      
+      if (isCompleted) {
+        markerColor = '#2563EB';
+        markerLabel = 'Completed';
+      } else if (site.type === 'confirmed') {
         markerColor = '#004734';
-        markerLabel = 'Confirmed';
+        markerLabel = 'Verified';
       } else if (site.type === 'mixed') {
         markerColor = '#006B50';
         markerLabel = 'Mixed';
-      } else if (site.type === 'sunset') {
-        markerColor = '#6B7280';
-        markerLabel = 'Sunset';
       } else {
         markerColor = '#ca8a04';
         markerLabel = 'Supported';
       }
 
       const marker = L.circleMarker([site.lat, site.lng], {
-        radius: 8,
-        color: markerColor,
-        weight: 2,
+        radius: 7,
+        color: '#fff',
+        weight: 2.5,
         fillOpacity: 1,
         fillColor: markerColor,
-        className: 'map-marker'
+        className: 'map-marker map-marker-' + site.type
       });
 
       const title = site.name;
       const siteDescription = site.description || '';
-      const showCountry = site.country && site.country !== site.name;
+      const showCountry = site.country && site.country !== site.name && !site.name.includes(site.country);
+      const projectName = site.projectName || '';
       const parsed = parseSiteDescription(siteDescription);
       const hasStructured = parsed && (parsed.plantingCycle || parsed.plantingSite);
 
       const structuredLines = [];
-      if (hasStructured) {
-        if (parsed.plantingSite) structuredLines.push('<div class="popup-line"><span class="popup-label">Planting site:</span> ' + parsed.plantingSite + '</div>');
-        if (parsed.projectType) structuredLines.push('<div class="popup-line"><span class="popup-label">Project type:</span> ' + formatProjectType(parsed.projectType) + '</div>');
-        if (parsed.plantingCycle) structuredLines.push('<div class="popup-line"><span class="popup-label">Planting cycle:</span> ' + parsed.plantingCycle + '</div>');
+      if (projectName) {
+        structuredLines.push('<div class="popup-line"><span class="popup-label">Project:</span> ' + projectName + '</div>');
       }
-      const fallbackDesc = !hasStructured && siteDescription ? '<div class="popup-desc">' + siteDescription + '</div>' : '';
+      if (hasStructured) {
+        if (parsed.plantingSite) structuredLines.push('<div class="popup-line"><span class="popup-label">Site:</span> ' + parsed.plantingSite + '</div>');
+        if (parsed.projectType) structuredLines.push('<div class="popup-line"><span class="popup-label">Type:</span> ' + formatProjectType(parsed.projectType) + '</div>');
+        if (parsed.plantingCycle) structuredLines.push('<div class="popup-line"><span class="popup-label">Cycle:</span> ' + parsed.plantingCycle + '</div>');
+      }
+      const fallbackDesc = siteDescription ? '<div class="popup-desc">' + siteDescription + '</div>' : '';
+
+      let noteHtml = '';
+      if (site.note) {
+        const linkTag = site.noteLink
+          ? ' <a href="' + site.noteLink + '" class="popup-note-link">Read more &rarr;</a>'
+          : '';
+        noteHtml = '<div class="popup-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>' + site.note + linkTag + '</span></div>';
+      }
+
+      // Determine primary and secondary badges
+      const isCompletedSite = !!site.noteLink || site.type === 'sunset' || site.type === 'completed';
+      let primaryBadge, secondaryBadge;
+      
+      if (isCompletedSite) {
+        primaryBadge = '<span class="popup-badge popup-badge-sunset">Completed</span>';
+        // Show type badge as secondary only if it's different from completed
+        if (site.type !== 'sunset' && site.type !== 'completed') {
+          const typeLabel = site.type === 'confirmed' ? 'Verified' : site.type === 'mixed' ? 'Mixed' : 'Supported';
+          const typeClass = site.type === 'confirmed' ? 'popup-badge-confirmed' : site.type === 'mixed' ? 'popup-badge-mixed' : 'popup-badge-supported';
+          secondaryBadge = `<span class="popup-badge ${typeClass}">${typeLabel}</span>`;
+        } else {
+          secondaryBadge = '';
+        }
+      } else {
+        primaryBadge = `<span class="popup-badge popup-badge-${site.type}">${markerLabel}</span>`;
+        secondaryBadge = '';
+      }
 
       const popupHTML = `
         <div class="map-popup">
-          <div class="popup-title">${title}</div>
-          <div class="popup-meta">
-            <span class="popup-badge popup-badge-${site.type}">${markerLabel}</span>
-            <span class="popup-source">Source: ${site.source}</span>
+          <div class="popup-header">
+            <div class="popup-title">${title}</div>
+            ${showCountry ? '<div class="popup-subtitle">' + site.country + '</div>' : ''}
           </div>
-          ${showCountry ? '<div class="popup-country">' + site.country + '</div>' : ''}
-          ${structuredLines.length ? '<div class="popup-fields">' + structuredLines.join('') + '</div>' : ''}
-          ${fallbackDesc}
-          <div class="popup-disclaimer">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</div>
+          <div class="popup-divider"></div>
+          <div class="popup-body">
+            <div class="popup-meta">
+              ${primaryBadge}
+              ${secondaryBadge}
+              <span class="popup-source">${site.source}</span>
+            </div>
+            ${structuredLines.length ? '<div class="popup-fields">' + structuredLines.join('') + '</div>' : ''}
+            ${fallbackDesc}
+            ${noteHtml}
+          </div>
+          <div class="popup-footer">Location is approximate and provided by third-party data sources.</div>
         </div>
       `;
 
-      marker.bindPopup(popupHTML);
-      addMarkerToGroup(marker, site.type);
+      marker.bindPopup(popupHTML, getPopupOptions());
+      // Use completed type for clustering if applicable
+      const clusterType = isCompleted ? 'sunset' : site.type;
+      addMarkerToGroup(marker, clusterType);
     });
   } else {
     Object.entries(plantingData).forEach(([cc, cfg]) => {
       const [lat, lng] = cfg.centroid;
 
-      let markerColor, markerLabel;
-      if (cfg.type === 'confirmed') {
+      let markerColor, markerLabel, isCompleted;
+      // Check if this country/region has completed sites
+      isCompleted = cfg.type === 'completed' || cfg.type === 'sunset' || 
+                    (cfg.sites && cfg.sites.some(s => {
+                      const siteType = typeof s === 'string' ? cfg.type : s.type;
+                      return siteType === 'completed' || siteType === 'sunset';
+                    }));
+      
+      if (isCompleted) {
+        markerColor = '#2563EB';
+        markerLabel = 'Completed';
+      } else if (cfg.type === 'confirmed') {
         markerColor = '#004734';
-        markerLabel = 'Confirmed';
+        markerLabel = 'Verified';
       } else if (cfg.type === 'mixed') {
         markerColor = '#006B50';
         markerLabel = 'Mixed';
-      } else if (cfg.type === 'sunset') {
-        markerColor = '#6B7280';
-        markerLabel = 'Sunset';
       } else {
         markerColor = '#ca8a04';
         markerLabel = 'Supported';
       }
 
       const marker = L.circleMarker([lat, lng], {
-        radius: 8,
-        color: markerColor,
-        weight: 2,
+        radius: 7,
+        color: '#fff',
+        weight: 2.5,
         fillOpacity: 1,
         fillColor: markerColor,
-        className: 'map-marker'
+        className: 'map-marker map-marker-' + cfg.type
       });
 
-      const title = `${countryName[cc] || cc} (${countLabel(cfg.sites)})`;
+      const title = countryName[cc] || cc;
+      const siteCount = countLabel(cfg.sites);
       const siteNames = (cfg.sites || []).map(s => typeof s === 'string' ? s : s.name).slice(0, 5);
       const moreCount = (cfg.sites || []).length > 5 ? (cfg.sites.length - 5) : 0;
-
       const popupHTML = `
         <div class="map-popup">
-          <div class="popup-title">${title}</div>
-          <div class="popup-meta">
-            <span class="popup-badge popup-badge-${cfg.type}">${markerLabel}</span>
-            <span class="popup-source">Source: ${cfg.source || 'Mixed Sources'}</span>
+          <div class="popup-header">
+            <div class="popup-title">${title}</div>
+            <div class="popup-subtitle">${siteCount}</div>
           </div>
-          ${siteNames.length > 0 ? '<div class="popup-sites"><strong>Sites:</strong> ' + siteNames.join(', ') + (moreCount > 0 ? ' + ' + moreCount + ' more' : '') + '</div>' : ''}
-          <div class="popup-disclaimer">Location is approximate and provided by third-party data sources. We do our best to ensure accuracy.</div>
+          <div class="popup-divider"></div>
+          <div class="popup-body">
+            <div class="popup-meta">
+              ${isCompleted ? `<span class="popup-badge popup-badge-sunset">Completed</span>` : ''}
+              ${isCompleted && cfg.type !== 'completed' && cfg.type !== 'sunset' ? `<span class="popup-badge popup-badge-${cfg.type}">${cfg.type === 'confirmed' ? 'Verified' : cfg.type === 'mixed' ? 'Mixed' : 'Supported'}</span>` : !isCompleted ? `<span class="popup-badge popup-badge-${cfg.type}">${markerLabel}</span>` : ''}
+              <span class="popup-source">${cfg.source || 'Mixed Sources'}</span>
+            </div>
+            ${siteNames.length > 0 ? '<div class="popup-sites"><strong>Sites:</strong> ' + siteNames.join(', ') + (moreCount > 0 ? ' + ' + moreCount + ' more' : '') + '</div>' : ''}
+          </div>
+          <div class="popup-footer">Location is approximate and provided by third-party data sources.</div>
         </div>
       `;
 
-      marker.bindPopup(popupHTML);
-      addMarkerToGroup(marker, cfg.type);
+      marker.bindPopup(popupHTML, getPopupOptions());
+      // Use completed type for clustering if applicable
+      const clusterType = isCompleted ? 'sunset' : cfg.type;
+      addMarkerToGroup(marker, clusterType);
     });
   }
 
-  clusterConfirmed.addTo(map);
-  clusterMixed.addTo(map);
-  clusterSupported.addTo(map);
-  clusterSunset.addTo(map);
+  singleClusterGroup.addTo(map);
   return map;
 }
 
@@ -756,21 +909,29 @@ function getFilteredData() {
     if (currentFilters.type !== 'all' && cfg.type !== currentFilters.type) {
       return false;
     }
-    if (currentFilters.source !== 'all') {
-      if (cfg.type === 'mixed') {
-        const hasMatchingSource = cfg.sites.some(site => {
-          if (typeof site === 'string') {
-            return cfg.source === currentFilters.source;
-          }
-          return site.source === currentFilters.source;
-        });
-        if (!hasMatchingSource) {
-          return false;
+    if (currentFilters.source === 'all') {
+      return true;
+    }
+    function sourceMatches(src) {
+      if (currentFilters.source === 'Tree-Nation') {
+        return src === 'Tree-Nation' || (src && src.includes('(Tree-Nation)'));
+      }
+      return src === currentFilters.source;
+    }
+
+    if (cfg.type === 'mixed') {
+      const hasMatchingSource = cfg.sites.some(site => {
+        if (typeof site === 'string') {
+          return sourceMatches(cfg.source || '');
         }
-      } else {
-        if (cfg.source !== currentFilters.source) {
-          return false;
-        }
+        return sourceMatches(site.source || '');
+      });
+      if (!hasMatchingSource) {
+        return false;
+      }
+    } else {
+      if (!sourceMatches(cfg.source || '')) {
+        return false;
       }
     }
     
@@ -792,10 +953,24 @@ function updateFilterResults() {
   }
 }
 
+function showSiteListSkeleton() {
+  const siteLists = document.getElementById('site-lists');
+  if (!siteLists) return;
+  siteLists.classList.remove('fade-in');
+  siteLists.innerHTML = '';
+  for (let i = 0; i < 3; i++) {
+    const row = document.createElement('div');
+    row.className = 'skeleton-row';
+    row.innerHTML = '<div class="skeleton-dot"></div><div class="skeleton-bar skeleton-bar-sm"></div><div class="skeleton-bar skeleton-bar-md"></div><div class="skeleton-bar-tag"></div>';
+    siteLists.appendChild(row);
+  }
+}
+
 function renderSiteLists() {
   const siteLists = document.getElementById('site-lists');
   if (!siteLists) return;
   siteLists.innerHTML = '';
+  siteLists.classList.add('fade-in');
 
   const filteredData = getFilteredData();
 
@@ -817,14 +992,18 @@ function renderSiteLists() {
         statusColor = 'bg-brand-green';
         statusBg = 'bg-emerald-50';
         statusText = 'text-emerald-800';
+      } else if (cfg.type === 'completed') {
+        statusColor = 'bg-info';
+        statusBg = 'bg-blue-50';
+        statusText = 'text-blue-800';
       } else if (cfg.type === 'mixed') {
         statusColor = 'bg-emerald-600';
         statusBg = 'bg-emerald-50';
         statusText = 'text-emerald-700';
       } else if (cfg.type === 'sunset') {
-        statusColor = 'bg-gray-500';
-        statusBg = 'bg-gray-100';
-        statusText = 'text-gray-700';
+        statusColor = 'bg-info';
+        statusBg = 'bg-blue-50';
+        statusText = 'text-blue-800';
       } else {
         statusColor = 'bg-legacy-gold';
         statusBg = 'bg-yellow-100';
@@ -841,7 +1020,7 @@ function renderSiteLists() {
         </div>
         <div class="flex items-center gap-2 sm:gap-3 justify-end sm:justify-end flex-shrink-0">
           <span class="text-xs px-2 sm:px-3 py-1 rounded-full font-medium whitespace-nowrap ${statusBg} ${statusText}">
-            ${cfg.type === 'confirmed' ? 'Confirmed' : cfg.type === 'mixed' ? 'Mixed' : cfg.type === 'sunset' ? 'Sunset' : 'Supported'}
+            ${cfg.type === 'confirmed' ? 'Verified' : cfg.type === 'completed' ? 'Completed' : cfg.type === 'mixed' ? 'Mixed' : cfg.type === 'sunset' ? 'Completed' : 'Supported'}
           </span>
           <span class="text-xs text-gray-500 hidden sm:inline truncate max-w-[140px]" title="${(cfg.source || 'Mixed Sources').replace(/"/g, '&quot;')}">${cfg.source || 'Mixed Sources'}</span>
           <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -862,19 +1041,37 @@ function renderSiteLists() {
           const li = document.createElement('li');
           li.className = 'flex items-center gap-2 text-gray-700 py-1';
           
-          let siteColor, siteType;
-          if (typeof site === 'string') {
-            siteColor = cfg.type === 'confirmed' ? 'bg-brand-green' : 'bg-legacy-gold';
-            siteType = cfg.type === 'confirmed' ? 'Confirmed' : 'Supported';
+          let siteColor, siteType, siteExtraTag;
+          const sType = typeof site === 'string' ? cfg.type : site.type;
+          siteExtraTag = '';
+          if (sType === 'confirmed') {
+            siteColor = 'bg-brand-green';
+            siteType = 'Verified';
+          } else if (sType === 'completed') {
+            siteColor = 'bg-brand-green';
+            siteType = '<span class="text-xs text-white bg-info px-1.5 py-0.5 rounded-full">Completed</span>';
+            siteExtraTag = '<span class="text-xs text-white bg-brand-green px-1.5 py-0.5 rounded-full ml-1 flex-shrink-0">Verified</span>';
+          } else if (sType === 'sunset') {
+            siteColor = 'bg-info';
+            siteType = '<span class="text-xs text-white bg-info px-1.5 py-0.5 rounded-full">Completed</span>';
           } else {
-            siteColor = site.type === 'confirmed' ? 'bg-brand-green' : 'bg-legacy-gold';
-            siteType = site.type === 'confirmed' ? 'Confirmed' : 'Supported';
+            siteColor = 'bg-legacy-gold';
+            siteType = 'Supported';
           }
+          
+          const displayName = typeof site === 'string' ? site : site.name;
+          const showFootnote3 = (cc === 'NP' && displayName === 'Eden Reforestation Projects') || (cc === 'US_MT' && displayName === 'National Forest Recovery');
+          const footnoteLink = showFootnote3 ? ' <a href="#footnote-4" class="align-super text-xs text-brand-green hover:underline no-underline" aria-label="Footnote 4">4</a>' : '';
+          
+          const siteTypeDisplay = typeof siteType === 'string' && siteType.includes('<span') 
+            ? `<span class="ml-2 flex-shrink-0">${siteType}</span>`
+            : `<span class="text-xs text-gray-500 ml-2 flex-shrink-0">${siteType}</span>`;
           
           li.innerHTML = `
             <div class="w-1.5 h-1.5 rounded-full ${siteColor} flex-shrink-0"></div>
-            <span class="flex-1 truncate">${typeof site === 'string' ? site : site.name}</span>
-            <span class="text-xs text-gray-500 ml-2 flex-shrink-0">${siteType}</span>
+            <span class="flex-1 truncate">${displayName}${footnoteLink}</span>
+            ${siteTypeDisplay}
+            ${siteExtraTag}
           `;
           ul.appendChild(li);
         });
@@ -895,57 +1092,114 @@ function initializeMobileMenu() {
   const toggleBtn = document.getElementById('mobile-menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   const closeBtn = document.getElementById('mobile-menu-close');
+  const backdrop = document.getElementById('mobile-menu-backdrop');
   if (!toggleBtn || !mobileMenu) return;
   if (toggleBtn.dataset.menuInit) return;
   toggleBtn.dataset.menuInit = '1';
 
-  function toggleMenu() {
-    const isOpen = !mobileMenu.classList.contains('hidden');
-    mobileMenu.classList.toggle('hidden');
-    document.documentElement.style.overflow = isOpen ? '' : 'hidden';
-    document.body.style.overflow = isOpen ? '' : 'hidden';
-    toggleBtn.setAttribute('aria-expanded', String(!isOpen));
+  function openMenu() {
+    mobileMenu.classList.add('menu-open');
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    toggleBtn.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu() {
+    mobileMenu.classList.remove('menu-open');
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    toggleBtn.setAttribute('aria-expanded', 'false');
   }
 
-  toggleBtn.addEventListener('click', toggleMenu);
-  if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+  toggleBtn.addEventListener('click', openMenu);
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+  if (backdrop) backdrop.addEventListener('click', closeMenu);
+}
+
+function toggleClearButton() {
+  const btn = document.getElementById('clear-filters');
+  if (!btn) return;
+  const hasActiveFilter = currentFilters.type !== 'all' || currentFilters.source !== 'all';
+  btn.classList.toggle('visible', hasActiveFilter);
 }
 
 function initializeFilters() {
-  const typeFilter = document.getElementById('type-filter');
-  const sourceFilter = document.getElementById('source-filter');
   const clearFiltersBtn = document.getElementById('clear-filters');
-  
-  function applyFilters() {
-    renderSiteLists();
-    updateFilterResults();
-  }
-  
-  if (typeFilter) {
-    typeFilter.addEventListener('change', (e) => {
-      currentFilters.type = e.target.value;
-      applyFilters();
+
+  document.querySelectorAll('.custom-select').forEach(dropdown => {
+    const trigger = dropdown.querySelector('.select-trigger');
+    const panel = dropdown.querySelector('.select-panel');
+    const valueEl = dropdown.querySelector('.select-value');
+    const filterKey = dropdown.dataset.filter;
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const wasOpen = dropdown.classList.contains('open');
+      document.querySelectorAll('.custom-select.open').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.select-trigger').setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen) {
+        dropdown.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
     });
-  }
-  
-  if (sourceFilter) {
-    sourceFilter.addEventListener('change', (e) => {
-      currentFilters.source = e.target.value;
-      applyFilters();
+
+    panel.addEventListener('click', (e) => e.stopPropagation());
+
+    panel.querySelectorAll('.select-option').forEach(option => {
+      option.addEventListener('click', () => {
+        panel.querySelectorAll('.select-option').forEach(o => o.classList.remove('active'));
+        option.classList.add('active');
+        valueEl.textContent = option.querySelector('.option-text').textContent;
+        currentFilters[filterKey] = option.dataset.value;
+        dropdown.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+        toggleClearButton();
+        showSiteListSkeleton();
+        updateFilterResults();
+        setTimeout(() => { renderSiteLists(); }, 300);
+      });
     });
-  }
-  
+  });
+
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.custom-select.open').forEach(d => {
+      d.classList.remove('open');
+      d.querySelector('.select-trigger').setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.custom-select.open').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.select-trigger').setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
   if (clearFiltersBtn) {
     clearFiltersBtn.addEventListener('click', () => {
       currentFilters.type = 'all';
       currentFilters.source = 'all';
-      
-      if (typeFilter) typeFilter.value = 'all';
-      if (sourceFilter) sourceFilter.value = 'all';
-      
-      applyFilters();
+      document.querySelectorAll('.custom-select').forEach(dropdown => {
+        const panel = dropdown.querySelector('.select-panel');
+        const valueEl = dropdown.querySelector('.select-value');
+        const firstOption = panel.querySelector('.select-option');
+        panel.querySelectorAll('.select-option').forEach(o => o.classList.remove('active'));
+        if (firstOption) {
+          firstOption.classList.add('active');
+          valueEl.textContent = firstOption.querySelector('.option-text').textContent;
+        }
+      });
+      toggleClearButton();
+      showSiteListSkeleton();
+      updateFilterResults();
+      setTimeout(() => { renderSiteLists(); }, 300);
     });
   }
+
+  toggleClearButton();
   updateFilterResults();
 }
 

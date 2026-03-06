@@ -1,3 +1,13 @@
+/* Sticky footer: body fills viewport, main grows to push footer to the bottom */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1 1 0%;
+}
+
 :root {
     --color-brand-green: #004734;
     --color-brand-green-light: #006B50;
@@ -111,4 +121,96 @@ select:focus-visible,
     .ooc-alert__body {
         font-size: 0.9rem;
     }
+}
+
+/* ── Mobile Menu ── */
+#mobile-menu {
+    pointer-events: none;
+    visibility: hidden;
+}
+
+#mobile-menu.menu-open {
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.mobile-menu-backdrop {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu-open .mobile-menu-backdrop {
+    opacity: 1;
+}
+
+.mobile-menu-panel {
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.menu-open .mobile-menu-panel {
+    transform: translateX(0);
+}
+
+.mobile-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1.15rem;
+    border-radius: 1rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-brand-green);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.mobile-nav-link:hover {
+    background-color: #F0FDF4;
+}
+
+.mobile-nav-link.active {
+    background-color: var(--color-brand-green);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.mobile-nav-link.active:hover {
+    background-color: var(--color-brand-green-hover);
+}
+
+/* ── Fiscal-Year Badges ── */
+.fy-badge {
+    display: inline-block;
+    font-size: 0.625rem;
+    font-weight: 600;
+    padding: 0.125rem 0.4rem;
+    border-radius: 9999px;
+    vertical-align: middle;
+    margin-left: 0.35rem;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+}
+
+.fy-current {
+    background-color: #ECFDF5;
+    color: #065F46;
+}
+
+.fy-previous {
+    background-color: #F3F4F6;
+    color: #6B7280;
+}
+
+.fy-historical {
+    background-color: #FEF3C7;
+    color: #92400E;
+}
+
+/* ── Footnote highlight when linked (accessibility) ── */
+[id^="footnote-"]:target {
+    background-color: rgba(0, 71, 52, 0.06);
+    border-left: 3px solid var(--color-brand-green);
+    border-radius: 0 0.25rem 0.25rem 0;
+    padding-left: 0.5rem;
+    scroll-margin-top: 5rem;
 }
