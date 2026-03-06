@@ -1,6 +1,6 @@
 const TreeData = {
 
-    lastUpdated: "February 28th, 2026",
+    lastUpdated: "March 6th, 2026",
 
     /* ────────────────────────────────────────────────
        TOTALS
