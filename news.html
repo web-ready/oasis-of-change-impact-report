@@ -10,6 +10,7 @@
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="assets/css/design-tokens.css" rel="stylesheet">
+    <link href="assets/css/footer.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -137,10 +138,13 @@
 
     </main>
 
-    <footer id="page-footer" class="mt-12">
-        <div class="bg-brand-green text-white px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-            <div class="max-w-6xl mx-auto">
-                <p class="text-xs text-white/70">&copy; <span id="copyright-year"></span> Oasis of Change, Inc.</p>
+    <footer id="page-footer" class="ooc-footer mt-12">
+        <div class="ooc-footer__inner bg-brand-green text-white">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+                <div class="ooc-footer__brand">
+                    <p class="ooc-footer__tagline">Planting trees. Building futures.</p>
+                    <p class="ooc-footer__copyright">&copy; <span id="copyright-year"></span> Oasis of Change, Inc.</p>
+                </div>
             </div>
         </div>
     </footer>
