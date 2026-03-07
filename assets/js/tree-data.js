@@ -3,15 +3,18 @@ const TreeData = {
     lastUpdated: "March 6th, 2026",
 
     /* ────────────────────────────────────────────────
-       TOTALS
-       Verified  = Oasis-funded (7,819) + Historical (70) + Partners (628) = 8,517
-       Legacy    = Pre–Tree-Nation partners (fixed)       = 7,338
-       Total     = 8,517 + 7,338                          = 15,855
+       TOTALS  (synced with Tree-Nation API – March 7, 2026)
+       Web-Ready Forest = 8,068  (Oasis-funded 7,819 + Historical 70 + Seeds/other 179)
+       Partners         = 628    (SPES 233 + SWWW 170 + MST 124 + EcoSearch 101)
+       Verified         = 8,068 + 628  = 8,696
+       Legacy           = 7,338        (Tero 4,567 + Refoorest 2,771)
+       Total            = 8,696 + 7,338 = 16,034
        ──────────────────────────────────────────────── */
     totals: {
-        verifiedTrees: 8517,    // all Tree-Nation (Oasis 7,819 + Historical 70 + Partners 628)
+        webReadyTrees: 8068,    // full Tree-Nation count for web-ready forest
+        verifiedTrees: 8696,    // Web-Ready (8,068) + Partners (628)
         legacyTrees:   7338,    // Tero 4,567 + Refoorest 2,771
-        totalTrees:    15855,   // verified + legacy
+        totalTrees:    16034,   // verified + legacy
         goalTrees:     10000
     },
 
@@ -204,6 +207,7 @@ const TreeData = {
     getTotalTrees:    function() { return this.totals.totalTrees; },
     getVerifiedTrees: function() { return this.totals.verifiedTrees; },
     getLegacyTrees:   function() { return this.totals.legacyTrees; },
+    getWebReadyTrees: function() { return this.totals.webReadyTrees; },
 
     getOasisFundedTrees: function() {
         return this.verifiedProjects.reduce(function(sum, p) {
@@ -216,6 +220,12 @@ const TreeData = {
             return p.fy === 'Historical' ? sum + (p.trees || 0) : sum;
         }, 0);
     },
+    getProjectTrees: function() {
+        return this.verifiedProjects.reduce(function(sum, p) { return sum + (p.trees || 0); }, 0);
+    },
+    getSeedsTrees: function() {
+        return this.totals.webReadyTrees - this.getProjectTrees();
+    },
     getPartnerTrees: function() {
         return (this.verifiedPartners || []).reduce(function(sum, p) { return sum + (p.trees || 0); }, 0);
     },
@@ -224,6 +234,10 @@ const TreeData = {
         var projectKg = this.verifiedProjects.reduce(function(sum, p) { return sum + (p.co2Offset || 0); }, 0);
         var partnerKg = (this.verifiedPartners || []).reduce(function(sum, p) { return sum + ((p.co2Tonnes || 0) * 1000); }, 0);
         return projectKg + partnerKg;
+    },
+
+    getWebReadyCo2Kg: function() {
+        return this.verifiedProjects.reduce(function(sum, p) { return sum + (p.co2Offset || 0); }, 0);
     },
 
     getSpeciesCount: function() {

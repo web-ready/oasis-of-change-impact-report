@@ -41,6 +41,7 @@ function updateUI() {
     setText('legacy-count', legacy.toLocaleString());
     setText('footnote-oasis-trees', TreeData.getOasisFundedTrees().toLocaleString());
     setText('footnote-historical-trees', TreeData.getHistoricalTrees().toLocaleString());
+    setText('footnote-seeds-trees', TreeData.getSeedsTrees().toLocaleString());
     setText('footnote-partner-trees', TreeData.getPartnerTrees().toLocaleString());
     setText('species-count', TreeData.getSpeciesCount());
     const countries = [...new Set(TreeData.getMapSites().map(s => s.country))];
@@ -377,40 +378,37 @@ if (document.readyState === 'loading') {
 }
 
 /**
- * Fetches partner tree counts from Tree-Nation API and updates the dashboard.
- * Falls back to TreeData (already rendered) if API is unavailable or fails (e.g. CORS).
+ * Fetches all forest tree counts (WebReady + partners) from Tree-Nation API
+ * and updates the dashboard hero stats, CO₂, and partner section.
+ * Falls back to TreeData if API is unavailable (e.g. CORS).
  */
-function loadPartnerCountsFromAPI() {
+function loadLiveTreeCountsFromAPI() {
     if (typeof TreeNationAPI === 'undefined' || typeof TreeData === 'undefined') {
-        console.log('[Dashboard] Partner planting sites: using hard-coded TreeData (TreeNationAPI not loaded).');
+        console.log('[Dashboard] Using hard-coded TreeData (TreeNationAPI not loaded).');
         return;
     }
 
-    TreeNationAPI.fetchPartnerForests()
-        .then(function(partnerResults) {
+    TreeNationAPI.fetchAllForests()
+        .then(function(data) {
+            var forests = data.forests || [];
             var slugToId = TreeNationAPI.PARTNER_SLUG_TO_ID || {};
-            var apiCountById = {};
-            partnerResults.forEach(function(r) {
-                var id = slugToId[r.slug];
-                if (id != null) apiCountById[id] = r.trees;
-            });
+
+            var wr = forests.filter(function(f) { return f.slug === 'web-ready'; })[0];
+            var webReadyTrees = (wr && !wr.error) ? wr.trees : TreeData.getWebReadyTrees();
 
             var basePartners = TreeData.getVerifiedPartners();
-            if (!basePartners || basePartners.length === 0) return;
-
-            var mergedPartners = basePartners.map(function(p) {
-                var trees = apiCountById[p.id] !== undefined ? apiCountById[p.id] : p.trees;
+            var mergedPartners = (basePartners || []).map(function(p) {
+                var slug = Object.keys(slugToId).filter(function(k) { return slugToId[k] === p.id; })[0];
+                var live = slug ? forests.filter(function(f) { return f.slug === slug; })[0] : null;
+                var trees = (live && !live.error) ? live.trees : p.trees;
                 return { id: p.id, name: p.name, baseLocation: p.baseLocation, countries: p.countries, trees: trees, profileUrl: p.profileUrl, co2Tonnes: p.co2Tonnes };
             });
 
             var partnerTreesTotal = mergedPartners.reduce(function(sum, p) { return sum + (p.trees || 0); }, 0);
-            var oasisTrees = TreeData.getOasisFundedTrees();
-            var historicalTrees = TreeData.getHistoricalTrees();
-            var verifiedTotal = oasisTrees + historicalTrees + partnerTreesTotal;
+            var verifiedTotal = webReadyTrees + partnerTreesTotal;
             var totalTotal = verifiedTotal + TreeData.getLegacyTrees();
 
-            console.log('[Dashboard] Partner planting sites: loaded from Tree-Nation API. Total partner trees:', partnerTreesTotal);
-            console.table(mergedPartners.map(function(p) { return { Partner: p.name, Trees: p.trees }; }));
+            console.log('[Dashboard] Live tree counts from Tree-Nation API. WebReady:', webReadyTrees, '| Partners:', partnerTreesTotal);
 
             setText('verified-count', verifiedTotal.toLocaleString());
             setText('total-count', totalTotal.toLocaleString());
@@ -418,14 +416,14 @@ function loadPartnerCountsFromAPI() {
             populatePartnerSection(mergedPartners);
         })
         .catch(function(err) {
-            console.warn('[Dashboard] Partner planting sites: using hard-coded TreeData (API failed:', err.message + ').');
+            console.warn('[Dashboard] Using hard-coded TreeData (API failed:', err.message + ').');
         });
 }
 
 function boot() {
     initializeTreeData();
     setTimeout(animateCount, 400);
-    loadPartnerCountsFromAPI();
+    loadLiveTreeCountsFromAPI();
 
     setupSearch('verified-search', '#verified-table', 'verified-data');
     setupSearch('legacy-search', '#legacy-table', 'legacy-data');

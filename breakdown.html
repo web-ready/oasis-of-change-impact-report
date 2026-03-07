@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verified Breakdown - Oasis of Change</title>
+    <meta name="author" content="Oasis of Change, Inc.">
+    <meta property="og:site_name" content="Oasis of Change, Inc.">
+    <meta name="description" content="See exactly how Oasis of Change's total tree count adds up — with live data from the Tree-Nation API.">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="assets/css/design-tokens.css" rel="stylesheet">
+    <link href="assets/css/footer.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#004734',
+                        'brand-green-light': '#006B50',
+                        'legacy-gold': '#EAB308',
+                        'deep-forest': '#0F172A',
+                        'cloud-white': '#FFFFFF',
+                        'mist-gray': '#F8FAFC',
+                        'success': { DEFAULT: '#059669', light: '#10b981', bg: '#ECFDF5', text: '#065F46' },
+                        'warning': { DEFAULT: '#D97706', light: '#F59E0B', bg: '#FFFBEB', text: '#92400E' },
+                        'error': { DEFAULT: '#DC2626', light: '#EF4444', bg: '#FEF2F2', text: '#991B1B' },
+                        'info': { DEFAULT: '#2563EB', light: '#3B82F6', bg: '#EFF6FF', text: '#1E40AF' }
+                    },
+                    fontFamily: {
+                        'serif': ['DM Serif Display', 'serif'],
+                        'sans': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .api-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.375rem 0.875rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+        .api-badge--live {
+            background: #ECFDF5;
+            color: #065F46;
+            border: 1px solid #A7F3D0;
+        }
+        .api-badge--loading {
+            background: #F3F4F6;
+            color: #6B7280;
+            border: 1px solid #E5E7EB;
+        }
+        .api-badge--fallback {
+            background: #FFFBEB;
+            color: #92400E;
+            border: 1px solid #FDE68A;
+        }
+        .api-pulse {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background: #059669;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.5); }
+            50% { box-shadow: 0 0 0 6px rgba(5, 150, 105, 0); }
+        }
+        .api-spinner {
+            width: 0.75rem;
+            height: 0.75rem;
+            border: 2px solid #D1D5DB;
+            border-top-color: #6B7280;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .api-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background: #D97706;
+        }
+
+        .summary-card {
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            min-height: 9rem;
+        }
+        .summary-card--grand {
+            background: linear-gradient(145deg, #003326, #004734);
+            border-color: transparent;
+            color: white;
+        }
+        .summary-card--verified {
+            background: #ECFDF5;
+            border-color: #A7F3D0;
+        }
+        .summary-card--legacy {
+            background: #FFFBEB;
+            border-color: #FDE68A;
+        }
+
+        .forest-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .forest-card:hover {
+            border-color: var(--color-brand-green);
+            box-shadow: 0 2px 12px rgba(0, 71, 52, 0.08);
+        }
+        .forest-card--featured {
+            background: linear-gradient(135deg, rgba(0,71,52,0.03) 0%, rgba(0,71,52,0.07) 100%);
+            border-color: rgba(0,71,52,0.2);
+        }
+        .forest-card--featured:hover {
+            border-color: var(--color-brand-green);
+            box-shadow: 0 4px 20px rgba(0, 71, 52, 0.12);
+        }
+        .forest-card--legacy {
+            background: linear-gradient(135deg, rgba(234,179,8,0.03) 0%, rgba(234,179,8,0.07) 100%);
+            border-color: rgba(234,179,8,0.25);
+        }
+        .forest-card--legacy:hover {
+            border-color: var(--color-legacy-gold);
+            box-shadow: 0 2px 12px rgba(234, 179, 8, 0.12);
+        }
+
+        .live-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.625rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding: 0.125rem 0.5rem;
+            border-radius: 9999px;
+            background: #ECFDF5;
+            color: #065F46;
+            border: 1px solid #A7F3D0;
+        }
+        .live-tag .live-dot {
+            width: 0.375rem;
+            height: 0.375rem;
+            border-radius: 50%;
+            background: #059669;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        .cached-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.625rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding: 0.125rem 0.5rem;
+            border-radius: 9999px;
+            background: #F3F4F6;
+            color: #6B7280;
+            border: 1px solid #E5E7EB;
+        }
+
+        .equation-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .equation-step {
+            padding: 1.25rem 1.5rem;
+        }
+        .equation-step + .equation-step {
+            border-top: 1px solid #F3F4F6;
+        }
+        .equation-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.375rem 0;
+            font-size: 0.9375rem;
+        }
+        .equation-row--total {
+            padding-top: 0.75rem;
+            margin-top: 0.5rem;
+            border-top: 2px solid #E5E7EB;
+            font-weight: 700;
+            font-size: 1.0625rem;
+        }
+        .equation-row--grand {
+            padding: 1rem 1.5rem;
+            background: linear-gradient(145deg, #003326, #004734);
+            color: white;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        .equation-operator {
+            color: #9CA3AF;
+            font-weight: 500;
+            width: 1.25rem;
+            flex-shrink: 0;
+        }
+        .equation-label {
+            flex: 1;
+            min-width: 0;
+        }
+        .equation-value {
+            font-variant-numeric: tabular-nums;
+            text-align: right;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+
+        .profile-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35em;
+            transition: transform 0.2s ease;
+        }
+        .profile-link-icon {
+            display: inline-flex;
+            flex-shrink: 0;
+            opacity: 0;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            color: currentColor;
+        }
+        .profile-link:hover .profile-link-icon,
+        .profile-link:focus-visible .profile-link-icon {
+            opacity: 1;
+        }
+        .profile-link-icon svg {
+            width: 0.875em;
+            height: 0.875em;
+        }
+        @media (hover: hover) {
+            .profile-link-icon {
+                transform: translateX(0.25em);
+            }
+            .profile-link:hover,
+            .profile-link:focus-visible {
+                transform: translateX(-3px);
+            }
+            .profile-link:hover .profile-link-icon,
+            .profile-link:focus-visible .profile-link-icon {
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .summary-card { padding: 1.125rem; }
+            .forest-card { padding: 1.125rem; }
+            .equation-step { padding: 1rem; }
+            .equation-row { font-size: 0.8125rem; }
+            .equation-row--total { font-size: 0.9375rem; }
+            .equation-row--grand { font-size: 1rem; padding: 0.875rem 1rem; }
+        }
+    </style>
+</head>
+<body class="bg-mist-gray font-sans antialiased min-h-screen flex flex-col">
+
+    <div class="bg-brand-green text-white py-3 px-4 text-center text-sm font-medium z-[60] relative">
+        <span class="inline-flex items-center gap-2 justify-center flex-wrap">
+            <strong>2025-2026 FY Planting Complete:</strong> 7,144 trees in 14 countries <span class="hidden sm:inline">—</span> <a href="/impact-2025-2026.html" class="underline underline-offset-2 hover:text-white/80">View impact</a>
+        </span>
+    </div>
+
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between h-14 relative">
+                <a href="/index.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="/index.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Dashboard</a>
+                    <a href="/breakdown.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:bg-brand-green-light transition">Breakdown</a>
+                    <a href="/impact.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Impact Report</a>
+                    <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Certificates</a>
+                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Tree Species</a>
+                    <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Gallery</a>
+                    <a href="/news.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">News</a>
+                </div>
+                <button id="mobile-menu-toggle" class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-green/[0.06] text-brand-green hover:bg-brand-green hover:text-white transition-all duration-200" aria-label="Open menu" aria-expanded="false">
+                    <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h12M4 17h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="lg:hidden fixed inset-0 z-[2000]" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
+        <div class="absolute inset-0 bg-brand-green/20 backdrop-blur-sm mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
+        <div class="absolute top-0 right-0 bottom-0 w-[82%] max-w-[340px] bg-white rounded-l-[2rem] flex flex-col mobile-menu-panel" style="box-shadow:-8px 0 30px rgba(0,0,0,0.08)">
+            <div class="flex items-center justify-between px-6 pt-7 pb-4">
+                <h2 id="mobile-menu-title" class="font-serif text-2xl text-brand-green">Menu</h2>
+                <button id="mobile-menu-close" class="w-10 h-10 rounded-2xl bg-gray-50 text-gray-400 inline-flex items-center justify-center transition-all duration-200 hover:bg-brand-green hover:text-white" aria-label="Close menu">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="mx-6 h-px bg-gray-100"></div>
+            <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
+                <a href="/index.html" class="mobile-nav-link">Dashboard</a>
+                <a href="/breakdown.html" class="mobile-nav-link active">Breakdown</a>
+                <a href="/impact.html" class="mobile-nav-link">Impact Report</a>
+                <a href="/certificates.html" class="mobile-nav-link">Certificates</a>
+                <a href="/species.html" class="mobile-nav-link">Tree Species</a>
+                <a href="/gallery.html" class="mobile-nav-link">Gallery</a>
+                <a href="/news.html" class="mobile-nav-link">News</a>
+            </nav>
+            <div class="px-6 py-5 border-t border-gray-100">
+                <p class="text-xs text-gray-400 text-center font-medium tracking-wide">Oasis of Change, Inc.</p>
+            </div>
+        </div>
+    </div>
+
+    <main class="flex-1 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+        <div class="text-center mb-10">
+            <h1 class="font-serif text-3xl md:text-4xl text-deep-forest mb-3">Verified Breakdown</h1>
+            <p class="text-base text-gray-600 max-w-2xl mx-auto mb-5">See exactly how our total tree count adds up — with live data from the Tree-Nation API.</p>
+            <div class="flex justify-center">
+                <div id="api-status-badge" class="api-badge api-badge--loading">
+                    <span class="api-spinner"></span> Connecting to Tree-Nation&hellip;
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <section class="mb-10">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="summary-card summary-card--grand sm:col-span-1 sm:row-span-1">
+                    <div class="text-white/60 text-xs font-semibold uppercase tracking-wide">Grand Total</div>
+                    <div class="text-3xl sm:text-4xl font-bold tabular-nums" id="bd-grand-total">—</div>
+                    <div class="text-white/50 text-xs">trees planted</div>
+                </div>
+                <div class="summary-card summary-card--verified">
+                    <div class="text-brand-green/60 text-xs font-semibold uppercase tracking-wide">Verified (Tree-Nation)</div>
+                    <div class="text-2xl sm:text-3xl font-bold text-brand-green tabular-nums" id="bd-verified-total">—</div>
+                    <div class="text-brand-green/50 text-xs">trees</div>
+                </div>
+                <div class="summary-card summary-card--legacy">
+                    <div class="text-amber-700/60 text-xs font-semibold uppercase tracking-wide">Legacy Partners</div>
+                    <div class="text-2xl sm:text-3xl font-bold text-amber-700 tabular-nums" id="bd-legacy-total">—</div>
+                    <div class="text-amber-700/50 text-xs">trees</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tree-Nation Forests -->
+        <section class="mb-10">
+            <div class="mb-5">
+                <h2 class="text-xl font-semibold text-deep-forest mb-1">Tree-Nation Forests</h2>
+                <p class="text-sm text-gray-500">Live tree counts from the Tree-Nation API.</p>
+            </div>
+
+            <!-- WebReady (Featured) -->
+            <div class="forest-card forest-card--featured mb-4">
+                <div class="flex flex-col sm:flex-row items-center sm:justify-between gap-4">
+                    <div class="flex-1 min-w-0">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <h3 class="text-lg font-semibold text-deep-forest">Oasis of Change</h3>
+                            <span id="bd-webready-tag" class="cached-tag">Cached</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-2 max-w-xl">Our primary forest on Tree-Nation. Includes all Oasis-funded fiscal year projects and historical pre-incorporation plantings.</p>
+                        <a href="https://tree-nation.com/profile/web-ready" target="_blank" rel="noopener" class="profile-link text-sm text-brand-green font-medium hover:underline underline-offset-2">
+                            View Forest on Tree-Nation
+                            <span class="profile-link-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span>
+                        </a>
+                    </div>
+                    <div class="flex items-center gap-1.5 flex-shrink-0 self-center">
+                        <span class="text-2xl sm:text-3xl font-bold text-brand-green tabular-nums" id="bd-webready-count">—</span>
+                        <span class="text-sm text-gray-500">trees</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Planting Partners -->
+            <div class="mb-3 mt-8">
+                <h3 class="text-sm font-semibold text-brand-green uppercase tracking-wide mb-1">Planting Partners</h3>
+                <p class="text-xs text-gray-500">Partners planting in their own Tree-Nation accounts, operated by Oasis of Change.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="bd-partners-grid">
+                <!-- Populated by JS -->
+            </div>
+            <div class="mt-3 flex items-center justify-end">
+                <div class="text-sm text-gray-500">Partner total: <strong class="text-deep-forest tabular-nums" id="bd-partner-subtotal">—</strong> trees</div>
+            </div>
+        </section>
+
+        <!-- Legacy Partners -->
+        <section class="mb-10">
+            <div class="mb-5">
+                <h2 class="text-xl font-semibold text-deep-forest mb-1">Legacy Partners</h2>
+                <p class="text-sm text-gray-500">Trees planted with legacy partners (Tero and Refoorest) before our Tree-Nation partnership.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="bd-legacy-grid">
+                <!-- Populated by JS -->
+            </div>
+            <div class="mt-3 flex items-center justify-end">
+                <div class="text-sm text-gray-500">Legacy total: <strong class="text-amber-700 tabular-nums" id="bd-legacy-subtotal">—</strong> trees</div>
+            </div>
+        </section>
+
+        <!-- How It Adds Up -->
+        <section class="mb-10">
+            <div class="mb-5">
+                <h2 class="text-xl font-semibold text-deep-forest mb-1">How It All Adds Up</h2>
+                <p class="text-sm text-gray-500">A transparent look at the math behind our total tree count.</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation-step">
+                    <div class="text-xs font-semibold text-brand-green uppercase tracking-wide mb-2">Step 1 — Tree-Nation Verified</div>
+                    <div class="equation-row">
+                        <span class="equation-operator"></span>
+                        <span class="equation-label text-gray-700">Oasis of Change (Web-Ready)</span>
+                        <span class="equation-value font-medium text-deep-forest" id="eq-webready">—</span>
+                    </div>
+                    <div id="eq-partners-rows">
+                        <!-- Partner rows populated by JS -->
+                    </div>
+                    <div class="equation-row equation-row--total">
+                        <span class="equation-operator">=</span>
+                        <span class="equation-label text-brand-green">Verified Total</span>
+                        <span class="equation-value text-brand-green" id="eq-verified-total">—</span>
+                    </div>
+                </div>
+                <div class="equation-step">
+                    <div class="text-xs font-semibold text-amber-700 uppercase tracking-wide mb-2">Step 2 — Add Legacy Partners</div>
+                    <div class="equation-row">
+                        <span class="equation-operator"></span>
+                        <span class="equation-label text-gray-700">Verified Total</span>
+                        <span class="equation-value font-medium text-deep-forest" id="eq-verified-carry">—</span>
+                    </div>
+                    <div id="eq-legacy-rows">
+                        <!-- Legacy rows populated by JS -->
+                    </div>
+                </div>
+                <div class="equation-row equation-row--grand">
+                    <span class="equation-operator">=</span>
+                    <span class="equation-label">Grand Total</span>
+                    <span class="equation-value" id="eq-grand-total">—</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notes -->
+        <div class="ooc-alert mb-2" role="note" aria-label="Data source notice">
+            <div class="ooc-alert__row">
+                <div class="ooc-alert__icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="ooc-alert__title">About This Data</h4>
+                    <p class="ooc-alert__body">Tree-Nation counts are fetched live from the API when available. If the API is unreachable (e.g. due to CORS restrictions), data from the last manual update (<span id="bd-last-updated">—</span>) is displayed instead. Legacy partner counts are fixed and cannot be independently verified. <a href="#footnote-1" class="underline underline-offset-2 hover:text-white/80">1</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="page-footer" class="ooc-footer mt-12">
+        <div class="ooc-footer__inner bg-brand-green text-white">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+                <h2 class="text-xs font-semibold text-white/80 uppercase tracking-wide mb-3">Notes</h2>
+                <ol class="space-y-2 text-sm text-white/95 list-none pt-1 pb-4 mb-4 border-b border-white/20">
+                    <li id="footnote-1" class="scroll-mt-20"><sup class="text-white/70 font-medium">1</sup> Tree-Nation does not set CORS headers on their public API. In browsers, this means the live data fetch may be blocked depending on your network and browser settings. When live data is unavailable, the page falls back to the most recent manually verified counts.</li>
+                </ol>
+                <div class="ooc-footer__brand">
+                    <p class="ooc-footer__tagline">Planting trees. Building futures.</p>
+                    <p class="ooc-footer__copyright">&copy; <span id="copyright-year"></span> Oasis of Change, Inc.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/tree-data.js"></script>
+    <script src="assets/js/tree-nation-api.js"></script>
+    <script src="assets/js/breakdown.js"></script>
+    <script src="assets/js/footnotes.js"></script>
+    <script>document.getElementById('copyright-year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
