@@ -39,6 +39,8 @@
 </head>
 <body class="bg-mist-gray font-sans antialiased min-h-screen flex flex-col">
 
+    <a href="#gallery" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[9999] focus:bg-brand-green focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold focus:shadow-lg">Skip to gallery</a>
+
     <!-- Banner -->
     <div class="bg-brand-green text-white py-3 px-4 text-center text-sm font-medium z-[60] relative">
         <span class="inline-flex items-center gap-2 justify-center flex-wrap">
@@ -180,7 +182,7 @@
 
                 <div class="featured-grid">
                     <!-- Featured 1: Tanzania (largest) -->
-                    <div class="featured-card" role="button" tabindex="0" aria-label="View Mkussu Forest project" onclick="document.querySelector('[data-id=tanzania-mkussu-species]')?.click()">
+                    <div class="featured-card" role="button" tabindex="0" aria-label="View Mkussu Forest project — 7,057 trees in Tanzania" data-featured-target="tanzania-mkussu-species">
                         <img src="assets/images/planting-sites/2025-2026-fy/Tanzania-Afrocarpus-Usambarensis.jpg" alt="Afrocarpus Usambarensis in Tanzania's Mkussu Forest" class="featured-card__image" loading="lazy">
                         <div class="featured-card__overlay"></div>
                         <div class="featured-card__content">
@@ -198,7 +200,7 @@
                     </div>
 
                     <!-- Featured 2: Romania -->
-                    <div class="featured-card" role="button" tabindex="0" aria-label="View Bear Groves project" onclick="document.querySelector('[data-id=romania-european-beech]')?.click()">
+                    <div class="featured-card" role="button" tabindex="0" aria-label="View Bear Groves project — restoring wildlife corridors in Transylvania" data-featured-target="romania-european-beech">
                         <img src="assets/images/planting-sites/2025-2026-fy/Romania-European-Beech.webp" alt="European Beech in Transylvania" class="featured-card__image" loading="lazy">
                         <div class="featured-card__overlay"></div>
                         <div class="featured-card__content">
@@ -212,7 +214,7 @@
                     </div>
 
                     <!-- Featured 3: Canada -->
-                    <div class="featured-card" role="button" tabindex="0" aria-label="View Boreal Forest project" onclick="document.querySelector('[data-id=canada-team]')?.click()">
+                    <div class="featured-card" role="button" tabindex="0" aria-label="View Boreal Forest project — restoring fire-adapted ecosystems in Canada" data-featured-target="canada-team">
                         <img src="assets/images/planting-sites/2025-2026-fy/Canada-Team.webp" alt="Boreal Forest Restoration team in Canada" class="featured-card__image" loading="lazy">
                         <div class="featured-card__overlay"></div>
                         <div class="featured-card__content">
@@ -234,26 +236,26 @@
             <section id="gallery" class="gallery-grid-section">
                 <div class="gallery-filters">
                     <div class="filters-inner">
-                        <div class="filter-group">
-                            <span class="filter-group__label">Show</span>
-                            <button class="filter-pill filter-active" data-filter-type="contentType" data-filter-value="all">All</button>
-                            <button class="filter-pill" data-filter-type="contentType" data-filter-value="planting-site">Planting Sites</button>
-                            <button class="filter-pill" data-filter-type="contentType" data-filter-value="team">Team Photos</button>
+                        <div class="filter-group" role="group" aria-label="Filter by content type">
+                            <span class="filter-group__label" id="filter-type-label">Show</span>
+                            <button class="filter-pill filter-active" data-filter-type="contentType" data-filter-value="all" aria-pressed="true">All</button>
+                            <button class="filter-pill" data-filter-type="contentType" data-filter-value="planting-site" aria-pressed="false">Planting Sites</button>
+                            <button class="filter-pill" data-filter-type="contentType" data-filter-value="team" aria-pressed="false">Team Photos</button>
                         </div>
 
-                        <div class="filter-divider"></div>
+                        <div class="filter-divider" aria-hidden="true"></div>
 
-                        <div class="filter-group">
-                            <span class="filter-group__label">Region</span>
-                            <button class="filter-pill filter-active" data-filter-type="region" data-filter-value="all">All</button>
-                            <button class="filter-pill" data-filter-type="region" data-filter-value="Africa">Africa</button>
-                            <button class="filter-pill" data-filter-type="region" data-filter-value="South America">South America</button>
-                            <button class="filter-pill" data-filter-type="region" data-filter-value="Europe">Europe</button>
-                            <button class="filter-pill" data-filter-type="region" data-filter-value="North America">North America</button>
-                            <button class="filter-pill" data-filter-type="region" data-filter-value="Asia-Pacific">Asia-Pacific</button>
+                        <div class="filter-group" role="group" aria-label="Filter by region">
+                            <span class="filter-group__label" id="filter-region-label">Region</span>
+                            <button class="filter-pill filter-active" data-filter-type="region" data-filter-value="all" aria-pressed="true">All</button>
+                            <button class="filter-pill" data-filter-type="region" data-filter-value="Africa" aria-pressed="false">Africa</button>
+                            <button class="filter-pill" data-filter-type="region" data-filter-value="South America" aria-pressed="false">S. America</button>
+                            <button class="filter-pill" data-filter-type="region" data-filter-value="Europe" aria-pressed="false">Europe</button>
+                            <button class="filter-pill" data-filter-type="region" data-filter-value="North America" aria-pressed="false">N. America</button>
+                            <button class="filter-pill" data-filter-type="region" data-filter-value="Asia-Pacific" aria-pressed="false">Asia-Pacific</button>
                         </div>
 
-                        <div class="filter-results">
+                        <div class="filter-results" aria-live="polite" aria-atomic="true">
                             <span id="results-count">21 projects</span>
                         </div>
                     </div>
@@ -289,13 +291,13 @@
     <!-- ════════════════════════════════════════════════════
          MODAL / LIGHTBOX
          ════════════════════════════════════════════════════ -->
-    <div id="gallery-modal" aria-modal="true" role="dialog" aria-label="Project detail">
+    <div id="gallery-modal" aria-modal="true" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-caption">
         <div class="modal-backdrop" id="modal-backdrop"></div>
         <div class="modal-container">
             <!-- Image Side -->
             <div class="modal-image-side">
                 <img id="modal-image" src="" alt="" loading="lazy">
-                <button class="modal-close" id="modal-close" aria-label="Close">
+                <button class="modal-close" id="modal-close" aria-label="Close dialog">
                     <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
                 <button class="modal-nav-btn modal-nav-btn--prev" id="modal-prev" aria-label="Previous project">
@@ -304,7 +306,7 @@
                 <button class="modal-nav-btn modal-nav-btn--next" id="modal-next" aria-label="Next project">
                     <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                 </button>
-                <div class="modal-counter" id="modal-counter"></div>
+                <div class="modal-counter" id="modal-counter" aria-live="polite" aria-atomic="true"></div>
             </div>
             <!-- Info Side -->
             <div class="modal-info-side">
