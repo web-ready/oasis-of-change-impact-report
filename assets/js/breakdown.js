@@ -17,9 +17,15 @@
     function init() {
         if (typeof TreeData === 'undefined') return;
 
-        state.webReadyTrees = TreeData.getWebReadyTrees();
+        state.webReadyTrees = typeof TreeData.getWebReadyTrees === 'function'
+            ? TreeData.getWebReadyTrees()
+            : (TreeData.totals && TreeData.totals.webReadyTrees) || 0;
 
-        state.partners = (TreeData.getVerifiedPartners() || []).map(function (p) {
+        var partners = typeof TreeData.getVerifiedPartners === 'function'
+            ? TreeData.getVerifiedPartners()
+            : TreeData.verifiedPartners;
+
+        state.partners = (partners || []).map(function (p) {
             return {
                 id: p.id,
                 name: p.name,
@@ -31,7 +37,11 @@
             };
         });
 
-        state.legacyProjects = (TreeData.getLegacyProjects() || []).map(function (p) {
+        var legacy = typeof TreeData.getLegacyProjects === 'function'
+            ? TreeData.getLegacyProjects()
+            : TreeData.legacyProjects;
+
+        state.legacyProjects = (legacy || []).map(function (p) {
             return { id: p.id, name: p.name, trees: p.trees, source: p.source };
         });
 
@@ -222,18 +232,28 @@
 
     // ── Helpers ──────────────────────────────────────────
 
+    var _loadingTimer = null;
+
     function setApiStatus(status) {
         var el = document.getElementById('api-status-badge');
         if (!el) return;
+
+        if (_loadingTimer) { clearTimeout(_loadingTimer); _loadingTimer = null; }
+
         if (status === 'live') {
             el.className = 'api-badge api-badge--live';
             el.innerHTML = '<span class="api-pulse"></span> Live tree counts from Tree-Nation API';
         } else if (status === 'loading') {
             el.className = 'api-badge api-badge--loading';
             el.innerHTML = '<span class="api-spinner"></span> Connecting to Tree-Nation\u2026';
+            _loadingTimer = setTimeout(function () {
+                if (el.className.indexOf('loading') !== -1) {
+                    el.innerHTML = '<span class="api-spinner"></span> Fetching live data \u2014 this can take a few seconds\u2026';
+                }
+            }, 3000);
         } else {
             el.className = 'api-badge api-badge--fallback';
-            el.innerHTML = '<span class="api-dot"></span> Data from ' + (TreeData ? TreeData.lastUpdated : 'last update');
+            el.innerHTML = '<span class="api-dot"></span> Showing cached data from ' + (TreeData ? TreeData.lastUpdated : 'last update');
         }
     }
 
@@ -281,8 +301,8 @@
     // ── Boot ────────────────────────────────────────────
 
     function boot() {
-        init();
         initMobileMenu();
+        try { init(); } catch (e) { console.error('[Breakdown] init failed:', e); }
     }
 
     if (document.readyState === 'loading') {
