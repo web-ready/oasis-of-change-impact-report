@@ -31,24 +31,27 @@ function getRelativeTimeLabel(date) {
     return 'just now';
 }
 
-function updateUI() {
-    const total = TreeData.getTotalTrees();
-    const verified = TreeData.getVerifiedTrees();
-    const legacy = TreeData.getLegacyTrees();
+function safeCall(fn, fallback) {
+    try { return typeof fn === 'function' ? fn() : fallback; } catch (e) { return fallback; }
+}
 
-    setText('total-count', total.toLocaleString());
+function updateUI() {
+    const verified = safeCall(function() { return TreeData.getVerifiedTrees(); }, 0);
+    const legacy = safeCall(function() { return TreeData.getLegacyTrees(); }, 0);
+
     setText('verified-count', verified.toLocaleString());
     setText('legacy-count', legacy.toLocaleString());
-    setText('footnote-oasis-trees', TreeData.getOasisFundedTrees().toLocaleString());
-    setText('footnote-historical-trees', TreeData.getHistoricalTrees().toLocaleString());
-    setText('footnote-seeds-trees', TreeData.getSeedsTrees().toLocaleString());
-    setText('footnote-partner-trees', TreeData.getPartnerTrees().toLocaleString());
-    setText('species-count', TreeData.getSpeciesCount());
-    const countries = [...new Set(TreeData.getMapSites().map(s => s.country))];
+    setText('footnote-oasis-trees', safeCall(function() { return TreeData.getOasisFundedTrees(); }, 0).toLocaleString());
+    setText('footnote-historical-trees', safeCall(function() { return TreeData.getHistoricalTrees(); }, 0).toLocaleString());
+    setText('footnote-seeds-trees', safeCall(function() { return TreeData.getSeedsTrees(); }, 0).toLocaleString());
+    setText('footnote-partner-trees', safeCall(function() { return TreeData.getPartnerTrees(); }, 0).toLocaleString());
+    setText('species-count', safeCall(function() { return TreeData.getSpeciesCount(); }, 0));
+    const sites = safeCall(function() { return TreeData.getMapSites(); }, []);
+    const countries = [...new Set(sites.map(function(s) { return s.country; }))];
     setText('countries-count', countries.length);
-    setText('continents-count', TreeData.getContinentsCount());
-    setText('planting-sites-count', TreeData.getPlantingSitesCount());
-    setText('co2-offset', TreeData.getCo2Captured().toLocaleString() + '+');
+    setText('continents-count', safeCall(function() { return TreeData.getContinentsCount(); }, 0));
+    setText('planting-sites-count', safeCall(function() { return TreeData.getPlantingSitesCount(); }, 0));
+    setText('co2-offset', safeCall(function() { return TreeData.getCo2Captured(); }, 0).toLocaleString() + '+');
 
     populateProjectTables();
     populateSpeciesGrid();
@@ -342,18 +345,15 @@ function animateCount() {
     if (typeof TreeData === 'undefined') return;
     const el = document.getElementById('total-count');
     if (!el) return;
-    const target = TreeData.getTotalTrees();
-    const shown = parseInt(el.textContent.replace(/,/g, ''), 10);
-    if (!Number.isNaN(shown) && shown >= target) {
-        el.textContent = target.toLocaleString();
-        return;
-    }
+    const target = safeCall(function() { return TreeData.getTotalTrees(); }, 0);
+    if (!target) { el.textContent = '—'; return; }
+
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         el.textContent = target.toLocaleString();
         return;
     }
 
-    let current = Number.isNaN(shown) ? 0 : shown;
+    let current = 0;
     const inc = target / 60;
     function step() {
         current += inc;
@@ -378,7 +378,7 @@ if (document.readyState === 'loading') {
 }
 
 /**
- * Fetches all forest tree counts (WebReady + partners) from Tree-Nation API
+ * Fetches all forest tree counts (Web-Ready + partners) from Tree-Nation API
  * and updates the dashboard hero stats, CO₂, and partner section.
  * Falls back to TreeData if API is unavailable (e.g. CORS).
  */
@@ -394,9 +394,9 @@ function loadLiveTreeCountsFromAPI() {
             var slugToId = TreeNationAPI.PARTNER_SLUG_TO_ID || {};
 
             var wr = forests.filter(function(f) { return f.slug === 'web-ready'; })[0];
-            var webReadyTrees = (wr && !wr.error) ? wr.trees : TreeData.getWebReadyTrees();
+            var webReadyTrees = (wr && !wr.error) ? wr.trees : safeCall(function() { return TreeData.getWebReadyTrees(); }, 0);
 
-            var basePartners = TreeData.getVerifiedPartners();
+            var basePartners = safeCall(function() { return TreeData.getVerifiedPartners(); }, TreeData.verifiedPartners || []);
             var mergedPartners = (basePartners || []).map(function(p) {
                 var slug = Object.keys(slugToId).filter(function(k) { return slugToId[k] === p.id; })[0];
                 var live = slug ? forests.filter(function(f) { return f.slug === slug; })[0] : null;
@@ -406,9 +406,10 @@ function loadLiveTreeCountsFromAPI() {
 
             var partnerTreesTotal = mergedPartners.reduce(function(sum, p) { return sum + (p.trees || 0); }, 0);
             var verifiedTotal = webReadyTrees + partnerTreesTotal;
-            var totalTotal = verifiedTotal + TreeData.getLegacyTrees();
+            var legacyTrees = safeCall(function() { return TreeData.getLegacyTrees(); }, 0);
+            var totalTotal = verifiedTotal + legacyTrees;
 
-            console.log('[Dashboard] Live tree counts from Tree-Nation API. WebReady:', webReadyTrees, '| Partners:', partnerTreesTotal);
+            console.log('[Dashboard] Live from Tree-Nation API. Web-Ready:', webReadyTrees, '| Partners:', partnerTreesTotal);
 
             setText('verified-count', verifiedTotal.toLocaleString());
             setText('total-count', totalTotal.toLocaleString());
@@ -422,7 +423,7 @@ function loadLiveTreeCountsFromAPI() {
 
 function boot() {
     initializeTreeData();
-    setTimeout(animateCount, 400);
+    animateCount();
     loadLiveTreeCountsFromAPI();
 
     setupSearch('verified-search', '#verified-table', 'verified-data');

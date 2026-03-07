@@ -274,6 +274,7 @@
             .equation-row--total { font-size: 0.9375rem; }
             .equation-row--grand { font-size: 1rem; padding: 0.875rem 1rem; }
         }
+
     </style>
 </head>
 <body class="bg-mist-gray font-sans antialiased min-h-screen flex flex-col">
@@ -344,21 +345,27 @@
         </div>
 
         <!-- Summary Cards -->
-        <section class="mb-10">
+        <section class="mb-10" id="summary-section">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div class="summary-card summary-card--grand sm:col-span-1 sm:row-span-1">
                     <div class="text-white/60 text-xs font-semibold uppercase tracking-wide">Grand Total</div>
-                    <div class="text-3xl sm:text-4xl font-bold tabular-nums" id="bd-grand-total">—</div>
+                    <div class="text-3xl sm:text-4xl font-bold tabular-nums" id="bd-grand-total">
+                        <span class="skeleton skeleton--dark skeleton-line" style="width:5rem;height:2.25rem">&nbsp;</span>
+                    </div>
                     <div class="text-white/50 text-xs">trees planted</div>
                 </div>
                 <div class="summary-card summary-card--verified">
                     <div class="text-brand-green/60 text-xs font-semibold uppercase tracking-wide">Verified (Tree-Nation)</div>
-                    <div class="text-2xl sm:text-3xl font-bold text-brand-green tabular-nums" id="bd-verified-total">—</div>
+                    <div class="text-2xl sm:text-3xl font-bold text-brand-green tabular-nums" id="bd-verified-total">
+                        <span class="skeleton skeleton-line" style="width:4rem;height:1.875rem">&nbsp;</span>
+                    </div>
                     <div class="text-brand-green/50 text-xs">trees</div>
                 </div>
                 <div class="summary-card summary-card--legacy">
                     <div class="text-amber-700/60 text-xs font-semibold uppercase tracking-wide">Legacy Partners</div>
-                    <div class="text-2xl sm:text-3xl font-bold text-amber-700 tabular-nums" id="bd-legacy-total">—</div>
+                    <div class="text-2xl sm:text-3xl font-bold text-amber-700 tabular-nums" id="bd-legacy-total">
+                        <span class="skeleton skeleton-line" style="width:4rem;height:1.875rem">&nbsp;</span>
+                    </div>
                     <div class="text-amber-700/50 text-xs">trees</div>
                 </div>
             </div>
@@ -371,7 +378,7 @@
                 <p class="text-sm text-gray-500">Live tree counts from the Tree-Nation API.</p>
             </div>
 
-            <!-- WebReady (Featured) -->
+            <!-- Web-Ready (Featured) -->
             <div class="forest-card forest-card--featured mb-4">
                 <div class="flex flex-col sm:flex-row items-center sm:justify-between gap-4">
                     <div class="flex-1 min-w-0">
@@ -386,7 +393,9 @@
                         </a>
                     </div>
                     <div class="flex items-center gap-1.5 flex-shrink-0 self-center">
-                        <span class="text-2xl sm:text-3xl font-bold text-brand-green tabular-nums" id="bd-webready-count">—</span>
+                        <span class="text-2xl sm:text-3xl font-bold text-brand-green tabular-nums" id="bd-webready-count">
+                            <span class="skeleton skeleton-line" style="width:4rem;height:1.875rem">&nbsp;</span>
+                        </span>
                         <span class="text-sm text-gray-500">trees</span>
                     </div>
                 </div>
@@ -398,7 +407,10 @@
                 <p class="text-xs text-gray-500">Partners planting in their own Tree-Nation accounts, operated by Oasis of Change.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="bd-partners-grid">
-                <!-- Populated by JS -->
+                <div class="skeleton-card" id="skel-partner-1"><div class="flex items-start justify-between gap-3 mb-2"><div class="skeleton skeleton-line" style="width:60%;height:1rem">&nbsp;</div><div class="skeleton skeleton-line" style="width:3rem;height:1.25rem">&nbsp;</div></div><div class="skeleton skeleton-line" style="width:40%;height:0.75rem">&nbsp;</div></div>
+                <div class="skeleton-card" id="skel-partner-2"><div class="flex items-start justify-between gap-3 mb-2"><div class="skeleton skeleton-line" style="width:55%;height:1rem">&nbsp;</div><div class="skeleton skeleton-line" style="width:3rem;height:1.25rem">&nbsp;</div></div><div class="skeleton skeleton-line" style="width:35%;height:0.75rem">&nbsp;</div></div>
+                <div class="skeleton-card" id="skel-partner-3"><div class="flex items-start justify-between gap-3 mb-2"><div class="skeleton skeleton-line" style="width:65%;height:1rem">&nbsp;</div><div class="skeleton skeleton-line" style="width:3rem;height:1.25rem">&nbsp;</div></div><div class="skeleton skeleton-line" style="width:45%;height:0.75rem">&nbsp;</div></div>
+                <div class="skeleton-card" id="skel-partner-4"><div class="flex items-start justify-between gap-3 mb-2"><div class="skeleton skeleton-line" style="width:50%;height:1rem">&nbsp;</div><div class="skeleton skeleton-line" style="width:3rem;height:1.25rem">&nbsp;</div></div><div class="skeleton skeleton-line" style="width:30%;height:0.75rem">&nbsp;</div></div>
             </div>
             <div class="mt-3 flex items-center justify-end">
                 <div class="text-sm text-gray-500">Partner total: <strong class="text-deep-forest tabular-nums" id="bd-partner-subtotal">—</strong> trees</div>
@@ -409,10 +421,11 @@
         <section class="mb-10">
             <div class="mb-5">
                 <h2 class="text-xl font-semibold text-deep-forest mb-1">Legacy Partners</h2>
-                <p class="text-sm text-gray-500">Trees planted with legacy partners (Tero and Refoorest) before our Tree-Nation partnership.</p>
+                <p class="text-sm text-gray-500">Trees planted with legacy partners before our Tree-Nation partnership.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="bd-legacy-grid">
-                <!-- Populated by JS -->
+                <div class="skeleton-card" id="skel-legacy-1"><div class="flex items-center justify-between gap-3"><div class="skeleton skeleton-line" style="width:50%;height:1rem">&nbsp;</div><div class="skeleton skeleton-line" style="width:3rem;height:1.25rem">&nbsp;</div></div></div>
+                <div class="skeleton-card" id="skel-legacy-2"><div class="flex items-center justify-between gap-3"><div class="skeleton skeleton-line" style="width:45%;height:1rem">&nbsp;</div><div class="skeleton skeleton-line" style="width:3rem;height:1.25rem">&nbsp;</div></div></div>
             </div>
             <div class="mt-3 flex items-center justify-end">
                 <div class="text-sm text-gray-500">Legacy total: <strong class="text-amber-700 tabular-nums" id="bd-legacy-subtotal">—</strong> trees</div>
@@ -431,7 +444,7 @@
                     <div class="equation-row">
                         <span class="equation-operator"></span>
                         <span class="equation-label text-gray-700">Oasis of Change (Web-Ready)</span>
-                        <span class="equation-value font-medium text-deep-forest" id="eq-webready">—</span>
+                        <span class="equation-value font-medium text-deep-forest" id="eq-webready"><span class="skeleton skeleton-line" style="width:3rem">&nbsp;</span></span>
                     </div>
                     <div id="eq-partners-rows">
                         <!-- Partner rows populated by JS -->
@@ -439,7 +452,7 @@
                     <div class="equation-row equation-row--total">
                         <span class="equation-operator">=</span>
                         <span class="equation-label text-brand-green">Verified Total</span>
-                        <span class="equation-value text-brand-green" id="eq-verified-total">—</span>
+                        <span class="equation-value text-brand-green" id="eq-verified-total"><span class="skeleton skeleton-line" style="width:3rem">&nbsp;</span></span>
                     </div>
                 </div>
                 <div class="equation-step">
@@ -447,7 +460,7 @@
                     <div class="equation-row">
                         <span class="equation-operator"></span>
                         <span class="equation-label text-gray-700">Verified Total</span>
-                        <span class="equation-value font-medium text-deep-forest" id="eq-verified-carry">—</span>
+                        <span class="equation-value font-medium text-deep-forest" id="eq-verified-carry"><span class="skeleton skeleton-line" style="width:3rem">&nbsp;</span></span>
                     </div>
                     <div id="eq-legacy-rows">
                         <!-- Legacy rows populated by JS -->
@@ -456,7 +469,7 @@
                 <div class="equation-row equation-row--grand">
                     <span class="equation-operator">=</span>
                     <span class="equation-label">Grand Total</span>
-                    <span class="equation-value" id="eq-grand-total">—</span>
+                    <span class="equation-value" id="eq-grand-total"><span class="skeleton skeleton--dark skeleton-line" style="width:3rem">&nbsp;</span></span>
                 </div>
             </div>
         </section>
