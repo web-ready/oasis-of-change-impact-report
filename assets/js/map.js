@@ -454,6 +454,45 @@ const countryName = {
   CF: 'Central African Republic'
 };
 
+function getBaseCountryName(cc) {
+  if (cc.startsWith('US_')) return 'United States';
+  if (cc.startsWith('IN_')) return 'India';
+  return countryName[cc] || cc;
+}
+
+function groupByCountry(filteredEntries) {
+  var groups = {};
+  var groupOrder = [];
+
+  filteredEntries.forEach(function(entry) {
+    var cc = entry[0];
+    var cfg = entry[1];
+    var base = getBaseCountryName(cc);
+
+    if (!groups[base]) {
+      groups[base] = { name: base, codes: [], sites: [], types: new Set(), sources: new Set() };
+      groupOrder.push(base);
+    }
+
+    groups[base].codes.push(cc);
+    groups[base].types.add(cfg.type);
+    if (cfg.source) groups[base].sources.add(cfg.source);
+
+    if (Array.isArray(cfg.sites)) {
+      cfg.sites.forEach(function(site) {
+        groups[base].sites.push(site);
+      });
+    }
+  });
+
+  return groupOrder.map(function(base) {
+    var g = groups[base];
+    var type = g.types.size === 1 ? g.types.values().next().value : 'mixed';
+    var source = g.sources.size === 1 ? g.sources.values().next().value : 'Mixed Sources';
+    return { name: g.name, codes: g.codes, type: type, source: source, sites: g.sites };
+  });
+}
+
 function countLabel(sites) {
   if (Array.isArray(sites) && sites.length > 0) {
     return `${sites.length} planting site${sites.length === 1 ? '' : 's'}`;
@@ -941,14 +980,15 @@ function getFilteredData() {
 
 function updateFilterResults() {
   const filteredData = getFilteredData();
-  const totalCountries = Object.keys(plantingData).length;
+  const totalGroups = groupByCountry(Object.entries(plantingData)).length;
+  const filteredGroups = groupByCountry(filteredData).length;
   const resultsContainer = document.getElementById('filter-results');
   
   if (resultsContainer) {
     if (currentFilters.type === 'all' && currentFilters.source === 'all') {
-      resultsContainer.textContent = `Showing all ${totalCountries} countries`;
+      resultsContainer.textContent = `Showing all ${totalGroups} countries`;
     } else {
-      resultsContainer.textContent = `Showing ${filteredData.length} of ${totalCountries} countries`;
+      resultsContainer.textContent = `Showing ${filteredGroups} of ${totalGroups} countries`;
     }
   }
 }
@@ -973,34 +1013,36 @@ function renderSiteLists() {
   siteLists.classList.add('fade-in');
 
   const filteredData = getFilteredData();
+  const groups = groupByCountry(filteredData);
 
-  filteredData
+  groups
     .sort((a, b) => {
-      const aHas = a[1].sites.length > 1;
-      const bHas = b[1].sites.length > 1;
-      return (aHas === bHas) ? 0 : (aHas ? -1 : 1);
+      const aHas = a.sites.length > 1;
+      const bHas = b.sites.length > 1;
+      if (aHas !== bHas) return aHas ? -1 : 1;
+      return a.name.localeCompare(b.name);
     })
-    .forEach(([cc, cfg]) => {
-      const name = countryName[cc] || cc;
-      const hasList = Array.isArray(cfg.sites) && cfg.sites.length > 0;
+    .forEach(group => {
+      const name = group.name;
+      const hasList = group.sites.length > 0;
 
       const details = document.createElement('details');
       details.className = 'site-accordion border border-gray-200 rounded-lg sm:rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-200';
 
       let statusColor, statusBg, statusText;
-      if (cfg.type === 'confirmed') {
+      if (group.type === 'confirmed') {
         statusColor = 'bg-brand-green';
         statusBg = 'bg-emerald-50';
         statusText = 'text-emerald-800';
-      } else if (cfg.type === 'completed') {
+      } else if (group.type === 'completed') {
         statusColor = 'bg-info';
         statusBg = 'bg-blue-50';
         statusText = 'text-blue-800';
-      } else if (cfg.type === 'mixed') {
+      } else if (group.type === 'mixed') {
         statusColor = 'bg-emerald-600';
         statusBg = 'bg-emerald-50';
         statusText = 'text-emerald-700';
-      } else if (cfg.type === 'sunset') {
+      } else if (group.type === 'sunset') {
         statusColor = 'bg-info';
         statusBg = 'bg-blue-50';
         statusText = 'text-blue-800';
@@ -1010,19 +1052,21 @@ function renderSiteLists() {
         statusText = 'text-yellow-700';
       }
 
+      const typeLabel = group.type === 'confirmed' ? 'Verified' : group.type === 'completed' ? 'Completed' : group.type === 'mixed' ? 'Mixed' : group.type === 'sunset' ? 'Completed' : 'Supported';
+
       const summary = document.createElement('summary');
       summary.className = 'cursor-pointer px-4 sm:px-6 py-3 sm:py-4 font-medium grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-2 sm:gap-4 items-center text-deep-forest hover:bg-gray-50 rounded-lg sm:rounded-xl transition-colors duration-200 list-none';
       summary.innerHTML = `
         <div class="flex items-center gap-2 min-w-0">
           <div class="w-3 h-3 rounded-full ${statusColor} flex-shrink-0" aria-hidden="true"></div>
           <span class="truncate min-w-0" title="${name.replace(/"/g, '&quot;')}">${name}</span>
-          <span class="text-xs sm:text-sm text-gray-500 flex-shrink-0 whitespace-nowrap">— ${hasList ? `${cfg.sites.length} site${cfg.sites.length === 1 ? '' : 's'}` : 'site count pending'}</span>
+          <span class="text-xs sm:text-sm text-gray-500 flex-shrink-0 whitespace-nowrap">— ${hasList ? `${group.sites.length} site${group.sites.length === 1 ? '' : 's'}` : 'site count pending'}</span>
         </div>
         <div class="flex items-center gap-2 sm:gap-3 justify-end sm:justify-end flex-shrink-0">
           <span class="text-xs px-2 sm:px-3 py-1 rounded-full font-medium whitespace-nowrap ${statusBg} ${statusText}">
-            ${cfg.type === 'confirmed' ? 'Verified' : cfg.type === 'completed' ? 'Completed' : cfg.type === 'mixed' ? 'Mixed' : cfg.type === 'sunset' ? 'Completed' : 'Supported'}
+            ${typeLabel}
           </span>
-          <span class="text-xs text-gray-500 hidden sm:inline truncate max-w-[140px]" title="${(cfg.source || 'Mixed Sources').replace(/"/g, '&quot;')}">${cfg.source || 'Mixed Sources'}</span>
+          <span class="text-xs text-gray-500 hidden sm:inline truncate max-w-[140px]" title="${group.source.replace(/"/g, '&quot;')}">${group.source}</span>
           <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
@@ -1037,12 +1081,12 @@ function renderSiteLists() {
       if (hasList) {
         const ul = document.createElement('ul');
         ul.className = 'grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm';
-        cfg.sites.forEach(site => {
+        group.sites.forEach(site => {
           const li = document.createElement('li');
           li.className = 'flex items-center gap-2 text-gray-700 py-1';
           
           let siteColor, siteType, siteExtraTag;
-          const sType = typeof site === 'string' ? cfg.type : site.type;
+          const sType = typeof site === 'string' ? group.type : site.type;
           siteExtraTag = '';
           if (sType === 'confirmed') {
             siteColor = 'bg-brand-green';
@@ -1060,8 +1104,8 @@ function renderSiteLists() {
           }
           
           const displayName = typeof site === 'string' ? site : site.name;
-          const showFootnote3 = (cc === 'NP' && displayName === 'Eden Reforestation Projects') || (cc === 'US_MT' && displayName === 'National Forest Recovery');
-          const footnoteLink = showFootnote3 ? ' <a href="#footnote-4" class="align-super text-xs text-brand-green hover:underline no-underline" aria-label="Footnote 4">4</a>' : '';
+          const showFootnote = (group.codes.includes('NP') && displayName === 'Eden Reforestation Projects') || (group.codes.includes('US_MT') && displayName === 'National Forest Recovery');
+          const footnoteLink = showFootnote ? ' <a href="#footnote-4" class="align-super text-xs text-brand-green hover:underline no-underline" aria-label="Footnote 4">4</a>' : '';
           
           const siteTypeDisplay = typeof siteType === 'string' && siteType.includes('<span') 
             ? `<span class="ml-2 flex-shrink-0">${siteType}</span>`
