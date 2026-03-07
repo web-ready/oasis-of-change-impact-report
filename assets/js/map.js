@@ -728,6 +728,42 @@ function initializeMap() {
     { position: 'topright', collapsed: true }
   ).addTo(map);
 
+  /* Fullscreen control – best accessibility/usability on mobile */
+  const mapContainer = document.getElementById('map');
+  const FullscreenControl = L.Control.extend({
+    onAdd: function() {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'leaflet-fullscreen-toggle';
+      btn.setAttribute('aria-label', 'Expand map to full screen');
+      btn.innerHTML = '<svg class="fullscreen-expand" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg><svg class="fullscreen-compress" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25"/></svg>';
+      const reqFs = mapContainer.requestFullscreen || mapContainer.webkitRequestFullscreen || mapContainer.msRequestFullscreen;
+      const exitFs = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+      const isFs = () => !!(document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement);
+      function toggleFs() {
+        if (isFs()) {
+          if (exitFs) exitFs.call(document);
+        } else if (reqFs) {
+          reqFs.call(mapContainer);
+        }
+      }
+      function onFsChange() {
+        const fs = isFs();
+        btn.setAttribute('aria-label', fs ? 'Exit full screen' : 'Expand map to full screen');
+        btn.querySelector('.fullscreen-expand').style.display = fs ? 'none' : '';
+        btn.querySelector('.fullscreen-compress').style.display = fs ? '' : 'none';
+        btn.classList.toggle('active', fs);
+        setTimeout(function() { map.invalidateSize(); }, 100);
+      }
+      btn.addEventListener('click', toggleFs);
+      document.addEventListener('fullscreenchange', onFsChange);
+      document.addEventListener('webkitfullscreenchange', onFsChange);
+      document.addEventListener('MSFullscreenChange', onFsChange);
+      return btn;
+    }
+  });
+  map.addControl(new FullscreenControl({ position: 'topright' }));
+
   function refreshMapSize() {
     map.invalidateSize();
   }

@@ -153,6 +153,59 @@
 }
 
 /* ═══════════════════════════════════════════════
+   FULLSCREEN TOGGLE  –  expand map for best usability
+   ═══════════════════════════════════════════════ */
+.leaflet-fullscreen-toggle {
+  width: 38px !important;
+  height: 38px !important;
+  border: 1px solid rgba(0,0,0,0.06) !important;
+  border-radius: 12px !important;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(255,255,255,0.85) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06) !important;
+  color: #0F172A !important;
+  transition: background 0.2s, color 0.2s;
+}
+.leaflet-fullscreen-toggle:hover {
+  background: rgba(0, 71, 52, 0.08) !important;
+  color: #004734 !important;
+}
+.leaflet-fullscreen-toggle:active {
+  background: rgba(0, 71, 52, 0.12) !important;
+}
+.leaflet-fullscreen-toggle.active {
+  background: rgba(0, 71, 52, 0.12) !important;
+  color: #004734 !important;
+}
+.leaflet-fullscreen-toggle svg {
+  flex-shrink: 0;
+}
+@media (max-width: 640px) {
+  .leaflet-fullscreen-toggle {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 14px !important;
+  }
+}
+
+/* Map fills viewport when in fullscreen */
+#map:fullscreen,
+#map:-webkit-full-screen,
+#map:-moz-full-screen,
+#map:-ms-fullscreen {
+  width: 100vw !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+/* ═══════════════════════════════════════════════
    ATTRIBUTION  –  subtle pill
    ═══════════════════════════════════════════════ */
 .leaflet-control-attribution {
