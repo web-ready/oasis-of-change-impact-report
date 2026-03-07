@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="assets/css/design-tokens.css" rel="stylesheet">
     <link href="assets/css/footer.css" rel="stylesheet">
+    <link href="assets/css/nav.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -143,11 +144,21 @@
                 </div>
                 <div class="hidden lg:flex items-center gap-3">
                     <a href="/index.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Dashboard</a>
+                    <div class="nav-dropdown">
+                        <a href="/impact.html" class="nav-dropdown__trigger inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+                            Impact Report
+                            <svg class="nav-dropdown__chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                        </a>
+                        <div class="nav-dropdown__menu" role="menu">
+                            <a href="/impact.html" role="menuitem">Overview</a>
+                            <a href="/impact-2025-2026.html" role="menuitem">2025-2026 FY <span class="nav-dropdown__badge">Latest</span></a>
+                            <a href="/impact-2024-2025.html" role="menuitem">2024-2025 FY</a>
+                        </div>
+                    </div>
                     <a href="/breakdown.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Breakdown</a>
-                    <a href="/impact.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Impact Report</a>
                     <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:bg-brand-green-light transition">Certificates</a>
-                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Tree Species</a>
                     <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Gallery</a>
+                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Tree Species</a>
                     <a href="/news.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">News</a>
                 </div>
                 
@@ -174,11 +185,21 @@
             <div class="mx-6 h-px bg-gray-100"></div>
             <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
                 <a href="/index.html" class="mobile-nav-link">Dashboard</a>
+                <div class="mobile-nav-submenu" id="mobile-impact-submenu">
+                    <button type="button" class="mobile-nav-submenu-toggle" aria-expanded="false" aria-controls="mobile-impact-links" id="mobile-impact-toggle">
+                        Impact Report
+                        <svg class="mobile-nav-submenu-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="mobile-nav-submenu-links" id="mobile-impact-links">
+                        <a href="/impact.html">Overview</a>
+                        <a href="/impact-2025-2026.html">2025-2026 FY <span class="nav-dropdown__badge">Latest</span></a>
+                        <a href="/impact-2024-2025.html">2024-2025 FY</a>
+                    </div>
+                </div>
                 <a href="/breakdown.html" class="mobile-nav-link">Breakdown</a>
-                <a href="/impact.html" class="mobile-nav-link">Impact Report</a>
                 <a href="/certificates.html" class="mobile-nav-link active">Certificates</a>
-                <a href="/species.html" class="mobile-nav-link">Tree Species</a>
                 <a href="/gallery.html" class="mobile-nav-link">Gallery</a>
+                <a href="/species.html" class="mobile-nav-link">Tree Species</a>
                 <a href="/news.html" class="mobile-nav-link">News</a>
             </nav>
             <div class="px-6 py-5 border-t border-gray-100">
@@ -241,6 +262,17 @@
     <script src="assets/js/tree-data.js"></script>
     <script src="assets/js/certificates.js"></script>
     <script src="assets/js/footnotes.js"></script>
+    <script>
+        (function(){
+            var t = document.getElementById('mobile-impact-toggle');
+            var s = document.getElementById('mobile-impact-submenu');
+            if (!t || !s) return;
+            t.addEventListener('click', function(){
+                var open = s.classList.toggle('open');
+                t.setAttribute('aria-expanded', open);
+            });
+        })();
+    </script>
     <script>document.getElementById('copyright-year').textContent=new Date().getFullYear();</script>
 </body>
 </html>
