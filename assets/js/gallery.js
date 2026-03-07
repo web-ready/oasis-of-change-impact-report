@@ -356,12 +356,31 @@ const GalleryData = {
         renderGalleryGrid(GalleryData.items);
         bindFilterEvents();
         bindModalEvents();
+        bindFeaturedCards();
         initScrollAnimations();
         initLazyLoading();
         initMobileMenu();
         initHeroStats();
         updateResultsCount(GalleryData.items.length);
         document.getElementById("copyright-year").textContent = new Date().getFullYear();
+    }
+
+    function bindFeaturedCards() {
+        var cards = document.querySelectorAll("[data-featured-target]");
+        cards.forEach(function (card) {
+            var targetId = card.getAttribute("data-featured-target");
+            var handler = function () {
+                var target = document.querySelector('[data-id="' + targetId + '"]');
+                if (target) target.click();
+            };
+            card.addEventListener("click", handler);
+            card.addEventListener("keydown", function (e) {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handler();
+                }
+            });
+        });
     }
 
     function initHeroStats() {
@@ -464,8 +483,10 @@ const GalleryData = {
                 var group = document.querySelectorAll('[data-filter-type="' + type + '"]');
                 group.forEach(function (b) {
                     b.classList.remove("filter-active");
+                    b.setAttribute("aria-pressed", "false");
                 });
                 btn.classList.add("filter-active");
+                btn.setAttribute("aria-pressed", "true");
 
                 applyFilters();
             });
@@ -496,14 +517,22 @@ const GalleryData = {
         activeFilters = { contentType: "all", region: "all" };
         document.querySelectorAll("[data-filter-type]").forEach(function (btn) {
             btn.classList.remove("filter-active");
+            btn.setAttribute("aria-pressed", "false");
             if (btn.getAttribute("data-filter-value") === "all") {
                 btn.classList.add("filter-active");
+                btn.setAttribute("aria-pressed", "true");
             }
         });
         applyFilters();
     };
 
     /* ── Modal ── */
+
+    var lastFocusedElement = null;
+    var touchStartX = 0;
+    var touchStartY = 0;
+    var touchEndX = 0;
+    var touchEndY = 0;
 
     function bindModalEvents() {
         var modal = document.getElementById("gallery-modal");
@@ -519,7 +548,58 @@ const GalleryData = {
             if (e.key === "Escape") closeModal();
             if (e.key === "ArrowLeft") navigateModal(-1);
             if (e.key === "ArrowRight") navigateModal(1);
+            if (e.key === "Tab") trapFocus(e, modal);
         });
+
+        var imageSide = document.querySelector(".modal-image-side");
+        if (imageSide) {
+            imageSide.addEventListener("touchstart", function (e) {
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
+            }, { passive: true });
+
+            imageSide.addEventListener("touchend", function (e) {
+                touchEndX = e.changedTouches[0].screenX;
+                touchEndY = e.changedTouches[0].screenY;
+                handleSwipe();
+            }, { passive: true });
+        }
+    }
+
+    function handleSwipe() {
+        var deltaX = touchEndX - touchStartX;
+        var deltaY = touchEndY - touchStartY;
+        var minSwipeDistance = 50;
+        if (Math.abs(deltaX) < minSwipeDistance) return;
+        if (Math.abs(deltaY) > Math.abs(deltaX)) return;
+
+        if (deltaX < 0) {
+            navigateModal(1);
+        } else {
+            navigateModal(-1);
+        }
+    }
+
+    function trapFocus(e, modal) {
+        var focusable = modal.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+
+        if (e.shiftKey) {
+            if (document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            }
+        } else {
+            if (document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        }
     }
 
     function openModal(itemId) {
@@ -530,11 +610,15 @@ const GalleryData = {
         if (index === -1) return;
         currentModalIndex = index;
 
+        lastFocusedElement = document.activeElement;
         populateModal(filteredItems[index]);
         modal.classList.add("modal-open");
         document.body.style.overflow = "hidden";
 
         updateNavButtons();
+
+        var closeBtn = document.getElementById("modal-close");
+        if (closeBtn) closeBtn.focus();
     }
 
     function closeModal() {
@@ -543,6 +627,11 @@ const GalleryData = {
         modal.classList.remove("modal-open");
         document.body.style.overflow = "";
         currentModalIndex = -1;
+
+        if (lastFocusedElement && lastFocusedElement.focus) {
+            lastFocusedElement.focus();
+            lastFocusedElement = null;
+        }
     }
 
     function navigateModal(direction) {
@@ -556,8 +645,16 @@ const GalleryData = {
     function updateNavButtons() {
         var prev = document.getElementById("modal-prev");
         var next = document.getElementById("modal-next");
-        prev.style.visibility = currentModalIndex <= 0 ? "hidden" : "visible";
-        next.style.visibility = currentModalIndex >= filteredItems.length - 1 ? "hidden" : "visible";
+        var atStart = currentModalIndex <= 0;
+        var atEnd = currentModalIndex >= filteredItems.length - 1;
+
+        prev.style.visibility = atStart ? "hidden" : "visible";
+        prev.setAttribute("aria-hidden", atStart ? "true" : "false");
+        prev.tabIndex = atStart ? -1 : 0;
+
+        next.style.visibility = atEnd ? "hidden" : "visible";
+        next.setAttribute("aria-hidden", atEnd ? "true" : "false");
+        next.tabIndex = atEnd ? -1 : 0;
     }
 
     function populateModal(item) {

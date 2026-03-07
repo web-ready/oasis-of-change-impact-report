@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="assets/css/design-tokens.css" rel="stylesheet">
     <link href="assets/css/footer.css" rel="stylesheet">
+    <link href="assets/css/nav.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -37,6 +38,8 @@
 </head>
 <body class="bg-mist-gray font-sans antialiased min-h-screen flex flex-col">
 
+    <a href="#impact-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[9999] focus:bg-brand-green focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold focus:shadow-lg">Skip to content</a>
+
     <div class="bg-brand-green text-white py-3 px-4 text-center text-sm font-medium z-[60] relative">
         <span class="inline-flex items-center gap-2 justify-center flex-wrap">
             <strong>2025-2026 FY Planting Complete:</strong> 7,144 trees in 14 countries <span class="hidden sm:inline">—</span> <a href="/impact-2025-2026.html" class="underline underline-offset-2 hover:text-white/80">View impact</a>
@@ -49,11 +52,21 @@
                 <a href="/index.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
                 <div class="hidden lg:flex items-center gap-3">
                     <a href="/index.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Dashboard</a>
+                    <div class="nav-dropdown">
+                        <a href="/impact.html" class="nav-dropdown__trigger inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:bg-brand-green-light transition">
+                            Impact Report
+                            <svg class="nav-dropdown__chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                        </a>
+                        <div class="nav-dropdown__menu" role="menu">
+                            <a href="/impact.html" role="menuitem" class="nav-dropdown__item--active">Overview</a>
+                            <a href="/impact-2025-2026.html" role="menuitem">2025-2026 FY <span class="nav-dropdown__badge">Latest</span></a>
+                            <a href="/impact-2024-2025.html" role="menuitem">2024-2025 FY</a>
+                        </div>
+                    </div>
                     <a href="/breakdown.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Breakdown</a>
-                    <a href="/impact.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:bg-brand-green-light transition">Impact Report</a>
                     <a href="/certificates.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Certificates</a>
-                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Tree Species</a>
                     <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Gallery</a>
+                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Tree Species</a>
                     <a href="/news.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">News</a>
                 </div>
                 <button id="mobile-menu-toggle" class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-green/[0.06] text-brand-green hover:bg-brand-green hover:text-white transition-all duration-200" aria-label="Open menu" aria-expanded="false">
@@ -77,11 +90,21 @@
             <div class="mx-6 h-px bg-gray-100"></div>
             <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
                 <a href="/index.html" class="mobile-nav-link">Dashboard</a>
+                <div class="mobile-nav-submenu open" id="mobile-impact-submenu">
+                    <button type="button" class="mobile-nav-submenu-toggle active" aria-expanded="true" aria-controls="mobile-impact-links" id="mobile-impact-toggle">
+                        Impact Report
+                        <svg class="mobile-nav-submenu-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="mobile-nav-submenu-links" id="mobile-impact-links">
+                        <a href="/impact.html" class="mobile-nav-submenu-link--active">Overview</a>
+                        <a href="/impact-2025-2026.html">2025-2026 FY <span class="nav-dropdown__badge">Latest</span></a>
+                        <a href="/impact-2024-2025.html">2024-2025 FY</a>
+                    </div>
+                </div>
                 <a href="/breakdown.html" class="mobile-nav-link">Breakdown</a>
-                <a href="/impact.html" class="mobile-nav-link active">Impact Report</a>
                 <a href="/certificates.html" class="mobile-nav-link">Certificates</a>
-                <a href="/species.html" class="mobile-nav-link">Tree Species</a>
                 <a href="/gallery.html" class="mobile-nav-link">Gallery</a>
+                <a href="/species.html" class="mobile-nav-link">Tree Species</a>
                 <a href="/news.html" class="mobile-nav-link">News</a>
             </nav>
             <div class="px-6 py-5 border-t border-gray-100">
@@ -90,7 +113,7 @@
         </div>
     </div>
 
-    <main class="flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <main id="impact-content" class="flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
 
         <section class="text-center mb-10">
             <h1 class="text-3xl md:text-4xl font-serif text-deep-forest mb-3">Fiscal Year Impact</h1>
@@ -101,7 +124,9 @@
         <section class="mb-12">
             <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100">
                 <h2 class="text-xl font-semibold text-deep-forest mb-6">Year-over-Year Growth <a href="#footnote-1" class="align-super text-xs text-gray-500 hover:text-brand-green no-underline" aria-label="Footnote 1">1</a></h2>
-                <div class="overflow-x-auto">
+
+                <!-- Desktop table (hidden on mobile) -->
+                <div class="hidden sm:block overflow-x-auto" role="table" aria-label="Year-over-year growth comparison">
                     <table class="w-full text-sm">
                         <thead>
                             <tr class="border-b-2 border-gray-200">
@@ -139,35 +164,148 @@
                         </tbody>
                     </table>
                 </div>
+
+                <!-- Mobile stacked cards with visual bars (visible only on mobile) -->
+                <div class="sm:hidden space-y-4" role="list" aria-label="Year-over-year growth comparison">
+
+                    <div class="rounded-xl border border-gray-100 p-4" role="listitem">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm font-semibold text-deep-forest">Trees Planted</span>
+                            <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">+958%</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div>
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs text-gray-500 font-medium">2024-25</span>
+                                    <span class="text-sm tabular-nums font-bold text-deep-forest">675</span>
+                                </div>
+                                <div class="h-2.5 bg-gray-100 rounded-full overflow-hidden" role="img" aria-label="675 trees, 9.4% of current year">
+                                    <div class="h-full rounded-full bg-gray-300 transition-all duration-700" style="width:9.4%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs text-brand-green font-semibold">2025-26</span>
+                                    <span class="text-sm tabular-nums font-bold text-brand-green">7,144</span>
+                                </div>
+                                <div class="h-2.5 bg-emerald-50 rounded-full overflow-hidden" role="img" aria-label="7,144 trees, 100%">
+                                    <div class="h-full rounded-full bg-brand-green transition-all duration-700" style="width:100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-xl border border-gray-100 p-4" role="listitem">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm font-semibold text-deep-forest">Countries</span>
+                            <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">14x</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div>
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs text-gray-500 font-medium">2024-25</span>
+                                    <span class="text-sm tabular-nums font-bold text-deep-forest">1</span>
+                                </div>
+                                <div class="h-2.5 bg-gray-100 rounded-full overflow-hidden" role="img" aria-label="1 country, 7.1% of current year">
+                                    <div class="h-full rounded-full bg-gray-300 transition-all duration-700" style="width:7.1%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs text-brand-green font-semibold">2025-26</span>
+                                    <span class="text-sm tabular-nums font-bold text-brand-green">14</span>
+                                </div>
+                                <div class="h-2.5 bg-emerald-50 rounded-full overflow-hidden" role="img" aria-label="14 countries, 100%">
+                                    <div class="h-full rounded-full bg-brand-green transition-all duration-700" style="width:100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-xl border border-gray-100 p-4" role="listitem">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm font-semibold text-deep-forest">CO&#8322; Offset (kg)</span>
+                            <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">+963%</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div>
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs text-gray-500 font-medium">2024-25</span>
+                                    <span class="text-sm tabular-nums font-bold text-deep-forest">33,750</span>
+                                </div>
+                                <div class="h-2.5 bg-gray-100 rounded-full overflow-hidden" role="img" aria-label="33,750 kg CO2, 9.4% of current year">
+                                    <div class="h-full rounded-full bg-gray-300 transition-all duration-700" style="width:9.4%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs text-brand-green font-semibold">2025-26</span>
+                                    <span class="text-sm tabular-nums font-bold text-brand-green">358,750</span>
+                                </div>
+                                <div class="h-2.5 bg-emerald-50 rounded-full overflow-hidden" role="img" aria-label="358,750 kg CO2, 100%">
+                                    <div class="h-full rounded-full bg-brand-green transition-all duration-700" style="width:100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-xl border border-gray-100 p-4" role="listitem">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm font-semibold text-deep-forest">Species Planted</span>
+                            <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">14x</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div>
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs text-gray-500 font-medium">2024-25</span>
+                                    <span class="text-sm tabular-nums font-bold text-deep-forest">1</span>
+                                </div>
+                                <div class="h-2.5 bg-gray-100 rounded-full overflow-hidden" role="img" aria-label="1 species, 7.1% of current year">
+                                    <div class="h-full rounded-full bg-gray-300 transition-all duration-700" style="width:7.1%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs text-brand-green font-semibold">2025-26</span>
+                                    <span class="text-sm tabular-nums font-bold text-brand-green">14</span>
+                                </div>
+                                <div class="h-2.5 bg-emerald-50 rounded-full overflow-hidden" role="img" aria-label="14 species, 100%">
+                                    <div class="h-full rounded-full bg-brand-green transition-all duration-700" style="width:100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </section>
 
         <section class="mb-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
 
                 <!-- 2025-2026 FY Card -->
-                <a href="/impact-2025-2026.html" class="group block bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md hover:border-brand-green/30 transition-all duration-200">
-                    <div class="px-6 py-5 border-b border-brand-green/10">
+                <a href="/impact-2025-2026.html" class="group block bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md hover:border-brand-green/30 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:ring-offset-2" aria-label="2025-2026 fiscal year: 7,144 trees across 14 countries — view full report">
+                    <div class="px-5 sm:px-6 py-4 sm:py-5 border-b border-brand-green/10">
                         <div class="flex items-center justify-between">
-                            <h3 class="text-xl font-semibold text-deep-forest">2025-2026 FY</h3>
+                            <h3 class="text-lg sm:text-xl font-semibold text-deep-forest">2025-2026 FY</h3>
                             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                                 Latest
                             </span>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <div class="grid grid-cols-3 gap-3 mb-4">
+                    <div class="p-5 sm:p-6">
+                        <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-4">
                             <div class="text-center">
-                                <div class="text-lg font-bold text-deep-forest">7,144</div>
+                                <div class="text-base sm:text-lg font-bold text-deep-forest tabular-nums">7,144</div>
                                 <div class="text-xs text-gray-500">Trees</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-lg font-bold text-deep-forest">14</div>
+                                <div class="text-base sm:text-lg font-bold text-deep-forest tabular-nums">14</div>
                                 <div class="text-xs text-gray-500">Countries</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-lg font-bold text-deep-forest">358,750</div>
+                                <div class="text-base sm:text-lg font-bold text-deep-forest tabular-nums">358,750</div>
                                 <div class="text-xs text-gray-500">CO&#8322; (kg)</div>
                             </div>
                         </div>
@@ -180,28 +318,28 @@
                 </a>
 
                 <!-- 2024-2025 FY Card -->
-                <a href="/impact-2024-2025.html" class="group block bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md hover:border-gray-300 transition-all duration-200">
-                    <div class="bg-white px-6 py-5 border-b border-gray-100">
+                <a href="/impact-2024-2025.html" class="group block bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md hover:border-gray-300 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:ring-offset-2" aria-label="2024-2025 fiscal year: 675 trees in Madagascar — view full report">
+                    <div class="bg-white px-5 sm:px-6 py-4 sm:py-5 border-b border-gray-100">
                         <div class="flex items-center justify-between">
-                            <h3 class="text-xl font-semibold text-deep-forest">2024-2025 FY</h3>
+                            <h3 class="text-lg sm:text-xl font-semibold text-deep-forest">2024-2025 FY</h3>
                             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                                 Completed
                             </span>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <div class="grid grid-cols-3 gap-3 mb-4">
+                    <div class="p-5 sm:p-6">
+                        <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-4">
                             <div class="text-center">
-                                <div class="text-lg font-bold text-deep-forest">675</div>
+                                <div class="text-base sm:text-lg font-bold text-deep-forest tabular-nums">675</div>
                                 <div class="text-xs text-gray-500">Trees</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-lg font-bold text-deep-forest">1</div>
+                                <div class="text-base sm:text-lg font-bold text-deep-forest tabular-nums">1</div>
                                 <div class="text-xs text-gray-500">Country</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-lg font-bold text-deep-forest">33,750</div>
+                                <div class="text-base sm:text-lg font-bold text-deep-forest tabular-nums">33,750</div>
                                 <div class="text-xs text-gray-500">CO&#8322; (kg)</div>
                             </div>
                         </div>
@@ -246,6 +384,17 @@
         if (closeBtn) closeBtn.addEventListener('click', close);
         if (backdrop) backdrop.addEventListener('click', close);
     })();
+    </script>
+    <script>
+        (function(){
+            var t = document.getElementById('mobile-impact-toggle');
+            var s = document.getElementById('mobile-impact-submenu');
+            if (!t || !s) return;
+            t.addEventListener('click', function(){
+                var open = s.classList.toggle('open');
+                t.setAttribute('aria-expanded', open);
+            });
+        })();
     </script>
     <script>document.getElementById('copyright-year').textContent=new Date().getFullYear();</script>
 </body>

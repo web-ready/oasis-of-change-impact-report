@@ -84,8 +84,8 @@ const TreeData = {
        ──────────────────────────────────────────────── */
     certificates: [
         // ── Historic ──
-        { id: "nepal-eden-historical",        title: "Eden Reforestation (Nepal) — Historical",   certificate: "Eden Reforestation",   location: "Nepal",   trees: 60,  co2Offset: 10800, date: "June 18, 2023", category: "historic", fyNote: "Historical Planting", filename: "historical/2023-06-18_Eden-Reforestation_Nepal_60-Trees-10800kg-CO2.pdf" },
-        { id: "usa-nfr-historical",           title: "National Forest Recovery (USA) — Historical", certificate: "Tree-Nation",         location: "United States", trees: 10, co2Offset: 150,  date: "May 13, 2023",  category: "historic", fyNote: "Historical Planting", filename: "historical/2023-05-13_National-Forest-Recovery_USA_10-Trees-150kg-CO2.pdf" },
+        { id: "nepal-eden-historical",        title: "Eden Reforestation (Nepal) — Historical",   certificate: "Eden Reforestation",   location: "Nepal",   trees: 60,  co2Offset: 10800, date: "June 18, 2023", category: "historic", fyNote: "Historical Planting", filename: "historical-plantings/2023-06-18_Eden-Reforestation_Nepal_60-Trees-10800kg-CO2.pdf" },
+        { id: "usa-nfr-historical",           title: "National Forest Recovery (USA) — Historical", certificate: "Tree-Nation",         location: "United States", trees: 10, co2Offset: 150,  date: "May 13, 2023",  category: "historic", fyNote: "Historical Planting", filename: "historical-plantings/2023-05-13_National-Forest-Recovery_USA_10-Trees-150kg-CO2.pdf" },
 
         // ── 2024-2025 FY ──
         { id: "web-ready-2025-madagascar",     title: "Web-Ready Forest Restoration (Madagascar)", certificate: "Eden Reforestation",   location: "Madagascar", trees: 675, co2Offset: 33750, date: "February 26, 2025", category: "2024-2025", fyNote: "2024-2025 FY", filename: "2024-2025-fy/2025-02-26_Web-Ready-Planting_Eden-Reforestation_Madagascar_675-Trees-33750kg-CO2.pdf" },
