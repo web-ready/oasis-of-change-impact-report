@@ -275,35 +275,6 @@
             .equation-row--grand { font-size: 1rem; padding: 0.875rem 1rem; }
         }
 
-        /* Skeleton loading */
-        .skeleton {
-            background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
-            background-size: 200% 100%;
-            animation: skeleton-shimmer 1.5s ease-in-out infinite;
-            border-radius: 0.375rem;
-        }
-        .skeleton--dark {
-            background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
-            background-size: 200% 100%;
-            animation: skeleton-shimmer 1.5s ease-in-out infinite;
-            border-radius: 0.375rem;
-        }
-        @keyframes skeleton-shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-        .skeleton-line {
-            height: 1em;
-            display: inline-block;
-        }
-        .skeleton-card {
-            background: white;
-            border: 1px solid #E5E7EB;
-            border-radius: 1rem;
-            padding: 1.5rem;
-        }
-        [data-loaded="true"] .skeleton,
-        [data-loaded="true"] .skeleton--dark { animation: none; background: transparent; }
     </style>
 </head>
 <body class="bg-mist-gray font-sans antialiased min-h-screen flex flex-col">
@@ -407,7 +378,7 @@
                 <p class="text-sm text-gray-500">Live tree counts from the Tree-Nation API.</p>
             </div>
 
-            <!-- WebReady (Featured) -->
+            <!-- Web-Ready (Featured) -->
             <div class="forest-card forest-card--featured mb-4">
                 <div class="flex flex-col sm:flex-row items-center sm:justify-between gap-4">
                     <div class="flex-1 min-w-0">
