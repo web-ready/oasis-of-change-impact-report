@@ -64,14 +64,15 @@ function fyBadge(fy) {
     return ' <span class="fy-badge ' + cls + '">' + fy + '</span>';
 }
 
-function populateProjectTables() {
-    var partners = (TreeData.getVerifiedPartners ? TreeData.getVerifiedPartners() : []).slice().sort(function(a,b){ return (b.trees||0)-(a.trees||0); });
+function populatePartnerSection(partners) {
+    var list = partners.slice().sort(function(a, b) { return (b.trees || 0) - (a.trees || 0); });
+    var extIcon = '<span class="partner-link-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span>';
     var pBody = document.getElementById('partners-table-body');
-    if (pBody && pBody.children.length === 0) {
-        partners.forEach(function(p) {
+    if (pBody) {
+        pBody.innerHTML = '';
+        list.forEach(function(p) {
             var tr = document.createElement('tr');
             tr.className = 'data-row border-b border-gray-50 transition-all duration-200';
-            var extIcon = '<span class="partner-link-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span>';
             var nameCell = p.profileUrl
                 ? '<a href="' + p.profileUrl + '" target="_blank" rel="noopener" class="partner-profile-link font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">' + p.name + extIcon + '</a>'
                 : p.name;
@@ -79,17 +80,17 @@ function populateProjectTables() {
                 '<td class="py-4 px-2">' + nameCell + '</td>' +
                 '<td class="py-4 px-2 text-sm text-gray-600">' + p.baseLocation + '</td>' +
                 '<td class="py-4 px-2 text-sm text-gray-600">' + p.countries + '</td>' +
-                '<td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">' + p.trees.toLocaleString() + '</td>';
+                '<td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">' + (p.trees || 0).toLocaleString() + '</td>';
             pBody.appendChild(tr);
         });
     }
     var pCards = document.getElementById('partners-mobile-cards');
-    if (pCards && pCards.children.length === 0) {
-        partners.forEach(function(p) {
+    if (pCards) {
+        pCards.innerHTML = '';
+        list.forEach(function(p) {
             var card = document.createElement('div');
             card.className = 'mobile-data-card';
-            card.setAttribute('data-search', (p.name + ' ' + p.baseLocation + ' ' + p.countries).toLowerCase());
-            var extIcon = '<span class="partner-link-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span>';
+            card.setAttribute('data-search', (p.name + ' ' + (p.baseLocation || '') + ' ' + (p.countries || '')).toLowerCase());
             var nameBlock = p.profileUrl
                 ? '<a href="' + p.profileUrl + '" target="_blank" rel="noopener" class="partner-profile-link mobile-card-title text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">' + p.name + extIcon + '</a>'
                 : '<div class="mobile-card-title">' + p.name + '</div>';
@@ -97,13 +98,18 @@ function populateProjectTables() {
                 '<div class="mobile-card-header">' +
                     '<div>' +
                         nameBlock +
-                        '<div class="mobile-card-subtitle">' + p.baseLocation + ' · ' + p.countries + '</div>' +
+                        '<div class="mobile-card-subtitle">' + (p.baseLocation || '') + ' · ' + (p.countries || '') + '</div>' +
                     '</div>' +
-                    '<div class="mobile-trees-count">' + p.trees.toLocaleString() + '</div>' +
+                    '<div class="mobile-trees-count">' + (p.trees || 0).toLocaleString() + '</div>' +
                 '</div>';
             pCards.appendChild(card);
         });
     }
+}
+
+function populateProjectTables() {
+    var partners = (TreeData.getVerifiedPartners ? TreeData.getVerifiedPartners() : []).slice().sort(function(a,b){ return (b.trees||0)-(a.trees||0); });
+    populatePartnerSection(partners);
 
     const verifiedProjects = [...TreeData.getVerifiedProjects()].sort((a, b) => (b.trees || 0) - (a.trees || 0));
     const vBody = document.getElementById('verified-table-body');
@@ -370,9 +376,56 @@ if (document.readyState === 'loading') {
     boot();
 }
 
+/**
+ * Fetches partner tree counts from Tree-Nation API and updates the dashboard.
+ * Falls back to TreeData (already rendered) if API is unavailable or fails (e.g. CORS).
+ */
+function loadPartnerCountsFromAPI() {
+    if (typeof TreeNationAPI === 'undefined' || typeof TreeData === 'undefined') {
+        console.log('[Dashboard] Partner planting sites: using hard-coded TreeData (TreeNationAPI not loaded).');
+        return;
+    }
+
+    TreeNationAPI.fetchPartnerForests()
+        .then(function(partnerResults) {
+            var slugToId = TreeNationAPI.PARTNER_SLUG_TO_ID || {};
+            var apiCountById = {};
+            partnerResults.forEach(function(r) {
+                var id = slugToId[r.slug];
+                if (id != null) apiCountById[id] = r.trees;
+            });
+
+            var basePartners = TreeData.getVerifiedPartners();
+            if (!basePartners || basePartners.length === 0) return;
+
+            var mergedPartners = basePartners.map(function(p) {
+                var trees = apiCountById[p.id] !== undefined ? apiCountById[p.id] : p.trees;
+                return { id: p.id, name: p.name, baseLocation: p.baseLocation, countries: p.countries, trees: trees, profileUrl: p.profileUrl, co2Tonnes: p.co2Tonnes };
+            });
+
+            var partnerTreesTotal = mergedPartners.reduce(function(sum, p) { return sum + (p.trees || 0); }, 0);
+            var oasisTrees = TreeData.getOasisFundedTrees();
+            var historicalTrees = TreeData.getHistoricalTrees();
+            var verifiedTotal = oasisTrees + historicalTrees + partnerTreesTotal;
+            var totalTotal = verifiedTotal + TreeData.getLegacyTrees();
+
+            console.log('[Dashboard] Partner planting sites: loaded from Tree-Nation API. Total partner trees:', partnerTreesTotal);
+            console.table(mergedPartners.map(function(p) { return { Partner: p.name, Trees: p.trees }; }));
+
+            setText('verified-count', verifiedTotal.toLocaleString());
+            setText('total-count', totalTotal.toLocaleString());
+            setText('footnote-partner-trees', partnerTreesTotal.toLocaleString());
+            populatePartnerSection(mergedPartners);
+        })
+        .catch(function(err) {
+            console.warn('[Dashboard] Partner planting sites: using hard-coded TreeData (API failed:', err.message + ').');
+        });
+}
+
 function boot() {
     initializeTreeData();
     setTimeout(animateCount, 400);
+    loadPartnerCountsFromAPI();
 
     setupSearch('verified-search', '#verified-table', 'verified-data');
     setupSearch('legacy-search', '#legacy-table', 'legacy-data');
