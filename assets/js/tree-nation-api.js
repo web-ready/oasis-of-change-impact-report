@@ -1,14 +1,11 @@
 /**
- * Tree-Nation API – Fetch & Aggregate Impact Data
+ * Tree-Nation API – Fetch & Aggregate Live Tree Counts
  *
- * Public endpoints (no API key / Bearer token required):
- *   • Forest details     GET /api/forests/{id}                → { id, tree_count, co2_compensated_tons }
- *   • Forest tree count  GET /api/forests/{slug}/tree_counter  → { count }
- *   • Profile updates    GET /rss/profile/{slug}/updates       → RSS/XML feed
+ * Public endpoint (no API key required):
+ *   GET /api/forests/{slug}/tree_counter  → { count }
  *
- * The details endpoint only accepts numeric IDs and returns both
- * tree_count and co2_compensated_tons.  The tree_counter endpoint
- * accepts profile slugs but returns tree count only (no CO₂).
+ * CO₂ is NOT fetched from the API — it comes from verified
+ * certificates in TreeData and is updated manually each fiscal year.
  *
  * CORS note: Tree-Nation does not set Access-Control-Allow-Origin on
  * these endpoints, so browser fetch() calls from a different origin
@@ -23,8 +20,6 @@ var TreeNationAPI = (function () {
 
     // ── Configuration ──────────────────────────────────
 
-    // All forests to aggregate, using the slug-based tree_counter
-    // endpoint so every forest can be referenced by its profile slug.
     var FORESTS = [
         { slug: 'web-ready',                     label: 'Oasis of Change (Web-Ready)' },
         { slug: 'stanley-park-ecology-society',   label: 'Stanley Park Ecology Society' },
@@ -33,7 +28,6 @@ var TreeNationAPI = (function () {
         { slug: 'ecosearch',                      label: 'EcoSearch' }
     ];
 
-    // Map API forest slug to TreeData verifiedPartners id (for dashboard merge).
     var PARTNER_SLUG_TO_ID = {
         'stanley-park-ecology-society': 'spes',
         'sustainable-www':             'sustainable-www',
@@ -41,7 +35,6 @@ var TreeNationAPI = (function () {
         'ecosearch':                    'ecosearch'
     };
 
-    // Profile slugs for the RSS update feeds (same slugs).
     var PROFILE_SLUGS = FORESTS.map(function (f) { return f.slug; });
 
     var API_BASE = 'https://tree-nation.com/api';
@@ -55,14 +48,6 @@ var TreeNationAPI = (function () {
         return fetch(API_BASE + '/forests/' + slug + '/tree_counter', requestOptions)
             .then(function (response) {
                 if (!response.ok) throw new Error('Forest ' + slug + ': HTTP ' + response.status);
-                return response.json();
-            });
-    }
-
-    function fetchForestById(id) {
-        return fetch(API_BASE + '/forests/' + id, requestOptions)
-            .then(function (response) {
-                if (!response.ok) throw new Error('Forest ' + id + ': HTTP ' + response.status);
                 return response.json();
             });
     }
@@ -86,10 +71,6 @@ var TreeNationAPI = (function () {
         return Promise.all(promises).then(aggregate);
     }
 
-    /**
-     * Fetches tree counts for partner forests only (excludes web-ready).
-     * Returns Promise<Array<{ slug, trees }>> for use by dashboard to merge with TreeData.verifiedPartners.
-     */
     function fetchPartnerForests() {
         var partnerSlugs = Object.keys(PARTNER_SLUG_TO_ID);
         var promises = partnerSlugs.map(function (slug) {
@@ -107,15 +88,8 @@ var TreeNationAPI = (function () {
 
     function aggregate(results) {
         var totalTrees = 0;
-
-        results.forEach(function (r) {
-            totalTrees += r.trees;
-        });
-
-        return {
-            forests:    results,
-            totalTrees: totalTrees
-        };
+        results.forEach(function (r) { totalTrees += r.trees; });
+        return { forests: results, totalTrees: totalTrees };
     }
 
     // ── RSS updates ────────────────────────────────────
@@ -201,10 +175,9 @@ var TreeNationAPI = (function () {
 
     return {
         FORESTS:            FORESTS,
-        PROFILE_SLUGS:     PROFILE_SLUGS,
+        PROFILE_SLUGS:      PROFILE_SLUGS,
         PARTNER_SLUG_TO_ID: PARTNER_SLUG_TO_ID,
         fetchForestBySlug:  fetchForestBySlug,
-        fetchForestById:    fetchForestById,
         fetchAllForests:    fetchAllForests,
         fetchPartnerForests: fetchPartnerForests,
         fetchRSSUpdates:    fetchRSSUpdates,
