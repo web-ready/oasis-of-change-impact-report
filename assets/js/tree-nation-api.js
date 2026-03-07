@@ -33,6 +33,14 @@ var TreeNationAPI = (function () {
         { slug: 'ecosearch',                      label: 'EcoSearch' }
     ];
 
+    // Map API forest slug to TreeData verifiedPartners id (for dashboard merge).
+    var PARTNER_SLUG_TO_ID = {
+        'stanley-park-ecology-society': 'spes',
+        'sustainable-www':             'sustainable-www',
+        'mittler-senior-technology':    'mst',
+        'ecosearch':                    'ecosearch'
+    };
+
     // Profile slugs for the RSS update feeds (same slugs).
     var PROFILE_SLUGS = FORESTS.map(function (f) { return f.slug; });
 
@@ -76,6 +84,25 @@ var TreeNationAPI = (function () {
         });
 
         return Promise.all(promises).then(aggregate);
+    }
+
+    /**
+     * Fetches tree counts for partner forests only (excludes web-ready).
+     * Returns Promise<Array<{ slug, trees }>> for use by dashboard to merge with TreeData.verifiedPartners.
+     */
+    function fetchPartnerForests() {
+        var partnerSlugs = Object.keys(PARTNER_SLUG_TO_ID);
+        var promises = partnerSlugs.map(function (slug) {
+            return fetchForestBySlug(slug)
+                .then(function (data) {
+                    return { slug: slug, trees: data.count || 0 };
+                })
+                .catch(function (err) {
+                    console.warn('[TreeNationAPI] Partner ' + slug + ':', err.message);
+                    return { slug: slug, trees: 0, error: err.message };
+                });
+        });
+        return Promise.all(promises);
     }
 
     function aggregate(results) {
@@ -173,13 +200,15 @@ var TreeNationAPI = (function () {
     // ── Public interface ───────────────────────────────
 
     return {
-        FORESTS:          FORESTS,
-        PROFILE_SLUGS:    PROFILE_SLUGS,
-        fetchForestBySlug: fetchForestBySlug,
-        fetchForestById:   fetchForestById,
-        fetchAllForests:   fetchAllForests,
-        fetchRSSUpdates:   fetchRSSUpdates,
-        fetchAllUpdates:   fetchAllUpdates,
-        run:               run
+        FORESTS:            FORESTS,
+        PROFILE_SLUGS:     PROFILE_SLUGS,
+        PARTNER_SLUG_TO_ID: PARTNER_SLUG_TO_ID,
+        fetchForestBySlug:  fetchForestBySlug,
+        fetchForestById:    fetchForestById,
+        fetchAllForests:    fetchAllForests,
+        fetchPartnerForests: fetchPartnerForests,
+        fetchRSSUpdates:    fetchRSSUpdates,
+        fetchAllUpdates:    fetchAllUpdates,
+        run:                run
     };
 })();
