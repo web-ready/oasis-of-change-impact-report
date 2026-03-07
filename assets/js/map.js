@@ -1017,9 +1017,7 @@ function renderSiteLists() {
 
   groups
     .sort((a, b) => {
-      const aHas = a.sites.length > 1;
-      const bHas = b.sites.length > 1;
-      if (aHas !== bHas) return aHas ? -1 : 1;
+      if (b.sites.length !== a.sites.length) return b.sites.length - a.sites.length;
       return a.name.localeCompare(b.name);
     })
     .forEach(group => {
