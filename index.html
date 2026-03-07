@@ -192,18 +192,18 @@
         </section>
 
         <section class="mb-12">
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-xl font-semibold text-deep-forest">Planting Locations</h2>
-                    <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-500 justify-start sm:justify-end">
-                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-info inline-block"></span> Completed</span>
-                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-brand-green inline-block"></span> Verified</span>
-                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-brand-green-light inline-block"></span> Mixed</span>
-                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-legacy-gold inline-block"></span> Supported</span>
-                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full inline-block" style="background:#7C3AED"></span> Grouped (multiple project types)</span>
+            <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 overflow-hidden">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+                    <h2 class="text-xl font-semibold text-deep-forest shrink-0">Planting Locations</h2>
+                    <div class="map-legend flex items-center gap-x-4 gap-y-2 text-xs text-gray-500 overflow-x-auto overflow-y-hidden pb-1 -mx-1 sm:mx-0 sm:pb-0 sm:overflow-visible flex-wrap sm:flex-nowrap sm:justify-end">
+                        <span class="flex items-center gap-1.5 shrink-0"><span class="w-2.5 h-2.5 rounded-full bg-info inline-block"></span> Completed</span>
+                        <span class="flex items-center gap-1.5 shrink-0"><span class="w-2.5 h-2.5 rounded-full bg-brand-green inline-block"></span> Verified</span>
+                        <span class="flex items-center gap-1.5 shrink-0"><span class="w-2.5 h-2.5 rounded-full bg-brand-green-light inline-block"></span> Mixed</span>
+                        <span class="flex items-center gap-1.5 shrink-0"><span class="w-2.5 h-2.5 rounded-full bg-legacy-gold inline-block"></span> Supported</span>
+                        <span class="flex items-center gap-1.5 shrink-0"><span class="w-2.5 h-2.5 rounded-full inline-block" style="background:#7C3AED"></span> Grouped</span>
                     </div>
                 </div>
-                <div id="map" class="w-full rounded-xl overflow-hidden"></div>
+                <div id="map" class="w-full rounded-xl overflow-hidden" role="application" aria-label="Interactive map of planting locations"></div>
             </div>
         </section>
 

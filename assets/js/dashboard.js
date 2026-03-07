@@ -136,11 +136,13 @@ function populateProjectTables() {
         verifiedProjects.forEach(p => {
             const card = document.createElement('div');
             card.className = 'mobile-data-card';
-            card.setAttribute('data-search', `${p.name.toLowerCase()} ${p.location.toLowerCase()}`);
+            card.setAttribute('data-search', `${p.name.toLowerCase()} ${p.location.toLowerCase()} ${(p.fy || '').toLowerCase()}`);
+            const badgeHtml = p.fy ? `<div class="mobile-card-badge-row">${fyBadge(p.fy).trim()}</div>` : '';
             card.innerHTML = `
                 <div class="mobile-card-header">
-                    <div>
-                        <div class="mobile-card-title"><a href="${p.url}" target="_blank" rel="noopener" class="partner-profile-link text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">${p.name}${extIconSvg}</a>${fyBadge(p.fy)}</div>
+                    <div class="mobile-card-content">
+                        <div class="mobile-card-title"><a href="${p.url}" target="_blank" rel="noopener" class="partner-profile-link text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">${p.name}${extIconSvg}</a></div>
+                        ${badgeHtml}
                         <div class="mobile-card-subtitle">${p.location}</div>
                     </div>
                     <div class="mobile-trees-count">${p.trees.toLocaleString()}</div>
@@ -254,27 +256,53 @@ function switchTab(tabName) {
     if (backdrop) backdrop.addEventListener('click', close);
 })();
 
-function setupSearch(searchId, tableId, dataClass) {
+function setupSearch(searchId, tableId, dataClass, mobileCardsId) {
     const input = document.getElementById(searchId);
     if (!input) return;
     input.addEventListener('input', (e) => {
         const term = e.target.value.toLowerCase();
         const tbody = document.querySelector(`${tableId} .${dataClass}`);
-        if (!tbody) return;
-        const rows = tbody.querySelectorAll('tr:not(.no-results-message)');
-        let visible = 0;
-        rows.forEach(row => {
-            const match = row.textContent.toLowerCase().includes(term);
-            row.style.display = match ? '' : 'none';
-            if (match) visible++;
-        });
-        const existing = tbody.querySelector('.no-results-message');
-        if (existing) existing.remove();
-        if (visible === 0 && term.length > 0) {
-            const tr = document.createElement('tr');
-            tr.className = 'no-results-message';
-            tr.innerHTML = `<td colspan="3" class="py-8 text-center text-gray-400 text-sm">No results for "${term}"</td>`;
-            tbody.appendChild(tr);
+        if (tbody) {
+            const rows = tbody.querySelectorAll('tr:not(.no-results-message)');
+            let visible = 0;
+            rows.forEach(row => {
+                const match = row.textContent.toLowerCase().includes(term);
+                row.style.display = match ? '' : 'none';
+                if (match) visible++;
+            });
+            const existing = tbody.querySelector('.no-results-message');
+            if (existing) existing.remove();
+            if (visible === 0 && term.length > 0) {
+                const tr = document.createElement('tr');
+                tr.className = 'no-results-message';
+                tr.innerHTML = `<td colspan="3" class="py-8 text-center text-gray-400 text-sm">No results for "${term}"</td>`;
+                tbody.appendChild(tr);
+            }
+        }
+        if (mobileCardsId) {
+            const cardsContainer = document.getElementById(mobileCardsId);
+            if (cardsContainer) {
+                const cards = cardsContainer.querySelectorAll('.mobile-data-card');
+                let visibleCount = 0;
+                cards.forEach(card => {
+                    const searchText = (card.getAttribute('data-search') || '').toLowerCase();
+                    const match = term.length === 0 || searchText.includes(term);
+                    card.style.display = match ? '' : 'none';
+                    if (match) visibleCount++;
+                });
+                let noResults = cardsContainer.querySelector('.mobile-no-results');
+                if (visibleCount === 0 && term.length > 0) {
+                    if (!noResults) {
+                        noResults = document.createElement('div');
+                        noResults.className = 'mobile-no-results py-8 text-center text-gray-400 text-sm';
+                        cardsContainer.appendChild(noResults);
+                    }
+                    noResults.textContent = 'No results for "' + term + '"';
+                    noResults.style.display = '';
+                } else if (noResults) {
+                    noResults.style.display = 'none';
+                }
+            }
         }
     });
 }
@@ -426,8 +454,8 @@ function boot() {
     animateCount();
     loadLiveTreeCountsFromAPI();
 
-    setupSearch('verified-search', '#verified-table', 'verified-data');
-    setupSearch('legacy-search', '#legacy-table', 'legacy-data');
+    setupSearch('verified-search', '#verified-table', 'verified-data', 'verified-mobile-cards');
+    setupSearch('legacy-search', '#legacy-table', 'legacy-data', 'legacy-mobile-cards');
     setupSorting('#verified-table', 'verified-data');
     setupSorting('#legacy-table', 'legacy-data');
     setupSpeciesFilters();

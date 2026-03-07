@@ -1,8 +1,9 @@
 /* ═══════════════════════════════════════════════
-   MAP CONTAINER
+   MAP CONTAINER – responsive, modern
    ═══════════════════════════════════════════════ */
 #map {
   height: 600px;
+  min-height: 320px;
   border-radius: 16px;
   box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.08),
@@ -11,16 +12,30 @@
   z-index: 10;
   overflow: hidden;
   border: 1px solid rgba(0, 71, 52, 0.08);
+  /* Smooth touch interactions on mobile */
+  touch-action: pan-x pan-y pinch-zoom;
+  -webkit-tap-highlight-color: transparent;
 }
 
+/* Mobile: viewport-based height, generous for usability */
 @media (max-width: 640px) {
-  #map { height: 280px; border-radius: 12px; }
+  #map {
+    height: min(60vh, 380px);
+    min-height: 300px;
+    border-radius: 12px;
+  }
 }
 @media (min-width: 641px) and (max-width: 768px) {
-  #map { height: 340px; }
+  #map {
+    height: min(45vh, 380px);
+    min-height: 340px;
+  }
 }
 @media (min-width: 769px) and (max-width: 1024px) {
-  #map { height: 420px; }
+  #map {
+    height: min(50vh, 480px);
+    min-height: 420px;
+  }
 }
 
 
@@ -55,10 +70,25 @@
   background: rgba(0, 71, 52, 0.08) !important;
   color: #004734 !important;
 }
+.leaflet-control-zoom a:active {
+  background: rgba(0, 71, 52, 0.12) !important;
+}
 .leaflet-control-zoom a + a {
   border-top: 1px solid rgba(0,0,0,0.06) !important;
 }
 
+/* Mobile: 44px touch targets (Apple HIG minimum) */
+@media (max-width: 640px) {
+  .leaflet-control-zoom {
+    border-radius: 14px !important;
+  }
+  .leaflet-control-zoom a {
+    width: 44px !important;
+    height: 44px !important;
+    line-height: 44px !important;
+    font-size: 18px !important;
+  }
+}
 
 /* ═══════════════════════════════════════════════
    LAYER CONTROL  –  map / satellite toggle
@@ -79,6 +109,18 @@
   width: 38px !important;
   height: 38px !important;
   background-size: 22px 22px !important;
+}
+
+/* Mobile: 44px touch target for layer toggle */
+@media (max-width: 640px) {
+  .leaflet-control-layers {
+    border-radius: 14px !important;
+  }
+  .leaflet-control-layers-toggle {
+    width: 44px !important;
+    height: 44px !important;
+    background-size: 24px 24px !important;
+  }
 }
 
 .leaflet-control-layers-expanded {
@@ -488,7 +530,7 @@
   }
   .popup-title {
     font-size: 0.8125rem;
-    padding-right: 20px;
+    padding-right: 48px;
   }
   .popup-header { padding: 10px 12px 0; }
   .popup-body { padding: 0 12px; }
@@ -500,13 +542,58 @@
   .popup-subtitle { font-size: 0.6875rem; }
   .popup-meta { gap: 6px; margin-bottom: 6px; }
 
+  /* 44px touch target for close (Apple HIG minimum) */
   .leaflet-popup-close-button {
-    top: 8px !important;
-    right: 8px !important;
-    width: 22px !important;
-    height: 22px !important;
-    font: 12px/22px 'Poppins', sans-serif !important;
+    top: 4px !important;
+    right: 4px !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    font: 18px/44px 'Poppins', sans-serif !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
+}
+
+
+/* ═══════════════════════════════════════════════
+   MAP LEGEND  –  mobile horizontal scroll
+   ═══════════════════════════════════════════════ */
+.map-legend {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+.map-legend::-webkit-scrollbar {
+  height: 4px;
+}
+.map-legend::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 2px;
+}
+.map-legend::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+
+/* ═══════════════════════════════════════════════
+   MAP LEGEND  –  mobile horizontal scroll
+   ═══════════════════════════════════════════════ */
+.map-legend {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+.map-legend::-webkit-scrollbar {
+  height: 4px;
+}
+.map-legend::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 2px;
+}
+.map-legend::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 2px;
 }
 
 

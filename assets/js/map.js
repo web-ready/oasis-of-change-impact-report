@@ -708,7 +708,8 @@ function initializeMap() {
     attributionControl: true
   }).setView([11, 16], 2);
 
-  const streetLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+  /* CARTO Voyager Labels Under – modern, labels beneath features */
+  const streetLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 20
@@ -727,10 +728,12 @@ function initializeMap() {
     { position: 'topright', collapsed: true }
   ).addTo(map);
 
-  window.addEventListener('resize', () => {
-    setTimeout(() => {
-      map.invalidateSize();
-    }, 100);
+  function refreshMapSize() {
+    map.invalidateSize();
+  }
+  window.addEventListener('resize', refreshMapSize);
+  window.addEventListener('orientationchange', () => {
+    setTimeout(refreshMapSize, 150);
   });
 
   const singleClusterGroup = createSingleClusterGroupWithPriority();
