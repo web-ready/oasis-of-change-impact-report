@@ -1,36 +1,195 @@
 /**
  * Oasis of Change — Footer
- * Tagline + copyright (and optional notes)
+ * Redesigned: two-column layout, cleaner hierarchy, integrated main-site link
  */
 
 .ooc-footer__inner {
     position: relative;
+    background: linear-gradient(180deg, #004734 0%, #003528 100%);
 }
 
-/* Tagline and copyright block */
+.ooc-footer__grid {
+    display: grid;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .ooc-footer__grid {
+        grid-template-columns: 1fr minmax(260px, 340px);
+        align-items: start;
+        gap: 3rem;
+    }
+}
+
+/* Notes section */
+.ooc-footer__notes-heading {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 0.75rem 0;
+}
+
+.ooc-footer__notes-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.ooc-footer__notes-list > li {
+    margin-bottom: 0.625rem;
+}
+
+.ooc-footer__notes-list sup {
+    font-size: 0.75em;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    margin-right: 0.2em;
+}
+
+.ooc-footer__notes-list a {
+    color: rgba(255, 255, 255, 0.95);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+}
+
+.ooc-footer__notes-list a:hover {
+    color: #fff;
+}
+
+/* Two-column notes when 4+ items */
+@media (min-width: 640px) {
+    .ooc-footer__notes-list.ooc-footer__notes-list--multi {
+        column-count: 2;
+        column-gap: 2rem;
+    }
+    .ooc-footer__notes-list.ooc-footer__notes-list--multi > li {
+        break-inside: avoid;
+    }
+}
+
+/* Brand block — right column on desktop */
 .ooc-footer__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    padding-top: 0.5rem;
+    padding: 1.5rem 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+@media (min-width: 1024px) {
+    .ooc-footer__brand {
+        padding: 0;
+        border-top: none;
+        align-items: flex-end;
+        text-align: right;
+    }
 }
 
 .ooc-footer__tagline {
-    font-size: 0.9375rem;
+    font-size: 1rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.95);
     letter-spacing: 0.02em;
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 1rem 0;
+}
+
+.ooc-footer__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+@media (min-width: 1024px) {
+    .ooc-footer__meta {
+        justify-content: flex-end;
+    }
 }
 
 .ooc-footer__copyright {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.7);
     margin: 0;
 }
 
-.ooc-footer .bg-brand-green > .max-w-6xl > .ooc-footer__brand {
-    margin-top: 0;
+.ooc-footer__main-site {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.ooc-footer__main-site a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 500;
+    font-size: 0.8125rem;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.ooc-footer__main-site a:hover {
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+}
+
+.ooc-footer__main-site-arrow {
+    font-size: 0.9em;
+    opacity: 0.85;
+}
+
+/* Carbon badge — tame the bright green to fit footer */
+.ooc-footer__carbon {
+    margin-top: 1rem;
+}
+
+.ooc-footer__carbon a,
+.ooc-footer__carbon .wcb-d {
+    opacity: 0.9;
+}
+
+.ooc-footer__carbon a:hover {
+    opacity: 1;
+}
+
+/* Pages without notes — centered brand only */
+.ooc-footer__simple {
+    display: flex;
+    justify-content: center;
+}
+
+.ooc-footer__simple .ooc-footer__brand {
+    padding: 0;
+    border-top: none;
+    align-items: center;
+}
+
+.ooc-footer__simple .ooc-footer__meta {
+    justify-content: center;
 }
 
 .ooc-footer [id^="footnote-"] {
+    scroll-margin-top: 5rem;
+}
+
+/* Footnote target highlight */
+#page-footer .bg-brand-green [id^="footnote-"]:target,
+#page-footer .ooc-footer__inner [id^="footnote-"]:target {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-left: 3px solid rgba(255, 255, 255, 0.5);
+    border-radius: 0 0.25rem 0.25rem 0;
+    padding-left: 0.5rem;
     scroll-margin-top: 5rem;
 }

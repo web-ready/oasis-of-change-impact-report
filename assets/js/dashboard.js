@@ -41,10 +41,6 @@ function updateUI() {
 
     setText('verified-count', verified.toLocaleString());
     setText('legacy-count', legacy.toLocaleString());
-    setText('footnote-oasis-trees', safeCall(function() { return TreeData.getOasisFundedTrees(); }, 0).toLocaleString());
-    setText('footnote-historical-trees', safeCall(function() { return TreeData.getHistoricalTrees(); }, 0).toLocaleString());
-    setText('footnote-seeds-trees', safeCall(function() { return TreeData.getSeedsTrees(); }, 0).toLocaleString());
-    setText('footnote-partner-trees', safeCall(function() { return TreeData.getPartnerTrees(); }, 0).toLocaleString());
     setText('species-count', safeCall(function() { return TreeData.getSpeciesCount(); }, 0));
     const sites = safeCall(function() { return TreeData.getMapSites(); }, []);
     const countries = [...new Set(sites.map(function(s) { return s.country; }))];
@@ -441,7 +437,6 @@ function loadLiveTreeCountsFromAPI() {
 
             setText('verified-count', verifiedTotal.toLocaleString());
             setText('total-count', totalTotal.toLocaleString());
-            setText('footnote-partner-trees', partnerTreesTotal.toLocaleString());
             populatePartnerSection(mergedPartners);
         })
         .catch(function(err) {

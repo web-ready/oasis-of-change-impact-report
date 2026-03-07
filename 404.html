@@ -138,10 +138,18 @@
 
     <footer id="page-footer" class="ooc-footer mt-12">
         <div class="ooc-footer__inner bg-brand-green text-white">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-                <div class="ooc-footer__brand">
-                    <p class="ooc-footer__tagline">Planting trees. Building futures.</p>
-                    <p class="ooc-footer__copyright">&copy; <span id="copyright-year"></span> Oasis of Change, Inc.</p>
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+                <div class="ooc-footer__simple">
+                    <div class="ooc-footer__brand">
+                        <p class="ooc-footer__tagline">Planting trees. Building futures.</p>
+                        <div class="ooc-footer__meta">
+                            <span class="ooc-footer__copyright">&copy; <span id="copyright-year"></span> Oasis of Change, Inc.</span>
+                            <span class="ooc-footer__main-site">
+                                <a href="https://oasisofchange.com" target="_blank" rel="noopener">oasisofchange.com <span class="ooc-footer__main-site-arrow" aria-hidden="true">→</span></a>
+                            </span>
+                        </div>
+                        <div class="ooc-footer__carbon" data-widget-type="tree-counter" data-tree-nation-code="f795cc969c4994f5" data-lang="en" data-theme="dark"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -172,6 +180,7 @@
             });
         })();
     </script>
+    <script src="https://widgets.tree-nation.com/js/widgets/v3/widgets.min.js"></script>
     <script>document.getElementById('copyright-year').textContent=new Date().getFullYear();</script>
 </body>
 </html>
