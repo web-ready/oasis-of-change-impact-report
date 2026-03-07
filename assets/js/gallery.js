@@ -1,6 +1,6 @@
 const GalleryData = {
 
-    basePath: "assets/images/planting_sites/2025-2026-fy/",
+    basePath: "assets/images/planting-sites/2025-2026-fy/",
 
     items: [
         {
