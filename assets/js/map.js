@@ -656,7 +656,7 @@ function createClusterGroupForType(type) {
 }
 
 // Single cluster group — uses "mixed" style when markers of different types are grouped together
-const CLUSTER_TYPE_PRIORITY = { 'confirmed': 5, 'mixed': 4, 'completed': 3, 'sunset': 2, 'supported': 1 };
+const CLUSTER_TYPE_PRIORITY = { 'confirmed': 5, 'mixed': 4, 'completed': 3, 'supported': 2 };
 
 function createSingleClusterGroupWithPriority() {
   return L.markerClusterGroup({
@@ -745,8 +745,8 @@ function initializeMap() {
     const mapSites = TreeData.getMapSites();
     
     // Sort markers so confirmed markers are added last (appear on top when overlapping)
-    // Priority order: supported < sunset < mixed < confirmed
-    const typePriority = { 'supported': 1, 'sunset': 2, 'mixed': 3, 'confirmed': 4 };
+    // Priority order: supported < completed < mixed < confirmed
+    const typePriority = { 'supported': 1, 'completed': 2, 'mixed': 3, 'confirmed': 4 };
     mapSites.sort((a, b) => {
       const priorityA = typePriority[a.type] || 0;
       const priorityB = typePriority[b.type] || 0;
@@ -773,7 +773,7 @@ function initializeMap() {
     mapSites.forEach(site => {
       let markerColor, markerLabel, isCompleted;
       // Check if site is completed (has noteLink indicating completion)
-      isCompleted = !!site.noteLink || site.type === 'sunset' || site.type === 'completed';
+      isCompleted = !!site.noteLink || site.type === 'completed';
       
       if (isCompleted) {
         markerColor = '#2563EB';
@@ -825,13 +825,13 @@ function initializeMap() {
       }
 
       // Determine primary and secondary badges
-      const isCompletedSite = !!site.noteLink || site.type === 'sunset' || site.type === 'completed';
+      const isCompletedSite = !!site.noteLink || site.type === 'completed';
       let primaryBadge, secondaryBadge;
       
       if (isCompletedSite) {
-        primaryBadge = '<span class="popup-badge popup-badge-sunset">Completed</span>';
+        primaryBadge = '<span class="popup-badge popup-badge-completed">Completed</span>';
         // Show type badge as secondary only if it's different from completed
-        if (site.type !== 'sunset' && site.type !== 'completed') {
+        if (site.type !== 'completed') {
           const typeLabel = site.type === 'confirmed' ? 'Verified' : site.type === 'mixed' ? 'Mixed' : 'Supported';
           const typeClass = site.type === 'confirmed' ? 'popup-badge-confirmed' : site.type === 'mixed' ? 'popup-badge-mixed' : 'popup-badge-supported';
           secondaryBadge = `<span class="popup-badge ${typeClass}">${typeLabel}</span>`;
@@ -866,7 +866,7 @@ function initializeMap() {
 
       marker.bindPopup(popupHTML, getPopupOptions());
       // Use completed type for clustering if applicable
-      const clusterType = isCompleted ? 'sunset' : site.type;
+      const clusterType = isCompleted ? 'completed' : site.type;
       addMarkerToGroup(marker, clusterType);
     });
   } else {
@@ -875,10 +875,10 @@ function initializeMap() {
 
       let markerColor, markerLabel, isCompleted;
       // Check if this country/region has completed sites
-      isCompleted = cfg.type === 'completed' || cfg.type === 'sunset' || 
+      isCompleted = cfg.type === 'completed' || 
                     (cfg.sites && cfg.sites.some(s => {
                       const siteType = typeof s === 'string' ? cfg.type : s.type;
-                      return siteType === 'completed' || siteType === 'sunset';
+                      return siteType === 'completed';
                     }));
       
       if (isCompleted) {
@@ -917,8 +917,8 @@ function initializeMap() {
           <div class="popup-divider"></div>
           <div class="popup-body">
             <div class="popup-meta">
-              ${isCompleted ? `<span class="popup-badge popup-badge-sunset">Completed</span>` : ''}
-              ${isCompleted && cfg.type !== 'completed' && cfg.type !== 'sunset' ? `<span class="popup-badge popup-badge-${cfg.type}">${cfg.type === 'confirmed' ? 'Verified' : cfg.type === 'mixed' ? 'Mixed' : 'Supported'}</span>` : !isCompleted ? `<span class="popup-badge popup-badge-${cfg.type}">${markerLabel}</span>` : ''}
+              ${isCompleted ? `<span class="popup-badge popup-badge-completed">Completed</span>` : ''}
+              ${isCompleted && cfg.type !== 'completed' ? `<span class="popup-badge popup-badge-${cfg.type}">${cfg.type === 'confirmed' ? 'Verified' : cfg.type === 'mixed' ? 'Mixed' : 'Supported'}</span>` : !isCompleted ? `<span class="popup-badge popup-badge-${cfg.type}">${markerLabel}</span>` : ''}
               <span class="popup-source">${cfg.source || 'Mixed Sources'}</span>
             </div>
             ${siteNames.length > 0 ? '<div class="popup-sites"><strong>Sites:</strong> ' + siteNames.join(', ') + (moreCount > 0 ? ' + ' + moreCount + ' more' : '') + '</div>' : ''}
@@ -929,7 +929,7 @@ function initializeMap() {
 
       marker.bindPopup(popupHTML, getPopupOptions());
       // Use completed type for clustering if applicable
-      const clusterType = isCompleted ? 'sunset' : cfg.type;
+      const clusterType = isCompleted ? 'completed' : cfg.type;
       addMarkerToGroup(marker, clusterType);
     });
   }
@@ -1040,7 +1040,7 @@ function renderSiteLists() {
         statusColor = 'bg-emerald-600';
         statusBg = 'bg-emerald-50';
         statusText = 'text-emerald-700';
-      } else if (group.type === 'sunset') {
+      } else if (group.type === 'completed') {
         statusColor = 'bg-info';
         statusBg = 'bg-blue-50';
         statusText = 'text-blue-800';
@@ -1050,7 +1050,7 @@ function renderSiteLists() {
         statusText = 'text-yellow-700';
       }
 
-      const typeLabel = group.type === 'confirmed' ? 'Verified' : group.type === 'completed' ? 'Completed' : group.type === 'mixed' ? 'Mixed' : group.type === 'sunset' ? 'Completed' : 'Supported';
+      const typeLabel = group.type === 'confirmed' ? 'Verified' : group.type === 'completed' ? 'Completed' : group.type === 'mixed' ? 'Mixed' : 'Supported';
 
       const summary = document.createElement('summary');
       summary.className = 'cursor-pointer px-4 sm:px-6 py-3 sm:py-4 font-medium grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-2 sm:gap-4 items-center text-deep-forest hover:bg-gray-50 rounded-lg sm:rounded-xl transition-colors duration-200 list-none';
@@ -1093,7 +1093,7 @@ function renderSiteLists() {
             siteColor = 'bg-brand-green';
             siteType = '<span class="text-xs text-white bg-info px-1.5 py-0.5 rounded-full">Completed</span>';
             siteExtraTag = '<span class="text-xs text-white bg-brand-green px-1.5 py-0.5 rounded-full ml-1 flex-shrink-0">Verified</span>';
-          } else if (sType === 'sunset') {
+          } else if (sType === 'completed') {
             siteColor = 'bg-info';
             siteType = '<span class="text-xs text-white bg-info px-1.5 py-0.5 rounded-full">Completed</span>';
           } else {
