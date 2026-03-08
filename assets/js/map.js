@@ -256,12 +256,12 @@ const plantingData = {
     ]
   },
   UG: { 
-    centroid: [1.37, 32.29], 
+    centroid: [1.049753, 34.216042],
     type: 'confirmed', 
     source: 'Tree-Nation',
     sites: [
-      { name: 'Preservation of Mt. Elgon Ecosystem', type: 'confirmed', source: 'Tree-Nation' },
-      { name: 'Forest Gardens - Mount Elgon Region', type: 'confirmed', source: 'Tree-Nation' }
+      { name: 'Forest Gardens - Mount Elgon Region', type: 'confirmed', source: 'Tree-Nation', lat: 0.826785, lng: 34.38345 },
+      { name: 'Preservation of Mt. Elgon Ecosystem', type: 'confirmed', source: 'Tree-Nation', lat: 1.272721, lng: 34.048634 }
     ]
   },
   US_MT: { 
