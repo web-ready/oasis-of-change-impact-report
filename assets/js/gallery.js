@@ -671,7 +671,6 @@ const GalleryData = {
         var treesEl = document.getElementById("modal-trees");
         var co2El = document.getElementById("modal-co2");
         var fyEl = document.getElementById("modal-fy");
-        var linkEl = document.getElementById("modal-project-link");
 
         speciesEl.closest(".modal-detail-row").style.display = item.species ? "flex" : "none";
         speciesEl.textContent = item.species || "";
@@ -683,13 +682,6 @@ const GalleryData = {
         co2El.textContent = item.co2 || "";
 
         fyEl.textContent = item.fy || "";
-
-        if (item.projectUrl) {
-            linkEl.href = item.projectUrl;
-            linkEl.style.display = "inline-flex";
-        } else {
-            linkEl.style.display = "none";
-        }
 
         var typeLabel = item.contentType === "team" ? "Team Photo" : "Planting Site";
         document.getElementById("modal-type-badge").textContent = typeLabel;
