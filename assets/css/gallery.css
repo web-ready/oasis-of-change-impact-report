@@ -307,7 +307,7 @@
 
 .story-quote__text {
     position: relative;
-    font-family: 'DM Serif Display', serif;
+    font-family: inherit;
     font-size: clamp(1.25rem, 3vw, 1.75rem);
     color: #ffffff;
     line-height: 1.55;
@@ -318,8 +318,31 @@
 .story-quote__attr {
     position: relative;
     font-size: 0.8rem;
-    color: rgba(255,255,255,0.45);
+    color: #ffffff;
     font-weight: 500;
+}
+
+.story-quote__attr--muted {
+    font-size: 0.75rem;
+    color: #ffffff;
+    margin-top: 0.5rem;
+}
+
+.story-quote__label {
+    position: relative;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.9);
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+}
+
+.story-quote--compact .story-quote__text {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+}
+.story-quote--compact {
+    padding: 2.5rem 2rem;
 }
 
 
