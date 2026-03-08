@@ -86,8 +86,6 @@ const plantingData = {
       { name: 'Bore', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Save the Aberdare Forest', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Swahili Coast Mangrove Restoration', type: 'confirmed', source: 'Tree-Nation', lat: -2.390773, lng: 40.782242 },
-      { name: 'Forest Gardens – Mount Elgon Region', type: 'confirmed', source: 'Tree-Nation', lat: 0.826785, lng: 34.38345 },
-      { name: 'Preservation of Mt. Elgon Ecosystem', type: 'confirmed', source: 'Tree-Nation', lat: 1.272721, lng: 34.048634 },
       { name: 'Kilifi', type: 'supported', source: 'Legacy Partner (Tero)' },
       { name: 'Kiongwe', type: 'supported', source: 'Legacy Partner (Tero)' },
       { name: 'Kipini', type: 'supported', source: 'Legacy Partner (Tero)' },
@@ -296,6 +294,15 @@ const plantingData = {
     source: 'Tree-Nation',
     sites: [
       { name: 'Forest Garden Program', type: 'confirmed', source: 'Tree-Nation' }
+    ]
+  },
+  UG: { 
+    centroid: [1.272721, 34.048634], 
+    type: 'confirmed', 
+    source: 'Tree-Nation',
+    sites: [
+      { name: 'Forest Gardens – Mount Elgon Region', type: 'confirmed', source: 'Tree-Nation', lat: 0.826785, lng: 34.38345 },
+      { name: 'Preservation of Mt. Elgon Ecosystem', type: 'confirmed', source: 'Tree-Nation', lat: 1.272721, lng: 34.048634 }
     ]
   },
   CM: { 
