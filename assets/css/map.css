@@ -426,6 +426,36 @@
   margin: 0 0 2px;
   padding-right: 24px;
 }
+.popup-verified-icon {
+  display: block;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+.popup-footer-verified {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-brand-green, #004734);
+  font-weight: 600;
+  font-size: 0.625rem;
+  flex-wrap: wrap;
+}
+.popup-footer-verified .popup-verified-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.popup-verified-link {
+  color: var(--color-brand-green, #004734);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 500;
+}
+.popup-verified-link:hover {
+  text-decoration-thickness: 2px;
+}
 
 .popup-subtitle {
   font-size: 0.75rem;
@@ -604,6 +634,7 @@
     font-size: 0.8125rem;
     padding-right: 48px;
   }
+  .popup-footer-verified { font-size: 0.5625rem; }
   .popup-header { padding: 10px 12px 0; }
   .popup-body { padding: 0 12px; }
   .popup-footer { padding: 6px 12px 8px; font-size: 0.5625rem; }
