@@ -15,7 +15,8 @@ const TreeData = {
         verifiedTrees: 8696,    // Web-Ready (8,068) + Partners (628)
         legacyTrees:   7338,    // Tero 4,567 + Refoorest 2,771
         totalTrees:    16034,   // verified + legacy
-        goalTrees:     10000
+        goalTrees:     1000000, // 1 million trees by 2030
+        goalYear:      2030
     },
 
 
@@ -217,6 +218,8 @@ const TreeData = {
     getVerifiedTrees: function() { return this.totals.verifiedTrees; },
     getLegacyTrees:   function() { return this.totals.legacyTrees; },
     getWebReadyTrees: function() { return this.totals.webReadyTrees; },
+    getGoalTrees:     function() { return this.totals.goalTrees || 1000000; },
+    getGoalYear:      function() { return this.totals.goalYear || 2030; },
 
     getOasisFundedTrees: function() {
         return this.verifiedProjects.reduce(function(sum, p) {

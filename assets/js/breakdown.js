@@ -62,6 +62,7 @@
 
     function renderAll() {
         renderSummary();
+        renderGoalProgress();
         renderWebReady();
         renderPartners();
         renderLegacy();
@@ -72,6 +73,16 @@
         setText('bd-grand-total', state.grandTotal.toLocaleString());
         setText('bd-verified-total', state.verifiedTotal.toLocaleString());
         setText('bd-legacy-total', state.legacyTotal.toLocaleString());
+    }
+
+    function renderGoalProgress() {
+        var goal = (typeof TreeData !== 'undefined' && TreeData.getGoalTrees) ? TreeData.getGoalTrees() : 1000000;
+        var total = state.grandTotal;
+        var pct = Math.min(100, goal > 0 ? (total / goal) * 100 : 0);
+        setText('bd-goal-progress-pct', pct.toFixed(1) + '%');
+        var barEl = document.getElementById('bd-goal-progress-bar');
+        if (barEl) barEl.style.width = pct + '%';
+        setText('bd-goal-progress-text', total.toLocaleString() + ' / 1,000,000 trees');
     }
 
     function renderWebReady() {
