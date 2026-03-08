@@ -298,7 +298,7 @@ const plantingData = {
   },
   
   SN: { 
-    centroid: [14.50,-14.45], 
+    centroid: [14.190073, -16.096897], 
     type: 'confirmed', 
     source: 'Tree-Nation',
     sites: [
