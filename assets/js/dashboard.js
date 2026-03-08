@@ -241,31 +241,6 @@ function switchTab(tabName) {
     }
 }
 
-(function(){
-    const toggleBtn = document.getElementById('mobile-menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const closeBtn = document.getElementById('mobile-menu-close');
-    const backdrop = document.getElementById('mobile-menu-backdrop');
-    if (!toggleBtn || !mobileMenu) return;
-    if (toggleBtn.dataset.menuInit) return;
-    toggleBtn.dataset.menuInit = '1';
-    const open = () => {
-        mobileMenu.classList.add('menu-open');
-        document.documentElement.style.overflow = 'hidden';
-        document.body.style.overflow = 'hidden';
-        toggleBtn.setAttribute('aria-expanded', 'true');
-    };
-    const close = () => {
-        mobileMenu.classList.remove('menu-open');
-        document.documentElement.style.overflow = '';
-        document.body.style.overflow = '';
-        toggleBtn.setAttribute('aria-expanded', 'false');
-    };
-    toggleBtn.addEventListener('click', open);
-    if (closeBtn) closeBtn.addEventListener('click', close);
-    if (backdrop) backdrop.addEventListener('click', close);
-})();
-
 function setupSearch(searchId, tableId, dataClass, mobileCardsId) {
     const input = document.getElementById(searchId);
     if (!input) return;

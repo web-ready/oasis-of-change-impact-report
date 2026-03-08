@@ -257,31 +257,7 @@
         </div>
     </footer>
 
-    <script>
-    (function(){
-        const toggleBtn = document.getElementById('mobile-menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const closeBtn = document.getElementById('mobile-menu-close');
-        const backdrop = document.getElementById('mobile-menu-backdrop');
-        if (!toggleBtn || !mobileMenu) return;
-        const open = () => { mobileMenu.classList.add('menu-open'); document.documentElement.style.overflow='hidden'; document.body.style.overflow='hidden'; toggleBtn.setAttribute('aria-expanded','true'); };
-        const close = () => { mobileMenu.classList.remove('menu-open'); document.documentElement.style.overflow=''; document.body.style.overflow=''; toggleBtn.setAttribute('aria-expanded','false'); };
-        toggleBtn.addEventListener('click', open);
-        if (closeBtn) closeBtn.addEventListener('click', close);
-        if (backdrop) backdrop.addEventListener('click', close);
-    })();
-    </script>
-    <script>
-        (function(){
-            var t = document.getElementById('mobile-impact-toggle');
-            var s = document.getElementById('mobile-impact-submenu');
-            if (!t || !s) return;
-            t.addEventListener('click', function(){
-                var open = s.classList.toggle('open');
-                t.setAttribute('aria-expanded', open);
-            });
-        })();
-    </script>
+    <script src="assets/js/nav.js"></script>
     <script src="https://widgets.tree-nation.com/js/widgets/v3/widgets.min.js"></script>
     <script>document.getElementById('copyright-year').textContent=new Date().getFullYear();</script>
 </body>
