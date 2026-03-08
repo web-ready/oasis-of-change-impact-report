@@ -35,11 +35,7 @@ var TreeNationAPI = (function () {
         'ecosearch':                    'ecosearch'
     };
 
-    var PROFILE_SLUGS = FORESTS.map(function (f) { return f.slug; });
-
     var API_BASE = 'https://tree-nation.com/api';
-    var RSS_BASE = 'https://tree-nation.com/rss/profile';
-
     var requestOptions = { method: 'GET', redirect: 'follow' };
 
     // ── Forest tree counts ─────────────────────────────
@@ -71,117 +67,16 @@ var TreeNationAPI = (function () {
         return Promise.all(promises).then(aggregate);
     }
 
-    function fetchPartnerForests() {
-        var partnerSlugs = Object.keys(PARTNER_SLUG_TO_ID);
-        var promises = partnerSlugs.map(function (slug) {
-            return fetchForestBySlug(slug)
-                .then(function (data) {
-                    return { slug: slug, trees: data.count || 0 };
-                })
-                .catch(function (err) {
-                    console.warn('[TreeNationAPI] Partner ' + slug + ':', err.message);
-                    return { slug: slug, trees: 0, error: err.message };
-                });
-        });
-        return Promise.all(promises);
-    }
-
     function aggregate(results) {
         var totalTrees = 0;
         results.forEach(function (r) { totalTrees += r.trees; });
         return { forests: results, totalTrees: totalTrees };
     }
 
-    // ── RSS updates ────────────────────────────────────
-
-    function fetchRSSUpdates(slug) {
-        return fetch(RSS_BASE + '/' + slug + '/updates', requestOptions)
-            .then(function (response) {
-                if (!response.ok) throw new Error('RSS ' + slug + ': HTTP ' + response.status);
-                return response.text();
-            })
-            .then(parseRSS);
-    }
-
-    function parseRSS(xml) {
-        var parser  = new DOMParser();
-        var doc     = parser.parseFromString(xml, 'application/xml');
-        var items   = doc.querySelectorAll('item');
-        var updates = [];
-
-        items.forEach(function (item) {
-            var get = function (tag) {
-                var el = item.querySelector(tag);
-                return el ? el.textContent : '';
-            };
-            var enclosure = item.querySelector('enclosure');
-
-            updates.push({
-                title:       get('title'),
-                description: get('description'),
-                link:        get('link'),
-                pubDate:     get('pubDate'),
-                imageUrl:    enclosure ? enclosure.getAttribute('url') : null
-            });
-        });
-
-        return updates;
-    }
-
-    function fetchAllUpdates() {
-        var promises = PROFILE_SLUGS.map(function (slug) {
-            return fetchRSSUpdates(slug)
-                .then(function (updates) {
-                    return { slug: slug, updates: updates };
-                })
-                .catch(function (err) {
-                    console.warn('[TreeNationAPI] RSS', slug, err.message);
-                    return { slug: slug, updates: [], error: err.message };
-                });
-        });
-
-        return Promise.all(promises);
-    }
-
-    // ── Combined runner ────────────────────────────────
-
-    function run() {
-        return Promise.all([fetchAllForests(), fetchAllUpdates()])
-            .then(function (results) {
-                var forestData  = results[0];
-                var updatesData = results[1];
-
-                console.group('[TreeNationAPI] Aggregated Forest Data');
-                console.table(forestData.forests);
-                console.log('Total trees:', forestData.totalTrees);
-                console.groupEnd();
-
-                console.group('[TreeNationAPI] Latest Project Updates');
-                updatesData.forEach(function (profile) {
-                    if (profile.updates.length) {
-                        console.log(profile.slug + ' — ' + profile.updates.length + ' update(s)');
-                        profile.updates.slice(0, 3).forEach(function (u) {
-                            console.log('  •', u.title, '(' + u.pubDate + ')');
-                        });
-                    }
-                });
-                console.groupEnd();
-
-                return { forests: forestData, updates: updatesData };
-            });
-    }
-
-    // ── Public interface ───────────────────────────────
-
     return {
         FORESTS:            FORESTS,
-        PROFILE_SLUGS:      PROFILE_SLUGS,
         PARTNER_SLUG_TO_ID: PARTNER_SLUG_TO_ID,
         fetchForestBySlug:  fetchForestBySlug,
-        fetchAllForests:    fetchAllForests,
-        fetchPartnerForests: fetchPartnerForests,
-        fetchRSSUpdates:    fetchRSSUpdates,
-        fetchAllUpdates:    fetchAllUpdates,
-        run:                run
+        fetchAllForests:    fetchAllForests
     };
 })();

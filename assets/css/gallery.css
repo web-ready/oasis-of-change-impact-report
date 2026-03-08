@@ -283,69 +283,6 @@
 }
 
 
-/* ── Storytelling Quote ── */
-
-.story-quote {
-    position: relative;
-    padding: 4rem 2rem;
-    text-align: center;
-    background: linear-gradient(135deg, #003326 0%, #004734 50%, #005a42 100%);
-    border-radius: 1.5rem;
-    overflow: hidden;
-    margin: 3rem 0;
-}
-
-.story-quote__pattern {
-    position: absolute;
-    inset: 0;
-    opacity: 0.04;
-    background-image:
-        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.2) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.15) 0%, transparent 50%);
-    pointer-events: none;
-}
-
-.story-quote__text {
-    position: relative;
-    font-family: inherit;
-    font-size: clamp(1.25rem, 3vw, 1.75rem);
-    color: #ffffff;
-    line-height: 1.55;
-    max-width: 680px;
-    margin: 0 auto 1rem;
-}
-
-.story-quote__attr {
-    position: relative;
-    font-size: 0.8rem;
-    color: #ffffff;
-    font-weight: 500;
-}
-
-.story-quote__attr--muted {
-    font-size: 0.75rem;
-    color: #ffffff;
-    margin-top: 0.5rem;
-}
-
-.story-quote__label {
-    position: relative;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: rgba(255,255,255,0.9);
-    text-transform: uppercase;
-    margin-bottom: 1.25rem;
-}
-
-.story-quote--compact .story-quote__text {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-}
-.story-quote--compact {
-    padding: 2.5rem 2rem;
-}
-
-
 /* ── Filter Bar ── */
 
 .gallery-filters {
@@ -884,26 +821,6 @@
     color: #059669;
 }
 
-.modal-project-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.65rem 1.25rem;
-    background: #004734;
-    color: #ffffff;
-    border-radius: 0.75rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    margin-top: auto;
-}
-
-.modal-project-link:hover {
-    background: #006B50;
-    transform: translateY(-1px);
-}
-
 .modal-nav-btn {
     position: absolute;
     top: 50%;
@@ -996,15 +913,6 @@
     .modal-detail-row {
         padding: 0.625rem 0.75rem;
         font-size: 0.82rem;
-    }
-
-    .modal-project-link {
-        padding: 0.8rem 1.5rem;
-        font-size: 0.88rem;
-        text-align: center;
-        justify-content: center;
-        width: 100%;
-        border-radius: 1rem;
     }
 }
 
@@ -1127,12 +1035,6 @@
         font-size: 1.35rem;
     }
 
-    .story-quote {
-        padding: 3rem 1.5rem;
-        margin: 2rem -0.5rem;
-        border-radius: 1rem;
-    }
-
     .section-header {
         flex-direction: column;
         gap: 0.25rem;
@@ -1163,46 +1065,6 @@
     .card-body {
         padding: 0.875rem 1rem;
     }
-}
-
-
-/* ── Why This Matters callout ── */
-
-.why-matters {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1.5rem;
-    background: linear-gradient(135deg, rgba(0,71,52,0.03) 0%, rgba(0,71,52,0.06) 100%);
-    border: 1px solid rgba(0,71,52,0.08);
-    border-radius: 1rem;
-    margin: 2rem 0;
-}
-
-.why-matters__icon {
-    flex-shrink: 0;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 0.75rem;
-    background: #004734;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.why-matters__title {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #004734;
-    margin: 0 0 0.25rem;
-}
-
-.why-matters__text {
-    font-size: 0.82rem;
-    color: #475569;
-    line-height: 1.6;
-    margin: 0;
 }
 
 
@@ -1250,8 +1112,7 @@
 }
 
 .modal-close:focus-visible,
-.modal-nav-btn:focus-visible,
-.modal-project-link:focus-visible {
+.modal-nav-btn:focus-visible {
     outline: 3px solid rgba(0, 71, 52, 0.5);
     outline-offset: 2px;
 }
