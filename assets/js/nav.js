@@ -24,6 +24,12 @@
     toggleBtn.addEventListener('click', open);
     if (closeBtn) closeBtn.addEventListener('click', close);
     if (backdrop) backdrop.addEventListener('click', close);
+
+    // Close menu when any nav link is clicked (removes friction for anchor links like Map)
+    mobileMenu.addEventListener('click', function (e) {
+      var link = e.target.closest('a[href]');
+      if (link) close();
+    });
   }
 
   function setupSubmenu(toggleId, submenuId) {
