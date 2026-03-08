@@ -15,7 +15,10 @@
     };
 
     function init() {
-        if (typeof TreeData === 'undefined') return;
+        if (typeof TreeData === 'undefined') {
+            console.error('[Oasis Breakdown] TreeData not loaded');
+            return;
+        }
 
         state.webReadyTrees = typeof TreeData.getWebReadyTrees === 'function'
             ? TreeData.getWebReadyTrees()
@@ -47,10 +50,9 @@
 
         recalculate();
         renderAll();
-
         setText('bd-last-updated', TreeData.lastUpdated);
-
         fetchLiveData();
+        if (typeof console !== 'undefined' && console.log) console.log('[Oasis Breakdown] Ready, total:', state.grandTotal);
     }
 
     function recalculate() {
@@ -201,8 +203,6 @@
         setText('eq-grand-total', state.grandTotal.toLocaleString());
     }
 
-    // ── Live API fetch (tree counts only, CO₂ stays from certificates) ──
-
     function fetchLiveData() {
         if (typeof TreeNationAPI === 'undefined') {
             setApiStatus('fallback');
@@ -236,7 +236,7 @@
                 setApiStatus('live');
             })
             .catch(function (err) {
-                console.warn('[Breakdown] API unavailable:', err.message || err);
+                console.warn('[Oasis Breakdown] API unavailable — using cached TreeData:', err.message || err);
                 setApiStatus('fallback');
             });
     }
@@ -286,7 +286,7 @@
     // ── Boot ────────────────────────────────────────────
 
     function boot() {
-        try { init(); } catch (e) { console.error('[Breakdown] init failed:', e); }
+        try { init(); } catch (e) { console.error('[Oasis Breakdown] init failed:', e); }
     }
 
     if (document.readyState === 'loading') {

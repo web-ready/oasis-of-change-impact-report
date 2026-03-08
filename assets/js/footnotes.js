@@ -1,7 +1,4 @@
-/**
- * Footnote highlight behaviour: clear URL hash after a short time or on scroll/click
- * so the :target highlight does not persist when the user moves on.
- */
+/* Footnote: clear #footnote-N hash after 2.5s or on scroll/click */
 (function () {
     if (!document.querySelector('[id^="footnote-"]')) return;
 

@@ -1,20 +1,5 @@
-/**
- * Tree-Nation API – Fetch & Aggregate Live Tree Counts
- *
- * Public endpoint (no API key required):
- *   GET /api/forests/{slug}/tree_counter  → { count }
- *
- * CO₂ is NOT fetched from the API — it comes from verified
- * certificates in TreeData and is updated manually each fiscal year.
- *
- * CORS note: Tree-Nation does not set Access-Control-Allow-Origin on
- * these endpoints, so browser fetch() calls from a different origin
- * will be blocked.  Workarounds:
- *   1. Use a lightweight serverless proxy (Cloudflare Worker, Netlify
- *      Function, etc.).
- *   2. Run during build/CI with Node.js instead of client-side.
- */
-
+/* Tree-Nation API: GET /api/forests/{slug}/tree_counter → { count }
+   CO₂ comes from TreeData (certificates), not API. CORS blocks cross-origin fetch — use proxy or build-time fetch. */
 var TreeNationAPI = (function () {
     'use strict';
 
@@ -59,7 +44,7 @@ var TreeNationAPI = (function () {
                     };
                 })
                 .catch(function (err) {
-                    console.warn('[TreeNationAPI]', err.message);
+                    console.warn('[TreeNationAPI]', forest.slug, err.message);
                     return { slug: forest.slug, label: forest.label, trees: 0, error: err.message };
                 });
         });

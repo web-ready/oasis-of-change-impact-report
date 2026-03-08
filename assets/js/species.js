@@ -1,14 +1,14 @@
 function initializeSpeciesData() {
-    if (typeof TreeData !== 'undefined') {
-        const speciesData = TreeData.getSpeciesData();
-        
-        const speciesCountElement = document.getElementById('species-count-display');
-        if (speciesCountElement) {
-            speciesCountElement.textContent = `${speciesData.totalSpecies} Species Combinations`;
-        }
-        
-        console.log('Species data loaded:', speciesData);
+    if (typeof TreeData === 'undefined') {
+        console.warn('[Oasis Species] TreeData not loaded');
+        return;
     }
+    const speciesData = TreeData.getSpeciesData();
+    const speciesCountElement = document.getElementById('species-count-display');
+    if (speciesCountElement) {
+        speciesCountElement.textContent = `${speciesData.totalSpecies} Species Combinations`;
+    }
+    if (typeof console !== 'undefined' && console.log) console.log('[Oasis Species] Ready, totalSpecies:', speciesData.totalSpecies);
 }
 
 document.addEventListener('DOMContentLoaded', function() {

@@ -672,7 +672,7 @@ function createClusterGroupForType(type) {
   });
 }
 
-// Single cluster group — uses "mixed" style when markers of different types are grouped together
+// Cluster: mixed style when markers of different types grouped
 const CLUSTER_TYPE_PRIORITY = { 'confirmed': 5, 'mixed': 4, 'completed': 3, 'supported': 2 };
 
 function createSingleClusterGroupWithPriority() {
@@ -684,12 +684,10 @@ function createSingleClusterGroupWithPriority() {
     iconCreateFunction: function(cluster) {
       const count = cluster.getChildCount();
       const size = count < 10 ? 'small' : count < 100 ? 'medium' : 'large';
-      // Collect distinct marker types in this cluster
       const types = new Set();
       cluster.getAllChildMarkers().forEach(function(m) {
         types.add((m.options && m.options.markerType) || 'supported');
       });
-      // If all markers share the same type, use that type; otherwise use neutral style
       let clusterType;
       if (types.size === 1) {
         clusterType = types.values().next().value;
@@ -718,7 +716,6 @@ function getPopupOptions() {
   };
 }
 
-/* Verified coordinates icon – 2x2 grid with checkmark */
 function getVerifiedCoordsIcon() {
   return '<img src="assets/images/verified-map-icon.png" alt="" class="popup-verified-icon" width="20" height="20" aria-hidden="true">';
 }
@@ -730,7 +727,6 @@ function initializeMap() {
     attributionControl: true
   }).setView([11, 16], 2);
 
-  /* CARTO Voyager Labels Under – modern, labels beneath features */
   const streetLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: 'abcd',
@@ -750,7 +746,6 @@ function initializeMap() {
     { position: 'topright', collapsed: true }
   ).addTo(map);
 
-  /* Fullscreen control – best accessibility/usability on mobile */
   const mapContainer = document.getElementById('map-container');
   const FullscreenControl = L.Control.extend({
     onAdd: function() {
@@ -786,7 +781,7 @@ function initializeMap() {
   });
   map.addControl(new FullscreenControl({ position: 'topright' }));
 
-  /* Mobile: ensure zoom buttons receive touches – touchend fallback when click doesn't fire */
+  // Mobile: touchend fallback when click doesn't fire on zoom buttons
   if ('ontouchstart' in window) {
     setTimeout(function() {
       var zoomIn = document.querySelector('.leaflet-control-zoom-in');
@@ -823,13 +818,12 @@ function initializeMap() {
   if (typeof TreeData !== 'undefined') {
     const mapSites = TreeData.getMapSites();
     
-    // Sort markers so confirmed markers are added last (appear on top when overlapping)
-    // Priority order: supported < completed < mixed < confirmed
+    // Add confirmed last so they appear on top when overlapping
     const typePriority = { 'supported': 1, 'completed': 2, 'mixed': 3, 'confirmed': 4 };
     mapSites.sort((a, b) => {
       const priorityA = typePriority[a.type] || 0;
       const priorityB = typePriority[b.type] || 0;
-      return priorityA - priorityB; // Lower priority first, higher priority last
+      return priorityA - priorityB;
     });
 
     function parseSiteDescription(desc) {
@@ -851,7 +845,6 @@ function initializeMap() {
 
     mapSites.forEach(site => {
       let markerColor, markerLabel, isCompleted;
-      // Check if site is completed (has noteLink indicating completion)
       isCompleted = !!site.noteLink || site.type === 'completed';
       
       if (isCompleted) {
@@ -899,13 +892,11 @@ function initializeMap() {
         noteHtml = '<div class="popup-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>' + site.note + linkTag + '</span></div>';
       }
 
-      // Determine primary and secondary badges
       const isCompletedSite = !!site.noteLink || site.type === 'completed';
       let primaryBadge, secondaryBadge;
       
       if (isCompletedSite) {
         primaryBadge = '<span class="popup-badge popup-badge-completed">Completed</span>';
-        // Show type badge as secondary only if it's different from completed
         if (site.type !== 'completed') {
           const typeLabel = site.type === 'confirmed' ? 'Verified' : site.type === 'mixed' ? 'Mixed' : 'Supported';
           const typeClass = site.type === 'confirmed' ? 'popup-badge-confirmed' : site.type === 'mixed' ? 'popup-badge-mixed' : 'popup-badge-supported';
@@ -946,16 +937,15 @@ function initializeMap() {
       `;
 
       marker.bindPopup(popupHTML, getPopupOptions());
-      // Use completed type for clustering if applicable
       const clusterType = isCompleted ? 'completed' : site.type;
       addMarkerToGroup(marker, clusterType);
     });
+    if (typeof console !== 'undefined' && console.log) console.log('[Oasis Map] Loaded', mapSites.length, 'sites from TreeData');
   } else {
     Object.entries(plantingData).forEach(([cc, cfg]) => {
       const [lat, lng] = cfg.centroid;
 
       let markerColor, markerLabel, isCompleted;
-      // Check if this country/region has completed sites
       isCompleted = cfg.type === 'completed' || 
                     (cfg.sites && cfg.sites.some(s => {
                       const siteType = typeof s === 'string' ? cfg.type : s.type;
@@ -1014,10 +1004,10 @@ function initializeMap() {
       `;
 
       marker.bindPopup(popupHTML, getPopupOptions());
-      // Use completed type for clustering if applicable
       const clusterType = isCompleted ? 'completed' : cfg.type;
       addMarkerToGroup(marker, clusterType);
     });
+    if (typeof console !== 'undefined' && console.warn) console.warn('[Oasis Map] TreeData missing — using embedded plantingData fallback');
   }
 
   singleClusterGroup.addTo(map);

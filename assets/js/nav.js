@@ -1,7 +1,4 @@
-/**
- * Oasis of Change — Shared navigation
- * Mobile menu (hamburger) + Impact/Explore submenus
- */
+/* Nav: mobile menu + Impact/Explore submenus */
 (function () {
   var toggleBtn = document.getElementById('mobile-menu-toggle');
   var mobileMenu = document.getElementById('mobile-menu');
@@ -25,7 +22,7 @@
     if (closeBtn) closeBtn.addEventListener('click', close);
     if (backdrop) backdrop.addEventListener('click', close);
 
-    // Close menu when any nav link is clicked (removes friction for anchor links like Map)
+    // Close menu when nav link clicked (anchor links like #map)
     mobileMenu.addEventListener('click', function (e) {
       var link = e.target.closest('a[href]');
       if (link) close();
@@ -43,4 +40,5 @@
   }
   setupSubmenu('mobile-impact-toggle', 'mobile-impact-submenu');
   setupSubmenu('mobile-explore-toggle', 'mobile-explore-submenu');
+  if (typeof console !== 'undefined' && console.log) console.log('[Oasis Nav] Ready');
 })();

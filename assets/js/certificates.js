@@ -4,7 +4,7 @@ function certificatePath(filename) {
 
 function downloadCertificate(certificateId) {
     if (typeof TreeData === 'undefined') {
-        console.error('TreeData not loaded');
+        console.error('[Oasis Certificates] TreeData not loaded');
         return;
     }
     
@@ -18,13 +18,14 @@ function downloadCertificate(certificateId) {
         link.click();
         document.body.removeChild(link);
     } else {
+        console.warn('[Oasis Certificates] Certificate not found:', certificateId);
         alert(`Certificate ${certificateId} not found.`);
     }
 }
 
 function populateCertificates(filterValue) {
     if (typeof TreeData === 'undefined') {
-        console.error('TreeData not loaded');
+        console.error('[Oasis Certificates] TreeData not loaded');
         return;
     }
     
@@ -78,6 +79,7 @@ function populateCertificates(filterValue) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    if (typeof console !== 'undefined' && console.log) console.log('[Oasis Certificates] Ready');
     populateCertificates('all');
     
     const filterBtns = document.querySelectorAll('.cert-filter-btn');
