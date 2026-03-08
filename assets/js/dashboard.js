@@ -1,6 +1,6 @@
 function initializeTreeData() {
     if (typeof TreeData === 'undefined') {
-        console.error('[Oasis Dashboard] TreeData not loaded — ensure tree-data.js is included before dashboard.js');
+        console.error('[Oasis of Change Dashboard] TreeData not loaded — ensure tree-data.js is included before dashboard.js');
         return;
     }
     const lastUpdatedEl = document.getElementById('last-updated-date');
@@ -393,7 +393,7 @@ if (document.readyState === 'loading') {
 // Fetch live tree counts from Tree-Nation API; fallback to TreeData (e.g. CORS)
 function loadLiveTreeCountsFromAPI() {
     if (typeof TreeNationAPI === 'undefined' || typeof TreeData === 'undefined') {
-        console.log('[Oasis Dashboard] Using TreeData (TreeNationAPI not loaded)');
+        console.log('[Oasis of Change Dashboard] Using TreeData (TreeNationAPI not loaded)');
         return;
     }
 
@@ -418,7 +418,7 @@ function loadLiveTreeCountsFromAPI() {
             var legacyTrees = safeCall(function() { return TreeData.getLegacyTrees(); }, 0);
             var totalTotal = verifiedTotal + legacyTrees;
 
-            console.log('[Oasis Dashboard] Live API: Web-Ready', webReadyTrees, 'Partners', partnerTreesTotal);
+            console.log('[Oasis of Change Dashboard] Live API: Web-Ready', webReadyTrees, 'Partners', partnerTreesTotal);
 
             setText('verified-count', verifiedTotal.toLocaleString());
             setText('total-count', totalTotal.toLocaleString());
@@ -426,7 +426,7 @@ function loadLiveTreeCountsFromAPI() {
             populatePartnerSection(mergedPartners);
         })
         .catch(function(err) {
-            console.warn('[Oasis Dashboard] API failed — using TreeData fallback:', err.message);
+            console.warn('[Oasis of Change Dashboard] API failed — using TreeData fallback:', err.message);
         });
 }
 
@@ -474,7 +474,7 @@ function initPlantingCarousel() {
 }
 
 function boot() {
-    if (typeof console !== 'undefined' && console.log) console.log('[Oasis Dashboard] Booting');
+    if (typeof console !== 'undefined' && console.log) console.log('[Oasis of Change Dashboard] Booting');
     initializeTreeData();
     animateCount();
     loadLiveTreeCountsFromAPI();

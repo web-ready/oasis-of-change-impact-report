@@ -1,6 +1,6 @@
 function initializeSpeciesData() {
     if (typeof TreeData === 'undefined') {
-        console.warn('[Oasis Species] TreeData not loaded');
+        console.warn('[Oasis of Change Species] TreeData not loaded');
         return;
     }
     const speciesData = TreeData.getSpeciesData();
@@ -8,7 +8,7 @@ function initializeSpeciesData() {
     if (speciesCountElement) {
         speciesCountElement.textContent = `${speciesData.totalSpecies} Species Combinations`;
     }
-    if (typeof console !== 'undefined' && console.log) console.log('[Oasis Species] Ready, totalSpecies:', speciesData.totalSpecies);
+    if (typeof console !== 'undefined' && console.log) console.log('[Oasis of Change Species] Ready, totalSpecies:', speciesData.totalSpecies);
 }
 
 document.addEventListener('DOMContentLoaded', function() {

@@ -940,7 +940,7 @@ function initializeMap() {
       const clusterType = isCompleted ? 'completed' : site.type;
       addMarkerToGroup(marker, clusterType);
     });
-    if (typeof console !== 'undefined' && console.log) console.log('[Oasis Map] Loaded', mapSites.length, 'sites from TreeData');
+    if (typeof console !== 'undefined' && console.log) console.log('[Oasis of Change Map] Loaded', mapSites.length, 'sites from TreeData');
   } else {
     Object.entries(plantingData).forEach(([cc, cfg]) => {
       const [lat, lng] = cfg.centroid;
@@ -1007,7 +1007,7 @@ function initializeMap() {
       const clusterType = isCompleted ? 'completed' : cfg.type;
       addMarkerToGroup(marker, clusterType);
     });
-    if (typeof console !== 'undefined' && console.warn) console.warn('[Oasis Map] TreeData missing — using embedded plantingData fallback');
+    if (typeof console !== 'undefined' && console.warn) console.warn('[Oasis of Change Map] TreeData missing — using embedded plantingData fallback');
   }
 
   singleClusterGroup.addTo(map);

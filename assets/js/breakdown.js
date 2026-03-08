@@ -16,7 +16,7 @@
 
     function init() {
         if (typeof TreeData === 'undefined') {
-            console.error('[Oasis Breakdown] TreeData not loaded');
+            console.error('[Oasis of Change Breakdown] TreeData not loaded');
             return;
         }
 
@@ -52,7 +52,7 @@
         renderAll();
         setText('bd-last-updated', TreeData.lastUpdated);
         fetchLiveData();
-        if (typeof console !== 'undefined' && console.log) console.log('[Oasis Breakdown] Ready, total:', state.grandTotal);
+        if (typeof console !== 'undefined' && console.log) console.log('[Oasis of Change Breakdown] Ready, total:', state.grandTotal);
     }
 
     function recalculate() {
@@ -236,7 +236,7 @@
                 setApiStatus('live');
             })
             .catch(function (err) {
-                console.warn('[Oasis Breakdown] API unavailable — using cached TreeData:', err.message || err);
+                console.warn('[Oasis of Change Breakdown] API unavailable — using cached TreeData:', err.message || err);
                 setApiStatus('fallback');
             });
     }
@@ -286,7 +286,7 @@
     // ── Boot ────────────────────────────────────────────
 
     function boot() {
-        try { init(); } catch (e) { console.error('[Oasis Breakdown] init failed:', e); }
+        try { init(); } catch (e) { console.error('[Oasis of Change Breakdown] init failed:', e); }
     }
 
     if (document.readyState === 'loading') {

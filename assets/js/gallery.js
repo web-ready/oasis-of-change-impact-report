@@ -353,7 +353,7 @@ const GalleryData = {
     var filteredItems = [];
 
     function init() {
-        if (typeof console !== 'undefined' && console.log) console.log('[Oasis Gallery] Ready, items:', GalleryData.items.length);
+        if (typeof console !== 'undefined' && console.log) console.log('[Oasis of Change Gallery] Ready, items:', GalleryData.items.length);
         renderGalleryGrid(GalleryData.items);
         bindFilterEvents();
         bindModalEvents();
