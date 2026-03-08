@@ -306,7 +306,7 @@ const plantingData = {
     ]
   },
   CM: { 
-    centroid: [7.37, 12.35], 
+    centroid: [5.139279, 10.275938], 
     type: 'confirmed', 
     source: 'Tree-Nation',
     sites: [
@@ -763,6 +763,24 @@ function initializeMap() {
     }
   });
   map.addControl(new FullscreenControl({ position: 'topright' }));
+
+  /* Mobile: ensure zoom buttons receive touches – touchend fallback when click doesn't fire */
+  if ('ontouchstart' in window) {
+    setTimeout(function() {
+      var zoomIn = document.querySelector('.leaflet-control-zoom-in');
+      var zoomOut = document.querySelector('.leaflet-control-zoom-out');
+      function addZoomFallback(el, fn) {
+        if (!el || el._zoomFallback) return;
+        el._zoomFallback = true;
+        el.addEventListener('touchend', function(e) {
+          e.preventDefault();
+          fn();
+        }, { passive: false });
+      }
+      addZoomFallback(zoomIn, function() { map.zoomIn(); });
+      addZoomFallback(zoomOut, function() { map.zoomOut(); });
+    }, 100);
+  }
 
   function refreshMapSize() {
     map.invalidateSize();
