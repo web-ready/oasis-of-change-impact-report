@@ -1,0 +1,8 @@
+{
+  "name": "oasis-of-change-impact-report",
+  "private": true,
+  "scripts": {
+    "serve": "npx serve -l 8080",
+    "start": "npx serve -l 8080"
+  }
+}
