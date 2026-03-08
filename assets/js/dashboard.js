@@ -49,6 +49,8 @@ function updateUI() {
     setText('planting-sites-count', safeCall(function() { return TreeData.getPlantingSitesCount(); }, 0));
     setText('co2-offset', safeCall(function() { return TreeData.getCo2Captured(); }, 0).toLocaleString() + '+');
 
+    updateGoalProgress(safeCall(function() { return TreeData.getTotalTrees(); }, 0));
+
     populateProjectTables();
     populateSpeciesGrid();
 }
@@ -56,6 +58,18 @@ function updateUI() {
 function setText(id, val) {
     const el = document.getElementById(id);
     if (el) el.textContent = val;
+}
+
+function updateGoalProgress(total) {
+    var goal = typeof TreeData !== 'undefined' && TreeData.getGoalTrees ? TreeData.getGoalTrees() : 1000000;
+    var year = typeof TreeData !== 'undefined' && TreeData.getGoalYear ? TreeData.getGoalYear() : 2030;
+    var pct = Math.min(100, goal > 0 ? (total / goal) * 100 : 0);
+    var pctEl = document.getElementById('goal-progress-pct');
+    var barEl = document.getElementById('goal-progress-bar');
+    var textEl = document.getElementById('goal-progress-text');
+    if (pctEl) pctEl.textContent = pct.toFixed(1) + '%';
+    if (barEl) barEl.style.width = pct + '%';
+    if (textEl) textEl.textContent = total.toLocaleString() + ' / 1,000,000 trees';
 }
 
 function fyBadge(fy) {
@@ -437,6 +451,7 @@ function loadLiveTreeCountsFromAPI() {
 
             setText('verified-count', verifiedTotal.toLocaleString());
             setText('total-count', totalTotal.toLocaleString());
+            updateGoalProgress(totalTotal);
             populatePartnerSection(mergedPartners);
         })
         .catch(function(err) {

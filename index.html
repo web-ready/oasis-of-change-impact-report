@@ -159,12 +159,25 @@
                     </a>
                 </div>
 
-                <div class="flex justify-center mb-8 sm:mb-10">
+                <div class="flex justify-center mb-6 sm:mb-8">
                     <div class="hero-total-card text-center bg-white/10 backdrop-blur-sm rounded-2xl px-10 sm:px-14 py-6 sm:py-8 border border-white/15">
                         <div class="tabular-nums text-4xl sm:text-5xl font-bold text-white mb-0.5 count-up" id="total-count">
                             <span class="skeleton skeleton--dark skeleton-line" style="width:7rem;height:2.75rem">&nbsp;</span>
                         </div>
                         <div class="text-sm sm:text-base font-medium text-white/70 tracking-wide uppercase">Trees Planted</div>
+                    </div>
+                </div>
+
+                <div id="goal-progress-section" class="mb-8 sm:mb-10 max-w-xl mx-auto px-2" aria-label="Progress to 1 million trees by 2030">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/15">
+                        <div class="flex items-center justify-between gap-3 mb-2">
+                            <span class="text-xs sm:text-sm font-medium text-white/80">1M trees by 2030</span>
+                            <span class="tabular-nums text-sm font-semibold text-white" id="goal-progress-pct">—</span>
+                        </div>
+                        <div class="h-2 bg-white/15 rounded-full overflow-hidden">
+                            <div id="goal-progress-bar" class="h-full bg-white/90 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
+                        </div>
+                        <div class="mt-1.5 text-xs text-white/60 tabular-nums" id="goal-progress-text">— / 1,000,000 trees</div>
                     </div>
                 </div>
 
