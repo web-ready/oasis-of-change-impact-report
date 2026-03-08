@@ -863,7 +863,7 @@ function initializeMap() {
       const hasStructured = parsed && (parsed.plantingCycle || parsed.plantingSite);
 
       const structuredLines = [];
-      if (projectName) {
+      if (projectName && projectName !== title) {
         structuredLines.push('<div class="popup-line"><span class="popup-label">Project:</span> ' + projectName + '</div>');
       }
       if (hasStructured) {
