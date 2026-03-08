@@ -867,7 +867,7 @@ function initializeMap() {
         if (parsed.projectType) structuredLines.push('<div class="popup-line"><span class="popup-label">Type:</span> ' + formatProjectType(parsed.projectType) + '</div>');
         if (parsed.plantingCycle) structuredLines.push('<div class="popup-line"><span class="popup-label">Cycle:</span> ' + parsed.plantingCycle + '</div>');
       }
-      const fallbackDesc = siteDescription ? '<div class="popup-desc">' + siteDescription + '</div>' : '';
+      const fallbackDesc = (siteDescription && !hasStructured) ? '<div class="popup-desc">' + siteDescription + '</div>' : '';
 
       let noteHtml = '';
       if (site.note) {
