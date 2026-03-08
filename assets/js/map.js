@@ -695,7 +695,7 @@ function getPopupOptions() {
 }
 
 function initializeMap() {
-  const map = L.map('map', { 
+  const map = L.map('map-container', { 
     scrollWheelZoom: true,
     zoomControl: true,
     attributionControl: true
@@ -722,7 +722,7 @@ function initializeMap() {
   ).addTo(map);
 
   /* Fullscreen control – best accessibility/usability on mobile */
-  const mapContainer = document.getElementById('map');
+  const mapContainer = document.getElementById('map-container');
   const FullscreenControl = L.Control.extend({
     onAdd: function() {
       const btn = document.createElement('button');

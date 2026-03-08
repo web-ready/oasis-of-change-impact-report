@@ -214,7 +214,52 @@
             </div>
         </section>
 
-        <section class="mb-12">
+        <section class="mb-12 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8" id="planting-carousel-section">
+            <div class="planting-carousel-wrapper">
+                <h2 class="planting-carousel__title">Planting Sites Around the World</h2>
+                <div class="planting-carousel relative">
+                    <div class="planting-carousel__track" id="planting-carousel-track">
+                        <div class="planting-carousel__slide">
+                            <img src="assets/images/planting-sites/2025-2026-fy/Brazil-Chizolobium-Amazonicum.webp" alt="Chizolobium Amazonicum in Brazil" class="planting-carousel__img">
+                            <div class="planting-carousel__caption">Brazil · Amazon</div>
+                        </div>
+                        <div class="planting-carousel__slide">
+                            <img src="assets/images/planting-sites/2025-2026-fy/Spain-Mastic.jpg" alt="Mastic tree in Spain" class="planting-carousel__img">
+                            <div class="planting-carousel__caption">Spain · Alvelal</div>
+                        </div>
+                        <div class="planting-carousel__slide">
+                            <img src="assets/images/planting-sites/2025-2026-fy/Ireland-Sessile-Oak.webp" alt="Sessile Oak in Ireland" class="planting-carousel__img">
+                            <div class="planting-carousel__caption">Ireland · Native Woodlands</div>
+                        </div>
+                        <div class="planting-carousel__slide">
+                            <img src="assets/images/planting-sites/2025-2026-fy/Canada-Team.webp" alt="Boreal Forest restoration team in Canada" class="planting-carousel__img">
+                            <div class="planting-carousel__caption">Canada · Boreal Forest</div>
+                        </div>
+                        <div class="planting-carousel__slide">
+                            <img src="assets/images/planting-sites/2025-2026-fy/Nigeria-Forest-Mangrove.jpg" alt="Mangrove forest in Nigeria" class="planting-carousel__img">
+                            <div class="planting-carousel__caption">Nigeria · Mangrove</div>
+                        </div>
+                        <div class="planting-carousel__slide">
+                            <img src="assets/images/planting-sites/2024-2025-fy/Madagascar/Mangrove_Tree.jpg" alt="Mangrove tree in Madagascar" class="planting-carousel__img">
+                            <div class="planting-carousel__caption">Madagascar · Eden Reforestation</div>
+                        </div>
+                    </div>
+                    <button type="button" class="planting-carousel__btn planting-carousel__btn--prev" id="planting-carousel-prev" aria-label="Previous slide">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                    </button>
+                    <button type="button" class="planting-carousel__btn planting-carousel__btn--next" id="planting-carousel-next" aria-label="Next slide">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                    <div class="planting-carousel__dots" id="planting-carousel-dots" role="tablist" aria-label="Carousel slides"></div>
+                </div>
+                <a href="/gallery.html" class="planting-carousel__cta">
+                    Explore gallery
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                </a>
+            </div>
+        </section>
+
+        <section id="map" class="mb-12 scroll-mt-24">
             <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 overflow-hidden">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
                     <h2 class="text-xl font-semibold text-deep-forest shrink-0">Planting Locations</h2>
@@ -226,7 +271,7 @@
                         <span class="flex items-center gap-1.5 shrink-0"><span class="w-2.5 h-2.5 rounded-full inline-block" style="background:#7C3AED"></span> Grouped</span>
                     </div>
                 </div>
-                <div id="map" class="map-fullscreen-target w-full rounded-xl overflow-hidden" role="application" aria-label="Interactive map of planting locations"></div>
+                <div id="map-container" class="map-fullscreen-target w-full rounded-xl overflow-hidden" role="application" aria-label="Interactive map of planting locations"></div>
             </div>
         </section>
 

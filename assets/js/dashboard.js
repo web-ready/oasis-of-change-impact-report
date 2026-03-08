@@ -444,10 +444,54 @@ function loadLiveTreeCountsFromAPI() {
         });
 }
 
+function initPlantingCarousel() {
+    var track = document.getElementById('planting-carousel-track');
+    var prevBtn = document.getElementById('planting-carousel-prev');
+    var nextBtn = document.getElementById('planting-carousel-next');
+    var dotsEl = document.getElementById('planting-carousel-dots');
+    if (!track || !prevBtn || !nextBtn || !dotsEl) return;
+    var slides = track.querySelectorAll('.planting-carousel__slide');
+    var total = slides.length;
+    if (total === 0) return;
+    var idx = 0;
+    var autoTimer;
+    function goTo(i) {
+        idx = (i + total) % total;
+        track.style.transform = 'translateX(-' + idx + '00%)';
+        dotsEl.querySelectorAll('button').forEach(function(btn, j) {
+            btn.classList.toggle('active', j === idx);
+        });
+    }
+    function next() {
+        goTo(idx + 1);
+        resetAuto();
+    }
+    function prev() {
+        goTo(idx - 1);
+        resetAuto();
+    }
+    function resetAuto() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(next, 4500);
+    }
+    for (var i = 0; i < total; i++) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        btn.addEventListener('click', function(j) { return function() { goTo(j); resetAuto(); }; }(i));
+        dotsEl.appendChild(btn);
+    }
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+    goTo(0);
+    resetAuto();
+}
+
 function boot() {
     initializeTreeData();
     animateCount();
     loadLiveTreeCountsFromAPI();
+    initPlantingCarousel();
 
     setupSearch('verified-search', '#verified-table', 'verified-data', 'verified-mobile-cards');
     setupSearch('legacy-search', '#legacy-table', 'legacy-data', 'legacy-mobile-cards');

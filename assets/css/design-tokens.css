@@ -1,3 +1,8 @@
+/* Smooth scroll for anchor links (e.g. #map) */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Sticky footer: body fills viewport, main grows to push footer to the bottom */
 body {
     min-height: 100vh;
