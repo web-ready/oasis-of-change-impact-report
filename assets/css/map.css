@@ -179,8 +179,17 @@
   background: rgba(0, 71, 52, 0.12) !important;
 }
 .leaflet-fullscreen-toggle.active {
-  background: rgba(0, 71, 52, 0.12) !important;
-  color: #004734 !important;
+  /* High-contrast "go out" state – visible on ocean, satellite, and light maps */
+  background: #ffffff !important;
+  color: #0F172A !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), 0 1px 4px rgba(0, 0, 0, 0.15) !important;
+}
+.leaflet-fullscreen-toggle.active:hover,
+.leaflet-fullscreen-toggle.active:focus-visible {
+  background: #f8fafc !important;
+  color: #0F172A !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.18) !important;
 }
 .leaflet-fullscreen-toggle svg {
   flex-shrink: 0;
