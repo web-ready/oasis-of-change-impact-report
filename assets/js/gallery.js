@@ -359,7 +359,6 @@ const GalleryData = {
         bindFeaturedCards();
         initScrollAnimations();
         initLazyLoading();
-        initMobileMenu();
         initHeroStats();
         updateResultsCount(GalleryData.items.length);
         document.getElementById("copyright-year").textContent = new Date().getFullYear();
@@ -754,34 +753,6 @@ const GalleryData = {
         } else {
             cards.forEach(function (card) { card.classList.add("card-visible"); });
         }
-    }
-
-    /* ── Mobile Menu ── */
-
-    function initMobileMenu() {
-        var toggleBtn = document.getElementById("mobile-menu-toggle");
-        var mobileMenu = document.getElementById("mobile-menu");
-        var closeBtn = document.getElementById("mobile-menu-close");
-        var backdrop = document.getElementById("mobile-menu-backdrop");
-
-        if (!toggleBtn || !mobileMenu) return;
-
-        var openMenu = function () {
-            mobileMenu.classList.add("menu-open");
-            document.documentElement.style.overflow = "hidden";
-            document.body.style.overflow = "hidden";
-            toggleBtn.setAttribute("aria-expanded", "true");
-        };
-        var closeMenu = function () {
-            mobileMenu.classList.remove("menu-open");
-            document.documentElement.style.overflow = "";
-            document.body.style.overflow = "";
-            toggleBtn.setAttribute("aria-expanded", "false");
-        };
-
-        toggleBtn.addEventListener("click", openMenu);
-        if (closeBtn) closeBtn.addEventListener("click", closeMenu);
-        if (backdrop) backdrop.addEventListener("click", closeMenu);
     }
 
     /* ── Boot ── */

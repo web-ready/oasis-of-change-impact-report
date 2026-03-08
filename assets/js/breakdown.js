@@ -283,36 +283,9 @@
         if (el) el.textContent = val;
     }
 
-    // ── Mobile menu toggle ──────────────────────────────
-
-    function initMobileMenu() {
-        var toggleBtn = document.getElementById('mobile-menu-toggle');
-        var mobileMenu = document.getElementById('mobile-menu');
-        var closeBtn = document.getElementById('mobile-menu-close');
-        var backdrop = document.getElementById('mobile-menu-backdrop');
-        if (!toggleBtn || !mobileMenu) return;
-
-        function openMenu() {
-            mobileMenu.classList.add('menu-open');
-            document.documentElement.style.overflow = 'hidden';
-            document.body.style.overflow = 'hidden';
-            toggleBtn.setAttribute('aria-expanded', 'true');
-        }
-        function closeMenu() {
-            mobileMenu.classList.remove('menu-open');
-            document.documentElement.style.overflow = '';
-            document.body.style.overflow = '';
-            toggleBtn.setAttribute('aria-expanded', 'false');
-        }
-        toggleBtn.addEventListener('click', openMenu);
-        if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-        if (backdrop) backdrop.addEventListener('click', closeMenu);
-    }
-
     // ── Boot ────────────────────────────────────────────
 
     function boot() {
-        initMobileMenu();
         try { init(); } catch (e) { console.error('[Breakdown] init failed:', e); }
     }
 

@@ -1216,33 +1216,6 @@ function renderSiteLists() {
     });
 }
 
-function initializeMobileMenu() {
-  const toggleBtn = document.getElementById('mobile-menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const closeBtn = document.getElementById('mobile-menu-close');
-  const backdrop = document.getElementById('mobile-menu-backdrop');
-  if (!toggleBtn || !mobileMenu) return;
-  if (toggleBtn.dataset.menuInit) return;
-  toggleBtn.dataset.menuInit = '1';
-
-  function openMenu() {
-    mobileMenu.classList.add('menu-open');
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-    toggleBtn.setAttribute('aria-expanded', 'true');
-  }
-  function closeMenu() {
-    mobileMenu.classList.remove('menu-open');
-    document.documentElement.style.overflow = '';
-    document.body.style.overflow = '';
-    toggleBtn.setAttribute('aria-expanded', 'false');
-  }
-
-  toggleBtn.addEventListener('click', openMenu);
-  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-  if (backdrop) backdrop.addEventListener('click', closeMenu);
-}
-
 function toggleClearButton() {
   const btn = document.getElementById('clear-filters');
   if (!btn) return;
@@ -1335,6 +1308,5 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeMap();
   renderSiteLists();
   renderTotals();
-  initializeMobileMenu();
   initializeFilters();
 });

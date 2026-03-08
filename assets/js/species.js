@@ -13,28 +13,6 @@ function initializeSpeciesData() {
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeSpeciesData();
-    
-    const toggleBtn = document.getElementById('mobile-menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const closeBtn = document.getElementById('mobile-menu-close');
-    const backdrop = document.getElementById('mobile-menu-backdrop');
-    if (toggleBtn && mobileMenu) {
-        const openMenu = () => {
-            mobileMenu.classList.add('menu-open');
-            document.documentElement.style.overflow = 'hidden';
-            document.body.style.overflow = 'hidden';
-            toggleBtn.setAttribute('aria-expanded', 'true');
-        };
-        const closeMenu = () => {
-            mobileMenu.classList.remove('menu-open');
-            document.documentElement.style.overflow = '';
-            document.body.style.overflow = '';
-            toggleBtn.setAttribute('aria-expanded', 'false');
-        };
-        toggleBtn.addEventListener('click', openMenu);
-        if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-        if (backdrop) backdrop.addEventListener('click', closeMenu);
-    }
 
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', function () {

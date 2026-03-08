@@ -421,20 +421,10 @@
         </div>
     </footer>
 
+    <script src="assets/js/nav.js"></script>
     <script src="assets/js/tree-data.js"></script>
     <script src="assets/js/species.js"></script>
     <script src="assets/js/footnotes.js"></script>
-    <script>
-        (function(){
-            var t = document.getElementById('mobile-impact-toggle');
-            var s = document.getElementById('mobile-impact-submenu');
-            if (!t || !s) return;
-            t.addEventListener('click', function(){
-                var open = s.classList.toggle('open');
-                t.setAttribute('aria-expanded', open);
-            });
-        })();
-    </script>
     <script src="https://widgets.tree-nation.com/js/widgets/v3/widgets.min.js"></script>
     <script>document.getElementById('copyright-year').textContent=new Date().getFullYear();</script>
 </body>
