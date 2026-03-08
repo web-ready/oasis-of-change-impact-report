@@ -424,11 +424,11 @@ const countryName = {
   TZ: 'Tanzania',
   UG: 'Uganda',
   SN: 'Senegal',
-  US_MT: 'USA - National Forest Recovery (Montana)',
-  US_CA: 'USA - Lost Forests Recovery (California)',
-  CM: 'Cameroon',
-  IN_Tigers: 'India - Trees for Tigers',
-  IN_Tribals: 'India - Trees for Tribals',
+  US_MT: 'National Forest Recovery (Montana)',
+  US_CA: 'Lost Forests Recovery (California)',
+  CM: 'Cocoa Farmer Agroforestry',
+  IN_Tigers: 'Trees for Tigers',
+  IN_Tribals: 'Trees for Tribals',
   MZ: 'Mozambique',
   LA: 'Laos',
   CD: 'Democratic Republic of the Congo',
@@ -858,14 +858,10 @@ function initializeMap() {
       const title = site.name;
       const siteDescription = site.description || '';
       const showCountry = site.country && site.country !== site.name && !site.name.includes(site.country);
-      const projectName = site.projectName || '';
       const parsed = parseSiteDescription(siteDescription);
       const hasStructured = parsed && (parsed.plantingCycle || parsed.plantingSite);
 
       const structuredLines = [];
-      if (projectName && projectName !== title) {
-        structuredLines.push('<div class="popup-line"><span class="popup-label">Project:</span> ' + projectName + '</div>');
-      }
       if (hasStructured) {
         if (parsed.plantingSite) structuredLines.push('<div class="popup-line"><span class="popup-label">Site:</span> ' + parsed.plantingSite + '</div>');
         if (parsed.projectType) structuredLines.push('<div class="popup-line"><span class="popup-label">Type:</span> ' + formatProjectType(parsed.projectType) + '</div>');
