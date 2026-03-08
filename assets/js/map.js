@@ -130,6 +130,7 @@ const plantingData = {
     type: 'confirmed', 
     source: 'Tree-Nation',
     fy: '2025-2026',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Replanting the burnt Mkussu Forest', type: 'confirmed', source: 'Tree-Nation' },
       { name: 'Usambara Biodiversity Conservation', type: 'confirmed', source: 'Tree-Nation' },
@@ -143,6 +144,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Boreal Forest Habitat Restoration', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -152,6 +154,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Amazon Windshields', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -161,6 +164,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Restoration of Ala Forest Reserve', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -170,6 +174,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Reforest the Amazon Basin', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -179,6 +184,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Bear Groves in Transylvania', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -188,6 +194,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Zimbabwe Reforestation Initiative', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -197,6 +204,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Ireland Community Tree Planting, County Clare', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -206,6 +214,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Restoration and Social Empowerment', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -215,6 +224,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Bosques de Agua', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -233,6 +243,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Big Scrub Rainforest Restoration', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -251,6 +262,7 @@ const plantingData = {
     type: 'confirmed',
     source: 'Tree-Nation',
     fy: '2025-2026',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Alvelal', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -267,6 +279,7 @@ const plantingData = {
     centroid: [41.490704, -123.247726], 
     type: 'confirmed', 
     source: 'Tree-Nation',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Lost Forests Recovery in California', type: 'confirmed', source: 'Sustainable WWW Partner Project (Tree-Nation)' }
     ]
@@ -283,6 +296,7 @@ const plantingData = {
     centroid: [19.055958, 81.986229], 
     type: 'confirmed', 
     source: 'Sustainable WWW Partner Project (Tree-Nation)',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Trees for Tribals', type: 'confirmed', source: 'Sustainable WWW Partner Project (Tree-Nation)' }
     ]
@@ -292,6 +306,7 @@ const plantingData = {
     centroid: [14.190073, -16.096897], 
     type: 'confirmed', 
     source: 'Tree-Nation',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Forest Garden Program', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -300,6 +315,7 @@ const plantingData = {
     centroid: [1.272721, 34.048634], 
     type: 'confirmed', 
     source: 'Tree-Nation',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Forest Gardens – Mount Elgon Region', type: 'confirmed', source: 'Tree-Nation', lat: 0.826785, lng: 34.38345 },
       { name: 'Preservation of Mt. Elgon Ecosystem', type: 'confirmed', source: 'Tree-Nation', lat: 1.272721, lng: 34.048634 }
@@ -309,6 +325,7 @@ const plantingData = {
     centroid: [5.139279, 10.275938], 
     type: 'confirmed', 
     source: 'Tree-Nation',
+    exactCoordinatesVerified: true,
     sites: [
       { name: 'Cocoa Farmer Agroforestry', type: 'confirmed', source: 'Tree-Nation' }
     ]
@@ -701,6 +718,11 @@ function getPopupOptions() {
   };
 }
 
+/* Verified coordinates icon – 2x2 grid with checkmark */
+function getVerifiedCoordsIcon() {
+  return '<img src="assets/images/verified-map-icon.png" alt="" class="popup-verified-icon" width="20" height="20" aria-hidden="true">';
+}
+
 function initializeMap() {
   const map = L.map('map-container', { 
     scrollWheelZoom: true,
@@ -896,6 +918,12 @@ function initializeMap() {
         secondaryBadge = '';
       }
 
+      const isExactCoordsVerified = !!site.exactCoordinatesVerified;
+      const verifiedIcon = getVerifiedCoordsIcon();
+      const popupFooter = isExactCoordsVerified
+        ? '<div class="popup-footer popup-footer-verified">' + verifiedIcon + ' Exact coordinates verified by our team. <a href="#footnote-exact-coords" class="popup-verified-link">What does this mean?</a></div>'
+        : '<div class="popup-footer">Location is approximate and provided by third-party data sources.</div>';
+
       const popupHTML = `
         <div class="map-popup">
           <div class="popup-header">
@@ -913,7 +941,7 @@ function initializeMap() {
             ${fallbackDesc}
             ${noteHtml}
           </div>
-          <div class="popup-footer">Location is approximate and provided by third-party data sources.</div>
+          ${popupFooter}
         </div>
       `;
 
@@ -961,6 +989,11 @@ function initializeMap() {
       const siteCount = countLabel(cfg.sites);
       const siteNames = (cfg.sites || []).map(s => typeof s === 'string' ? s : s.name).slice(0, 5);
       const moreCount = (cfg.sites || []).length > 5 ? (cfg.sites.length - 5) : 0;
+      const isExactCoordsVerified = !!cfg.exactCoordinatesVerified;
+      const verifiedIconFallback = getVerifiedCoordsIcon();
+      const popupFooterFallback = isExactCoordsVerified
+        ? '<div class="popup-footer popup-footer-verified">' + verifiedIconFallback + ' Exact coordinates verified by our team. <a href="#footnote-exact-coords" class="popup-verified-link">What does this mean?</a></div>'
+        : '<div class="popup-footer">Location is approximate and provided by third-party data sources.</div>';
       const popupHTML = `
         <div class="map-popup">
           <div class="popup-header">
@@ -976,7 +1009,7 @@ function initializeMap() {
             </div>
             ${siteNames.length > 0 ? '<div class="popup-sites"><strong>Sites:</strong> ' + siteNames.join(', ') + (moreCount > 0 ? ' + ' + moreCount + ' more' : '') + '</div>' : ''}
           </div>
-          <div class="popup-footer">Location is approximate and provided by third-party data sources.</div>
+          ${popupFooterFallback}
         </div>
       `;
 
