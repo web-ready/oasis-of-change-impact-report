@@ -13,6 +13,8 @@ function initializeTreeData() {
     updateUI();
 }
 
+var totalCountAnimToken = 0;
+
 function parseDisplayDate(dateText) {
     if (!dateText || typeof dateText !== 'string') return null;
     const normalized = dateText.replace(/(\d+)(st|nd|rd|th)/gi, '$1');
@@ -38,9 +40,11 @@ function safeCall(fn, fallback) {
 function updateUI() {
     const verified = safeCall(function() { return TreeData.getVerifiedTrees(); }, 0);
     const legacy = safeCall(function() { return TreeData.getLegacyTrees(); }, 0);
+    const total = safeCall(function() { return TreeData.getTotalTrees(); }, 0);
 
     setText('verified-count', verified.toLocaleString());
     setText('legacy-count', legacy.toLocaleString());
+    setText('total-count', total.toLocaleString());
     setText('species-count', safeCall(function() { return TreeData.getSpeciesCount(); }, 0));
     const sites = safeCall(function() { return TreeData.getMapSites(); }, []);
     const countries = [...new Set(sites.map(function(s) { return s.country; }))];
@@ -49,7 +53,7 @@ function updateUI() {
     setText('planting-sites-count', safeCall(function() { return TreeData.getPlantingSitesCount(); }, 0));
     setText('co2-offset', safeCall(function() { return TreeData.getCo2Captured(); }, 0).toLocaleString() + '+');
 
-    updateGoalProgress(safeCall(function() { return TreeData.getTotalTrees(); }, 0));
+    updateGoalProgress(total);
 
     populateProjectTables();
     populateSpeciesGrid();
@@ -354,12 +358,16 @@ function setupSpeciesFilters() {
     });
 }
 
-function animateCount() {
+function animateCount(targetOverride) {
     if (typeof TreeData === 'undefined') return;
     const el = document.getElementById('total-count');
     if (!el) return;
-    const target = safeCall(function() { return TreeData.getTotalTrees(); }, 0);
+    const target = Number.isFinite(targetOverride)
+        ? Math.max(0, Math.floor(targetOverride))
+        : safeCall(function() { return TreeData.getTotalTrees(); }, 0);
     if (!target) { el.textContent = '—'; return; }
+    totalCountAnimToken += 1;
+    const animToken = totalCountAnimToken;
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         el.textContent = target.toLocaleString();
@@ -369,6 +377,7 @@ function animateCount() {
     let current = 0;
     const inc = target / 60;
     function step() {
+        if (animToken !== totalCountAnimToken) return;
         current += inc;
         if (current >= target) { el.textContent = target.toLocaleString(); return; }
         el.textContent = Math.floor(current).toLocaleString();
@@ -421,7 +430,7 @@ function loadLiveTreeCountsFromAPI() {
             console.log('[Oasis of Change Dashboard] Live API: Web-Ready', webReadyTrees, 'Partners', partnerTreesTotal);
 
             setText('verified-count', verifiedTotal.toLocaleString());
-            setText('total-count', totalTotal.toLocaleString());
+            animateCount(totalTotal);
             updateGoalProgress(totalTotal);
             populatePartnerSection(mergedPartners);
         })
