@@ -3,27 +3,24 @@ const TreeData = {
     lastUpdated: "March 11th, 2026",
 
     /* ────────────────────────────────────────────────
-       TOTALS  (synced with Tree-Nation API – March 7, 2026)
-       Web-Ready Forest = 8,068  (Oasis-funded 7,819 + Historical 70 + Seeds/other 179)
-       Partners         = 628    (SPES 233 + SWWW 170 + MST 124 + EcoSearch 101)
-       Verified         = 8,068 + 628  = 8,696
-       Legacy           = 7,338        (Tero 4,567 + Refoorest 2,771)
-       Total            = 8,696 + 7,338 = 16,034
+       TOTALS — Fallback only. Live verified/total counts come from the
+       Tree-Nation API (dashboard & breakdown). These values are used when
+       the API is unavailable (e.g. CORS). Legacy is always from here.
        ──────────────────────────────────────────────── */
     totals: {
-        webReadyTrees: 8068,    // full Tree-Nation count for web-ready forest
-        verifiedTrees: 8696,    // Web-Ready (8,068) + Partners (628)
-        legacyTrees:   7338,    // Tero 4,567 + Refoorest 2,771
-        totalTrees:    16034,   // verified + legacy
-        goalTrees:     1000000, // 1 million trees by 2030
+        webReadyTrees: 8068,    // fallback: Oasis web-ready forest
+        verifiedTrees: 8696,    // fallback: web-ready + partners
+        legacyTrees:   7338,    // fixed: Tero + Refoorest (no API)
+        totalTrees:    16034,   // fallback: verified + legacy
+        goalTrees:     1000000,
         goalYear:      2030
     },
 
 
     /* ────────────────────────────────────────────────
-       VERIFIED PLANTING SITES  (Oasis-funded, via Tree-Nation)
-       2024-2025 FY: 675 trees   |   2025-2026 FY: 7,144 trees
-       Subtotal: 7,819 trees
+       VERIFIED PLANTING SITES — Oasis-funded projects (Tree-Nation).
+       Project list and per-project tree/CO₂ from certificates. Aggregate
+       verified total is from Tree-Nation API when available.
        ──────────────────────────────────────────────── */
     verifiedProjects: [
 
@@ -53,8 +50,8 @@ const TreeData = {
 
 
     /* ────────────────────────────────────────────────
-       Trees planted through partner organization accounts.
-       Subtotal: 628 trees
+       PLANTING PARTNERS — Partner forests on Tree-Nation. Tree counts
+       here are fallback when API unavailable; live counts from API.
        ──────────────────────────────────────────────── */
     verifiedPartners: [
         { id: "spes",            name: "Stanley Park Ecology Society", baseLocation: "Canada",        trees: 233, co2Tonnes: 21.49, countries: "Madagascar, Tanzania, Senegal, Kenya" },
@@ -65,9 +62,8 @@ const TreeData = {
 
 
     /* ────────────────────────────────────────────────
-       LEGACY PARTNERS  (pre–Tree-Nation, fixed, tree counts only)
-       Subtotal: 7,338 trees
-       CO₂ data unavailable — unverified legacy sources
+       LEGACY PARTNERS — Pre–Tree-Nation, fixed counts (no API).
+       CO₂ data unavailable — unverified legacy sources.
        ──────────────────────────────────────────────── */
     legacyProjects: [
         { id: "tero-partner",     name: "Tero Partner",     trees: 4567, date: "2023-2024", source: "Legacy Partner (Tero)" },
