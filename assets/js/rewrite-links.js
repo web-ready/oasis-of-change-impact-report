@@ -17,8 +17,8 @@
     var parts = href.split('#');
     var path = parts[0];
     var hash = parts.length > 1 ? '#' + parts.slice(1).join('#') : '';
-    if (path === '/' || path === '') {
-      path = window.location.protocol === 'file:' ? 'index.html' : '/index.html';
+    if (path === '/' || path === '' || path === '/home') {
+      path = window.location.protocol === 'file:' ? 'home.html' : '/home.html';
     } else {
       path = path.slice(1);
       if (path.indexOf('.') === -1) path = path + '.html';

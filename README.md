@@ -38,7 +38,8 @@ No build step required — the site runs as plain HTML/CSS/JS and can be served 
 ## Project Structure
 
 ```
-├── index.html              # Dashboard
+├── index.html              # Redirects to /home
+├── home.html               # Dashboard
 ├── impact.html             # Impact report overview
 ├── impact-2025-2026.html   # 2025–2026 FY report
 ├── impact-2024-2025.html   # 2024–2025 FY report
