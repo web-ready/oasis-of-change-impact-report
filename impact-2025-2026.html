@@ -37,46 +37,47 @@
             }
         }
     </script>
+    <script src="assets/js/rewrite-links.js"></script>
 </head>
 <body class="bg-mist-gray font-sans antialiased min-h-screen flex flex-col">
 
     <div class="bg-brand-green text-white py-3 px-4 text-center text-sm font-medium z-[60] relative">
         <span class="inline-flex items-center gap-2 justify-center flex-wrap">
-            <strong>2025-2026 FY Planting Complete:</strong> 7,144 trees in 14 countries <span class="hidden sm:inline">—</span> <a href="/impact-2025-2026.html" class="underline underline-offset-2 hover:text-white/80">View impact</a>
+            <strong>2025-2026 FY Planting Complete:</strong> 7,144 trees in 14 countries <span class="hidden sm:inline">—</span> <a href="/impact-2025-2026" class="underline underline-offset-2 hover:text-white/80">View impact</a>
         </span>
     </div>
 
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="flex items-center justify-between h-14 relative">
-                <a href="/index.html" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
+                <a href="/home" class="font-serif text-xl text-deep-forest hover:text-brand-green transition">Oasis of Change, Inc.</a>
                 <div class="hidden lg:flex items-center gap-3">
-                    <a href="/index.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Dashboard</a>
+                    <a href="/home" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Dashboard</a>
                     <div class="nav-dropdown">
-                        <a href="/impact.html" class="nav-dropdown__trigger inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:bg-brand-green-light transition">
+                        <a href="/impact" class="nav-dropdown__trigger inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:bg-brand-green-light transition">
                             Impact Report
                             <svg class="nav-dropdown__chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                         </a>
                         <div class="nav-dropdown__menu" role="menu">
-                            <a href="/impact.html" role="menuitem">Overview</a>
-                            <a href="/impact-2025-2026.html" role="menuitem" class="nav-dropdown__item--active">2025-2026 FY <span class="nav-dropdown__badge">Latest</span></a>
-                            <a href="/impact-2024-2025.html" role="menuitem">2024-2025 FY</a>
+                            <a href="/impact" role="menuitem">Overview</a>
+                            <a href="/impact-2025-2026" role="menuitem" class="nav-dropdown__item--active">2025-2026 FY <span class="nav-dropdown__badge">Latest</span></a>
+                            <a href="/impact-2024-2025" role="menuitem">2024-2025 FY</a>
                         </div>
                     </div>
                     <div class="nav-dropdown">
-                        <a href="/index.html#map" class="nav-dropdown__trigger inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+                        <a href="/home#map" class="nav-dropdown__trigger inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
                             Explore
                             <svg class="nav-dropdown__chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                         </a>
                         <div class="nav-dropdown__menu" role="menu">
-                            <a href="/index.html#map" role="menuitem">Map</a>
-                            <a href="/certificates.html" role="menuitem">Certificates</a>
-                            <a href="/breakdown.html" role="menuitem">Breakdown</a>
+                            <a href="/home#map" role="menuitem">Map</a>
+                            <a href="/certificates" role="menuitem">Certificates</a>
+                            <a href="/breakdown" role="menuitem">Breakdown</a>
                         </div>
                     </div>
-                    <a href="/gallery.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Gallery</a>
-                    <a href="/species.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Tree Species</a>
-                    <a href="/news.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">News</a>
+                    <a href="/gallery" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Gallery</a>
+                    <a href="/species" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Tree Species</a>
+                    <a href="/news" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">News</a>
                 </div>
                 <button id="mobile-menu-toggle" class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-green/[0.06] text-brand-green hover:bg-brand-green hover:text-white transition-all duration-200" aria-label="Open menu" aria-expanded="false">
                     <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -98,16 +99,16 @@
             </div>
             <div class="mx-6 h-px bg-gray-100"></div>
             <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
-                <a href="/index.html" class="mobile-nav-link">Dashboard</a>
+                <a href="/home" class="mobile-nav-link">Dashboard</a>
                 <div class="mobile-nav-submenu open" id="mobile-impact-submenu">
                     <button type="button" class="mobile-nav-submenu-toggle active" aria-expanded="true" aria-controls="mobile-impact-links" id="mobile-impact-toggle">
                         Impact Report
                         <svg class="mobile-nav-submenu-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="mobile-nav-submenu-links" id="mobile-impact-links">
-                        <a href="/impact.html">Overview</a>
-                        <a href="/impact-2025-2026.html" class="mobile-nav-submenu-link--active">2025-2026 FY <span class="nav-dropdown__badge">Latest</span></a>
-                        <a href="/impact-2024-2025.html">2024-2025 FY</a>
+                        <a href="/impact">Overview</a>
+                        <a href="/impact-2025-2026" class="mobile-nav-submenu-link--active">2025-2026 FY <span class="nav-dropdown__badge">Latest</span></a>
+                        <a href="/impact-2024-2025">2024-2025 FY</a>
                     </div>
                 </div>
                 <div class="mobile-nav-submenu" id="mobile-explore-submenu">
@@ -116,14 +117,14 @@
                         <svg class="mobile-nav-submenu-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="mobile-nav-submenu-links" id="mobile-explore-links">
-                        <a href="/index.html#map">Map</a>
-                        <a href="/certificates.html">Certificates</a>
-                        <a href="/breakdown.html">Breakdown</a>
+                        <a href="/home#map">Map</a>
+                        <a href="/certificates">Certificates</a>
+                        <a href="/breakdown">Breakdown</a>
                     </div>
                 </div>
-                <a href="/gallery.html" class="mobile-nav-link">Gallery</a>
-                <a href="/species.html" class="mobile-nav-link">Tree Species</a>
-                <a href="/news.html" class="mobile-nav-link">News</a>
+                <a href="/gallery" class="mobile-nav-link">Gallery</a>
+                <a href="/species" class="mobile-nav-link">Tree Species</a>
+                <a href="/news" class="mobile-nav-link">News</a>
             </nav>
             <div class="px-6 py-5 border-t border-gray-100">
                 <p class="text-xs text-gray-400 text-center font-medium tracking-wide">Oasis of Change, Inc.</p>
@@ -134,7 +135,7 @@
     <main class="flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
 
         <div class="mb-6">
-            <a href="/impact.html" class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-brand-green transition">
+            <a href="/impact" class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-brand-green transition">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                 All Fiscal Years
             </a>
@@ -363,7 +364,7 @@
         </section>
 
         <section class="text-center">
-            <a href="/impact-2024-2025.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300 transition">
+            <a href="/impact-2024-2025" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300 transition">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                 View 2024-2025 FY Impact
             </a>
