@@ -31,8 +31,6 @@ This static site provides donors, partners, and the public with full visibility 
 | Data       | `assets/js/tree-data.js` (planting data) |
 | Integration| Tree-Nation API & widget             |
 
-No build step required — the site runs as plain HTML/CSS/JS and can be served by any static host (e.g. GitHub Pages).
-
 ---
 
 ## Project Structure
