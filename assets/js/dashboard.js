@@ -406,6 +406,7 @@ function loadLiveTreeCountsFromAPI() {
         return;
     }
 
+    console.log('[Oasis of Change Dashboard] Requesting live Tree-Nation counters...');
     TreeNationAPI.fetchAllForests()
         .then(function(data) {
             var forests = data.forests || [];
@@ -432,7 +433,18 @@ function loadLiveTreeCountsFromAPI() {
             var totalTotal = verifiedTotal + legacyTrees;
             var totalCo2Kg = Math.round((webReadyCo2Tonnes + partnerCo2TonnesTotal) * 1000);
 
-            console.log('[Oasis of Change Dashboard] Live API: Web-Ready', webReadyTrees, 'Partners', partnerTreesTotal);
+            var sourceSummary = forests.reduce(function (acc, f) {
+                var key = f.source || 'unknown';
+                acc[key] = (acc[key] || 0) + 1;
+                return acc;
+            }, {});
+            console.log('[Oasis of Change Dashboard] Live API applied:', {
+                webReadyTrees: webReadyTrees,
+                partnerTrees: partnerTreesTotal,
+                totalTrees: totalTotal,
+                totalCo2Kg: totalCo2Kg,
+                sources: sourceSummary
+            });
 
             setText('verified-count', verifiedTotal.toLocaleString());
             setText('co2-offset', totalCo2Kg.toLocaleString() + '+');
