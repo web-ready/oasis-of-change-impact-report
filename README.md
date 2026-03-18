@@ -79,7 +79,7 @@ The `lastUpdated` field at the top reflects when data was last synced.
 
 - **How to find the Tree-Nation forest URL / ID**  
   Internal documentation lives in Atlassian Confluence:  
-  `https://oasisofchange.atlassian.net/wiki/x/AYBQAQ`
+  https://oasisofchange.atlassian.net/wiki/x/AYBQAQ
 
 For the step‑by‑step implementation checklist (files to edit, API mapping, etc.), see `docs/adding-tree-nation-forest.md`.
 
