@@ -75,11 +75,7 @@ The `lastUpdated` field at the top reflects when data was last synced.
 - **How to add a Tree-Nation forest (video)**  
   Embedded Loom walkthrough:
 
-  <div align="center">
-    <a href="https://www.loom.com/share/e6f0ff85aa2e4316b39a6ea02f69341d" target="_blank" rel="noopener">
-      <img src="https://cdn.loom.com/sessions/thumbnails/e6f0ff85aa2e4316b39a6ea02f69341d-with-play.gif" alt="Loom walkthrough for adding Tree-Nation forests" style="max-width: 100%; border-radius: 12px;" />
-    </a>
-  </div>
+ https://www.loom.com/share/e6f0ff85aa2e4316b39a6ea02f69341d
 
 - **How to find the Tree-Nation forest URL / ID**  
   Internal documentation lives in Atlassian Confluence:  
