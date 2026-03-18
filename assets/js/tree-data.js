@@ -1,6 +1,6 @@
 const TreeData = {
 
-    lastUpdated: "March 11th, 2026",
+    lastUpdated: "March 17th, 2026",
 
     /* ────────────────────────────────────────────────
        TOTALS — Fallback only. Live verified/total counts come from the
@@ -9,9 +9,9 @@ const TreeData = {
        ──────────────────────────────────────────────── */
     totals: {
         webReadyTrees: 8068,    // fallback: Oasis web-ready forest
-        verifiedTrees: 8696,    // fallback: web-ready + partners
+        verifiedTrees: 8700,    // fallback: web-ready + partners
         legacyTrees:   7338,    // fixed: Tero + Refoorest (no API)
-        totalTrees:    16034,   // fallback: verified + legacy
+        totalTrees:    16038,   // fallback: verified + legacy
         goalTrees:     1000000,
         goalYear:      2030
     },
@@ -54,10 +54,12 @@ const TreeData = {
        here are fallback when API unavailable; live counts from API.
        ──────────────────────────────────────────────── */
     verifiedPartners: [
-        { id: "spes",            name: "Stanley Park Ecology Society", baseLocation: "Canada",        trees: 233, co2Tonnes: 21.49, countries: "Madagascar, Tanzania, Senegal, Kenya" },
-        { id: "sustainable-www", name: "Sustainable WWW",          baseLocation: "Sweden",        trees: 170, co2Tonnes: 24.56, countries: "Tanzania, Kenya, Madagascar, Uganda, India, United States" },
-        { id: "mst",             name: "Mittler Senior Technology",    baseLocation: "United States", trees: 124, co2Tonnes: 16.25, countries: "Tanzania, Senegal, Madagascar, Indonesia, Uganda, Nepal" },
-        { id: "ecosearch",       name: "EcoSearch",                    baseLocation: "Canada",        trees: 101, co2Tonnes: 5.05,  countries: "Madagascar" }
+        { id: "spes",              name: "Stanley Park Ecology Society",               baseLocation: "Canada",        trees: 233, co2Tonnes: 21.49, countries: "Madagascar, Tanzania, Senegal, Kenya" },
+        { id: "sustainable-www",   name: "Sustainable WWW",                            baseLocation: "Sweden",        trees: 170, co2Tonnes: 24.56, countries: "Tanzania, Kenya, Madagascar, Uganda, India, United States" },
+        { id: "mst",               name: "Mittler Senior Technology",                  baseLocation: "United States", trees: 124, co2Tonnes: 16.25, countries: "Tanzania, Senegal, Madagascar, Indonesia, Uganda, Nepal" },
+        { id: "ecosearch",         name: "EcoSearch",                                  baseLocation: "Canada",        trees: 101, co2Tonnes: 5.05,  countries: "Madagascar" },
+        { id: "denman-place-mall", name: "Denman Place Mall",                          baseLocation: "Canada",        trees: 2,   co2Tonnes: 0,     countries: "Tanzania" },
+        { id: "gabriel-dalton",    name: "Gabriel Dalton (CEO Personal Forest)", baseLocation: "Canada",        trees: 2,   co2Tonnes: 0,     countries: "Tanzania" }
     ],
 
 

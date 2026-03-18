@@ -131,12 +131,19 @@
 
             var card = document.createElement('div');
             card.className = 'forest-card';
+            var co2Html = '';
+            if (typeof p.co2Tonnes === 'number' && p.co2Tonnes > 0) {
+                co2Html = '<div class="text-xs text-gray-400 mt-0.5">CO\u2082: <span class="tabular-nums text-gray-600 font-medium">' + p.co2Tonnes.toLocaleString(undefined, { maximumFractionDigits: 2 }) + '</span> t</div>';
+            } else {
+                co2Html = '<div class="text-xs text-gray-400 mt-0.5">CO\u2082: <span class="tabular-nums text-gray-500 font-medium">\u2014</span></div>';
+            }
             card.innerHTML =
                 '<div class="flex items-start justify-between gap-3 mb-1">' +
                     '<div class="flex flex-wrap items-center gap-2 min-w-0">' + nameHtml + tagHtml + '</div>' +
                     '<div class="text-xl font-bold text-brand-green tabular-nums flex-shrink-0">' + (p.trees || 0).toLocaleString() + '</div>' +
                 '</div>' +
                 '<div class="text-xs text-gray-400">Based in ' + (p.baseLocation || '—') + '</div>' +
+                co2Html +
                 countriesHtml;
 
             grid.appendChild(card);
@@ -175,9 +182,12 @@
             sorted.forEach(function (p) {
                 var row = document.createElement('div');
                 row.className = 'equation-row';
+                var co2Suffix = (typeof p.co2Tonnes === 'number' && p.co2Tonnes > 0)
+                    ? ' <span class="text-xs text-gray-400 tabular-nums">(' + p.co2Tonnes.toLocaleString(undefined, { maximumFractionDigits: 2 }) + ' t CO\u2082)</span>'
+                    : '';
                 row.innerHTML =
                     '<span class="equation-operator">+</span>' +
-                    '<span class="equation-label text-gray-700">' + p.name + '</span>' +
+                    '<span class="equation-label text-gray-700">' + p.name + co2Suffix + '</span>' +
                     '<span class="equation-value font-medium text-deep-forest">' + (p.trees || 0).toLocaleString() + '</span>';
                 partnersContainer.appendChild(row);
             });
@@ -226,6 +236,7 @@
                     var live = forests.filter(function (f) { return f.slug === slug; })[0];
                     if (live && !live.error) {
                         p.trees = live.trees;
+                        if (typeof live.co2Tonnes === 'number') p.co2Tonnes = live.co2Tonnes;
                         p.isLive = true;
                     }
                 });

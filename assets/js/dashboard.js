@@ -399,7 +399,7 @@ if (document.readyState === 'loading') {
     boot();
 }
 
-// Fetch live tree counts from Tree-Nation API; fallback to TreeData (e.g. CORS)
+// Fetch live tree counts (and CO2 when available) from Tree-Nation API; fallback to TreeData (e.g. CORS)
 function loadLiveTreeCountsFromAPI() {
     if (typeof TreeNationAPI === 'undefined' || typeof TreeData === 'undefined') {
         console.log('[Oasis of Change Dashboard] Using TreeData (TreeNationAPI not loaded)');
@@ -413,23 +413,29 @@ function loadLiveTreeCountsFromAPI() {
 
             var wr = forests.filter(function(f) { return f.slug === 'web-ready'; })[0];
             var webReadyTrees = (wr && !wr.error) ? wr.trees : safeCall(function() { return TreeData.getWebReadyTrees(); }, 0);
+            var fallbackWebReadyCo2Tonnes = safeCall(function() { return TreeData.getWebReadyCo2Kg(); }, 0) / 1000;
+            var webReadyCo2Tonnes = (wr && Number.isFinite(wr.co2Tonnes)) ? wr.co2Tonnes : fallbackWebReadyCo2Tonnes;
 
             var basePartners = safeCall(function() { return TreeData.getVerifiedPartners(); }, TreeData.verifiedPartners || []);
             var mergedPartners = (basePartners || []).map(function(p) {
                 var slug = Object.keys(slugToId).filter(function(k) { return slugToId[k] === p.id; })[0];
                 var live = slug ? forests.filter(function(f) { return f.slug === slug; })[0] : null;
                 var trees = (live && !live.error) ? live.trees : p.trees;
-                return { id: p.id, name: p.name, baseLocation: p.baseLocation, countries: p.countries, trees: trees, profileUrl: p.profileUrl, co2Tonnes: p.co2Tonnes };
+                var co2Tonnes = (live && Number.isFinite(live.co2Tonnes)) ? live.co2Tonnes : p.co2Tonnes;
+                return { id: p.id, name: p.name, baseLocation: p.baseLocation, countries: p.countries, trees: trees, profileUrl: p.profileUrl, co2Tonnes: co2Tonnes };
             });
 
             var partnerTreesTotal = mergedPartners.reduce(function(sum, p) { return sum + (p.trees || 0); }, 0);
+            var partnerCo2TonnesTotal = mergedPartners.reduce(function(sum, p) { return sum + (p.co2Tonnes || 0); }, 0);
             var verifiedTotal = webReadyTrees + partnerTreesTotal;
             var legacyTrees = safeCall(function() { return TreeData.getLegacyTrees(); }, 0);
             var totalTotal = verifiedTotal + legacyTrees;
+            var totalCo2Kg = Math.round((webReadyCo2Tonnes + partnerCo2TonnesTotal) * 1000);
 
             console.log('[Oasis of Change Dashboard] Live API: Web-Ready', webReadyTrees, 'Partners', partnerTreesTotal);
 
             setText('verified-count', verifiedTotal.toLocaleString());
+            setText('co2-offset', totalCo2Kg.toLocaleString() + '+');
             animateCount(totalTotal);
             updateGoalProgress(totalTotal);
             populatePartnerSection(mergedPartners);
