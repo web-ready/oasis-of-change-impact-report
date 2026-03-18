@@ -22,6 +22,8 @@ Update `assets/js/tree-nation-api.js`:
 
 - Add the forest slug to `FORESTS`.
   - Example: `https://tree-nation.com/profile/denman-place-mall` -> `denman-place-mall`
+- If known, add `forestId` in the same `FORESTS` entry.
+  - This enables the preferred endpoint: `GET /api/forests/{id}` (returns both tree count and CO2 tonnes).
 - Add slug -> partner id in `PARTNER_SLUG_TO_ID`.
   - The mapped value must equal the `id` in `tree-data.js`.
 
@@ -44,6 +46,7 @@ Only if applicable:
 
 This site uses public forest counters:
 
+- `GET https://tree-nation.com/api/forests/{id}` (preferred when ID is known)
 - `GET https://tree-nation.com/api/forests/{slug}/tree_counter`
 - `GET https://tree-nation.com/api/forests/{slug}/co2_counter` (used when available)
 
