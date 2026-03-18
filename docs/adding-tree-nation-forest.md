@@ -48,7 +48,6 @@ This site uses public forest counters:
 
 - `GET https://tree-nation.com/api/forests/{id}` (preferred when ID is known)
 - `GET https://tree-nation.com/api/forests/{slug}/tree_counter`
-- `GET https://tree-nation.com/api/forests/{slug}/co2_counter` (used when available)
 
 In practice, availability can vary by forest/account and environment (for example CORS or endpoint permission behavior). The implementation is:
 

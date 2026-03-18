@@ -1,10 +1,11 @@
 /* Tree-Nation API (public forest counters):
    - GET /api/forests/{id} -> { id, tree_count, co2_compensated_tons } (preferred when forest ID is known)
    - GET /api/forests/{slug}/tree_counter -> { count }
-   - GET /api/forests/{slug}/co2_counter -> { count } (availability can vary by account/permissions)
    TreeData remains the fallback source when API calls are unavailable. */
 var TreeNationAPI = (function () {
     'use strict';
+
+    var LOG_PREFIX = '[TreeNationAPI]';
 
     // ── Configuration ──────────────────────────────────
 
@@ -48,14 +49,6 @@ var TreeNationAPI = (function () {
             });
     }
 
-    function fetchForestCo2BySlug(slug) {
-        return fetch(API_BASE + '/forests/' + slug + '/co2_counter', requestOptions)
-            .then(function (response) {
-                if (!response.ok) throw new Error('Forest CO2 ' + slug + ': HTTP ' + response.status);
-                return response.json();
-            });
-    }
-
     function toNumberOrNull(value) {
         var num = Number(value);
         return Number.isFinite(num) ? num : null;
@@ -82,26 +75,47 @@ var TreeNationAPI = (function () {
     }
 
     function fetchBySlugCounters(forest) {
-        return Promise.all([
-            fetchForestBySlug(forest.slug),
-            fetchForestCo2BySlug(forest.slug).catch(function () { return null; })
-        ]).then(function (results) {
-            return normalizeForestResult(forest, results[0], results[1]);
+        // Keep slug fallback minimal to avoid noisy 422 responses on CO2 endpoints.
+        // Forest IDs are the preferred source for both tree and CO2 counters.
+        return fetchForestBySlug(forest.slug).then(function (treeData) {
+            return normalizeForestResult(forest, treeData, null);
         });
     }
 
     function fetchAllForests() {
+        if (typeof console !== 'undefined' && console.log) {
+            console.log(LOG_PREFIX, 'fetchAllForests start:', FORESTS.length, 'forests');
+        }
+
         var promises = FORESTS.map(function (forest) {
             var preferredFetch = forest.forestId
                 ? fetchForestById(forest.forestId)
-                    .then(function (summary) { return normalizeForestResult(forest, summary, summary); })
-                    .catch(function () { return fetchBySlugCounters(forest); })
-                : fetchBySlugCounters(forest);
+                    .then(function (summary) {
+                        var normalized = normalizeForestResult(forest, summary, summary);
+                        normalized.source = 'id';
+                        normalized.forestId = forest.forestId;
+                        return normalized;
+                    })
+                    .catch(function (idErr) {
+                        if (typeof console !== 'undefined' && console.warn) {
+                            console.warn(LOG_PREFIX, forest.slug, 'ID fetch failed, falling back to slug tree counter:', idErr.message || idErr);
+                        }
+                        return fetchBySlugCounters(forest).then(function (normalized) {
+                            normalized.source = 'slug';
+                            return normalized;
+                        });
+                    })
+                : fetchBySlugCounters(forest).then(function (normalized) {
+                    normalized.source = 'slug';
+                    return normalized;
+                });
 
             return preferredFetch
                 .catch(function (err) {
-                    console.warn('[TreeNationAPI]', forest.slug, err.message);
-                    return { slug: forest.slug, label: forest.label, trees: 0, co2Tonnes: null, error: err.message };
+                    if (typeof console !== 'undefined' && console.warn) {
+                        console.warn(LOG_PREFIX, forest.slug, 'fetch failed:', err.message || err);
+                    }
+                    return { slug: forest.slug, label: forest.label, trees: 0, co2Tonnes: null, source: 'fallback-zero', error: err.message };
                 });
         });
 
@@ -110,7 +124,24 @@ var TreeNationAPI = (function () {
 
     function aggregate(results) {
         var totalTrees = 0;
+        var idSources = 0;
+        var slugSources = 0;
+        var fallbackSources = 0;
         results.forEach(function (r) { totalTrees += r.trees; });
+        results.forEach(function (r) {
+            if (r.source === 'id') idSources += 1;
+            else if (r.source === 'slug') slugSources += 1;
+            else fallbackSources += 1;
+        });
+
+        if (typeof console !== 'undefined' && console.log) {
+            console.log(LOG_PREFIX, 'fetchAllForests done:', {
+                forests: results.length,
+                totalTrees: totalTrees,
+                sources: { id: idSources, slug: slugSources, fallback: fallbackSources }
+            });
+        }
+
         return { forests: results, totalTrees: totalTrees };
     }
 
@@ -119,7 +150,6 @@ var TreeNationAPI = (function () {
         PARTNER_SLUG_TO_ID: PARTNER_SLUG_TO_ID,
         fetchForestBySlug:  fetchForestBySlug,
         fetchForestById:    fetchForestById,
-        fetchForestCo2BySlug: fetchForestCo2BySlug,
         fetchAllForests:    fetchAllForests
     };
 })();

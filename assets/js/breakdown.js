@@ -51,8 +51,10 @@
         recalculate();
         renderAll();
         setText('bd-last-updated', TreeData.lastUpdated);
+        if (typeof console !== 'undefined' && console.log) {
+            console.log('[Oasis of Change Breakdown] Ready (cached), total:', state.grandTotal, 'lastUpdated:', TreeData.lastUpdated);
+        }
         fetchLiveData();
-        if (typeof console !== 'undefined' && console.log) console.log('[Oasis of Change Breakdown] Ready, total:', state.grandTotal);
     }
 
     function recalculate() {
@@ -219,6 +221,9 @@
             return;
         }
 
+        if (typeof console !== 'undefined' && console.log) {
+            console.log('[Oasis of Change Breakdown] Requesting live Tree-Nation counters...');
+        }
         setApiStatus('loading');
 
         TreeNationAPI.fetchAllForests()
@@ -245,6 +250,9 @@
                 recalculate();
                 renderAll();
                 setApiStatus('live');
+                if (typeof console !== 'undefined' && console.log) {
+                    console.log('[Oasis of Change Breakdown] Live counters applied, total:', state.grandTotal);
+                }
             })
             .catch(function (err) {
                 console.warn('[Oasis of Change Breakdown] API unavailable — using cached TreeData:', err.message || err);
