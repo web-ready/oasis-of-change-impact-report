@@ -72,6 +72,10 @@ The `lastUpdated` field at the top reflects when data was last synced.
 
 ---
 
+For forest onboarding and update steps, see `docs/adding-tree-nation-forest.md`.
+
+---
+
 ## License
 
 © Oasis of Change, Inc. All rights reserved.
