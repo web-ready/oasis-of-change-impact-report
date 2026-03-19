@@ -31,8 +31,6 @@ This static site provides donors, partners, and the public with full visibility 
 | Data       | `assets/js/tree-data.js` (planting data) |
 | Integration| Tree-Nation API & widget             |
 
-No build step required — the site runs as plain HTML/CSS/JS and can be served by any static host (e.g. GitHub Pages).
-
 ---
 
 ## Project Structure
@@ -77,15 +75,11 @@ The `lastUpdated` field at the top reflects when data was last synced.
 - **How to add a Tree-Nation forest (video)**  
   Embedded Loom walkthrough:
 
-  <div align="center">
-    <a href="https://www.loom.com/share/e6f0ff85aa2e4316b39a6ea02f69341d" target="_blank" rel="noopener">
-      <img src="https://cdn.loom.com/sessions/thumbnails/e6f0ff85aa2e4316b39a6ea02f69341d-with-play.gif" alt="Loom walkthrough for adding Tree-Nation forests" style="max-width: 100%; border-radius: 12px;" />
-    </a>
-  </div>
+ https://www.loom.com/share/e6f0ff85aa2e4316b39a6ea02f69341d
 
 - **How to find the Tree-Nation forest URL / ID**  
   Internal documentation lives in Atlassian Confluence:  
-  `https://oasisofchange.atlassian.net/wiki/x/AYBQAQ`
+  https://oasisofchange.atlassian.net/wiki/x/AYBQAQ
 
 For the step‑by‑step implementation checklist (files to edit, API mapping, etc.), see `docs/adding-tree-nation-forest.md`.
 
