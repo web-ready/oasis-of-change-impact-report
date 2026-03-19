@@ -58,7 +58,7 @@ const TreeData = {
         { id: "sustainable-www",   name: "Sustainable WWW",                            baseLocation: "Sweden",        trees: 170, co2Tonnes: 24.56, countries: "Tanzania, Kenya, Madagascar, Uganda, India, United States" },
         { id: "mst",               name: "Mittler Senior Technology",                  baseLocation: "United States", trees: 124, co2Tonnes: 16.25, countries: "Tanzania, Senegal, Madagascar, Indonesia, Uganda, Nepal" },
         { id: "ecosearch",         name: "EcoSearch",                                  baseLocation: "Canada",        trees: 101, co2Tonnes: 5.05,  countries: "Madagascar" },
-        { id: "denman-place-mall", name: "Denman Place Mall",                          baseLocation: "Canada",        trees: 2,   co2Tonnes: 0,     countries: "Tanzania" },
+        { id: "denman-place-mall", name: "Denman Place Mall",                          baseLocation: "Canada",        trees: 2,   co2Tonnes: 0,     countries: "Tanzania, Kenya" },
         { id: "gabriel-dalton",    name: "Gabriel Dalton (CEO Personal Forest)", baseLocation: "Canada",        trees: 2,   co2Tonnes: 0,     countries: "Tanzania" }
     ],
 
