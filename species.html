@@ -226,6 +226,22 @@
             max-height: 28rem;
             overflow: auto;
             min-height: 2.5rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb, #6a8179) var(--scrollbar-track, #dfe7e3);
+        }
+        .partner-species-list::-webkit-scrollbar {
+            width: 10px;
+        }
+        .partner-species-list::-webkit-scrollbar-track {
+            background: var(--scrollbar-track, #dfe7e3);
+        }
+        .partner-species-list::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb, #6a8179);
+            border: 2px solid var(--scrollbar-track, #dfe7e3);
+            border-radius: 9999px;
+        }
+        .partner-species-list::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover, #4f665e);
         }
         .partner-species-item {
             display: grid;
@@ -292,44 +308,113 @@
             justify-content: center;
             padding: 1rem;
         }
+        body.species-lightbox-open {
+            overflow: hidden;
+        }
         .species-lightbox.hidden { display: none; }
         .species-lightbox__backdrop {
             position: absolute;
             inset: 0;
-            background: rgba(2, 6, 23, 0.75);
-            backdrop-filter: blur(2px);
+            background: rgba(2, 6, 23, 0.78);
+            backdrop-filter: blur(3px);
         }
         .species-lightbox__panel {
             position: relative;
-            width: min(980px, 95vw);
-            max-height: 90vh;
-            overflow: auto;
+            width: min(980px, 96vw);
+            max-height: min(92vh, 980px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
             border-radius: 1rem;
             background: #FFFFFF;
             border: 1px solid #E5E7EB;
             box-shadow: 0 20px 60px rgba(2, 6, 23, 0.35);
-            padding: 1rem;
+            padding: 0.85rem;
+        }
+        .species-lightbox__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+        .species-lightbox__source-tag {
+            margin: 0;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #065F46;
+            background: #ECFDF5;
+            border: 1px solid #A7F3D0;
+            border-radius: 9999px;
+            padding: 0.2rem 0.55rem;
+            letter-spacing: 0.01em;
         }
         .species-lightbox__close {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.65rem;
-            border: 0;
-            background: transparent;
-            font-size: 1.6rem;
-            line-height: 1;
-            color: #6B7280;
+            border: 1px solid #D1D5DB;
+            background: #FFFFFF;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            line-height: 1.1;
+            color: #374151;
             cursor: pointer;
+        }
+        .species-lightbox__close:hover {
+            background: #F3F4F6;
+            color: #111827;
+        }
+        .species-lightbox__close:focus-visible {
+            outline: 2px solid #10B981;
+            outline-offset: 2px;
+        }
+        .species-lightbox__media {
+            flex: 0 1 auto;
+            min-height: 40vh;
+            max-height: min(58vh, 660px);
+            border-radius: 0.75rem;
+            border: 1px solid #E5E7EB;
+            background:
+                linear-gradient(135deg, #F8FAFC 0%, #EEF2F7 50%, #F8FAFC 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: clamp(0.4rem, 1vw, 0.75rem);
         }
         .species-lightbox__img {
             width: 100%;
-            max-height: 56vh;
+            height: 100%;
+            max-height: calc(min(58vh, 660px) - 1.5rem);
             object-fit: contain;
-            border-radius: 0.75rem;
-            background: #F3F4F6;
-            border: 1px solid #E5E7EB;
+            border-radius: 0.55rem;
+            background: transparent;
         }
-        .species-lightbox__body { margin-top: 0.9rem; }
+        .species-lightbox__body {
+            margin-top: 0.1rem;
+            max-height: min(30vh, 240px);
+            overflow: auto;
+            padding: 0.1rem 0.25rem 0.35rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb, #6a8179) var(--scrollbar-track, #dfe7e3);
+        }
+        .species-lightbox__body::-webkit-scrollbar {
+            width: 10px;
+        }
+        .species-lightbox__body::-webkit-scrollbar-track {
+            background: var(--scrollbar-track, #dfe7e3);
+        }
+        .species-lightbox__body::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb, #6a8179);
+            border: 2px solid var(--scrollbar-track, #dfe7e3);
+            border-radius: 9999px;
+        }
+        .species-lightbox__body::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover, #4f665e);
+        }
         .species-lightbox__title {
             font-size: 1.1rem;
             font-weight: 700;
@@ -341,6 +426,43 @@
             line-height: 1.45;
             color: #374151;
             white-space: pre-line;
+        }
+        .species-lightbox__disclaimer {
+            margin-top: 0.6rem;
+            padding-top: 0.6rem;
+            border-top: 1px solid #E5E7EB;
+            font-size: 0.75rem;
+            line-height: 1.45;
+            color: #6B7280;
+        }
+        @media (max-width: 640px) {
+            .species-lightbox {
+                align-items: stretch;
+                padding: 0.35rem;
+            }
+            .species-lightbox__panel {
+                width: 100%;
+                max-height: 100%;
+                border-radius: 0.85rem;
+                padding: 0.65rem;
+            }
+            .species-lightbox__media {
+                min-height: 36vh;
+                max-height: 48vh;
+            }
+            .species-lightbox__img {
+                max-height: calc(48vh - 1rem);
+            }
+            .species-lightbox__body {
+                max-height: 34vh;
+                padding-right: 0.1rem;
+            }
+            .species-lightbox__title {
+                font-size: 1rem;
+            }
+            .species-lightbox__desc {
+                font-size: 0.88rem;
+            }
         }
     </style>
     <script src="assets/js/rewrite-links.js"></script>

@@ -1,0 +1,1617 @@
+{
+  "note": "Generated snapshot for fast species-page hydration.",
+  "updatedAtIso": "2026-03-21T05:53:37.175Z",
+  "lastUpdated": "March 21st, 2026",
+  "speciesById": {
+    "70": {
+      "average_natural_life_span": 100,
+      "category": {
+        "id": 1,
+        "name": "Fast-growing"
+      },
+      "co2_offset": 10,
+      "co2_offset_period": "0,10",
+      "common_names": "Neem, cornucopia, Indian cedar, Indian lilac, margosa tree, azadirac de l’Inde, margosier, nim",
+      "family": "Meliaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "15,20",
+      "id": 70,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-7aba300708cda60366575edea0d83b34.jpg",
+      "life_time_CO2": 100,
+      "name": "Azadirachta indica",
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "particularities": "Azadirachta indica is a fast growing plantation tree with multiple accepted uses. It will start to produce fruit in 3 to 5 years. It is good for carbon sequestration. Besides food and lumber, it provides wood fuel, tannins, glue, oil, numerous traditional and modern medicines and wildlife habitat. Neem is termite resistant, but most importantly provides valuable organic insecticides used in plantations and in commercial products. It can be planted on very infertile soils.",
+      "planter_likes": "Neem trees are known in Swahili as Muarubaini which means - the tree of 40 uses - It is called this because it is believed to cure 40 different diseases. It is particularly drought resistant and has an adaptation whereby it can lose its leaves in the most extreme dry periods and then grow them back once the rains come.\r\n\r\nNeem is a very drought-resistant species and is used by the community in Bore for a variety of medicinal purposes. It is also valued as cooking fuel and when it is used in this way, the farmers do not need to cut down their existing natural tropical forest. In this locale, neem is probably the best type of tree to grow if our aim is to slow down tropical deforestation.",
+      "price": 1,
+      "price_per_tonne": "10.00000000000000000000",
+      "project_id": 6,
+      "stock": 197321
+    },
+    "184": {
+      "average_natural_life_span": 150,
+      "category": {
+        "id": 3,
+        "name": "Majestic"
+      },
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "common_names": "pondo,  Afrikaans: Opregte-geelhout, Northern Sotho: Mogôbagôba, Xhosa: Umcheya, Zulu: Umkhoba",
+      "family": "Podocarpaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": ",35",
+      "id": 184,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-e4b9e7c3e8b5e7071464c31497ab8aa4.jpg",
+      "life_time_CO2": 50,
+      "name": "Podocarpus latifolius",
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "particularities": "A evergreen forest tree with a straight bole, growing to 35m and occurring in upland rainforest at altitudes of 1500-2400 m. With dense canopy, cone -shaped when young, older trees have large, thick, buttressed trunks. It is often associated with the genus juniperus. Leaves narrow, shinny, dark green, it is a conifer.  It is grown as an ornamental and roadside tree, having a characteristic appearance with its conical shape and bright green glossy leaves",
+      "planter_likes": "Establishes well and resilient to harsh conditions",
+      "price": 0.35,
+      "price_per_tonne": "7.00000000000000000000",
+      "project_id": 32,
+      "stock": 19702
+    },
+    "198": {
+      "average_natural_life_span": 100,
+      "category": {
+        "id": 6,
+        "name": "Medicinal"
+      },
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "common_names": "Forest long-pod Albizia",
+      "family": "Mimosoideae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "height": "15,25",
+      "id": 198,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-5c45b574d2e67.jpg",
+      "life_time_CO2": 50,
+      "name": "Albizia schimperiana",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Albizia schimperiana is large, slow-growing tree, usually growing up to 30 metres tall but occasionally to 35 metres. \r\nThe tree is harvested from the wild, mainly for local use as a medicine and source of wood, soap and dyes. The wood is sometimes traded internationally\r\nThis tropical plant can be found at elevations from 900 - 2,600 metres. In Tanzania it grows in regions with a mean annual temperature in the range 14 - 20°c, and an annual rainfall of at least 1000mm.\r\nThis species has a symbiotic relationship with certain soil bacteria, these bacteria form nodules on the roots and fix atmospheric nitrogen. Some of this nitrogen is utilized by the growing plant but some can also be used by other plants growing nearby.",
+      "planter_likes": "Best for agroforestry and help to fix nitrogen back to the soil.",
+      "price": 0.35,
+      "price_per_tonne": "7.00000000000000000000",
+      "project_id": 41,
+      "stock": 10951
+    },
+    "204": {
+      "average_natural_life_span": 50,
+      "category": {
+        "id": 1,
+        "name": "Fast-growing"
+      },
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "common_names": "Cypress; Mexican cypress",
+      "family": "Cupressaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "20,40",
+      "id": 204,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-5f7341db7144c.jpg",
+      "life_time_CO2": 50,
+      "name": "Cupressus lusitanica",
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "particularities": "Cupressus lusitanica is an evergreen conifer tree with a conic to ovoid-conic crown, growing to 40 m tall. The foliage grows in dense sprays, dark green to somewhat yellow-green in colour. The leaves are scale-like, 2–5 mm long, and produced on rounded (not flattened) shoots. The seed cones are globose to oblong, 10–20 mm long, with four to 10 scales, green at first, maturing brown or grey-brown about 25 months after pollination.\r\n\r\nThe cones may either open at maturity to release the seeds, or remain closed for several years, only opening after the parent tree is killed in a wildfire, allowing the seeds to colonise the bare ground exposed by the fire. The male cones are 3–4 mm long, and release pollen in February–March. In most of its natural environment rainfall occurs with more quantity in summer.",
+      "planter_likes": "Farmers appreciate it for windbreaks, soil erosion control, and its adaptability to various soils and cooler highland climates. Its evergreen, ornamental appearance makes it popular in public spaces and along roads, while its aromatic qualities are also appreciated. Overall, it’s a versatile tree that supports both economic and environmental needs, though careful management is necessary to prevent ecological issues.",
+      "price": 0.35,
+      "price_per_tonne": "7.00000000000000000000",
+      "project_id": 41,
+      "stock": 26327
+    },
+    "212": {
+      "average_natural_life_span": 15,
+      "category": {
+        "id": 2,
+        "name": "Nutritional"
+      },
+      "co2_offset": 2,
+      "co2_offset_period": "0,10",
+      "common_names": "Peach tree",
+      "family": "proteaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "height": "3,7",
+      "id": 212,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-582347a95b1b1.jpg",
+      "life_time_CO2": 20,
+      "name": "Prunus persica",
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "particularities": "Peach tree (Prunus persica) is a deciduous tree native to the region of Northwest China between the Tarim Basin and the north slopes of the Kunlun Shan mountains, where it was first domesticated and cultivated. It bears an edible juicy fruit called a peach or a nectarine.The specific epithet persica refers to its widespread cultivation in Persia, whence it was transplanted to Europe. It belongs to the genus Prunus which includes the cherry, apricot, almond and plum, in the rose family. The peach is classified with the almond in the subgenus Amygdalus, distinguished from the other subgenera by the corrugated seed shel",
+      "planter_likes": "These types of trees are growowing very well in the Usambaras. They are important to improve local communities' economy.",
+      "price": 0.35,
+      "price_per_tonne": "17.50000000000000000000",
+      "project_id": 41,
+      "stock": 0
+    },
+    "727": {
+      "average_natural_life_span": 50,
+      "category": {
+        "id": 4,
+        "name": "Plant"
+      },
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "common_names": "Mangrove, Red Mangrove, rooiwortelboom, true mangrove",
+      "family": "Rhizophoraceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "10,25",
+      "id": 727,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-bf56374d2ad434ccaadc27c2c8955f78.jpg",
+      "life_time_CO2": 50,
+      "name": "Rhizophora mucronata",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Rhizophora mucronata is a small to medium size tree, with strong apical dominance and distinctive aerial roots. It is found in the Indo-Pacific region. Its natural habitat is estuaries and coasts. There are a several benefits provided by Rhizophora mucronata, it protects the coastline from floods and storms, it avoids coast erosion and its medicinal properties have been used for treating a number of diseases.",
+      "planter_likes": "Prior to the start of the project the mangrove forests found in this area were severely impacted by deforestation and forest degradation from charcoal production and wood collection for cooking, construction and other purposes.",
+      "price": 0.35,
+      "price_per_tonne": "7.00000000000000000000",
+      "project_id": 163,
+      "stock": 0
+    },
+    "728": {
+      "average_natural_life_span": 50,
+      "category": {
+        "id": 4,
+        "name": "Plant"
+      },
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "common_names": "Black mangrove",
+      "family": "Rhizophoraceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "10,25",
+      "id": 728,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-d08330f0e778bde1830558ba2c404454.jpg",
+      "life_time_CO2": 50,
+      "name": "Bruguiera gymnorhiza",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Bruguiera gymnorrhiza is an evergreen tree with many pneumatophores roots. It grows on the coats and estuaries in mud, in places well-watered. It is one of the most widely distributed trees in the tropics. It is found in East Africa, Madagascar, Indian Ocean islands, South Asian coast, Australia and it has been introduced in Hawaii. Bruguiera gymnorrhiza wood is known for being waterproof, resistant and tough. It has been used for timber and the bark is high in tannins, so it has also been used for tanning.",
+      "planter_likes": "Prior to the start of the project the mangrove forests found in this area were severely impacted by deforestation and forest degradation from charcoal production and wood collection for cooking, construction and other purposes.",
+      "price": 0.5,
+      "price_per_tonne": "10.00000000000000000000",
+      "project_id": 163,
+      "stock": 0
+    },
+    "729": {
+      "average_natural_life_span": 25,
+      "category": {
+        "id": 4,
+        "name": "Plant"
+      },
+      "co2_offset": 2,
+      "co2_offset_period": "0,10",
+      "common_names": "Yellow mangrove",
+      "family": "Rhizophoraceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "2,9",
+      "id": 729,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-458c08efb1745deaacf72de3d7006b90.jpg",
+      "life_time_CO2": 20,
+      "name": "Ceriops tagal",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Ceriops tagal is a small tree with a distinctive root growth.  It´s a compact branched tree with thin breathing roots. It occurs in estuaries, swamps and lagoons in the coastal areas of the Indian Ocean from Africa to Asia, Australia and the Pacific. Ceriops tagal was once used as a source of tannins and dyes. Nowadays it is still used as a source of these products and as well as medicines, once numerous applications in traditional medicine have been reported.",
+      "planter_likes": "Prior to the start of the project the mangrove forests found in this area were severely impacted by deforestation and forest degradation from charcoal production and wood collection for cooking, construction and other purposes.",
+      "price": 0.35,
+      "price_per_tonne": "17.50000000000000000000",
+      "project_id": 163,
+      "stock": 0
+    },
+    "730": {
+      "average_natural_life_span": 50,
+      "category": {
+        "id": 4,
+        "name": "Plant"
+      },
+      "co2_offset": 2,
+      "co2_offset_period": "0,10",
+      "common_names": "White mangrove, grey mangrove",
+      "family": "Acanthaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "2,10",
+      "id": 730,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-628bb06890b5f.jpg",
+      "life_time_CO2": 20,
+      "name": "Avicennia marina",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "White mangrove is a small tree with extensive root system with 'pencil roots' (breathing roots). The leaves are able to excrete excess salt through pores; consequently salt crystals are frequently present on the leaves. Avicennia marina is found in the coasts of the Indian Ocean, its habitat is sandy shores, estuaries and mud banks. Avicennia marina is a multipurpose tree; it is used in traditional medicine, for preventing coastal erosion and as a source of tannin. It is threatened by the loss of mangrove habitat throughout its range, primarily due to extraction and coastal development, and there has been an estimated 21% decline in mangrove area within this species range since 1980.",
+      "planter_likes": "Prior to the start of the project the mangrove forests found in this area were severely impacted by deforestation and forest degradation from charcoal production and wood collection for cooking, construction and other purposes.",
+      "price": 0.5,
+      "price_per_tonne": "25.00000000000000000000",
+      "project_id": 163,
+      "stock": 0
+    },
+    "1189": {
+      "average_natural_life_span": 90,
+      "category": {
+        "id": 1,
+        "name": "Fast-growing"
+      },
+      "co2_offset": 25,
+      "co2_offset_period": "0,10",
+      "common_names": "Paricá, Bandarra",
+      "family": "Caesalpiniaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "height": "20,35",
+      "id": 1189,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-459cdd4e475611ae0c8ae1b758233de6.webp",
+      "life_time_CO2": 250,
+      "name": "Schizolobium amazonicum",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": null,
+      "planter_likes": "Bandarra is a fast growing species.",
+      "price": 5,
+      "price_per_tonne": "20.00000000000000000000",
+      "project_id": 287,
+      "stock": 109
+    },
+    "1206": {
+      "average_natural_life_span": 30,
+      "category": {
+        "id": 5,
+        "name": "Agroforestry"
+      },
+      "co2_offset": 20,
+      "co2_offset_period": "0,10",
+      "common_names": "Earleaf Acacia",
+      "family": "Fabaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "15,30",
+      "id": 1206,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-5f7ca2bfbc66d.jpg",
+      "life_time_CO2": 200,
+      "name": "Acacia auriculiformis",
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "particularities": "Acacia auriculiformis is a fast-growing evergreen tree with dense foliage and a spreading crown. It grows from 25 to 35 meters tall, in its natural habitat, however more commonly it is 8 to 20 meters tall.\r\nNatural stands are found in Australia, Papua New Guinea and Indonesia, although it is naturalized in Asia, Africa, North America, Central America, the Caribbean, South America and Oceania. The tree is commonly found in the seasonally dry tropical lowlands of the humid and sub-humid zones. The tree is harvested for its wood; it’s used for furniture and for construction; it is extensively used to provide pulp for the paper industry; and it’s a major source of firewood, once it provides very good charcoal. The tree is also harvested from the wild for local use as a medicine. The tree is also an excellent shade tree, it can be planted to provide shelter on beaches and beach fronts.",
+      "planter_likes": null,
+      "price": 2,
+      "price_per_tonne": "10.00000000000000000000",
+      "project_id": 295,
+      "stock": 0
+    },
+    "1367": {
+      "average_natural_life_span": 250,
+      "category": {
+        "id": 1,
+        "name": "Fast-growing"
+      },
+      "co2_offset": 1,
+      "co2_offset_period": "0,10",
+      "common_names": "Pin noir d'Autriche",
+      "family": "PINACEES",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "12,30",
+      "id": 1367,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-52c34afdcb8c90c246b5ca0a41cce3ba.jpg",
+      "life_time_CO2": 10,
+      "name": "Pinus nigra",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Pinus nigra, or Black Pine, is a large, hardy conifer known for its deeply fissured dark bark and long, stiff needles in pairs. It thrives in poor, rocky soils and is resistant to drought, pollution, and wind, making it a popular species for reforestation and erosion control. Native to Southern Europe and the Mediterranean, it provides valuable timber and habitat for wildlife.",
+      "planter_likes": null,
+      "price": 2,
+      "price_per_tonne": "200.00000000000000000000",
+      "project_id": 297,
+      "stock": 7561
+    },
+    "1374": {
+      "average_natural_life_span": 20,
+      "category": {
+        "id": 1,
+        "name": "Fast-growing"
+      },
+      "co2_offset": 10,
+      "co2_offset_period": "0,10",
+      "common_names": "Chinaberry, White Cedar, Persian Lilac, Bead tree",
+      "family": "Meliaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "height": "10,15",
+      "id": 1374,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-5e8f310bd5fdb.jpg",
+      "life_time_CO2": 100,
+      "name": "Melia azedarach",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Melia azedarach is a fast-growing, deciduous tree; it’s typically a medium-sized tree; it can reach around 45 meters tall in moist forests, however in cooler and drier areas it’s more likely to reach from 10 to 15 meters tall; the straight and cylindrical bole can reach from 30 to 40 cm in diameter. It grows in East Asia, in China, India, Sri Lanka, Nepal, Thailand, Laos, Vietnam, Indonesia, Philippines and Australia. The native habitat of the species is lowland and highland rain forest. Melia azedarach is a tree of the subtropical climatic zone, it’s a highly adaptable plant, it can tolerate a wide range of conditions from warm temperate to some frost. It’s a very important tree for local people. The leaves can be eaten, they are used cooked as a pot-herb, in curries and soups. The fruit can also be eaten and it has a sweetish flavor. The tree also provides a wide range of medicinal applications, being largely used in traditional medicine; it can be used as an insecticide and repellent. It’s a very useful timber; the wood is moderately heavy and somewhat durable and is used for making furniture, packing cases and construction. The tree is planted as a pioneer species in reforestation projects. It is also planted as a street tree and ornamental.",
+      "planter_likes": "its aqueous extract reduces the intensity of asthmatic attacks. It is a highly adaptable plant that can tolerate a wide range of conditions from warm temperate with some frost, right through to the humid tropics.",
+      "price": 0.4,
+      "price_per_tonne": "4.00000000000000000000",
+      "project_id": 307,
+      "stock": 0
+    },
+    "1516": {
+      "average_natural_life_span": 150,
+      "category": {
+        "id": 6,
+        "name": "Medicinal"
+      },
+      "co2_offset": 1,
+      "co2_offset_period": "0,10",
+      "common_names": "Indian gooseberry, Amla",
+      "family": "Phyllanthaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "height": "7,18",
+      "id": 1516,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-5f3d29727ad42.png",
+      "life_time_CO2": 10,
+      "name": "Phyllanthus emblica",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "It grows in East Asia, in China, the Indian subcontinent, Myanmar, Thailand, Cambodia, Laos, Vietnam, Malaysia, and Indonesia. It’s a plant mainly of hot, tropical lowlands, succeeding in both humid and semi-arid areas. Indian gooseberry is known for its edible fruit of the same name; the fruits can be eaten raw or cooked, made into desserts or jams. It is considered one of the most important medicinal plants in traditional Asiatic and Indian medicine. All parts of Phyllanthus Emblica are useful in the treatment of various diseases. Among its parts, the most important part is its fruit. The fruit is widely used as a diuretic, laxative, liver tonic, refrigerant, stomachache, and for common cold and fever.",
+      "planter_likes": "It has great importance in traditional Asiatic medicine, not only as an antiscorbutic but also in the treatment of diverse ailments, especially those associated with the digestive organs.",
+      "price": 0.5,
+      "price_per_tonne": "50.00000000000000000000",
+      "project_id": 307,
+      "stock": 0
+    },
+    "1517": {
+      "average_natural_life_span": 45,
+      "category": {
+        "id": 1,
+        "name": "Fast-growing"
+      },
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "common_names": "Lapsi, Hog Plum",
+      "family": "Anacardiaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "height": "15,30",
+      "id": 1517,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-5f3e63979056c.jpg",
+      "life_time_CO2": 50,
+      "name": "Choerospondias axillaris",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Choerospondias axillaris is a large, deciduous, and subtropical tree; it normally grows from 15 to 20 meters tall, although some trees can grow up to 30 meters tall; the bole normally grows around 30 to 40 cm in diameter. Lapsi trees are reported to be native to Nepal and its range includes East Asian: Japan, China, India, Bhutan, Thailand, Cambodia, Laos, and Vietnam. It grows in lowland, hills, and mountain forests and it’s found in secondary forests. It’s found in the wild mainly on wet, deep soils, or on heavy clay or sandy clay soils. Lapsi is a fruit tree and it has been recognized as a potential agroforestry tree. The fruits, high vitamin C content, can be eaten raw or made into juices, ice creams, sweets, and jellies. The fibrous bark can be used for making rope. The wood is soft and is used as a light construction timber, for making general furniture. The wood is also used for fuel. It is also used as a pioneer fruit tree in reforestation projects.",
+      "planter_likes": "Its edible fruit. its a pioneer in reforestation.",
+      "price": 0.5,
+      "price_per_tonne": "10.00000000000000000000",
+      "project_id": 307,
+      "stock": 0
+    },
+    "1519": {
+      "average_natural_life_span": 100,
+      "category": {
+        "id": 4,
+        "name": "Plant"
+      },
+      "co2_offset": 1,
+      "co2_offset_period": "0,10",
+      "common_names": "Indian Bay Leaf",
+      "family": "Lauraceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "10,20",
+      "id": 1519,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-854b413a3ee9f8e6390ee1797bdcbc39.jpg",
+      "life_time_CO2": 10,
+      "name": "Cinnamomum tamala",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Cinnamomum tamala is a small evergreen tree growing from 10 to 15 meters tall; the bole can reach from 20 to 60 cm in diameter. It occurs in East Asia, in China, India, Nepal and Bhutan. It grows in mountain slopes, evergreen broad-leaved forests in valleys. It’s a plant of tropical and subtropical areas in the Himalayas, it prefers a fertile, sandy, moisture-retentive soil. The tree has a range of uses. The bark is used as a spice like the true cinnamon (Cinnamomum verum). The aromatic leaves are dried and used as a flavouring. The dried bark is used to treat stomach-ache and the leaves are used in the treatment of colic and diarrhoea. Essential oils, obtained from the leaves and the bark, are used as food flavourings. The wood is light brown, slightly soft and it has excellent working qualities.",
+      "planter_likes": "its leaves and essential oils. The bark is used as a spice like the true cinnamon. The dried bark is used to treat stomach-ache.",
+      "price": 0.5,
+      "price_per_tonne": "50.00000000000000000000",
+      "project_id": 307,
+      "stock": 0
+    },
+    "1520": {
+      "average_natural_life_span": 60,
+      "category": {
+        "id": 1,
+        "name": "Fast-growing"
+      },
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "common_names": "Black Catechu, Black cutch",
+      "family": "Fabaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "height": "10,20",
+      "id": 1520,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-5f4a317f8962e.jpg",
+      "life_time_CO2": 50,
+      "name": "Acacia catechu",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Acacia catechu is a deciduous tree that can grow from 6 to 10 meters tall; the bole can reach 70 cm in diameter. It’s native from Asia and is valued for the production of tannin. It occurs in East Asia, in China, Pakistan, India, Nepal, Myanmar, and Thailand. It’s a plant for subtropical to tropical areas; it grows in mixed deciduous forests and savannas of lower mountains and hills; it’s common in drier regions on sandy soils of riverbanks and watersheds. The tree is a source of tannin, known as catechu, or cutch, which is extracted from the heartwood; it normally contains around 55 to 60% tannin and it can be used for tanning, preserving fishing nets and ropes, and dyeing cotton, silk, paper, and leather. The plant is antiseptic and astringent, commonly used in traditional medicine. The bark exudes a good quality gum, considered one of the best substitutes for gum Arabic. The tree also provides a useful timber; the wood is very strong, hard, and durable; and the wood is also ideal for charcoal.",
+      "planter_likes": "Seeds contain water-soluble mucilage (6.8%); a good protein source. It is a good fodder tree and is extensively lopped to feed goats and at times cattle. Khersal, a crystalline form of cutch sometimes found deposited in cavities of the wood is used medicinally for the treatment of coughs and sore throat.",
+      "price": 0.5,
+      "price_per_tonne": "10.00000000000000000000",
+      "project_id": 307,
+      "stock": 0
+    },
+    "1729": {
+      "average_natural_life_span": 50,
+      "category": {
+        "id": 5,
+        "name": "Agroforestry"
+      },
+      "co2_offset": 1,
+      "co2_offset_period": "0,10",
+      "common_names": "Oranges, Lemon, Chungwa",
+      "family": "Rutaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 3,
+        "name": "Semi-evergreen"
+      },
+      "foliage_type": {
+        "id": 3,
+        "name": "Semi-evergreen"
+      },
+      "height": "3,6",
+      "id": 1729,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-67d34f9e50003b5fb79cd6aad4a79dcb.webp",
+      "life_time_CO2": 10,
+      "name": "Citrus limon",
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "particularities": "The lemon is a small evergreen tree. The fruit and its juice is used for cooking and drink purposes throughout the world. The pulp and rind are used in cooking and baking. The juice contains about 5% to 6% citric acid, which is why lemons have a sour taste.Lemon juice an inexpensive acid used in science experiments, electrical conductance and in cleaning products. Lemon juice can act as a short-term preservative on foods that tend to oxidize and turn brown after being cut, such as apples or avocados.",
+      "planter_likes": "Fruits are richer in vitamin C. Being highly  marketable for the farmers, the business can be a good pivot to extreme poverty graduation.",
+      "price": 0.35,
+      "price_per_tonne": "35.00000000000000000000",
+      "project_id": 361,
+      "stock": 0
+    },
+    "1730": {
+      "average_natural_life_span": 100,
+      "category": {
+        "id": 6,
+        "name": "Medicinal"
+      },
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "common_names": "Markamea, East African Tulip, Nile tulip, Nile trumpet or siala tree",
+      "family": "Bignoniaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "10,15",
+      "id": 1730,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-bcf672c972ff4d509739ddfac71f221e.jpg",
+      "life_time_CO2": 50,
+      "name": "Markhamia lutea",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Markhamia lutea is a fast-growing evergreen small tree; it can grow from 10 to 15 meters tall, although some trees have been reported to reach 40 meters tall; the bole can reach up to 70 cm in diameter. It can be found in East Africa: in Ethiopia, Kenya, Uganda, Rwanda and Tanzania. It grows in savanna forests and in montane forests. Roots, bark and leaves are used in traditional medicine. It’s an important agroforestry tree; it’s used as shade tree in crops; it’s useful for erosion control, soil conservation and provides good mulch. It is also planted as an ornamental tree in gardens and parks.",
+      "planter_likes": "Being ant venomous the tree gain popularity in many east African communities. It is climatic resilient, which makes it suitable for quick restoration of highly destroyed forest parts.",
+      "price": 0.35,
+      "price_per_tonne": "7.00000000000000000000",
+      "project_id": 361,
+      "stock": 48237
+    },
+    "1741": {
+      "average_natural_life_span": 100,
+      "category": {
+        "id": 7,
+        "name": "Endangered"
+      },
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "common_names": "Forest natal-mahogany, Kwingwina",
+      "family": "Meliaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "10,25",
+      "id": 1741,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-6089e1e5b4970.jpg",
+      "life_time_CO2": 50,
+      "name": "Trichilia dregeana",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Trichilia dregeana is an essential component of its native habitat. Trichilia dregeana produces round, fleshy fruits that turn from green to red or purple as they ripen. The fruits are known to attract various bird species. Traditional medicine has utilized parts of this tree for various remedies, including treating skin conditions and gastrointestinal issues. Apart from providing food to bird species, the tree plays a role in forest ecology as a canopy or sub-canopy species, helping maintain the forest microclimate and supporting understory vegetation.",
+      "planter_likes": "Medicinally, various plant parts are used in the treatment of lumbago, leprosy, sleeplessness, inflammation, cuts, rheumatism, bruises, eczema, fever, intestinal worms, colds, infertility, dysentery, diarrhea, scabies, and back pain caused by kidney problems. The fruits are eaten raw, cooked as a vegetable, or made into a sweet drink or sauce.",
+      "price": 0.35,
+      "price_per_tonne": "7.00000000000000000000",
+      "project_id": 361,
+      "stock": 0
+    },
+    "1746": {
+      "average_natural_life_span": 100,
+      "category": {
+        "id": 8,
+        "name": "Fauna protection"
+      },
+      "co2_offset": 2,
+      "co2_offset_period": "0,10",
+      "common_names": "Wild fig",
+      "family": "Moraceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "6,21",
+      "id": 1746,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-9fa032ed0b05ca7cadd021d4af9042f8.jpg",
+      "life_time_CO2": 20,
+      "name": "Ficus thonningii",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "The species has diverse economic and environmental uses across many faming and pastoral communities in Africa. In some dryland areas in Africa for example, it is a very good source of dry season livestock fodder, because it produces highly nutritious foliage in large amouns all year round. Parts of the plant edible for livestock include, leaves, twigs and barks, and their nutirional value varies with season",
+      "planter_likes": "Multipurpose tree, it offers fruits, medicinal virtues and the various commodities it can supply. It is often planted to offer cover from the scorching sun in recreational areas, market centres and schoolyards. It can also be planted to provide shelter during the cold winter months",
+      "price": 0.35,
+      "price_per_tonne": "17.50000000000000000000",
+      "project_id": 361,
+      "stock": 0
+    },
+    "1861": {
+      "average_natural_life_span": 50,
+      "category": {
+        "id": 2,
+        "name": "Nutritional"
+      },
+      "co2_offset": 1,
+      "co2_offset_period": "0,10",
+      "common_names": "Blackthorn or sloe",
+      "family": "Rosaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "height": "1,5",
+      "id": 1861,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-610925474c48e.jpg",
+      "life_time_CO2": 10,
+      "name": "Prunus spinosa",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Prunus spinosa, commonly known as blackthorn or sloe, is a deciduous shrub or small tree that offers several benefits when planted. It is a hardy plant that requires minimal care once established. It can tolerate a range of soil conditions, including poor or chalky soils, and is relatively resistant to pests and diseases. It is native to Europe, western Asia, and northwest Africa. It is commonly found in hedgerows, woodlands, and scrublands throughout its native range. The fruits of blackthorn, known as sloes, have been used for centuries to make sloe gin, a traditional British liqueur.",
+      "planter_likes": "One of the earliest trees to flower, blackthorn is a vital source of nectar for bees in the spring. It is also a foodplant specific to many butterflies and moths, such as the brown hairstreak and the black hairstreak, which is in serious decline in the UK. The plant is well-adapted to a variety of climates and soil conditions, making it a versatile choice for various landscape situations. It provides support to wildlife, food and shelter. The shrub, with its long, sharp thorns, is traditionally used in Britain and other parts of northern Europe to make a cattle-proof hedge.",
+      "price": 5,
+      "price_per_tonne": "500.00000000000000000000",
+      "project_id": 391,
+      "stock": 738
+    },
+    "2068": {
+      "average_natural_life_span": 25,
+      "category": {
+        "id": 5,
+        "name": "Agroforestry"
+      },
+      "co2_offset": 2,
+      "co2_offset_period": "0,10",
+      "common_names": "Blackthorn, Swarthaak, Acacia, Senegalia mellifera",
+      "family": "Fabaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "height": "5,9",
+      "id": 2068,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-61d45abd26786.jpg",
+      "life_time_CO2": 20,
+      "name": "Acacia mellifera",
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "particularities": "Acacia mellifera is a very thorny shrub to small tree, 2-5 m tall. Crown rounded or flat and spreading, with branches that may reach down to the ground. Bark light to dark grey and longitudinally fissured, fissures generally darker.",
+      "planter_likes": "In Africa, is used as fencing, livestock feed and building material for huts. It flowers are sources of nectar for honey-producing bees. The wood is prized also for fuel and making charcoal. It is widely used in traditional African medicine. The plant contains the psychoactive chemical DMT.",
+      "price": 0.5,
+      "price_per_tonne": "25.00000000000000000000",
+      "project_id": 449,
+      "stock": 0
+    },
+    "2070": {
+      "average_natural_life_span": 25,
+      "category": {
+        "id": 5,
+        "name": "Agroforestry"
+      },
+      "co2_offset": 2,
+      "co2_offset_period": "0,10",
+      "common_names": "Gum acacia, Gum arabic tree, Sudan gum and Sudan gum arabic, also known as Senegalia senegal",
+      "family": "Fabaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "height": "5,15",
+      "id": 2070,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-19e3e829933fcfa1d0e30d74a2b3d5a9.jpg",
+      "life_time_CO2": 20,
+      "name": "Acacia senegal",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "The tree is of great economic importance for the gum arabic it produces which is used as a food additive, in crafts, and as a cosmetic. The gum is drained from cuts in the bark",
+      "planter_likes": "Acacia is particularly valued for agroforestry - improving soil due to nitrogen fixation and the accumulation of organic matter it has considerable economic importance for its gum and has a long tradition of trading.",
+      "price": 0.5,
+      "price_per_tonne": "25.00000000000000000000",
+      "project_id": 449,
+      "stock": 136
+    },
+    "2071": {
+      "average_natural_life_span": 20,
+      "category": {
+        "id": 5,
+        "name": "Agroforestry"
+      },
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "common_names": "Palo verde, Mexican palo verde, Parkinsonia, Jerusalem thorn, Jelly bean tree, Palo de rayo, and Retama",
+      "family": "Fabaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "4,10",
+      "id": 2071,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-ec4f9d9a4ce79ef516d29b7111025094.jpg",
+      "life_time_CO2": 50,
+      "name": "Parkinsonia aculeata",
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "particularities": "Parkinsonia aculeata is a small and spiny evergreen tree with an open and spreading crown; it can grow from 4 to 10 meters tall with a short and often crooked trunk that can reach up to 40 cm in diameter, often branching near the ground. It's a plant of the semi-arid tropics and subtropics with a great temperature range, the tree is fast-growing but short-lived and it’s native to South, Central and North America. The tree is occasionally harvested for local use as food. The seeds can be eaten raw or cooked and are rich in protein. The fruit can be eaten raw, it has a sweet pulp, up to 60% sugar. The leaf, fruit and stem decoctions are taken orally to treat fever in traditional medicine.",
+      "planter_likes": "The tree is used for erosion control, soil stabilization and reforestation in arid areas once it’s able to grow in very harsh conditions. It’s also used as a hedge and as an attractive ornamental with unusual foliage and vivid flowers.",
+      "price": 0.5,
+      "price_per_tonne": "10.00000000000000000000",
+      "project_id": 449,
+      "stock": 0
+    },
+    "2072": {
+      "average_natural_life_span": 45,
+      "category": {
+        "id": 2,
+        "name": "Nutritional"
+      },
+      "co2_offset": 1,
+      "co2_offset_period": "0,10",
+      "common_names": "Lemon tree",
+      "family": "Rutaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "3,6",
+      "id": 2072,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-2193c329916608f64ba2de339ce8895d.jpg",
+      "life_time_CO2": 10,
+      "name": "Citrus limon",
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "particularities": "The lemon is a small evergreen tree. The fruit and its juice is used for cooking and drink purposes throughout the world. The pulp and rind are used in cooking and baking. The juice contains about 5% to 6% citric acid, which is why lemons have a sour taste.Lemon juice an inexpensive acid used in science experiments, electrical conductance and in cleaning products. Lemon juice can act as a short-term preservative on foods that tend to oxidize and turn brown after being cut, such as apples or avocados.",
+      "planter_likes": "A very popular fruit with a wide range of uses, the plant has been under cultivation for at least 1,000 years, having been first recorded in China around 1,000 AD. It is widely grown for its edible fruit in warm temperate to tropical zones.",
+      "price": 0.35,
+      "price_per_tonne": "35.00000000000000000000",
+      "project_id": 450,
+      "stock": 0
+    },
+    "2208": {
+      "average_natural_life_span": 50,
+      "category": {
+        "id": 2,
+        "name": "Nutritional"
+      },
+      "co2_offset": 10,
+      "co2_offset_period": "0,10",
+      "common_names": "Black plum",
+      "family": "Myrtaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "10,25",
+      "id": 2208,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-fe22be272913a264077c640735af4377.jpg",
+      "life_time_CO2": 100,
+      "name": "Syzygium cumini",
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "particularities": "Syzygium cumini is native to the Indian subcontinent and Southeast Asia. It is an evergreen tree that produces small, fragrant white flowers and purple-black fruits. The tree is known for its dense foliage and is commonly used for shade and ornamental purposes.",
+      "planter_likes": "Syzygium cumini, commonly known as Malabar plum, Java plum, black plum, jamun or jambolan, is an evergreen tropical tree in the flowering plant family Myrtaceae, and favored for its fruit, timber, and ornamental value",
+      "price": 1,
+      "price_per_tonne": "10.00000000000000000000",
+      "project_id": 41,
+      "stock": 28024
+    },
+    "2213": {
+      "average_natural_life_span": 200,
+      "category": {
+        "id": 5,
+        "name": "Agroforestry"
+      },
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "common_names": "Parachichi",
+      "family": "Lauraceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "9,20",
+      "id": 2213,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-6540754c056ee2208423c0b486386f24.jpg",
+      "life_time_CO2": 50,
+      "name": "Persea americana",
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "particularities": "The avocado is a tree that is native to South Central Mexico, classified as a member of the flowering plant family Lauraceae. Avocado also refers to the tree's fruit, which is botanically a large berry containing a single see. Avocados are commercially valuable and are cultivated in tropical and Mediterranean climates throughout the world. They have a green-skinned, fleshy body that may be pear-shaped, egg-shaped, or spherical. Commercially, they ripen after harvesting. Avocado trees are partially self-pollinating and often are propagated through grafting to maintain a predictable quality and quantity of the fruit.",
+      "planter_likes": "The tree is good for agroforestry since it will provide income for the farmer  as a cashcrop. It is fast growing  and will enhance food security.\r\nThe tree is not allelopathic, the fruits are richer in nutrients important for human heath improvement. Shed and littered leaves are such important ingredients for soil revitalization. Flowering time attracts bees potential to honey business.",
+      "price": 0.35,
+      "price_per_tonne": "7.00000000000000000000",
+      "project_id": 32,
+      "stock": 3329
+    },
+    "2286": {
+      "average_natural_life_span": 450,
+      "category": {
+        "id": 1,
+        "name": "Fast-growing"
+      },
+      "co2_offset": 15,
+      "co2_offset_period": "0,10",
+      "common_names": "Eastern White Pine, White pine",
+      "family": "Pinaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": ",67",
+      "id": 2286,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-624f491569076.jpg",
+      "life_time_CO2": 150,
+      "name": "Pinus strobus",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Pinus strobus is an evergreen tree with a conical crown that becomes rounded to flatten with age; it can grow up to 60 meters tall; the straight, cylindrical trunk can reach up to 180 cm in diameter. It is native to Central and Eastern North America.",
+      "planter_likes": "The plant has a wide range of traditional uses, being harvested for food, medicines, and a range of various materials. The seeds can be eaten raw or cooked and is mainly used as a flavoring in cooking. Pinus strobus is valued especially for its antiseptic properties, used extensively in the treatment of skin complaints, wounds, and burns. It is also considered to be very beneficial to the respiratory system, used in treating coughs and colds. It is a very important commercial source of timber. A tan or green dye is obtained from the needles. The tree is also grown as an ornamental and is used to provide shelter and to restore damaged environments.",
+      "price": 4,
+      "price_per_tonne": "26.66666666666700000000",
+      "project_id": 386,
+      "stock": 0
+    },
+    "2350": {
+      "average_natural_life_span": 100,
+      "category": {
+        "id": 2,
+        "name": "Nutritional"
+      },
+      "co2_offset": 1,
+      "co2_offset_period": "0,10",
+      "common_names": "Mastic (Eng), lentisco, charneca, almáciga (Spa), mata, llentiscle, lentisc (Cat), legeltxor, legeltxorra (Baq), almecegueira, arceira, lentisco (Glg), aroeira, lentisco-verdadeiro (Por).",
+      "family": "Anacardiaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "1,5",
+      "id": 2350,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-a694107ff1dbbc8f06a7d8b8ff2c0f91.jpg",
+      "life_time_CO2": 10,
+      "name": "Pistacia lentiscus",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Native to the Mediterranean region, Pistacia lentiscus is a hardy shrub or small tree known for its aromatic resin, \"mastic,\" which has been used for centuries in medicine, food, and cosmetics. It thrives in dry, rocky soils and plays a crucial role in Mediterranean ecosystems.",
+      "planter_likes": "Pistacia lentiscus is a shrub or dioecious tree, with separate male and female plants, evergreen from 1 to 5 m high; the bole can be around 15 cm in diameter. The tree is indigenous to the Mediterranean coastal region from Syria to Spain, and the Greek archipelago, but it also grows in Portugal, Morocco and the Canary Islands. It grows in open woods and scrub on dry hillsides, usually by the coast. A resin, called 'mastic', is obtained from incisions made into the bark of the trunk, but not into the wood. It’s known in Greece as “tears of Chios,” being traditionally produced on the island of Chios. The odour is agreeable and the taste is resinous, when chewed it becomes a soft, white, opaque gum and it can easily be masticated. An edible oil is also obtained from the seeds. Mastic is used in herbal medicine; the resin is analgesic, diuretic, expectorant, odontalgic, sedative and stimulant.",
+      "price": 7,
+      "price_per_tonne": "700.00000000000000000000",
+      "project_id": 212,
+      "stock": 359
+    },
+    "2415": {
+      "average_natural_life_span": 100,
+      "category": {
+        "id": 7,
+        "name": "Endangered"
+      },
+      "co2_offset": 1,
+      "co2_offset_period": "0,10",
+      "common_names": "Tabaquillo, Queñoa",
+      "family": "Rosaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "3,15",
+      "id": 2415,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-3c8ab3537a6f4ccab0e10f1aea4ae994.jpg",
+      "life_time_CO2": 20,
+      "name": "Polylepis australis",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Polylepis australis is native to the Argentinian Andes, forming high-altitude woodlands. According to the United Nations Environment Programme, forests dominated by Polylepis belong to the most endangered tropical and subtropical mountain forest ecosystems of the world. They are restricted to the high mountains of South America where the use of fire to promote grass re-growth, domestic animal grazing, removal of timber and firewood, and soil erosion have reduced these forests to isolated patches.",
+      "planter_likes": "Tabaquillo forests are truly magical places, they have unique energy, and they are sacred to us. They are also home and refuge for hundreds of native animal and plant species. Filled with springs and streams, they are oases of life, shade, humidity, and microclimate in the Sierras de Córdoba. They are vital for the maintenance of the mountainous ecosystems in which they are found: they protect the soil from erosion, contribute to the proper movement of water, and constitute a unique habitat for other species that are found under their shadow. Polylepis australis belongs to high-altitude forests, being native to this habitat and one of the few species that adapts to survive in this habitat.  We started working with Polylepis australis because it is a pioneer at the succession process for the ecosystem restoration.  What changes once we start working on reforestation and conservation of the land is that there is also a lot of pasture and other herbs growing that help to restore soil organic matter, avoid soil erosion and impact on water retention capacity on the mountains. We have some references where Polylepis australis is planted to stop erosion and have good results. Also the one with the most experience in terms of production from seed and there is a lot to research to work on other species and this high-altitud ecosistem restoration.",
+      "price": 2.5,
+      "price_per_tonne": "125.00000000000000000000",
+      "project_id": 510,
+      "stock": 8616
+    },
+    "2905": {
+      "average_natural_life_span": 500,
+      "category": {
+        "id": 3,
+        "name": "Majestic"
+      },
+      "co2_offset": 10,
+      "co2_offset_period": "0,10",
+      "common_names": "Sessile Oak",
+      "family": "Fagaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "height": "20,40",
+      "id": 2905,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-c41594fb1c5e55eb3c0d227480062e9d.webp",
+      "life_time_CO2": 100,
+      "name": "Quercus petraea",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Quercus petraea, commonly known as sessile oak or durmast oak, is a species of deciduous tree in the beech family, Fagaceae. It is native to Europe and parts of western Asia. Sessile oak is often found in a variety of habitats, including woodlands, forests, and mixed woodlands. It is typically associated with well-drained soils and can grow on a range of soil types. It generally grows as a medium to large-sized tree, reaching heights of about 20-40 meters tall. Sessile oak contributes to biodiversity and supports a range of organisms in its ecosystem, from insects to larger animals. Due to its majestic size and attractive foliage, Quercus petraea is sometimes planted in parks and large gardens as an ornamental tree. It provides shade and a sense of natural beauty to outdoor spaces.",
+      "planter_likes": "The acorns of sessile oak are an important food source for various wildlife, including birds, mammals, and insects. They provide sustenance during the fall and winter months. The wood of Quercus petraea is strong, durable, and has been historically used for various purposes, including construction, furniture-making, and barrel production. Sessile oak has cultural significance in various regions. It has been associated with traditions, folklore, and rituals. Various parts of the sessile oak, including its bark and leaves, have been used in traditional herbal medicine for their potential astringent and anti-inflammatory properties.",
+      "price": 7.8,
+      "price_per_tonne": "78.00000000000000000000",
+      "project_id": 669,
+      "stock": 0
+    },
+    "2924": {
+      "average_natural_life_span": 100,
+      "category": {
+        "id": 7,
+        "name": "Endangered"
+      },
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "common_names": "African Cherry; Prunus; Pygeum; Red Stinkwood",
+      "family": "Rosaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "10,40",
+      "id": 2924,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-318f0858bf23cc33abb3c69b69676a24.webp",
+      "life_time_CO2": 50,
+      "name": "Prunus africana",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Medium to large evergreen tree native to Afromontane forests of sub-Saharan Africa, typically occurring at higher elevations; characterized by a straight bole, dark fissured bark, and small white flowers, with slow natural regeneration in undisturbed forests. \r\nThe demand for its bark has led to concerns about the sustainability of its populations in the wild. Efforts have been made to promote sustainable harvesting practices and protect the species.",
+      "planter_likes": "The fruits of Prunus africana are small, ovoid drupes that start green and mature to a dark reddish-purple color. The fruits are not typically consumed by humans but are an important food source for various wildlife. The tree has local medicinal uses and provides a good quality wood mainly used locally. The tree can also be used for erosion control, shade, windbreak and as an ornamental.",
+      "price": 0.35,
+      "price_per_tonne": "7.00000000000000000000",
+      "project_id": 269,
+      "stock": 29656
+    },
+    "2925": {
+      "average_natural_life_span": 100,
+      "category": {
+        "id": 7,
+        "name": "Endangered"
+      },
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "common_names": "African yellow-wood, Usambara afrocarpus",
+      "family": "Podocarpaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "15,30",
+      "id": 2925,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-131d355902bda8e27b53189b416dd0b7.jpg",
+      "life_time_CO2": 50,
+      "name": "Afrocarpus usambarensis",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Afrocarpus usambarensis, formerly known as Podocarpus usambarensis, is a coniferous tree from the family Podocarpaceae; it is native to Eastern Africa, particularly in Kenya and Tanzania. It is classified as Endangered, it suffers from habitat loss due to deforestation, logging, and land conversion.",
+      "planter_likes": "As a native tree species, Afrocarpus usambarensis plays an essential role in maintaining the structure and function of the ecosystem. The tree provides habitat, food, and shelter for numerous animal species and contributes to the overall biodiversity of the region. It can reach up to 30 meters in height. It is highly valued for its timber which is used in the construction of houses.",
+      "price": 0.35,
+      "price_per_tonne": "7.00000000000000000000",
+      "project_id": 269,
+      "stock": 16567
+    },
+    "2996": {
+      "average_natural_life_span": 100,
+      "category": {
+        "id": 7,
+        "name": "Endangered"
+      },
+      "co2_offset": null,
+      "co2_offset_period": "0,10",
+      "common_names": "African Cherry; Prunus; Pygeum; Red Stinkwood",
+      "family": "Rosaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "10,24",
+      "id": 2996,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-40e21420fedd41b8d45739b7a2b81eb8.webp",
+      "life_time_CO2": 50,
+      "name": "Prunus africana",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Prunus africana is a fast-growing, medium to large evergreen tree that normally grows from 10 to 24 meters tall. It’s a tree of higher elevations, grows in the humid and semi-humid highlands, and requires a sunny position, being widely distributed in Africa. The bark is highly valued for its medicinal properties, particularly as a treatment for benign prostatic hyperplasia and prostate gland hypertrophy. Prunus africana is considered a vulnerable species due to overharvesting of its bark for medicinal use. The demand for its bark has led to concerns about the sustainability of its populations in the wild. Efforts have been made to promote sustainable harvesting practices and protect the species.",
+      "planter_likes": "The fruits of Prunus africana are small, ovoid drupes that start green and mature to a dark reddish-purple color. The fruits are not typically consumed by humans but are an important food source for various wildlife. The tree has local medicinal uses and provides a good quality wood mainly used locally. The tree can also be used for erosion control, shade, windbreak and as an ornamental.",
+      "price": 1,
+      "price_per_tonne": "20.00000000000000000000",
+      "project_id": 682,
+      "stock": 61102
+    },
+    "3022": {
+      "average_natural_life_span": 150,
+      "category": {
+        "id": 2,
+        "name": "Nutritional"
+      },
+      "co2_offset": 1,
+      "co2_offset_period": "0,10",
+      "common_names": "Clove, Clove Tree",
+      "family": "Myrtaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "8,20",
+      "id": 3022,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-fe3c9474261ec4e0dbc3cd007fff5764.jpg",
+      "life_time_CO2": 10,
+      "name": "Syzygium aromaticum",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Syzygium aromaticum, commonly known as cloves, is a spice that is derived from the flower buds of the clove tree. The clove tree is an evergreen tree that can grow up to 8-12 meters in height. Cloves are known for their strong, sweet, and aromatic flavor and aroma. Cloves have been used for their potential medicinal properties for centuries. Clove essential oil is extracted from the clove buds and is used in aromatherapy and traditional medicine. loves are rich in antioxidants, which may contribute to their potential health benefits.",
+      "planter_likes": "Culinary Use: Cloves are a widely used spice in various cuisines around the world. They are often used in both sweet and savory dishes, such as curries, desserts, pickles, and beverages. Cloves are a key ingredient in many spice blends and are used to add flavor to meats, soups, and rice dishes.\r\nTraditional Medicine: Cloves have been used in traditional medicine systems for various purposes, including as a digestive aid and for respiratory health.",
+      "price": 2,
+      "price_per_tonne": "200.00000000000000000000",
+      "project_id": 692,
+      "stock": 7906
+    },
+    "3031": {
+      "average_natural_life_span": 150,
+      "category": {
+        "id": 3,
+        "name": "Majestic"
+      },
+      "co2_offset": 15,
+      "co2_offset_period": "0,10",
+      "common_names": "European beech",
+      "family": "Fagaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "height": "25,50",
+      "id": 3031,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-500f6f21165df4f85a36efc0cced76bd.webp",
+      "life_time_CO2": 150,
+      "name": "Fagus sylvatica",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Fagus sylvatica, commonly known as European beech, is a deciduous tree native to Europe. European beech is a large tree that can reach heights of up to 40 meters or more. It has a straight, tall trunk and a dense, rounded crown. European beech is adapted to a wide range of soil types and can be found in various forest ecosystems, from lowlands to mountainous regions. European beech forests are important for biodiversity conservation in Europe. They provide habitat for a variety of plant and animal species.",
+      "planter_likes": "Beech trees can grow really tall, reaching heights of up to 35 meters, with light gray-colored, pillar-like trunks. Old specimens host various bird and mammal species in their holes. Their fruits, beechnuts, represent an important food source for mammals. During fruiting years, bears, wild boars, and small furry creatures like squirrels, voles, and mice gather beneath the beech trees to eat and collect as many nuts as possible before the winter months.",
+      "price": 2.2,
+      "price_per_tonne": "14.66666666666700000000",
+      "project_id": 690,
+      "stock": 3731
+    },
+    "3043": {
+      "average_natural_life_span": 50,
+      "category": {
+        "id": 4,
+        "name": "Plant"
+      },
+      "co2_offset": 2,
+      "co2_offset_period": "0,10",
+      "common_names": "White mangrove, grey mangrove",
+      "family": "Acanthaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "2,10",
+      "id": 3043,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-75a8090307472a1f7fcb2bee38662113.jpg",
+      "life_time_CO2": 20,
+      "name": "Avicennia marina",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "White mangrove is a small tree with extensive root system with 'pencil roots' (breathing roots). The leaves are able to excrete excess salt through pores; consequently salt crystals are frequently present on the leaves. Avicennia marina is found in the coasts of the Indian Ocean, its habitat is sandy shores, estuaries and mud banks. Avicennia marina is a multipurpose tree; it is used in traditional medicine, for preventing coastal erosion and as a source of tannin. It is threatened by the loss of mangrove habitat throughout its range, primarily due to extraction and coastal development, and there has been an estimated 21% decline in mangrove area within this species range since 1980.",
+      "planter_likes": "Avicennia marina has a robust root system that helps stabilize coastal soil and prevent erosion. The dense mangrove vegetation acts as a natural buffer against storm surges, reducing the impact of these natural disasters on coastal communities. Coastal communities often rely on mangroves for traditional resource extraction activities, such as fishing, honey collection, and wood harvesting, providing livelihoods and sustenance.",
+      "price": 0.5,
+      "price_per_tonne": "25.00000000000000000000",
+      "project_id": 704,
+      "stock": 0
+    },
+    "3046": {
+      "average_natural_life_span": 80,
+      "category": {
+        "id": 1,
+        "name": "Fast-growing"
+      },
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "common_names": "Jack Pine",
+      "family": "Pinaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "9,22",
+      "id": 3046,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-e5b87eeda4ea849740267111b47783fa.webp",
+      "life_time_CO2": 50,
+      "name": "Pinus banksiana",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Pinus banksiana, commonly known as jack pine, is a species of pine tree native to North America. Jack pine is a medium-sized tree, typically reaching heights of 12 to 20 meters. This species is well-adapted to thrive in nutrient-poor soils and is often found in dry, sandy, or rocky areas. It is a pioneer species, meaning it is one of the first to colonize areas after disturbances like fires. This species is primarily found in North America, particularly in the northern United States and Canada.",
+      "planter_likes": "Jack pine plays a crucial ecological role in reforesting areas disturbed by fire. Its cones' adaptation to open and release seeds in response to heat helps it dominate post-fire landscapes. The seeds of jack pine are an essential food source for certain wildlife species, including red squirrels and some birds. Jack pine wood is used for various purposes, including construction, paper production, and as fuelwood.",
+      "price": 1.4,
+      "price_per_tonne": "28.00000000000000000000",
+      "project_id": 705,
+      "stock": 19068
+    },
+    "3060": {
+      "average_natural_life_span": 100,
+      "category": {
+        "id": 8,
+        "name": "Fauna protection"
+      },
+      "co2_offset": 2,
+      "co2_offset_period": "0,10",
+      "common_names": "Smooth Mesquite, Torréon Mesquite, Mezquite Blanco, Mezquite",
+      "family": "Fabaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "height": "5,15",
+      "id": 3060,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-b0c631508372f2545b6be0513d8de643.jpg",
+      "life_time_CO2": 20,
+      "name": "Prosopis laevigata",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Prosopis laevigata, commonly known as \"Smooth Mesquite\" or \"Torréon Mesquite,\" is a tree species belonging to the Fabaceae family. It is native to North and Central America, particularly Mexico. It's a medium-sized deciduous tree that typically reaches heights of 5 to 12 meters. Its canopy is often broad and rounded, providing ample shade. This tree species is well-adapted to arid and semi-arid environments. It is often found in deserts, grasslands, and scrublands.",
+      "planter_likes": "The pods of Prosopis laevigata are an essential food source for various animals, including birds, rodents, and insects. The tree also plays a role in nitrogen fixation, which benefits the surrounding ecosystem. Prosopis laevigata is known for its ability to tolerate drought and poor soil conditions. While Prosopis laevigata is not considered globally endangered, overgrazing and habitat degradation can impact local populations. Conservation efforts may be needed to ensure the health of mesquite populations in some areas.",
+      "price": 1.7,
+      "price_per_tonne": "85.00000000000000000000",
+      "project_id": 694,
+      "stock": 14470
+    },
+    "3061": {
+      "average_natural_life_span": 50,
+      "category": {
+        "id": 8,
+        "name": "Fauna protection"
+      },
+      "co2_offset": 2,
+      "co2_offset_period": "0,10",
+      "common_names": "Palo Blanco, Mexican Paloverde",
+      "family": "Fabaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "height": "4,15",
+      "id": 3061,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-50bfb1be22256d8c51bc7a34ccee7cc2.jpg",
+      "life_time_CO2": 20,
+      "name": "Lysiloma acapulcense",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Lysiloma acapulcense, commonly known as \"Palo Blanco\" or \"Mexican Paloverde,\" is a tree species native to Mexico and parts of Central America. It's a small to medium-sized deciduous tree. It typically reaches heights of 5 to 10 meters (16 to 33 feet) and has an open, spreading canopy. Palo Blanco is well-adapted to arid and semi-arid regions. It is often found in desert and scrubland habitats. The tree's ability to tolerate drought makes it an important species in such environments.",
+      "planter_likes": "Lysiloma acapulcense is a resilient tree species adapted to arid environments, providing ecological benefits and serving various cultural and ecological roles in its native range. The seeds of Lysiloma acapulcense are a food source for various animals, including birds and rodents. The tree's presence in arid regions also contributes to soil stabilization and erosion control.",
+      "price": 1.7,
+      "price_per_tonne": "85.00000000000000000000",
+      "project_id": 694,
+      "stock": 4912
+    },
+    "3186": {
+      "average_natural_life_span": 100,
+      "category": {
+        "id": 5,
+        "name": "Agroforestry"
+      },
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "common_names": "Peacock flower",
+      "family": "Fabaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "height": "5,30",
+      "id": 3186,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-32f8f9c29771b9070795c8bdfbe89739.jpg",
+      "life_time_CO2": 50,
+      "name": "Albizia gummifera",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Albizia gummifera is a deciduous tree with an open crown; it can reach up to 30 meters tall; the trunk is straight and up to 100 cm in diameter. Albizia gummifera has a deep root system that can help to prevent soil erosion and improve soil fertility.  Albizia gummifera has attractive foliage and produces showy, fragrant flowers that can add aesthetic value to a landscape or garden. The tree is harvested for local use as a source of food, medicine, and wood.",
+      "planter_likes": "Albizia gummifera has an extensive root system that helps to stabilize soil, making it useful for erosion control on slopes or in areas prone to soil erosion. It provides shade, which can be beneficial for people, animals, and other plants. Like other leguminous trees, Albizia gummifera is capable of fixing atmospheric nitrogen through symbiotic relationships with nitrogen-fixing bacteria in its root nodules. This enriches the soil with nitrogen, benefiting surrounding plants.",
+      "price": 0.35,
+      "price_per_tonne": "7.00000000000000000000",
+      "project_id": 361,
+      "stock": 64336
+    },
+    "3303": {
+      "average_natural_life_span": 150,
+      "category": {
+        "id": 2,
+        "name": "Nutritional"
+      },
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "common_names": "Mango tree; Mango; Common Indian Mango",
+      "family": "Anacardiaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "10,30",
+      "id": 3303,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-9c6d46f976ab7e29310986d45a1938ad.jpg",
+      "life_time_CO2": 50,
+      "name": "Mangifera indica",
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "particularities": "The mango tree is a large and evergreen tree with a dense and spreading crown. It can grow up to 30, 40 meters high and the trunk can reach up to 100 cm in diameter. It thrives in both the subtropics and the tropics, generally growing best in moderately dry climates. Established trees are drought tolerant. It's grown extensively around the world in tropical regions and frost-free subtropics for its edible fruit. It’s one of the most popular fruits in the world, rich in vitamins A and C; it’s commonly eaten raw but it can be processed into juices, jams, dried slices, canned slices in syrup, and puree or paste. The leaves can be used in traditional medicine, as an infusion in the treatment of asthma and coughs. The tree is also an important honey plant, secreting large quantities of nectar.",
+      "planter_likes": "Mangifera indica is primarily cultivated for its delicious and nutritious fruits, which are consumed fresh, dried, or processed into juices, jams, and other products. Various parts of the mango tree, including leaves, bark, and seeds, are used in traditional medicine for their anti-inflammatory, antioxidant, and antimicrobial properties.",
+      "price": 5,
+      "price_per_tonne": "100.00000000000000000000",
+      "project_id": 776,
+      "stock": 0
+    },
+    "3315": {
+      "average_natural_life_span": 25,
+      "category": {
+        "id": 1,
+        "name": "Fast-growing"
+      },
+      "co2_offset": null,
+      "co2_offset_period": "0,10",
+      "common_names": "Forest Mangrove, Brown Salwood, or Mangium",
+      "family": "Fabaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "15,30",
+      "id": 3315,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-506524f63a78b5075f586fdbe63e50a8.jpg",
+      "life_time_CO2": 250,
+      "name": "Acacia mangium",
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "particularities": "Acacia mangium is a highly versatile, fast-growing tree species with significant ecological and economic value. It is widely used in reforestation projects, agroforestry, and timber production.",
+      "planter_likes": "Ecological Benefits: Nitrogen fixation, soil stabilization, reforestation, biodiversity support, thrives very well in our environment.\r\n Economic Benefits: Fast growth, timber production, pulp and paper, fuelwood, versatility producing tannins, gums, and resin.",
+      "price": 2,
+      "price_per_tonne": "8.00000000000000000000",
+      "project_id": 774,
+      "stock": 1525
+    },
+    "3590": {
+      "average_natural_life_span": 0,
+      "category": {
+        "id": 3,
+        "name": "Majestic"
+      },
+      "co2_offset": 50,
+      "co2_offset_period": "0,10",
+      "common_names": "Paineira, Paineira-rosa,  Árvore-dos-espinhos, Silk Floss Tree",
+      "family": "Malvaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "height": "15,30",
+      "id": 3590,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-c5457b9c38c3c5176b8ca820b4cea399.webp",
+      "life_time_CO2": 500,
+      "name": "Ceiba speciosa",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Ceiba speciosa is a fast-growing deciduous tree with a dense, wide-spreading canopy, reaching 15 to 30 meters tall. The trunk is covered in stout spines when young, and it can reach 80 to 120 cm in diameter.",
+      "planter_likes": "The plant is harvested from the wild mainly for its seed floss, which is used as a stuffing material. It is an excellent choice as a pioneer species for restoring native woodland or for establishing woodland gardens. It is often grown as an ornamental, being valued especially for its spectacular flowering display.",
+      "price": 2,
+      "price_per_tonne": "4.00000000000000000000",
+      "project_id": 305,
+      "stock": 6141
+    },
+    "3596": {
+      "average_natural_life_span": 3,
+      "category": {
+        "id": 4,
+        "name": "Plant"
+      },
+      "co2_offset": 2,
+      "co2_offset_period": "0,10",
+      "common_names": "Kangaroo Apple, Poroporo (in Māori), Pam Plum",
+      "family": "Solanaceae",
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "height": "1,4",
+      "id": 3596,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-c887b6bd1325491307fe71cd9823974b.webp",
+      "life_time_CO2": 20,
+      "name": "Solanum aviculare",
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "particularities": "Native to eastern Australia (Queensland, New South Wales, Victoria) and New Zealand. \r\n It produces colourful orange-red berries (which are bird-dispersed) and has toxic alkaloids (e.g., solasodine) in leaves/unripe fruit. \r\n It often colonises forest margins and disturbed sites.",
+      "planter_likes": "Its relatively rapid establishment, bird-attracting fruit, and suitability for shrub / small-tree layering in restoration or mixed plantings make it useful for biodiversity enhancement and early successional planting.",
+      "price": 5,
+      "price_per_tonne": "250.00000000000000000000",
+      "project_id": 425,
+      "stock": 0
+    }
+  }
+}
