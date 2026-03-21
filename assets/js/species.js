@@ -33,7 +33,7 @@
     var PARTNER_GROUP_LABEL_TO_ID = {
         'Web-Ready by Oasis of Change, Inc.': 'web-ready',
         'Stanley Park Ecology Society (SPES)': 'spes',
-        'Mittler Senior Technology': 'mittler',
+        'Mittler Senior Technology': 'mst',
         'Denman Place Mall': 'denman-place-mall',
         'EcoSearch': 'ecosearch'
     };
@@ -110,9 +110,13 @@
         }
 
         var sortedGroups = PARTNER_SPECIES_ID_GROUPS.slice().sort(function (a, b) {
-            // Keep Web-Ready pinned first, then sort by live partner tree totals.
+            // Keep Web-Ready pinned first and EcoSearch pinned last.
             if (a.groupLabel.indexOf('Web-Ready') !== -1) return -1;
             if (b.groupLabel.indexOf('Web-Ready') !== -1) return 1;
+            if (a.groupLabel === 'EcoSearch') return 1;
+            if (b.groupLabel === 'EcoSearch') return -1;
+
+            // Remaining partners sort by live partner tree totals.
             var aId = PARTNER_GROUP_LABEL_TO_ID[a.groupLabel];
             var bId = PARTNER_GROUP_LABEL_TO_ID[b.groupLabel];
             var aTrees = aId && partnerTreesById[aId] ? partnerTreesById[aId] : 0;
@@ -135,7 +139,7 @@
 
                 var thumbHtml = imageUrl
                     ? '<button type="button" class="partner-species-thumb-btn js-species-thumb" data-species-id="' + sid + '" aria-label="View larger image of ' + escapeHtml(name) + '">' +
-                        '<img class="partner-species-thumb" src="' + imageUrl + '" alt="' + escapeHtml(name) + '" loading="lazy" decoding="async">' +
+                        '<img class="partner-species-thumb is-loading js-partner-species-img" src="' + imageUrl + '" alt="' + escapeHtml(name) + '" loading="lazy" decoding="async" data-fallback-label="' + String(sid) + '">' +
                       '</button>'
                     : '<span class="partner-species-thumb partner-species-thumb--fallback" aria-hidden="true">' + String(sid) + '</span>';
 
@@ -264,6 +268,40 @@
         });
     }
 
+    function setupSpeciesThumbLoading() {
+        var thumbs = document.querySelectorAll('.js-partner-species-img');
+        thumbs.forEach(function (img) {
+            var button = img.closest('.partner-species-thumb-btn');
+            if (!button) return;
+
+            var markReady = function () {
+                img.classList.remove('is-loading');
+                img.classList.add('is-loaded');
+                button.classList.add('is-ready');
+            };
+
+            var swapToFallback = function () {
+                var fallback = document.createElement('span');
+                fallback.className = 'partner-species-thumb partner-species-thumb--fallback';
+                fallback.setAttribute('aria-hidden', 'true');
+                fallback.textContent = img.getAttribute('data-fallback-label') || 'N/A';
+                button.replaceWith(fallback);
+            };
+
+            if (img.complete) {
+                if (img.naturalWidth > 0) {
+                    markReady();
+                } else {
+                    swapToFallback();
+                }
+                return;
+            }
+
+            img.addEventListener('load', markReady, { once: true });
+            img.addEventListener('error', swapToFallback, { once: true });
+        });
+    }
+
     function applyFilter(filter) {
         var speciesCards = document.querySelectorAll('.species-card');
         speciesCards.forEach(function (card) {
@@ -309,6 +347,7 @@
             var byId = {};
             results.forEach(function (r) { byId[r.sid] = r.sp; });
             renderVerifiedPartnerSpeciesCard(byId);
+            setupSpeciesThumbLoading();
             hideStaticVerifiedCardsIfCovered(byId);
             setupLightboxInteractions(byId);
             var activeBtn = document.querySelector('.filter-btn.active');

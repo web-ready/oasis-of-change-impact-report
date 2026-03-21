@@ -120,10 +120,36 @@
         }
         .partner-species-thumb-btn {
             border: 0;
-            background: transparent;
+            background: #E5E7EB;
             padding: 0;
             cursor: zoom-in;
             border-radius: 0.6rem;
+            width: 56px;
+            height: 56px;
+            position: relative;
+            overflow: hidden;
+        }
+        .partner-species-thumb-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(110deg, #E5E7EB 8%, #F3F4F6 18%, #E5E7EB 33%);
+            background-size: 200% 100%;
+            animation: partner-thumb-shimmer 1.2s linear infinite;
+        }
+        .partner-species-thumb-btn.is-ready::before {
+            display: none;
+        }
+        .partner-species-thumb.is-loading {
+            opacity: 0;
+        }
+        .partner-species-thumb.is-loaded {
+            opacity: 1;
+            transition: opacity 0.18s ease;
+        }
+        @keyframes partner-thumb-shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
         .partner-species-thumb-btn:focus-visible {
             outline: 2px solid #10B981;
@@ -388,18 +414,6 @@
 
         <section class="mb-8">
             <div id="species-grid">
-                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="preincorporation" data-country="preincorporation">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-deep-forest">Historical Plantings <a href="#footnote-1" class="align-super text-[10px] text-gray-400 hover:text-gray-600 no-underline" aria-label="Footnote 1">1</a></h3>
-                        <span class="tag" style="border-color:#E5E7EB;color:#6B7280;background-color:#F9FAFB">Pre-incorporation</span>
-                    </div>
-                    <p class="text-xs text-gray-500 mb-3">Species attributed to planting activities prior to the legal incorporation of Oasis of Change, Inc.</p>
-                    <div class="space-y-2 text-sm">
-                        <p><strong>Phyllanthus emblica</strong> (Indian gooseberry / Amla)<span class="block text-xs text-gray-400 mt-0.5">Nepal</span></p>
-                        <p><strong>Pinus strobus</strong> (Eastern white pine)<span class="block text-xs text-gray-400 mt-0.5">United States</span></p>
-                    </div>
-                </div>
-
                 <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="nepal">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-deep-forest">Nepal <a href="#footnote-2" class="align-super text-[10px] text-gray-400 hover:text-gray-600 no-underline" aria-label="Footnote 2">2</a></h3>
@@ -540,6 +554,18 @@
                         <p><strong>Mangifera indica</strong> (Mango Tree)</p>
                         <p><strong>Moringa oleifera</strong> (Moringa)</p>
                         <p><strong>Sclerocarya birrea</strong> (Marula)</p>
+                    </div>
+                </div>
+
+                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="preincorporation" data-country="preincorporation">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-deep-forest">Historical Plantings <a href="#footnote-1" class="align-super text-[10px] text-gray-400 hover:text-gray-600 no-underline" aria-label="Footnote 1">1</a></h3>
+                        <span class="tag" style="border-color:#E5E7EB;color:#6B7280;background-color:#F9FAFB">Pre-incorporation</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-3">Species attributed to planting activities prior to the legal incorporation of Oasis of Change, Inc.</p>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Phyllanthus emblica</strong> (Indian gooseberry / Amla)<span class="block text-xs text-gray-400 mt-0.5">Nepal</span></p>
+                        <p><strong>Pinus strobus</strong> (Eastern white pine)<span class="block text-xs text-gray-400 mt-0.5">United States</span></p>
                     </div>
                 </div>
 
