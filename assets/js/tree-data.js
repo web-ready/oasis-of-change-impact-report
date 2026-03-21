@@ -1,6 +1,6 @@
 const TreeData = {
 
-    lastUpdated: "March 17th, 2026",
+    lastUpdated: "March 20th, 2026",
 
     /* ────────────────────────────────────────────────
        TOTALS — Fallback only. Live verified/total counts come from the
@@ -8,10 +8,11 @@ const TreeData = {
        the API is unavailable (e.g. CORS). Legacy is always from here.
        ──────────────────────────────────────────────── */
     totals: {
-        webReadyTrees: 8068,    // fallback: Oasis web-ready forest
-        verifiedTrees: 8700,    // fallback: web-ready + partners
+        webReadyTrees: 8987,    // fallback: Oasis web-ready forest (Tree-Nation)
+        webReadyCo2Kg: 476000,  // fallback: full forest CO₂ on Tree-Nation (incl. seeds / non-cert lines)
+        verifiedTrees: 9640,    // fallback: web-ready + additive partners (excl. overlap gifts)
         legacyTrees:   7338,    // fixed: Tero + Refoorest (no API)
-        totalTrees:    16038,   // fallback: verified + legacy
+        totalTrees:    16978,   // fallback: verified + legacy
         goalTrees:     1000000,
         goalYear:      2030
     },
@@ -54,12 +55,12 @@ const TreeData = {
        here are fallback when API unavailable; live counts from API.
        ──────────────────────────────────────────────── */
     verifiedPartners: [
-        { id: "spes",              name: "Stanley Park Ecology Society",               baseLocation: "Canada",        trees: 233, co2Tonnes: 21.49, countries: "Madagascar, Tanzania, Senegal, Kenya" },
+        { id: "spes",              name: "Stanley Park Ecology Society",               baseLocation: "Canada",        trees: 234, co2Tonnes: 21.55, countries: "Madagascar, Tanzania, Senegal, Kenya" },
         { id: "sustainable-www",   name: "Sustainable WWW",                            baseLocation: "Sweden",        trees: 170, co2Tonnes: 24.56, countries: "Tanzania, Kenya, Madagascar, Uganda, India, United States" },
         { id: "mst",               name: "Mittler Senior Technology",                  baseLocation: "United States", trees: 124, co2Tonnes: 16.25, countries: "Tanzania, Senegal, Madagascar, Indonesia, Uganda, Nepal" },
         { id: "ecosearch",         name: "EcoSearch",                                  baseLocation: "Canada",        trees: 101, co2Tonnes: 5.05,  countries: "Madagascar" },
-        { id: "denman-place-mall", name: "Denman Place Mall",                          baseLocation: "Canada",        trees: 2,   co2Tonnes: 0,     countries: "Tanzania, Kenya" },
-        { id: "gabriel-dalton",    name: "Gabriel Dalton (CEO Personal Forest)",       baseLocation: "Canada",        trees: 2,   co2Tonnes: 0,     countries: "Tanzania" },
+        { id: "denman-place-mall", name: "Denman Place Mall",                          baseLocation: "Canada",        trees: 22,  co2Tonnes: 1.1,   countries: "Tanzania, Kenya" },
+        { id: "gabriel-dalton",    name: "Gabriel Dalton (CEO Personal Forest)",       baseLocation: "Canada",        trees: 2,   co2Tonnes: 0.1,   countries: "Tanzania" },
         { id: "wesn",              name: "West End Seniors' Network (WESN)",           baseLocation: "Canada",        trees: 900, co2Tonnes: 45,    countries: "Kenya", isSharedWithWebReady: true, sharedWithLabel: "Web-Ready by Oasis of Change, Inc.", partnerSpecies: [{ name: "Persea americana", country: "Kenya", project: "Save the Aberdare Forest" }] }
     ],
 
@@ -243,12 +244,19 @@ const TreeData = {
     },
 
     getCo2Captured: function() {
-        var projectKg = this.verifiedProjects.reduce(function(sum, p) { return sum + (p.co2Offset || 0); }, 0);
-        var partnerKg = (this.verifiedPartners || []).reduce(function(sum, p) { return sum + ((p.co2Tonnes || 0) * 1000); }, 0);
-        return projectKg + partnerKg;
+        // Match dashboard live API: Web-Ready forest CO₂ + additive partners only (exclude overlap gifts).
+        var webKg = this.getWebReadyCo2Kg();
+        var partnerKg = (this.verifiedPartners || []).reduce(function(sum, p) {
+            if (p.isSharedWithWebReady) return sum;
+            return sum + ((p.co2Tonnes || 0) * 1000);
+        }, 0);
+        return webKg + partnerKg;
     },
 
     getWebReadyCo2Kg: function() {
+        if (this.totals && typeof this.totals.webReadyCo2Kg === 'number' && Number.isFinite(this.totals.webReadyCo2Kg) && this.totals.webReadyCo2Kg > 0) {
+            return this.totals.webReadyCo2Kg;
+        }
         return this.verifiedProjects.reduce(function(sum, p) { return sum + (p.co2Offset || 0); }, 0);
     },
 
