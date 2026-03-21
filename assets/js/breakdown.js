@@ -229,9 +229,8 @@
                     : '';
                 var sharedTrees = getSharedTrees(p);
                 var additiveTrees = getAdditiveTrees(p);
-                var sharedLabel = getSharedForestLabel(p);
                 var sharedSuffix = sharedTrees > 0
-                    ? ' <span class="text-xs text-amber-700">[' + sharedTrees.toLocaleString() + ' trees shared with ' + sharedLabel + ']</span>'
+                    ? ' <span class="text-xs text-amber-700">[' + sharedTrees.toLocaleString() + ' trees shared with the Oasis of Change Forest]</span>'
                     : '';
                 row.innerHTML =
                     '<span class="equation-operator">+</span>' +
@@ -369,19 +368,10 @@
 
     function getSharedTagText(partner) {
         var sharedTrees = getSharedTrees(partner);
-        var sharedLabel = getSharedForestLabel(partner);
         if (sharedTrees > 0) {
-            return sharedTrees.toLocaleString() + ' trees shared with ' + sharedLabel;
+            return sharedTrees.toLocaleString() + ' trees shared with the Oasis of Change Forest';
         }
-        return 'Shared with ' + sharedLabel;
-    }
-
-    function getSharedForestLabel(partner) {
-        if (!partner || !partner.sharedWithLabel) return 'Oasis of Change, Inc. Forest.';
-        if (partner.sharedWithLabel.indexOf('Web-Ready by ') === 0) {
-            return 'Oasis of Change, Inc. Forest.';
-        }
-        return partner.sharedWithLabel + ' Forest.';
+        return 'Shared with the Oasis of Change Forest';
     }
 
     // ── Boot ────────────────────────────────────────────
