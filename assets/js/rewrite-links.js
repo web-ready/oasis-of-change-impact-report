@@ -18,6 +18,7 @@
     var path = parts[0];
     var hash = parts.length > 1 ? '#' + parts.slice(1).join('#') : '';
     if (path === '/' || path === '' || path === '/home') {
+      // In local mode (file://, localhost, 127.0.0.1), always use .html routes.
       path = window.location.protocol === 'file:' ? 'home.html' : '/home.html';
     } else {
       path = path.slice(1);

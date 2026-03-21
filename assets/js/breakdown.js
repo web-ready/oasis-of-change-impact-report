@@ -45,6 +45,7 @@
                 trees: p.trees,
                 co2Tonnes: p.co2Tonnes || 0,
                 isSharedWithWebReady: p.isSharedWithWebReady === true,
+                sharedTreesWithWebReady: p.sharedTreesWithWebReady,
                 sharedWithLabel: p.sharedWithLabel || 'Web-Ready by Oasis of Change, Inc.',
                 isLive: false
             };
@@ -69,10 +70,10 @@
 
     function recalculate() {
         var additivePartnerTrees = state.partners.reduce(function (sum, p) {
-            return p.isSharedWithWebReady ? sum : sum + (p.trees || 0);
+            return sum + getAdditiveTrees(p);
         }, 0);
         var sharedPartnerTrees = state.partners.reduce(function (sum, p) {
-            return p.isSharedWithWebReady ? sum + (p.trees || 0) : sum;
+            return sum + getSharedTrees(p);
         }, 0);
         state.additivePartnerTotal = additivePartnerTrees;
         state.sharedPartnerTotal = sharedPartnerTrees;
@@ -149,7 +150,7 @@
                 ? '<span class="live-tag"><span class="live-dot"></span> Live</span>'
                 : '<span class="cached-tag">Cached</span>';
             if (p.isSharedWithWebReady) {
-                tagHtml += '<span class="shared-tag">Overlaps ' + p.sharedWithLabel + '</span>';
+                tagHtml += '<span class="shared-tag">' + getSharedTagText(p) + '</span>';
             }
 
             var nameHtml = profileUrl
@@ -176,9 +177,6 @@
                 '</div>' +
                 '<div class="text-xs text-gray-400">Based in ' + (p.baseLocation || '—') + '</div>' +
                 co2Html +
-                (p.isSharedWithWebReady
-                    ? '<div class="text-xs text-amber-700 mt-1">These trees were gifted to the ' + p.sharedWithLabel + ' forest and are already reflected in its total. Displayed here for full transparency; excluded from additive totals to prevent double counting.</div>'
-                    : '') +
                 countriesHtml;
 
             grid.appendChild(card);
@@ -228,13 +226,16 @@
                 var co2Suffix = (typeof p.co2Tonnes === 'number' && p.co2Tonnes > 0)
                     ? ' <span class="text-xs text-gray-400 tabular-nums">(' + Math.round(p.co2Tonnes * 1000).toLocaleString() + ' kg CO\u2082)</span>'
                     : '';
-                var sharedSuffix = p.isSharedWithWebReady
-                    ? ' <span class="text-xs text-amber-700">[overlaps ' + p.sharedWithLabel + '; excluded from total]</span>'
+                var sharedTrees = getSharedTrees(p);
+                var additiveTrees = getAdditiveTrees(p);
+                var sharedLabel = getSharedForestLabel(p);
+                var sharedSuffix = sharedTrees > 0
+                    ? ' <span class="text-xs text-amber-700">[' + sharedTrees.toLocaleString() + ' trees shared with ' + sharedLabel + ']</span>'
                     : '';
                 row.innerHTML =
-                    '<span class="equation-operator">' + (p.isSharedWithWebReady ? '\u2261' : '+') + '</span>' +
+                    '<span class="equation-operator">+</span>' +
                     '<span class="equation-label text-gray-700">' + p.name + co2Suffix + sharedSuffix + '</span>' +
-                    '<span class="equation-value font-medium text-deep-forest">' + (p.trees || 0).toLocaleString() + '</span>';
+                    '<span class="equation-value font-medium text-deep-forest">' + (additiveTrees || 0).toLocaleString() + '</span>';
                 partnersContainer.appendChild(row);
             });
         }
@@ -347,6 +348,39 @@
     function setText(id, val) {
         var el = document.getElementById(id);
         if (el) el.textContent = val;
+    }
+
+    function getSharedTrees(partner) {
+        if (!partner || !partner.isSharedWithWebReady) return 0;
+        var totalTrees = Number(partner.trees) || 0;
+        var explicitShared = Number(partner.sharedTreesWithWebReady);
+        if (Number.isFinite(explicitShared) && explicitShared > 0) {
+            return Math.min(totalTrees, Math.floor(explicitShared));
+        }
+        return totalTrees;
+    }
+
+    function getAdditiveTrees(partner) {
+        if (!partner) return 0;
+        var totalTrees = Number(partner.trees) || 0;
+        return Math.max(0, totalTrees - getSharedTrees(partner));
+    }
+
+    function getSharedTagText(partner) {
+        var sharedTrees = getSharedTrees(partner);
+        var sharedLabel = getSharedForestLabel(partner);
+        if (sharedTrees > 0) {
+            return sharedTrees.toLocaleString() + ' trees shared with ' + sharedLabel;
+        }
+        return 'Shared with ' + sharedLabel;
+    }
+
+    function getSharedForestLabel(partner) {
+        if (!partner || !partner.sharedWithLabel) return 'Oasis of Change, Inc. Forest.';
+        if (partner.sharedWithLabel.indexOf('Web-Ready by ') === 0) {
+            return 'Oasis of Change, Inc. Forest.';
+        }
+        return partner.sharedWithLabel + ' Forest.';
     }
 
     // ── Boot ────────────────────────────────────────────

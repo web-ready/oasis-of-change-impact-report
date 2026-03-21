@@ -18,7 +18,10 @@ const FORESTS = [
 ];
 
 const LEGACY_TREES = 7338;
-const OVERLAP_PARTNER_IDS = new Set(['wesn']);
+const SHARED_TREES_WITH_WEB_READY = {
+  // WESN/Web-Ready shared allocation.
+  wesn: 900
+};
 
 function ordinal(n) {
   const mod10 = n % 10;
@@ -56,8 +59,10 @@ async function run() {
   const webReadyCo2Kg = Math.round((byId['web-ready']?.co2Tonnes || 0) * 1000);
 
   const additivePartnerTrees = Object.entries(byId).reduce((sum, [id, p]) => {
-    if (id === 'web-ready' || OVERLAP_PARTNER_IDS.has(id)) return sum;
-    return sum + (p.trees || 0);
+    if (id === 'web-ready') return sum;
+    const partnerTrees = p.trees || 0;
+    const sharedTrees = Math.max(0, Math.min(partnerTrees, Number(SHARED_TREES_WITH_WEB_READY[id]) || 0));
+    return sum + Math.max(0, partnerTrees - sharedTrees);
   }, 0);
 
   const verifiedTrees = webReadyTrees + additivePartnerTrees;

@@ -1,12 +1,12 @@
 {
-  "updatedAtIso": "2026-03-21T05:20:01.133Z",
+  "updatedAtIso": "2026-03-21T07:36:51.958Z",
   "lastUpdated": "March 21st, 2026",
   "totals": {
     "webReadyTrees": 8987,
     "webReadyCo2Kg": 476000,
-    "verifiedTrees": 9640,
+    "verifiedTrees": 9660,
     "legacyTrees": 7338,
-    "totalTrees": 16978
+    "totalTrees": 16998
   },
   "partnersById": {
     "spes": {
@@ -34,8 +34,8 @@
       "co2Tonnes": 0.1
     },
     "wesn": {
-      "trees": 900,
-      "co2Tonnes": 45
+      "trees": 920,
+      "co2Tonnes": 46
     }
   }
 }
