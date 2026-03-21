@@ -106,6 +106,9 @@
         var existing = document.getElementById('verified-partner-species-card');
         if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
 
+        var skeleton = document.getElementById('verified-partner-species-skeleton');
+        if (skeleton && skeleton.parentNode) skeleton.parentNode.removeChild(skeleton);
+
         var card = document.createElement('div');
         card.id = 'verified-partner-species-card';
         card.className = 'species-card species-card--partner-verified bg-white rounded-lg p-5 border border-gray-200';
@@ -137,7 +140,7 @@
             return (b.speciesIds.length || 0) - (a.speciesIds.length || 0);
         });
 
-        var content = sortedGroups.map(function (group) {
+        var content = sortedGroups.map(function (group, idx) {
             var groupSpeciesLines = group.speciesIds.map(function (sid) {
                 var sp = entriesById[sid];
                 var name = sp && sp.name ? sp.name : ('Species ID ' + sid);
@@ -166,7 +169,9 @@
                     '</div>';
             }).join('');
 
-            return '<details class="partner-group" open>' +
+            // Default: expand everything so we never render partially-hidden/white sections.
+            var openAttr = ' open';
+            return '<details class="partner-group' + openAttr + '">' +
                 '<summary><span>' + escapeHtml(group.groupLabel) + '</span><span class="partner-group-count">' + group.speciesIds.length + ' species</span></summary>' +
                 '<div class="partner-species-list">' + groupSpeciesLines + '</div>' +
                 '</details>';
@@ -178,6 +183,21 @@
                 '<span class="tag" style="border-color:#BBF7D0;color:#166534;background-color:#F0FDF4">Verified (API)</span>' +
             '</div>' +
             '<p class="text-xs text-gray-500 mb-3">Species for partner forests shown on the Breakdown page. Names and metadata are fetched from Tree-Nation by species ID.</p>' +
+            '<div class="partner-group-toolbar flex justify-end gap-2 mb-3">' +
+                '<button type="button" class="partner-accordion-btn partner-accordion-btn--expand" data-partner-accordion="expand-all">' +
+                    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+                        '<path d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />' +
+                        '<path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />' +
+                    '</svg>' +
+                    '<span>Expand all</span>' +
+                '</button>' +
+                '<button type="button" class="partner-accordion-btn partner-accordion-btn--collapse" data-partner-accordion="collapse-all">' +
+                    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+                        '<path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />' +
+                    '</svg>' +
+                    '<span>Collapse all</span>' +
+                '</button>' +
+            '</div>' +
             '<div class="partner-group-grid">' + content + '</div>';
 
         var insertBefore = grid.firstElementChild;
@@ -187,7 +207,92 @@
             grid.appendChild(card);
         }
 
-        setupPartnerGroupToggleFix(card);
+        setupPartnerGroupExpandCollapseAll(card);
+    }
+
+    function renderVerifiedPartnerSpeciesSkeleton() {
+        var grid = document.getElementById('species-grid');
+        if (!grid) return;
+
+        var existing = document.getElementById('verified-partner-species-skeleton');
+        if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+
+        var card = document.createElement('div');
+        card.id = 'verified-partner-species-skeleton';
+        card.className = 'species-card species-card--partner-verified skeleton-card';
+        card.setAttribute('data-category', 'verified');
+        card.setAttribute('data-country', 'partner-verified');
+
+        // Skeleton mirrors the eventual verified card structure, but without API data.
+        card.innerHTML =
+            '<div class="flex items-center justify-between mb-4">' +
+                '<div class="skeleton skeleton-line" style="width: 15rem; height: 1.5rem">&nbsp;</div>' +
+                '<div class="skeleton skeleton-line" style="width: 12rem; height: 1.25rem">&nbsp;</div>' +
+            '</div>' +
+            '<div class="skeleton skeleton-line" style="width: 100%; height: 1rem; margin-bottom: 0.5rem">&nbsp;</div>' +
+            '<div class="skeleton skeleton-line" style="width: 92%; height: 0.85rem; margin-bottom: 1rem">&nbsp;</div>' +
+            '<div class="partner-group-grid">' +
+                '<details class="partner-group" open>' +
+                    '<summary>' +
+                        '<span class="skeleton skeleton-line" style="width: 70%; height: 0.95rem">&nbsp;</span>' +
+                        '<span class="skeleton skeleton-line" style="width: 5.5rem; height: 0.7rem">&nbsp;</span>' +
+                    '</summary>' +
+                    '<div class="partner-species-list">' +
+                        '<div class="partner-species-item">' +
+                            '<div class="skeleton" style="width:56px;height:56px;border-radius:0.6rem">&nbsp;</div>' +
+                            '<div>' +
+                                '<div class="skeleton skeleton-line" style="width: 75%; height: 0.9rem; display:block">&nbsp;</div>' +
+                                '<div class="skeleton skeleton-line" style="width: 40%; height: 0.7rem; display:block; margin-top:0.2rem">&nbsp;</div>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="partner-species-item">' +
+                            '<div class="skeleton" style="width:56px;height:56px;border-radius:0.6rem">&nbsp;</div>' +
+                            '<div>' +
+                                '<div class="skeleton skeleton-line" style="width: 68%; height: 0.9rem; display:block">&nbsp;</div>' +
+                                '<div class="skeleton skeleton-line" style="width: 38%; height: 0.7rem; display:block; margin-top:0.2rem">&nbsp;</div>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="partner-species-item">' +
+                            '<div class="skeleton" style="width:56px;height:56px;border-radius:0.6rem">&nbsp;</div>' +
+                            '<div>' +
+                                '<div class="skeleton skeleton-line" style="width: 80%; height: 0.9rem; display:block">&nbsp;</div>' +
+                                '<div class="skeleton skeleton-line" style="width: 35%; height: 0.7rem; display:block; margin-top:0.2rem">&nbsp;</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</details>' +
+                '<details class="partner-group">' +
+                    '<summary>' +
+                        '<span class="skeleton skeleton-line" style="width: 60%; height: 0.95rem">&nbsp;</span>' +
+                        '<span class="skeleton skeleton-line" style="width: 5rem; height: 0.7rem">&nbsp;</span>' +
+                    '</summary>' +
+                '</details>' +
+                '<details class="partner-group">' +
+                    '<summary>' +
+                        '<span class="skeleton skeleton-line" style="width: 58%; height: 0.95rem">&nbsp;</span>' +
+                        '<span class="skeleton skeleton-line" style="width: 5.4rem; height: 0.7rem">&nbsp;</span>' +
+                    '</summary>' +
+                '</details>' +
+                '<details class="partner-group">' +
+                    '<summary>' +
+                        '<span class="skeleton skeleton-line" style="width: 52%; height: 0.95rem">&nbsp;</span>' +
+                        '<span class="skeleton skeleton-line" style="width: 5.2rem; height: 0.7rem">&nbsp;</span>' +
+                    '</summary>' +
+                '</details>' +
+                '<details class="partner-group">' +
+                    '<summary>' +
+                        '<span class="skeleton skeleton-line" style="width: 48%; height: 0.95rem">&nbsp;</span>' +
+                        '<span class="skeleton skeleton-line" style="width: 4.8rem; height: 0.7rem">&nbsp;</span>' +
+                    '</summary>' +
+                '</details>' +
+            '</div>';
+
+        var insertBefore = grid.firstElementChild;
+        if (insertBefore) {
+            grid.insertBefore(card, insertBefore);
+        } else {
+            grid.appendChild(card);
+        }
     }
 
     function refreshPartnerGroupPanel(details, fromUserToggle) {
@@ -218,6 +323,48 @@
         });
     }
 
+    function setupPartnerGroupExpandCollapseAll(card) {
+        if (!card) return;
+
+        var groups = card.querySelectorAll('details.partner-group');
+        var expandBtn = card.querySelector('[data-partner-accordion="expand-all"]');
+        var collapseBtn = card.querySelector('[data-partner-accordion="collapse-all"]');
+
+        // Start expanded (matches `openAttr = ' open'`).
+        groups.forEach(function (details) {
+            details.open = true;
+
+            // Prevent per-group toggling via the summary so the UI state stays consistent.
+            var summary = details.querySelector('summary');
+            if (summary) {
+                summary.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                });
+            }
+        });
+
+        function expandAll() {
+            groups.forEach(function (details) {
+                details.open = true;
+            });
+
+            requestAnimationFrame(function () {
+                // Re-run thumb handling in case some groups were collapsed before.
+                setupSpeciesThumbLoading(card);
+            });
+        }
+
+        function collapseAll() {
+            groups.forEach(function (details) {
+                details.open = false;
+            });
+        }
+
+        if (expandBtn) expandBtn.addEventListener('click', expandAll);
+        if (collapseBtn) collapseBtn.addEventListener('click', collapseAll);
+    }
+
     /**
      * Browsers can intermittently fail to paint or load content inside <details>.
      * Nudge layout on first paint; on user open, re-trigger image loads + thumb handlers.
@@ -226,13 +373,38 @@
         if (!card) return;
 
         var groups = card.querySelectorAll('details.partner-group');
-        groups.forEach(function (details) {
+        if (!groups || !groups.length) return;
+
+        // Ensure only the first group is open on initial render.
+        groups.forEach(function (d, idx) {
+            d.open = idx === 0;
+        });
+
+        groups.forEach(function (details, idx) {
             if (details.getAttribute('data-toggle-fix') === 'true') return;
             details.setAttribute('data-toggle-fix', 'true');
 
-            details.addEventListener('toggle', function () {
-                if (!details.open) return;
-                refreshPartnerGroupPanel(details, true);
+            var summary = details.querySelector('summary');
+            if (!summary) return;
+
+            // Use click prevention to fully control accordion state.
+            summary.addEventListener('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                var nextOpen = !(details.open === true);
+
+                if (nextOpen) {
+                    groups.forEach(function (other) {
+                        other.open = false;
+                    });
+                    details.open = true;
+                    refreshPartnerGroupPanel(details, true);
+                    return;
+                }
+
+                // Allow closing the current panel.
+                details.open = false;
             });
 
             if (details.open) {
@@ -343,6 +515,13 @@
         var scope = root && root.querySelectorAll ? root : document;
         var thumbs = scope.querySelectorAll('.js-partner-species-img:not([data-thumb-handled])');
         thumbs.forEach(function (img) {
+            // If the thumbnail is inside a closed <details>, some browsers may report
+            // `img.complete === true` and `naturalWidth === 0` before the resource
+            // is actually requested. In that case we must defer handling until the
+            // group is opened, otherwise we prematurely replace the image with a fallback.
+            var detailsParent = img.closest('details.partner-group');
+            if (detailsParent && !detailsParent.open) return;
+
             img.setAttribute('data-thumb-handled', 'true');
             var button = img.closest('.partner-species-thumb-btn');
             if (!button) return;
@@ -421,6 +600,9 @@
     function boot() {
         initializeSpeciesData();
         setupFilters();
+
+        // Immediately show a skeleton for the API-backed "Verified Tree Planting" section.
+        renderVerifiedPartnerSpeciesSkeleton();
 
         var allIds = [];
         PARTNER_SPECIES_ID_GROUPS.forEach(function (group) {
