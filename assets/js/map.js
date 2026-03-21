@@ -1179,7 +1179,7 @@ function renderSiteLists() {
           
           const displayName = typeof site === 'string' ? site : site.name;
           const showFootnote = (group.codes.includes('NP') && displayName === 'Eden Reforestation Projects') || (group.codes.includes('US_MT') && displayName === 'National Forest Recovery');
-          const footnoteLink = showFootnote ? ' <a href="#footnote-4" class="align-super text-xs text-brand-green hover:underline no-underline" aria-label="Footnote 4">4</a>' : '';
+          const footnoteLink = showFootnote ? ' <a href="#footnote-6" class="align-super text-xs text-brand-green hover:underline no-underline" aria-label="Footnote 6">6</a>' : '';
           
           const siteTypeDisplay = typeof siteType === 'string' && siteType.includes('<span') 
             ? `<span class="ml-2 flex-shrink-0">${siteType}</span>`
