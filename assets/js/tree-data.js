@@ -13,6 +13,11 @@ const TreeData = {
         verifiedTrees: 9640,    // fallback: web-ready + additive partners (excl. overlap gifts)
         legacyTrees:   7338,    // fixed: Tero + Refoorest (no API)
         totalTrees:    16978,   // fallback: verified + legacy
+        // Species transparency model for homepage reporting:
+        // combined "up to" figure = verified unique + legacy-only unique (no double-counting overlap).
+        verifiedSpeciesUnique: 46,
+        legacySpeciesOnlyUnique: 50,
+        combinedSpeciesUpTo: 96,
         goalTrees:     1000000,
         goalYear:      2030
     },
@@ -261,6 +266,9 @@ const TreeData = {
     },
 
     getSpeciesCount: function() {
+        if (this.totals && Number.isFinite(this.totals.combinedSpeciesUpTo) && this.totals.combinedSpeciesUpTo > 0) {
+            return this.totals.combinedSpeciesUpTo;
+        }
         var all = [].concat(this.species.verifiedSpecies);
         var legacy = this.species.legacySpecies;
         for (var key in legacy) { all = all.concat(legacy[key]); }
