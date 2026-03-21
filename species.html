@@ -61,6 +61,18 @@
         @media (min-width: 1024px) {
             .partner-group-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
+        /* Mobile: centre partner “tabs” in the column (narrower card, centred). */
+        @media (max-width: 639.98px) {
+            .partner-group-grid {
+                justify-items: center;
+            }
+            .species-card--partner-verified .partner-group {
+                width: 100%;
+                max-width: min(100%, 24rem);
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
         .partner-group {
             border: 1px solid #E5E7EB;
             border-radius: 0.9rem;
@@ -99,11 +111,16 @@
         @media (max-width: 639.98px) {
             .partner-group > summary {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center;
+                text-align: center;
                 gap: 0.5rem;
             }
+            .partner-group-title {
+                text-align: center;
+                width: 100%;
+            }
             .partner-group-count {
-                align-self: flex-start;
+                align-self: center;
             }
             .partner-species-list {
                 max-height: min(22rem, 52vh);
@@ -144,9 +161,10 @@
         .partner-accordion-btn.is-active:hover {
             background: var(--color-brand-green) !important;
         }
-        .partner-accordion-btn--expand {
-            border-color: #A7F3D0;
-            color: #064E3B;
+        /* Inactive Expand matches Collapse (neutral border) — avoids odd mint stroke next to green active state. */
+        .partner-accordion-btn--expand:not(.is-active) {
+            border-color: #E5E7EB;
+            color: #0F172A;
         }
         .partner-accordion-btn {
             display: inline-flex;
