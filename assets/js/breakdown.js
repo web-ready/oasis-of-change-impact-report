@@ -6,9 +6,12 @@
 
     var state = {
         webReadyTrees: 0,
+        webReadyCo2Kg: 0,
         partners: [],
         legacyProjects: [],
         verifiedTotal: 0,
+        additivePartnerTotal: 0,
+        sharedPartnerTotal: 0,
         legacyTotal: 0,
         grandTotal: 0,
         isLive: false
@@ -24,6 +27,11 @@
             ? TreeData.getWebReadyTrees()
             : (TreeData.totals && TreeData.totals.webReadyTrees) || 0;
 
+        var webReadyCo2Kg = typeof TreeData.getWebReadyCo2Kg === 'function'
+            ? TreeData.getWebReadyCo2Kg()
+            : null;
+        state.webReadyCo2Kg = Number.isFinite(webReadyCo2Kg) ? webReadyCo2Kg : 0;
+
         var partners = typeof TreeData.getVerifiedPartners === 'function'
             ? TreeData.getVerifiedPartners()
             : TreeData.verifiedPartners;
@@ -36,6 +44,8 @@
                 countries: p.countries,
                 trees: p.trees,
                 co2Tonnes: p.co2Tonnes || 0,
+                isSharedWithWebReady: p.isSharedWithWebReady === true,
+                sharedWithLabel: p.sharedWithLabel || 'Web-Ready',
                 isLive: false
             };
         });
@@ -58,8 +68,15 @@
     }
 
     function recalculate() {
-        var partnerTrees = state.partners.reduce(function (sum, p) { return sum + (p.trees || 0); }, 0);
-        state.verifiedTotal = state.webReadyTrees + partnerTrees;
+        var additivePartnerTrees = state.partners.reduce(function (sum, p) {
+            return p.isSharedWithWebReady ? sum : sum + (p.trees || 0);
+        }, 0);
+        var sharedPartnerTrees = state.partners.reduce(function (sum, p) {
+            return p.isSharedWithWebReady ? sum + (p.trees || 0) : sum;
+        }, 0);
+        state.additivePartnerTotal = additivePartnerTrees;
+        state.sharedPartnerTotal = sharedPartnerTrees;
+        state.verifiedTotal = state.webReadyTrees + additivePartnerTrees;
         state.legacyTotal = state.legacyProjects.reduce(function (sum, p) { return sum + (p.trees || 0); }, 0);
         state.grandTotal = state.verifiedTotal + state.legacyTotal;
     }
@@ -89,8 +106,21 @@
         setText('bd-goal-progress-text', total.toLocaleString() + ' / 1,000,000 trees');
     }
 
+    function co2KgLineFromTonnes(tonnes) {
+        if (typeof tonnes === 'number' && Number.isFinite(tonnes) && tonnes > 0) {
+            return '<div class="text-xs text-gray-400 mt-0.5">CO\u2082: <span class="tabular-nums text-gray-600 font-medium">' +
+                Math.round(tonnes * 1000).toLocaleString() + '</span> kg</div>';
+        }
+        return '<div class="text-xs text-gray-400 mt-0.5">CO\u2082: <span class="tabular-nums text-gray-500 font-medium">\u2014</span></div>';
+    }
+
     function renderWebReady() {
         setText('bd-webready-count', state.webReadyTrees.toLocaleString());
+        var co2Display = (typeof state.webReadyCo2Kg === 'number' && state.webReadyCo2Kg > 0)
+            ? Math.round(state.webReadyCo2Kg).toLocaleString()
+            : '—';
+        setText('bd-webready-co2-kg', co2Display);
+
         var tag = document.getElementById('bd-webready-tag');
         if (tag) {
             if (state.isLive) {
@@ -108,7 +138,12 @@
         if (!grid) return;
         grid.innerHTML = '';
 
-        var sorted = state.partners.slice().sort(function (a, b) { return (b.trees || 0) - (a.trees || 0); });
+        var sorted = state.partners.slice().sort(function (a, b) {
+            if (a.isSharedWithWebReady !== b.isSharedWithWebReady) {
+                return a.isSharedWithWebReady ? 1 : -1;
+            }
+            return (b.trees || 0) - (a.trees || 0);
+        });
 
         sorted.forEach(function (p) {
             var slug = getSlugForPartner(p.id);
@@ -116,6 +151,9 @@
             var tagHtml = p.isLive
                 ? '<span class="live-tag"><span class="live-dot"></span> Live</span>'
                 : '<span class="cached-tag">Cached</span>';
+            if (p.isSharedWithWebReady) {
+                tagHtml += '<span class="shared-tag">Shared with ' + p.sharedWithLabel + '</span>';
+            }
 
             var nameHtml = profileUrl
                 ? '<a href="' + profileUrl + '" target="_blank" rel="noopener" class="profile-link font-semibold text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">' + p.name + EXT_ICON + '</a>'
@@ -133,12 +171,7 @@
 
             var card = document.createElement('div');
             card.className = 'forest-card';
-            var co2Html = '';
-            if (typeof p.co2Tonnes === 'number' && p.co2Tonnes > 0) {
-                co2Html = '<div class="text-xs text-gray-400 mt-0.5">CO\u2082: <span class="tabular-nums text-gray-600 font-medium">' + p.co2Tonnes.toLocaleString(undefined, { maximumFractionDigits: 2 }) + '</span> t</div>';
-            } else {
-                co2Html = '<div class="text-xs text-gray-400 mt-0.5">CO\u2082: <span class="tabular-nums text-gray-500 font-medium">\u2014</span></div>';
-            }
+            var co2Html = co2KgLineFromTonnes(p.co2Tonnes);
             card.innerHTML =
                 '<div class="flex items-start justify-between gap-3 mb-1">' +
                     '<div class="flex flex-wrap items-center gap-2 min-w-0">' + nameHtml + tagHtml + '</div>' +
@@ -146,13 +179,16 @@
                 '</div>' +
                 '<div class="text-xs text-gray-400">Based in ' + (p.baseLocation || '—') + '</div>' +
                 co2Html +
+                (p.isSharedWithWebReady
+                    ? '<div class="text-xs text-amber-700 mt-1">Count is shown for transparency but not added to totals to avoid double counting.</div>'
+                    : '') +
                 countriesHtml;
 
             grid.appendChild(card);
         });
 
-        var partnerTotal = state.partners.reduce(function (sum, p) { return sum + (p.trees || 0); }, 0);
-        setText('bd-partner-subtotal', partnerTotal.toLocaleString());
+        setText('bd-partner-subtotal', state.additivePartnerTotal.toLocaleString());
+        setText('bd-shared-partner-subtotal', state.sharedPartnerTotal.toLocaleString());
     }
 
     function renderLegacy() {
@@ -176,20 +212,34 @@
 
     function renderEquation() {
         setText('eq-webready', state.webReadyTrees.toLocaleString());
+        var webCo2Suffix = document.getElementById('eq-webready-co2-suffix');
+        if (webCo2Suffix) {
+            webCo2Suffix.textContent = (typeof state.webReadyCo2Kg === 'number' && state.webReadyCo2Kg > 0)
+                ? ' (' + Math.round(state.webReadyCo2Kg).toLocaleString() + ' kg CO\u2082)'
+                : '';
+        }
 
         var partnersContainer = document.getElementById('eq-partners-rows');
         if (partnersContainer) {
             partnersContainer.innerHTML = '';
-            var sorted = state.partners.slice().sort(function (a, b) { return (b.trees || 0) - (a.trees || 0); });
+            var sorted = state.partners.slice().sort(function (a, b) {
+                if (a.isSharedWithWebReady !== b.isSharedWithWebReady) {
+                    return a.isSharedWithWebReady ? 1 : -1;
+                }
+                return (b.trees || 0) - (a.trees || 0);
+            });
             sorted.forEach(function (p) {
                 var row = document.createElement('div');
                 row.className = 'equation-row';
                 var co2Suffix = (typeof p.co2Tonnes === 'number' && p.co2Tonnes > 0)
-                    ? ' <span class="text-xs text-gray-400 tabular-nums">(' + p.co2Tonnes.toLocaleString(undefined, { maximumFractionDigits: 2 }) + ' t CO\u2082)</span>'
+                    ? ' <span class="text-xs text-gray-400 tabular-nums">(' + Math.round(p.co2Tonnes * 1000).toLocaleString() + ' kg CO\u2082)</span>'
+                    : '';
+                var sharedSuffix = p.isSharedWithWebReady
+                    ? ' <span class="text-xs text-amber-700">[shared with ' + p.sharedWithLabel + '; excluded from total]</span>'
                     : '';
                 row.innerHTML =
-                    '<span class="equation-operator">+</span>' +
-                    '<span class="equation-label text-gray-700">' + p.name + co2Suffix + '</span>' +
+                    '<span class="equation-operator">' + (p.isSharedWithWebReady ? '\u2261' : '+') + '</span>' +
+                    '<span class="equation-label text-gray-700">' + p.name + co2Suffix + sharedSuffix + '</span>' +
                     '<span class="equation-value font-medium text-deep-forest">' + (p.trees || 0).toLocaleString() + '</span>';
                 partnersContainer.appendChild(row);
             });
@@ -233,6 +283,9 @@
                 var wr = forests.filter(function (f) { return f.slug === 'web-ready'; })[0];
                 if (wr && !wr.error) {
                     state.webReadyTrees = wr.trees;
+                    if (typeof wr.co2Tonnes === 'number' && Number.isFinite(wr.co2Tonnes)) {
+                        state.webReadyCo2Kg = wr.co2Tonnes * 1000;
+                    }
                 }
 
                 state.partners.forEach(function (p) {
