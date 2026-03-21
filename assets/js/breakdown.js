@@ -170,11 +170,11 @@
             var card = document.createElement('div');
             card.className = 'forest-card';
             var co2Html = co2KgLineFromTonnes(p.co2Tonnes);
-            var additiveTrees = getAdditiveTrees(p);
+            var forestTrees = Number(p.trees) || 0;
             card.innerHTML =
                 '<div class="flex items-start justify-between gap-3 mb-1">' +
                     '<div class="flex flex-wrap items-center gap-2 min-w-0">' + nameHtml + tagHtml + '</div>' +
-                    '<div class="text-xl font-bold text-brand-green tabular-nums flex-shrink-0">' + additiveTrees.toLocaleString() + '</div>' +
+                    '<div class="text-xl font-bold text-brand-green tabular-nums flex-shrink-0">' + forestTrees.toLocaleString() + '</div>' +
                 '</div>' +
                 '<div class="text-xs text-gray-400">Based in ' + (p.baseLocation || '—') + '</div>' +
                 co2Html +

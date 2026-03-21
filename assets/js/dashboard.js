@@ -94,7 +94,6 @@ function populatePartnerSection(partners) {
             var tr = document.createElement('tr');
             tr.className = 'data-row border-b border-gray-50 transition-all duration-200';
             var sharedTrees = getSharedTrees(p);
-            var additiveTrees = getAdditiveTrees(p);
             var sharedNote = '';
             if (sharedTrees > 0) {
                 sharedNote = ' <span class="text-xs text-amber-700">[' + sharedTrees.toLocaleString() + ' trees shared with the Oasis of Change Forest]</span>';
@@ -106,7 +105,7 @@ function populatePartnerSection(partners) {
                 '<td class="py-4 px-2">' + nameCell + '</td>' +
                 '<td class="py-4 px-2 text-sm text-gray-600">' + p.baseLocation + '</td>' +
                 '<td class="py-4 px-2 text-sm text-gray-600">' + p.countries + '</td>' +
-                '<td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">' + getAdditiveTrees(p).toLocaleString() + '</td>';
+                '<td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">' + (Number(p.trees) || 0).toLocaleString() + '</td>';
             pBody.appendChild(tr);
         });
     }
@@ -126,7 +125,7 @@ function populatePartnerSection(partners) {
                         nameBlock +
                         '<div class="mobile-card-subtitle">' + (p.baseLocation || '') + ' · ' + (p.countries || '') + '</div>' +
                     '</div>' +
-                    '<div class="mobile-trees-count">' + getAdditiveTrees(p).toLocaleString() + '</div>' +
+                    '<div class="mobile-trees-count">' + (Number(p.trees) || 0).toLocaleString() + '</div>' +
                 '</div>';
             pCards.appendChild(card);
         });
