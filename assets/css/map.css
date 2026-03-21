@@ -667,16 +667,17 @@
 .map-legend {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb, #6a8179) var(--scrollbar-track, #dfe7e3);
 }
 .map-legend::-webkit-scrollbar {
   height: 4px;
 }
 .map-legend::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: var(--scrollbar-track, #dfe7e3);
   border-radius: 2px;
 }
 .map-legend::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--scrollbar-thumb, #6a8179);
   border-radius: 2px;
 }
 
@@ -686,16 +687,17 @@
 .map-legend {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb, #6a8179) var(--scrollbar-track, #dfe7e3);
 }
 .map-legend::-webkit-scrollbar {
   height: 4px;
 }
 .map-legend::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: var(--scrollbar-track, #dfe7e3);
   border-radius: 2px;
 }
 .map-legend::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--scrollbar-thumb, #6a8179);
   border-radius: 2px;
 }
 
@@ -723,13 +725,13 @@ details[open] summary svg {
 
 #site-lists::-webkit-scrollbar { width: 6px; }
 #site-lists::-webkit-scrollbar-track {
-  background: var(--color-surface-muted, #f1f5f9);
+  background: var(--scrollbar-track, #dfe7e3);
   border-radius: 3px;
 }
 #site-lists::-webkit-scrollbar-thumb {
-  background: var(--color-border-muted, #cbd5e1);
+  background: var(--scrollbar-thumb, #6a8179);
   border-radius: 3px;
 }
 #site-lists::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-muted, #94a3b8);
+  background: var(--scrollbar-thumb-hover, #4f665e);
 }

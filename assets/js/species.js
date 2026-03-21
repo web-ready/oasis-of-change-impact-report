@@ -4,10 +4,71 @@
     var API_BASE = 'https://tree-nation.com/api';
     var requestOptions = { method: 'GET', redirect: 'follow' };
     var SPECIES_API_CACHE = {};
+    var SPECIES_CACHE_PATH = 'assets/data/species-cache.json';
+    var SPECIES_STORAGE_PREFIX = 'ooc_tree_species_cache_v1:';
+    var SPECIES_STORAGE_TTL_MS = 24 * 60 * 60 * 1000; // 24h
 
     // Lightbox: single document listener; species map refreshed after each render.
     var lightboxSpeciesById = {};
     var lightboxDocumentClickBound = false;
+    var lightboxKeydownBound = false;
+    var lightboxLastFocusedElement = null;
+
+    function getCachedSpeciesFromStorage(id) {
+        if (typeof localStorage === 'undefined') return undefined;
+        try {
+            var raw = localStorage.getItem(SPECIES_STORAGE_PREFIX + String(id));
+            if (!raw) return undefined;
+            var parsed = JSON.parse(raw);
+            if (!parsed || typeof parsed.ts !== 'number') return undefined;
+            if (Date.now() - parsed.ts > SPECIES_STORAGE_TTL_MS) return undefined;
+            return parsed.species;
+        } catch (e) {
+            return undefined;
+        }
+    }
+
+    function setCachedSpeciesInStorage(id, species) {
+        if (typeof localStorage === 'undefined') return;
+        try {
+            localStorage.setItem(
+                SPECIES_STORAGE_PREFIX + String(id),
+                JSON.stringify({ ts: Date.now(), species: species })
+            );
+        } catch (e) {
+            // Ignore storage failures (private mode/quota/etc).
+        }
+    }
+
+    function applySpeciesCacheFileToApiCache(cacheFile) {
+        if (!cacheFile || !cacheFile.speciesById) return false;
+        var byId = cacheFile.speciesById;
+        Object.keys(byId).forEach(function (idKey) {
+            var id = Number(idKey);
+            if (!Number.isFinite(id)) return;
+            SPECIES_API_CACHE[id] = byId[idKey];
+        });
+        return true;
+    }
+
+    function loadSpeciesCacheFile() {
+        if (typeof fetch === 'undefined') return Promise.resolve(false);
+        return fetch(SPECIES_CACHE_PATH)
+            .then(function (response) {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.json();
+            })
+            .then(function (cacheFile) {
+                var applied = applySpeciesCacheFileToApiCache(cacheFile);
+                if (applied && typeof console !== 'undefined' && console.log) {
+                    console.log('[Oasis of Change Species] Loaded species cache:', cacheFile.lastUpdated || cacheFile.updatedAtIso || 'unknown');
+                }
+                return applied;
+            })
+            .catch(function () {
+                return false;
+            });
+    }
 
     // Species IDs derived from the species registries / taxonomic indices for
     // the project/forest sources represented on `breakdown.html`.
@@ -83,18 +144,44 @@
         if (!id && id !== 0) return Promise.resolve(null);
         if (Object.prototype.hasOwnProperty.call(SPECIES_API_CACHE, id)) return Promise.resolve(SPECIES_API_CACHE[id]);
 
+        var stored = getCachedSpeciesFromStorage(id);
+        if (stored !== undefined) {
+            SPECIES_API_CACHE[id] = stored;
+            return Promise.resolve(stored);
+        }
+
         var url = API_BASE + '/species/' + id;
-        return fetch(url, requestOptions)
+        var SPECIES_FETCH_TIMEOUT_MS = 15000;
+        var controller = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+        var timeoutId = null;
+        var fetchOptions = requestOptions;
+
+        if (controller) {
+            fetchOptions = Object.assign({}, requestOptions, { signal: controller.signal });
+            timeoutId = window.setTimeout(function () {
+                try { controller.abort(); } catch (e) { /* noop */ }
+            }, SPECIES_FETCH_TIMEOUT_MS);
+        }
+
+        var clearTimer = function () {
+            if (timeoutId) window.clearTimeout(timeoutId);
+        };
+
+        return fetch(url, fetchOptions)
             .then(function (response) {
                 if (!response.ok) throw new Error('HTTP ' + response.status);
                 return response.json();
             })
             .then(function (species) {
+                clearTimer();
                 SPECIES_API_CACHE[id] = species || null;
+                setCachedSpeciesInStorage(id, SPECIES_API_CACHE[id]);
                 return SPECIES_API_CACHE[id];
             })
             .catch(function () {
+                clearTimer();
                 SPECIES_API_CACHE[id] = null;
+                setCachedSpeciesInStorage(id, null);
                 return null;
             });
     }
@@ -156,7 +243,7 @@
 
                 var thumbHtml = imageUrl
                     ? '<button type="button" class="partner-species-thumb-btn js-species-thumb" data-species-id="' + sid + '" aria-label="View larger image of ' + nameSafe + '">' +
-                        '<img class="partner-species-thumb is-loading js-partner-species-img" src="' + escapeAttr(imageUrl) + '" alt="' + altSafe + '" loading="eager" decoding="async" data-fallback-label="' + String(sid) + '">' +
+                        '<img class="partner-species-thumb is-loading js-partner-species-img" src="' + escapeAttr(imageUrl) + '" alt="' + altSafe + '" loading="lazy" decoding="async" data-fallback-label="' + String(sid) + '">' +
                       '</button>'
                     : '<span class="partner-species-thumb partner-species-thumb--fallback" aria-hidden="true">' + String(sid) + '</span>';
 
@@ -169,9 +256,9 @@
                     '</div>';
             }).join('');
 
-            // Default: expand everything so we never render partially-hidden/white sections.
+            // Keep the original experience: all partner groups open by default.
             var openAttr = ' open';
-            return '<details class="partner-group' + openAttr + '">' +
+            return '<details class="partner-group"' + openAttr + '>' +
                 '<summary><span class="partner-group-title">' + escapeHtml(group.groupLabel) + '</span><span class="partner-group-count">' + group.speciesIds.length + ' species</span></summary>' +
                 '<div class="partner-species-list">' + groupSpeciesLines + '</div>' +
                 '</details>';
@@ -370,9 +457,8 @@
             else clearToolbarActive();
         }
 
-        // Start expanded (matches `openAttr = ' open'`).
+        // Start based on the `<details open>` boolean attribute in markup.
         groups.forEach(function (details) {
-            details.open = true;
 
             var summary = details.querySelector('summary');
             if (summary) {
@@ -386,10 +472,13 @@
 
             details.addEventListener('toggle', function () {
                 if (desktopMq.matches) return;
-                requestAnimationFrame(syncToolbarFromGroups);
+                requestAnimationFrame(function () {
+                    syncToolbarFromGroups();
+                    if (details.open) refreshPartnerGroupPanel(details, true);
+                });
             });
         });
-        setMode('expand');
+        syncToolbarFromGroups();
 
         function expandAll() {
             groups.forEach(function (details) {
@@ -531,15 +620,40 @@
         lightbox.innerHTML =
             '<div class="species-lightbox__backdrop" data-close-lightbox="true"></div>' +
             '<div class="species-lightbox__panel" role="dialog" aria-modal="true" aria-label="Species image viewer">' +
-                '<button type="button" class="species-lightbox__close" data-close-lightbox="true" aria-label="Close image viewer">×</button>' +
-                '<img id="species-lightbox-img" class="species-lightbox__img" src="" alt="">' +
+                '<div class="species-lightbox__header">' +
+                    '<p class="species-lightbox__source-tag">Tree-Nation API content</p>' +
+                    '<button type="button" class="species-lightbox__close" data-close-lightbox="true" aria-label="Close image viewer">' +
+                        '<span aria-hidden="true">×</span>' +
+                    '</button>' +
+                '</div>' +
+                '<div class="species-lightbox__media">' +
+                    '<img id="species-lightbox-img" class="species-lightbox__img" src="" alt="" loading="eager" decoding="async">' +
+                '</div>' +
                 '<div class="species-lightbox__body">' +
                     '<h4 id="species-lightbox-title" class="species-lightbox__title"></h4>' +
                     '<p id="species-lightbox-desc" class="species-lightbox__desc"></p>' +
+                    '<p id="species-lightbox-disclaimer" class="species-lightbox__disclaimer"></p>' +
                 '</div>' +
             '</div>';
         document.body.appendChild(lightbox);
         return lightbox;
+    }
+
+    function closeSpeciesLightbox() {
+        var lightbox = document.getElementById('species-lightbox');
+        if (!lightbox) return;
+        lightbox.classList.add('hidden');
+        document.body.classList.remove('species-lightbox-open');
+
+        var imgEl = document.getElementById('species-lightbox-img');
+        if (imgEl) {
+            imgEl.removeAttribute('src');
+        }
+
+        if (lightboxLastFocusedElement && typeof lightboxLastFocusedElement.focus === 'function') {
+            lightboxLastFocusedElement.focus();
+        }
+        lightboxLastFocusedElement = null;
     }
 
     function openSpeciesLightbox(species) {
@@ -548,12 +662,19 @@
         var imgEl = document.getElementById('species-lightbox-img');
         var titleEl = document.getElementById('species-lightbox-title');
         var descEl = document.getElementById('species-lightbox-desc');
+        var disclaimerEl = document.getElementById('species-lightbox-disclaimer');
 
+        lightboxLastFocusedElement = document.activeElement;
         imgEl.src = species.image;
         imgEl.alt = species.name || 'Species';
         titleEl.textContent = species.name || 'Species';
         descEl.textContent = species.particularities || species.planter_likes || 'No additional description available from Tree-Nation API.';
+        disclaimerEl.textContent = 'Image and species details are supplied by the Tree-Nation API.';
         lightbox.classList.remove('hidden');
+        document.body.classList.add('species-lightbox-open');
+
+        var closeBtn = lightbox.querySelector('.species-lightbox__close');
+        if (closeBtn) closeBtn.focus();
     }
 
     function setupLightboxInteractions(entriesById) {
@@ -566,7 +687,7 @@
         document.addEventListener('click', function (event) {
             var closeTrigger = event.target.closest('[data-close-lightbox="true"]');
             if (closeTrigger) {
-                lightbox.classList.add('hidden');
+                closeSpeciesLightbox();
                 return;
             }
 
@@ -575,6 +696,15 @@
             var sid = Number(thumb.getAttribute('data-species-id'));
             openSpeciesLightbox(lightboxSpeciesById[sid]);
         });
+
+        if (!lightboxKeydownBound) {
+            lightboxKeydownBound = true;
+            document.addEventListener('keydown', function (event) {
+                if (event.key !== 'Escape') return;
+                if (lightbox.classList.contains('hidden')) return;
+                closeSpeciesLightbox();
+            });
+        }
     }
 
     function setupSpeciesThumbLoading(root) {
@@ -679,17 +809,84 @@
 
         if (!allIds.length) return;
 
-        Promise.all(allIds.map(function (sid) {
-            return fetchSpeciesById(sid).then(function (sp) { return { sid: sid, sp: sp }; });
-        })).then(function (results) {
-            var byId = {};
-            results.forEach(function (r) { byId[r.sid] = r.sp; });
-            renderVerifiedPartnerSpeciesCard(byId);
-            setupSpeciesThumbLoading();
-            hideStaticVerifiedCardsIfCovered(byId);
-            setupLightboxInteractions(byId);
-            var activeBtn = document.querySelector('.filter-btn.active');
-            applyFilter(activeBtn ? activeBtn.getAttribute('data-filter') : 'all');
+        function mapWithConcurrency(items, concurrency, mapper) {
+            return new Promise(function (resolve) {
+                var results = new Array(items.length);
+                var nextIndex = 0;
+                var inFlight = 0;
+                var doneCount = 0;
+
+                function launchMore() {
+                    while (inFlight < concurrency && nextIndex < items.length) {
+                        (function (index) {
+                            var sid = items[index];
+                            inFlight += 1;
+
+                            Promise.resolve(mapper(sid))
+                                .then(function (value) {
+                                    results[index] = value;
+                                }, function () {
+                                    results[index] = null;
+                                })
+                                .then(function () {
+                                    inFlight -= 1;
+                                    doneCount += 1;
+                                    if (doneCount === items.length) resolve(results);
+                                    else launchMore();
+                                });
+                        })(nextIndex);
+                        nextIndex += 1;
+                    }
+                }
+
+                launchMore();
+            });
+        }
+
+        // Hydrate from pre-generated cache first; only fetch missing IDs.
+        loadSpeciesCacheFile().finally(function () {
+            var missing = allIds.filter(function (sid) {
+                return !Object.prototype.hasOwnProperty.call(SPECIES_API_CACHE, sid);
+            });
+
+            function buildById() {
+                var byId = {};
+                allIds.forEach(function (sid) {
+                    byId[sid] = Object.prototype.hasOwnProperty.call(SPECIES_API_CACHE, sid)
+                        ? SPECIES_API_CACHE[sid]
+                        : null;
+                });
+                return byId;
+            }
+
+            if (!missing.length) {
+                var byId = buildById();
+                renderVerifiedPartnerSpeciesCard(byId);
+                setupSpeciesThumbLoading();
+                hideStaticVerifiedCardsIfCovered(byId);
+                setupLightboxInteractions(byId);
+                var activeBtn = document.querySelector('.filter-btn.active');
+                applyFilter(activeBtn ? activeBtn.getAttribute('data-filter') : 'all');
+                return;
+            }
+
+            var concurrency = 8;
+            mapWithConcurrency(missing, concurrency, function (sid) {
+                return fetchSpeciesById(sid).then(function (sp) { return { sid: sid, sp: sp }; });
+            }).then(function (results) {
+                // fetchSpeciesById already populates SPECIES_API_CACHE; results are only used to preserve ids.
+                results.forEach(function (r) {
+                    SPECIES_API_CACHE[r.sid] = r.sp;
+                });
+
+                var byId = buildById();
+                renderVerifiedPartnerSpeciesCard(byId);
+                setupSpeciesThumbLoading();
+                hideStaticVerifiedCardsIfCovered(byId);
+                setupLightboxInteractions(byId);
+                var activeBtn = document.querySelector('.filter-btn.active');
+                applyFilter(activeBtn ? activeBtn.getAttribute('data-filter') : 'all');
+            });
         });
     }
 
