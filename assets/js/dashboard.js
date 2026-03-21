@@ -93,9 +93,12 @@ function populatePartnerSection(partners) {
         list.forEach(function(p) {
             var tr = document.createElement('tr');
             tr.className = 'data-row border-b border-gray-50 transition-all duration-200';
-            var sharedNote = p.isSharedWithWebReady
-                ? ' <span class="text-xs text-amber-700">[overlaps ' + (p.sharedWithLabel || 'Web-Ready by Oasis of Change, Inc.') + '; not additive]</span>'
-                : '';
+            var sharedTrees = getSharedTrees(p);
+            var additiveTrees = getAdditiveTrees(p);
+            var sharedNote = '';
+            if (sharedTrees > 0) {
+                sharedNote = ' <span class="text-xs text-amber-700">[' + sharedTrees.toLocaleString() + ' trees shared with ' + (p.sharedWithLabel || 'Web-Ready by Oasis of Change, Inc.') + ' Forest.]</span>';
+            }
             var nameCell = p.profileUrl
                 ? '<a href="' + p.profileUrl + '" target="_blank" rel="noopener" class="partner-profile-link font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">' + p.name + extIcon + '</a>' + sharedNote
                 : p.name + sharedNote;
@@ -103,7 +106,7 @@ function populatePartnerSection(partners) {
                 '<td class="py-4 px-2">' + nameCell + '</td>' +
                 '<td class="py-4 px-2 text-sm text-gray-600">' + p.baseLocation + '</td>' +
                 '<td class="py-4 px-2 text-sm text-gray-600">' + p.countries + '</td>' +
-                '<td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">' + (p.trees || 0).toLocaleString() + '</td>';
+                '<td class="py-4 px-2 text-right tabular-nums text-lg font-semibold text-deep-forest">' + getAdditiveTrees(p).toLocaleString() + '</td>';
             pBody.appendChild(tr);
         });
     }
@@ -123,7 +126,7 @@ function populatePartnerSection(partners) {
                         nameBlock +
                         '<div class="mobile-card-subtitle">' + (p.baseLocation || '') + ' · ' + (p.countries || '') + '</div>' +
                     '</div>' +
-                    '<div class="mobile-trees-count">' + (p.trees || 0).toLocaleString() + '</div>' +
+                    '<div class="mobile-trees-count">' + getAdditiveTrees(p).toLocaleString() + '</div>' +
                 '</div>';
             pCards.appendChild(card);
         });
@@ -437,18 +440,19 @@ function loadLiveTreeCountsFromAPI() {
                     profileUrl: p.profileUrl,
                     co2Tonnes: co2Tonnes,
                     isSharedWithWebReady: p.isSharedWithWebReady === true,
+                    sharedTreesWithWebReady: p.sharedTreesWithWebReady,
                     sharedWithLabel: p.sharedWithLabel || 'Web-Ready by Oasis of Change, Inc.'
                 };
             });
 
             var partnerTreesTotal = mergedPartners.reduce(function(sum, p) {
-                return p.isSharedWithWebReady ? sum : sum + (p.trees || 0);
+                return sum + getAdditiveTrees(p);
             }, 0);
             var partnerCo2TonnesTotal = mergedPartners.reduce(function(sum, p) {
-                return p.isSharedWithWebReady ? sum : sum + (p.co2Tonnes || 0);
+                return sum + getAdditiveCo2Tonnes(p);
             }, 0);
             var sharedPartnerTrees = mergedPartners.reduce(function(sum, p) {
-                return p.isSharedWithWebReady ? sum + (p.trees || 0) : sum;
+                return sum + getSharedTrees(p);
             }, 0);
             var verifiedTotal = webReadyTrees + partnerTreesTotal;
             var legacyTrees = safeCall(function() { return TreeData.getLegacyTrees(); }, 0);
@@ -521,6 +525,34 @@ function initPlantingCarousel() {
     nextBtn.addEventListener('click', next);
     goTo(0);
     resetAuto();
+}
+
+function getSharedTrees(partner) {
+    if (!partner || !partner.isSharedWithWebReady) return 0;
+    var totalTrees = Number(partner.trees) || 0;
+    var explicitShared = Number(partner.sharedTreesWithWebReady);
+    if (Number.isFinite(explicitShared) && explicitShared > 0) {
+        return Math.min(totalTrees, Math.floor(explicitShared));
+    }
+    return totalTrees;
+}
+
+function getAdditiveTrees(partner) {
+    if (!partner) return 0;
+    var totalTrees = Number(partner.trees) || 0;
+    return Math.max(0, totalTrees - getSharedTrees(partner));
+}
+
+function getAdditiveCo2Tonnes(partner) {
+    if (!partner) return 0;
+    var co2 = Number(partner.co2Tonnes);
+    if (!Number.isFinite(co2) || co2 <= 0) return 0;
+    var trees = Number(partner.trees) || 0;
+    if (trees <= 0) return 0;
+    var additiveTrees = getAdditiveTrees(partner);
+    if (additiveTrees <= 0) return 0;
+    if (additiveTrees >= trees) return co2;
+    return co2 * (additiveTrees / trees);
 }
 
 function boot() {

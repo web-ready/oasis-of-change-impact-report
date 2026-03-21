@@ -1,6 +1,6 @@
 const TreeData = {
 
-    lastUpdated: "March 20th, 2026",
+    lastUpdated: "March 21st, 2026",
 
     /* ────────────────────────────────────────────────
        TOTALS — Fallback only. Live verified/total counts come from the
@@ -10,9 +10,9 @@ const TreeData = {
     totals: {
         webReadyTrees: 8987,    // fallback: Oasis web-ready forest (Tree-Nation)
         webReadyCo2Kg: 476000,  // fallback: full forest CO₂ on Tree-Nation (incl. seeds / non-cert lines)
-        verifiedTrees: 9640,    // fallback: web-ready + additive partners (excl. overlap gifts)
+        verifiedTrees: 9660,    // fallback: web-ready + additive partners (excluding only shared overlap portions)
         legacyTrees:   7338,    // fixed: Tero + Refoorest (no API)
-        totalTrees:    16978,   // fallback: verified + legacy
+        totalTrees:    16998,   // fallback: verified + legacy
         // Species transparency model for homepage reporting:
         // combined "up to" figure = verified unique + legacy-only unique (no double-counting overlap).
         verifiedSpeciesUnique: 46,
@@ -66,7 +66,9 @@ const TreeData = {
         { id: "ecosearch",         name: "EcoSearch",                                  baseLocation: "Canada",        trees: 101, co2Tonnes: 5.05,  countries: "Madagascar" },
         { id: "denman-place-mall", name: "Denman Place Mall",                          baseLocation: "Canada",        trees: 22,  co2Tonnes: 1.1,   countries: "Tanzania, Kenya" },
         { id: "gabriel-dalton",    name: "Gabriel Dalton (CEO Personal Forest)",       baseLocation: "Canada",        trees: 2,   co2Tonnes: 0.1,   countries: "Tanzania" },
-        { id: "wesn",              name: "West End Seniors' Network (WESN)",           baseLocation: "Canada",        trees: 900, co2Tonnes: 45,    countries: "Kenya", isSharedWithWebReady: true, sharedWithLabel: "Web-Ready by Oasis of Change, Inc.", partnerSpecies: [{ name: "Persea americana", country: "Kenya", project: "Save the Aberdare Forest" }] }
+        // WESN has a partial shared allocation with Web-Ready.
+        // Trees above the shared portion remain additive.
+        { id: "wesn",              name: "West End Seniors' Network (WESN)",           baseLocation: "Canada",        trees: 920, co2Tonnes: 46,    countries: "Kenya", isSharedWithWebReady: true, sharedTreesWithWebReady: 900, sharedWithLabel: "Web-Ready by Oasis of Change, Inc.", partnerSpecies: [{ name: "Persea americana", country: "Kenya", project: "Save the Aberdare Forest" }] }
     ],
 
 
@@ -133,7 +135,7 @@ const TreeData = {
         { id: "tanzania",    name: "Replanting the burnt Mkussu Forest", country: "Tanzania", type: "confirmed", source: "Tree-Nation", trees: 7057, lat: -4.798667, lng: 38.290218, description: "Planted by Oasis of Change (CORE) and Sustainable WWW (planting partner).", exactCoordinatesVerified: true },
         { id: "tanzania-usambara", name: "Usambara Biodiversity Conservation", country: "Tanzania", type: "confirmed", source: "Tree-Nation", trees: 0, lat: -6.369028, lng: 34.888821, description: "Planted by Oasis of Change, Stanley Park Ecology Society, Sustainable WWW, and Mittler Senior Technology (planting partners).", exactCoordinatesVerified: true },
         { id: "tanzania-geita", name: "Geita Tree Plantation for Community", country: "Tanzania", type: "confirmed", source: "Tree-Nation", trees: 0, lat: -2.874174, lng: 32.219807, description: "Planted by Sustainable WWW (planting partner).", exactCoordinatesVerified: true },
-        { id: "tanzania-plant-to-stop-poverty", name: "Plant to Stop Poverty", country: "Tanzania", type: "confirmed", source: "Tree-Nation", trees: 0, lat: -5.148192, lng: 38.448196, description: "Planted by Oasis of Change, Stanley Park Ecology Society, and Mittler Senior Technology (planting partners).", exactCoordinatesVerified: true },
+        { id: "tanzania-plant-to-stop-poverty", name: "Plant to Stop Poverty", country: "Tanzania", type: "confirmed", source: "Tree-Nation", trees: 0, lat: -5.148192, lng: 38.448196, description: "Planted by Oasis of Change, Stanley Park Ecology Society, Mittler Senior Technology, and West End Seniors' Network (WESN) (planting partners).", exactCoordinatesVerified: true },
         { id: "tanzania-mlola", name: "Mlola Biodiversity Restoration", country: "Tanzania", type: "confirmed", source: "Tree-Nation", trees: 0, lat: -4.631748, lng: 38.426472, description: "Planted by Sustainable WWW (planting partner).", exactCoordinatesVerified: true },
         { id: "canada",      name: "Canada",       country: "Canada",      type: "confirmed", source: "Tree-Nation",               trees: 62,   lat: 52.405426, lng: -98.917091, description: "2025-2026 FY — Boreal Forest Habitat Restoration", exactCoordinatesVerified: true },
         { id: "bolivia",     name: "Bolivia",      country: "Bolivia",     type: "confirmed", source: "Tree-Nation",               trees: 2,    lat: -17.270603, lng: -62.805347, description: "2025-2026 FY — Amazon Windshields (PILOT)", exactCoordinatesVerified: true },
@@ -249,11 +251,30 @@ const TreeData = {
     },
 
     getCo2Captured: function() {
-        // Match dashboard live API: Web-Ready forest CO₂ + additive partners only (exclude overlap gifts).
+        // Match dashboard live API: Web-Ready forest CO₂ + additive partners only
+        // (excluding only the shared portion assigned to Web-Ready).
         var webKg = this.getWebReadyCo2Kg();
         var partnerKg = (this.verifiedPartners || []).reduce(function(sum, p) {
-            if (p.isSharedWithWebReady) return sum;
-            return sum + ((p.co2Tonnes || 0) * 1000);
+            var co2Tonnes = Number(p.co2Tonnes);
+            if (!Number.isFinite(co2Tonnes) || co2Tonnes <= 0) return sum;
+
+            var trees = Number(p.trees) || 0;
+            if (trees <= 0) return sum;
+
+            var sharedTrees = 0;
+            if (p.isSharedWithWebReady) {
+                var explicitShared = Number(p.sharedTreesWithWebReady);
+                if (Number.isFinite(explicitShared) && explicitShared > 0) {
+                    sharedTrees = Math.min(trees, Math.floor(explicitShared));
+                } else {
+                    sharedTrees = trees;
+                }
+            }
+
+            var additiveTrees = Math.max(0, trees - sharedTrees);
+            if (additiveTrees <= 0) return sum;
+            var additiveFraction = additiveTrees >= trees ? 1 : (additiveTrees / trees);
+            return sum + (co2Tonnes * additiveFraction * 1000);
         }, 0);
         return webKg + partnerKg;
     },

@@ -13,6 +13,9 @@ Update `assets/js/tree-data.js`:
   - `trees` (fallback tree count)
   - `co2Tonnes` (fallback CO2 estimate in tonnes)
   - `countries` (comma-separated display list)
+- If a partner has a partial shared allocation with Web-Ready, set:
+  - `isSharedWithWebReady: true`
+  - `sharedTreesWithWebReady` (exact number assigned to Web-Ready and excluded from additive totals)
 - Update `totals.webReadyTrees`, `totals.webReadyCo2Kg` (forest total CO₂ in kg from Tree-Nation), `totals.verifiedTrees`, and `totals.totalTrees`.
 - Update `lastUpdated`.
 
@@ -44,7 +47,7 @@ Only if applicable:
 
 ## 5) Refresh generated cache
 
-After updating forest mappings or overlap rules:
+After updating forest mappings or shared-allocation rules:
 
 - Run `node tools/sync-tree-cache.mjs`
 - Commit `assets/data/tree-stats-cache.json`
