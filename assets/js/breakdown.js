@@ -6,6 +6,7 @@
 
     var state = {
         webReadyTrees: 0,
+        webReadyCo2Tonnes: 0,
         partners: [],
         legacyProjects: [],
         verifiedTotal: 0,
@@ -23,6 +24,11 @@
         state.webReadyTrees = typeof TreeData.getWebReadyTrees === 'function'
             ? TreeData.getWebReadyTrees()
             : (TreeData.totals && TreeData.totals.webReadyTrees) || 0;
+
+        var webReadyCo2Kg = typeof TreeData.getWebReadyCo2Kg === 'function'
+            ? TreeData.getWebReadyCo2Kg()
+            : null;
+        state.webReadyCo2Tonnes = Number.isFinite(webReadyCo2Kg) ? (webReadyCo2Kg / 1000) : 0;
 
         var partners = typeof TreeData.getVerifiedPartners === 'function'
             ? TreeData.getVerifiedPartners()
@@ -91,6 +97,11 @@
 
     function renderWebReady() {
         setText('bd-webready-count', state.webReadyTrees.toLocaleString());
+        var co2Display = (typeof state.webReadyCo2Tonnes === 'number' && state.webReadyCo2Tonnes > 0)
+            ? state.webReadyCo2Tonnes.toLocaleString(undefined, { maximumFractionDigits: 2 })
+            : '—';
+        setText('bd-webready-co2-tonnes', co2Display);
+
         var tag = document.getElementById('bd-webready-tag');
         if (tag) {
             if (state.isLive) {
@@ -233,6 +244,9 @@
                 var wr = forests.filter(function (f) { return f.slug === 'web-ready'; })[0];
                 if (wr && !wr.error) {
                     state.webReadyTrees = wr.trees;
+                    if (typeof wr.co2Tonnes === 'number' && Number.isFinite(wr.co2Tonnes)) {
+                        state.webReadyCo2Tonnes = wr.co2Tonnes;
+                    }
                 }
 
                 state.partners.forEach(function (p) {
