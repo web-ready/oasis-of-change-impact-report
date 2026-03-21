@@ -60,10 +60,23 @@
         });
 
         recalculate();
-        renderAll();
         setText('bd-last-updated', TreeData.lastUpdated);
+
+        if (typeof TreeNationAPI === 'undefined') {
+            renderAll();
+            if (typeof console !== 'undefined' && console.log) {
+                console.log('[Oasis of Change Breakdown] Ready (cached, no API):', state.grandTotal, 'lastUpdated:', TreeData.lastUpdated);
+            }
+            return;
+        }
+
+        // Tree-Nation sections keep the HTML skeletons until the API responds, so we never flash
+        // stale bundled/cache numbers before live counts. Legacy-only UI can render from TreeData.
+        setText('bd-legacy-total', state.legacyTotal.toLocaleString());
+        renderLegacy();
+        renderEquationLegacyPartial();
         if (typeof console !== 'undefined' && console.log) {
-            console.log('[Oasis of Change Breakdown] Ready (cached), total:', state.grandTotal, 'lastUpdated:', TreeData.lastUpdated);
+            console.log('[Oasis of Change Breakdown] Awaiting live Tree-Nation API...');
         }
         fetchLiveData();
     }
@@ -260,6 +273,24 @@
         setText('eq-grand-total', state.grandTotal.toLocaleString());
     }
 
+    /** Legacy partner counts are not from the Tree-Nation API; show equation Step 2 while Step 1 stays in loading state. */
+    function renderEquationLegacyPartial() {
+        var legacyContainer = document.getElementById('eq-legacy-rows');
+        if (legacyContainer) {
+            legacyContainer.innerHTML = '';
+            state.legacyProjects.forEach(function (p) {
+                var row = document.createElement('div');
+                row.className = 'equation-row';
+                row.innerHTML =
+                    '<span class="equation-operator">+</span>' +
+                    '<span class="equation-label text-gray-500">' + p.name + '</span>' +
+                    '<span class="equation-value font-medium text-gray-600">' + (p.trees || 0).toLocaleString() + '</span>';
+                legacyContainer.appendChild(row);
+            });
+        }
+        setText('eq-grand-total', '\u2014');
+    }
+
     function fetchLiveData() {
         if (typeof TreeNationAPI === 'undefined') {
             setApiStatus('fallback');
@@ -304,6 +335,8 @@
             })
             .catch(function (err) {
                 console.warn('[Oasis of Change Breakdown] API unavailable — using cached TreeData:', err.message || err);
+                recalculate();
+                renderAll();
                 setApiStatus('fallback');
             });
     }
