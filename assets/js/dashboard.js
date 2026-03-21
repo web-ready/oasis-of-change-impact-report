@@ -525,14 +525,21 @@ function initPlantingCarousel() {
 
 function boot() {
     if (typeof console !== 'undefined' && console.log) console.log('[Oasis of Change Dashboard] Booting');
-    initializeTreeData();
-    animateCount();
-    loadLiveTreeCountsFromAPI();
-    initPlantingCarousel();
 
-    setupSearch('verified-search', '#verified-table', 'verified-data', 'verified-mobile-cards');
-    setupSearch('legacy-search', '#legacy-table', 'legacy-data', 'legacy-mobile-cards');
-    setupSorting('#verified-table', 'verified-data');
-    setupSorting('#legacy-table', 'legacy-data');
-    setupSpeciesFilters();
+    var hydratePromise = (typeof TreeDataCache !== 'undefined' && typeof TreeDataCache.loadAndApply === 'function')
+        ? TreeDataCache.loadAndApply(typeof TreeData !== 'undefined' ? TreeData : null)
+        : Promise.resolve(false);
+
+    hydratePromise.finally(function () {
+        initializeTreeData();
+        animateCount();
+        loadLiveTreeCountsFromAPI();
+        initPlantingCarousel();
+
+        setupSearch('verified-search', '#verified-table', 'verified-data', 'verified-mobile-cards');
+        setupSearch('legacy-search', '#legacy-table', 'legacy-data', 'legacy-mobile-cards');
+        setupSorting('#verified-table', 'verified-data');
+        setupSorting('#legacy-table', 'legacy-data');
+        setupSpeciesFilters();
+    });
 }

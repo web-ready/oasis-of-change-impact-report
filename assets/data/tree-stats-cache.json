@@ -1,0 +1,41 @@
+{
+  "updatedAtIso": "2026-03-21T05:20:01.133Z",
+  "lastUpdated": "March 21st, 2026",
+  "totals": {
+    "webReadyTrees": 8987,
+    "webReadyCo2Kg": 476000,
+    "verifiedTrees": 9640,
+    "legacyTrees": 7338,
+    "totalTrees": 16978
+  },
+  "partnersById": {
+    "spes": {
+      "trees": 234,
+      "co2Tonnes": 21.55
+    },
+    "sustainable-www": {
+      "trees": 170,
+      "co2Tonnes": 24.56
+    },
+    "mst": {
+      "trees": 124,
+      "co2Tonnes": 16.25
+    },
+    "ecosearch": {
+      "trees": 101,
+      "co2Tonnes": 5.05
+    },
+    "denman-place-mall": {
+      "trees": 22,
+      "co2Tonnes": 1.1
+    },
+    "gabriel-dalton": {
+      "trees": 2,
+      "co2Tonnes": 0.1
+    },
+    "wesn": {
+      "trees": 900,
+      "co2Tonnes": 45
+    }
+  }
+}
