@@ -53,6 +53,29 @@
             border-color: #E5E7EB;
             background: #FFFFFF;
         }
+        .focus-tag-summary-card {
+            border: 1px solid #D1D5DB;
+            border-radius: 0.9rem;
+            background: #FFFFFF;
+            padding: 0.9rem;
+            min-height: 3.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .focus-tag-summary-pill {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 9999px;
+            padding: 0.12rem 0.55rem;
+            font-size: 0.7rem;
+            line-height: 1.2;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            color: #065F46;
+            background: #ECFDF5;
+            border: 1px solid #A7F3D0;
+        }
         .partner-group-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -272,8 +295,33 @@
             position: relative;
             overflow: hidden;
         }
+        .partner-species-thumb-loading-text {
+            position: absolute;
+            inset: auto 0 0 0;
+            background: rgba(17, 24, 39, 0.72);
+            color: #F9FAFB;
+            font-size: 0.6rem;
+            line-height: 1.2;
+            font-weight: 600;
+            text-align: center;
+            padding: 0.14rem 0.2rem;
+            letter-spacing: 0.01em;
+        }
+        .partner-species-thumb-btn.is-ready .partner-species-thumb-loading-text {
+            display: none;
+        }
+        .partner-species-details-btn {
+            border: 0;
+            background: transparent;
+            padding: 0.15rem 0;
+            text-align: left;
+            cursor: pointer;
+            min-width: 0;
+            width: 100%;
+        }
         /* Removed gradient shimmer to keep the verified section visually consistent. */
-        .partner-species-thumb-btn:focus-visible {
+        .partner-species-thumb-btn:focus-visible,
+        .partner-species-details-btn:focus-visible {
             outline: 2px solid #10B981;
             outline-offset: 2px;
         }
@@ -519,8 +567,8 @@
                             <a href="/breakdown" role="menuitem">Breakdown</a>
                         </div>
                     </div>
-                    <a href="/gallery" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Gallery</a>
                     <a href="/species" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-green text-white text-sm font-medium hover:bg-brand-green-light transition">Tree Species</a>
+                    <a href="/gallery" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">Gallery</a>
                     <a href="/news" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">News</a>
                 </div>
                 
@@ -568,8 +616,8 @@
                         <a href="/breakdown">Breakdown</a>
                     </div>
                 </div>
-                <a href="/gallery" class="mobile-nav-link">Gallery</a>
                 <a href="/species" class="mobile-nav-link active">Tree Species</a>
+                <a href="/gallery" class="mobile-nav-link">Gallery</a>
                 <a href="/news" class="mobile-nav-link">News</a>
             </nav>
             <div class="px-6 py-5 border-t border-gray-100">
@@ -628,9 +676,17 @@
             }
         </style>
 
-        <section class="mb-8">
-            <h2 class="text-base font-semibold text-deep-forest">About these categories</h2>
-            <p class="mt-2 text-xs text-gray-600 leading-relaxed">Labels like Agroforestry, Mangrove, or Medicinal are provided by project partners to describe typical uses and habitats.</p>
+        <section class="mb-7">
+            <div class="text-center mb-4">
+                <h2 class="text-base font-semibold text-deep-forest">Focus Tag Summary</h2>
+                <p class="mt-1 text-xs text-gray-600 leading-relaxed">A quick breakdown of the species categories across our verified planted species list.</p>
+            </div>
+            <div id="species-focus-tags-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div class="focus-tag-summary-card sm:col-span-2 lg:col-span-3 text-sm text-gray-500">
+                    Loading tag counts...
+                </div>
+            </div>
+            <p id="species-focus-tags-meta" class="mt-2 text-xs text-gray-500">Loading verified species tag counts...</p>
         </section>
 
         <section class="mb-8">
