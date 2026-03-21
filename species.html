@@ -50,7 +50,7 @@
         }
         .species-card--partner-verified {
             grid-column: 1 / -1;
-            border-color: #CFE9E1;
+            border-color: #E5E7EB;
             background: #FFFFFF;
         }
         .partner-group-grid {
@@ -62,16 +62,18 @@
             .partner-group-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
         .partner-group {
-            border: 1px solid #D1E5DD;
+            border: 1px solid #E5E7EB;
             border-radius: 0.9rem;
             /* Clip rounded corners cleanly at the header edges. */
             overflow: hidden;
             background: #FFFFFF;
-            box-shadow: 0 1px 6px rgba(2, 32, 24, 0.05);
+            box-shadow: none;
         }
         .partner-group-toolbar {
-            /* Keeps the expand/collapse controls aligned above the grid. */
-            width: 100%;
+            /* Inline with the card title: don't use 100% width here — in a flex row
+               that steals the whole row and squeezes the heading so "Planting" wraps early. */
+            width: auto;
+            flex-shrink: 0;
         }
         .partner-accordion-btn {
             font-size: 0.75rem;
@@ -86,9 +88,32 @@
         .partner-accordion-btn:hover {
             background: #F9FAFB;
         }
+        .partner-accordion-btn.is-active {
+            background: var(--color-brand-green) !important;
+            border-color: var(--color-brand-green) !important;
+            color: #FFFFFF !important;
+        }
+        .partner-accordion-btn.is-active:hover {
+            background: var(--color-brand-green) !important;
+        }
         .partner-accordion-btn--expand {
             border-color: #A7F3D0;
             color: #064E3B;
+        }
+        .partner-accordion-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .partner-accordion-btn svg {
+            flex: 0 0 auto;
+        }
+        /* Verified Tree Planting skeleton: flat (no shimmer/gradient) */
+        .species-card--partner-verified .skeleton--flat {
+            background: #E5E7EB !important;
+            background-image: none !important;
+            background-size: auto !important;
+            animation: none !important;
         }
         .partner-group > summary {
             cursor: default;
@@ -96,22 +121,27 @@
             padding: 0.8rem 0.9rem;
             font-size: 0.92rem;
             font-weight: 600;
-            color: #064E3B;
+            color: #0F172A;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 0.5rem;
             background: #F9FAFB;
-            border-bottom: 1px solid #D1FAE5;
+            border-bottom: 1px solid #E5E7EB;
             border-radius: 0.9rem 0.9rem 0 0;
             background-clip: padding-box;
+        }
+        @media (max-width: 1023.98px) {
+            .partner-group > summary {
+                cursor: pointer;
+            }
         }
         .partner-group > summary::-webkit-details-marker { display: none; }
         .partner-group-count {
             font-size: 0.7rem;
-            color: #065F46;
-            background: #FFFFFF;
-            border: 1px solid #A7F3D0;
+            color: #374151;
+            background: #F3F4F6;
+            border: 1px solid #E5E7EB;
             border-radius: 9999px;
             padding: 0.1rem 0.45rem;
             white-space: nowrap;
@@ -154,41 +184,20 @@
             position: relative;
             overflow: hidden;
         }
-        .partner-species-thumb-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(110deg, #E5E7EB 8%, #F3F4F6 18%, #E5E7EB 33%);
-            background-size: 200% 100%;
-            animation: partner-thumb-shimmer 1.2s linear infinite;
-        }
-        .partner-species-thumb-btn.is-ready::before {
-            display: none;
-        }
-        .partner-species-thumb.is-loading {
-            opacity: 0;
-        }
-        .partner-species-thumb.is-loaded {
-            opacity: 1;
-            transition: opacity 0.18s ease;
-        }
-        @keyframes partner-thumb-shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
+        /* Removed gradient shimmer to keep the verified section visually consistent. */
         .partner-species-thumb-btn:focus-visible {
             outline: 2px solid #10B981;
             outline-offset: 2px;
         }
-        .partner-species-thumb--fallback {
+        .species-card--partner-verified .partner-species-thumb--fallback {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             font-size: 0.72rem;
             font-weight: 700;
-            color: #065F46;
-            background: #ECFDF5;
-            border: 1px solid #A7F3D0;
+            color: #374151;
+            background: #F3F4F6;
+            border: 1px solid #E5E7EB;
         }
         .partner-species-name {
             font-size: 0.86rem;

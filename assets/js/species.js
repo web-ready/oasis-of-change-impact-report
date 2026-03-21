@@ -178,26 +178,29 @@
         }).join('');
 
         card.innerHTML =
-            '<div class="flex items-center justify-between mb-4">' +
-                '<h3 class="text-lg font-semibold text-deep-forest">Verified Tree Planting</h3>' +
-                '<span class="tag" style="border-color:#BBF7D0;color:#166534;background-color:#F0FDF4">Verified (API)</span>' +
+            // Title + toolbar: on small screens stack (full-width title). On sm+, use a row
+            // with flex-wrap so if the buttons need space, the toolbar wraps instead of
+            // squeezing the heading (which had sm:flex-1 + min-w-0 and forced "Planting"
+            // onto a second line while leaving empty space on line 1).
+            '<div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between mb-4">' +
+                '<h3 class="text-lg font-semibold text-deep-forest w-full sm:w-auto shrink-0">Verified Tree Planting</h3>' +
+                '<div class="partner-group-toolbar flex justify-end gap-2 shrink-0 sm:ml-auto">' +
+                    '<button type="button" class="partner-accordion-btn partner-accordion-btn--expand" data-partner-accordion="expand-all">' +
+                        '<span>Expand all</span>' +
+                        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+                            '<path d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />' +
+                            '<path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />' +
+                        '</svg>' +
+                    '</button>' +
+                    '<button type="button" class="partner-accordion-btn partner-accordion-btn--collapse" data-partner-accordion="collapse-all">' +
+                        '<span>Collapse all</span>' +
+                        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+                            '<path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />' +
+                        '</svg>' +
+                    '</button>' +
+                '</div>' +
             '</div>' +
-            '<p class="text-xs text-gray-500 mb-3">Species for partner forests shown on the Breakdown page. Names and metadata are fetched from Tree-Nation by species ID.</p>' +
-            '<div class="partner-group-toolbar flex justify-end gap-2 mb-3">' +
-                '<button type="button" class="partner-accordion-btn partner-accordion-btn--expand" data-partner-accordion="expand-all">' +
-                    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-                        '<path d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />' +
-                        '<path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />' +
-                    '</svg>' +
-                    '<span>Expand all</span>' +
-                '</button>' +
-                '<button type="button" class="partner-accordion-btn partner-accordion-btn--collapse" data-partner-accordion="collapse-all">' +
-                    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-                        '<path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />' +
-                    '</svg>' +
-                    '<span>Collapse all</span>' +
-                '</button>' +
-            '</div>' +
+            '<p class="text-xs text-gray-500 mb-3">Species for partner forests shown on the Breakdown page.</p>' +
             '<div class="partner-group-grid">' + content + '</div>';
 
         var insertBefore = grid.firstElementChild;
@@ -225,64 +228,63 @@
 
         // Skeleton mirrors the eventual verified card structure, but without API data.
         card.innerHTML =
-            '<div class="flex items-center justify-between mb-4">' +
-                '<div class="skeleton skeleton-line" style="width: 15rem; height: 1.5rem">&nbsp;</div>' +
-                '<div class="skeleton skeleton-line" style="width: 12rem; height: 1.25rem">&nbsp;</div>' +
+            '<div class="flex flex-col items-center justify-center text-center gap-3 py-10 px-4">' +
+                '<h3 class="text-2xl md:text-3xl font-bold text-deep-forest">Data loading</h3>' +
+                '<p class="text-base md:text-lg text-gray-600 max-w-2xl">Fetching verified tree planting species and thumbnails from Tree-Nation. This can take a moment.</p>' +
+                '<span class="tag" style="border-color:#BBF7D0;color:#166534;background-color:#F0FDF4">Loading from Tree-Nation</span>' +
             '</div>' +
-            '<div class="skeleton skeleton-line" style="width: 100%; height: 1rem; margin-bottom: 0.5rem">&nbsp;</div>' +
-            '<div class="skeleton skeleton-line" style="width: 92%; height: 0.85rem; margin-bottom: 1rem">&nbsp;</div>' +
             '<div class="partner-group-grid">' +
                 '<details class="partner-group" open>' +
                     '<summary>' +
-                        '<span class="skeleton skeleton-line" style="width: 70%; height: 0.95rem">&nbsp;</span>' +
-                        '<span class="skeleton skeleton-line" style="width: 5.5rem; height: 0.7rem">&nbsp;</span>' +
+                        '<span class="skeleton skeleton-line skeleton--flat" style="width: 70%; height: 0.95rem">&nbsp;</span>' +
+                        '<span class="skeleton skeleton-line skeleton--flat" style="width: 5.5rem; height: 0.7rem">&nbsp;</span>' +
                     '</summary>' +
                     '<div class="partner-species-list">' +
                         '<div class="partner-species-item">' +
-                            '<div class="skeleton" style="width:56px;height:56px;border-radius:0.6rem">&nbsp;</div>' +
+                            '<div class="skeleton skeleton--flat" style="width:56px;height:56px;border-radius:0.6rem">&nbsp;</div>' +
                             '<div>' +
-                                '<div class="skeleton skeleton-line" style="width: 75%; height: 0.9rem; display:block">&nbsp;</div>' +
-                                '<div class="skeleton skeleton-line" style="width: 40%; height: 0.7rem; display:block; margin-top:0.2rem">&nbsp;</div>' +
+                                '<div class="skeleton skeleton-line skeleton--flat" style="width: 75%; height: 0.9rem; display:block">&nbsp;</div>' +
+                                '<div class="skeleton skeleton-line skeleton--flat" style="width: 40%; height: 0.7rem; display:block; margin-top:0.2rem">&nbsp;</div>' +
                             '</div>' +
                         '</div>' +
                         '<div class="partner-species-item">' +
-                            '<div class="skeleton" style="width:56px;height:56px;border-radius:0.6rem">&nbsp;</div>' +
+                            '<div class="skeleton skeleton--flat" style="width:56px;height:56px;border-radius:0.6rem">&nbsp;</div>' +
                             '<div>' +
-                                '<div class="skeleton skeleton-line" style="width: 68%; height: 0.9rem; display:block">&nbsp;</div>' +
-                                '<div class="skeleton skeleton-line" style="width: 38%; height: 0.7rem; display:block; margin-top:0.2rem">&nbsp;</div>' +
+                                '<div class="skeleton skeleton-line skeleton--flat" style="width: 68%; height: 0.9rem; display:block">&nbsp;</div>' +
+                                '<div class="skeleton skeleton-line skeleton--flat" style="width: 38%; height: 0.7rem; display:block; margin-top:0.2rem">&nbsp;</div>' +
                             '</div>' +
                         '</div>' +
                         '<div class="partner-species-item">' +
-                            '<div class="skeleton" style="width:56px;height:56px;border-radius:0.6rem">&nbsp;</div>' +
+                            '<div class="skeleton skeleton--flat" style="width:56px;height:56px;border-radius:0.6rem">&nbsp;</div>' +
                             '<div>' +
-                                '<div class="skeleton skeleton-line" style="width: 80%; height: 0.9rem; display:block">&nbsp;</div>' +
-                                '<div class="skeleton skeleton-line" style="width: 35%; height: 0.7rem; display:block; margin-top:0.2rem">&nbsp;</div>' +
+                                '<div class="skeleton skeleton-line skeleton--flat" style="width: 80%; height: 0.9rem; display:block">&nbsp;</div>' +
+                                '<div class="skeleton skeleton-line skeleton--flat" style="width: 35%; height: 0.7rem; display:block; margin-top:0.2rem">&nbsp;</div>' +
                             '</div>' +
                         '</div>' +
                     '</div>' +
                 '</details>' +
                 '<details class="partner-group">' +
                     '<summary>' +
-                        '<span class="skeleton skeleton-line" style="width: 60%; height: 0.95rem">&nbsp;</span>' +
-                        '<span class="skeleton skeleton-line" style="width: 5rem; height: 0.7rem">&nbsp;</span>' +
+                        '<span class="skeleton skeleton-line skeleton--flat" style="width: 60%; height: 0.95rem">&nbsp;</span>' +
+                        '<span class="skeleton skeleton-line skeleton--flat" style="width: 5rem; height: 0.7rem">&nbsp;</span>' +
                     '</summary>' +
                 '</details>' +
                 '<details class="partner-group">' +
                     '<summary>' +
-                        '<span class="skeleton skeleton-line" style="width: 58%; height: 0.95rem">&nbsp;</span>' +
-                        '<span class="skeleton skeleton-line" style="width: 5.4rem; height: 0.7rem">&nbsp;</span>' +
+                        '<span class="skeleton skeleton-line skeleton--flat" style="width: 58%; height: 0.95rem">&nbsp;</span>' +
+                        '<span class="skeleton skeleton-line skeleton--flat" style="width: 5.4rem; height: 0.7rem">&nbsp;</span>' +
                     '</summary>' +
                 '</details>' +
                 '<details class="partner-group">' +
                     '<summary>' +
-                        '<span class="skeleton skeleton-line" style="width: 52%; height: 0.95rem">&nbsp;</span>' +
-                        '<span class="skeleton skeleton-line" style="width: 5.2rem; height: 0.7rem">&nbsp;</span>' +
+                        '<span class="skeleton skeleton-line skeleton--flat" style="width: 52%; height: 0.95rem">&nbsp;</span>' +
+                        '<span class="skeleton skeleton-line skeleton--flat" style="width: 5.2rem; height: 0.7rem">&nbsp;</span>' +
                     '</summary>' +
                 '</details>' +
                 '<details class="partner-group">' +
                     '<summary>' +
-                        '<span class="skeleton skeleton-line" style="width: 48%; height: 0.95rem">&nbsp;</span>' +
-                        '<span class="skeleton skeleton-line" style="width: 4.8rem; height: 0.7rem">&nbsp;</span>' +
+                        '<span class="skeleton skeleton-line skeleton--flat" style="width: 48%; height: 0.95rem">&nbsp;</span>' +
+                        '<span class="skeleton skeleton-line skeleton--flat" style="width: 4.8rem; height: 0.7rem">&nbsp;</span>' +
                     '</summary>' +
                 '</details>' +
             '</div>';
@@ -329,26 +331,75 @@
         var groups = card.querySelectorAll('details.partner-group');
         var expandBtn = card.querySelector('[data-partner-accordion="expand-all"]');
         var collapseBtn = card.querySelector('[data-partner-accordion="collapse-all"]');
+        // Match Tailwind `lg` / partner-group 2-col grid: desktop = no per-row summary toggle.
+        var desktopMq = typeof window.matchMedia === 'function'
+            ? window.matchMedia('(min-width: 1024px)')
+            : { matches: false, addEventListener: null, addListener: null };
+
+        function setMode(mode) {
+            if (expandBtn) {
+                var isActive = mode === 'expand';
+                expandBtn.classList.toggle('is-active', isActive);
+                expandBtn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            }
+            if (collapseBtn) {
+                var isActive = mode === 'collapse';
+                collapseBtn.classList.toggle('is-active', isActive);
+                collapseBtn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            }
+        }
+
+        function clearToolbarActive() {
+            if (expandBtn) {
+                expandBtn.classList.remove('is-active');
+                expandBtn.setAttribute('aria-pressed', 'false');
+            }
+            if (collapseBtn) {
+                collapseBtn.classList.remove('is-active');
+                collapseBtn.setAttribute('aria-pressed', 'false');
+            }
+        }
+
+        function syncToolbarFromGroups() {
+            if (desktopMq.matches) return;
+            var allOpen = true;
+            var allClosed = true;
+            groups.forEach(function (d) {
+                if (!d.open) allOpen = false;
+                if (d.open) allClosed = false;
+            });
+            if (allOpen) setMode('expand');
+            else if (allClosed) setMode('collapse');
+            else clearToolbarActive();
+        }
 
         // Start expanded (matches `openAttr = ' open'`).
         groups.forEach(function (details) {
             details.open = true;
 
-            // Prevent per-group toggling via the summary so the UI state stays consistent.
             var summary = details.querySelector('summary');
             if (summary) {
                 summary.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    event.stopPropagation();
+                    if (desktopMq.matches) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
                 });
             }
+
+            details.addEventListener('toggle', function () {
+                if (desktopMq.matches) return;
+                requestAnimationFrame(syncToolbarFromGroups);
+            });
         });
+        setMode('expand');
 
         function expandAll() {
             groups.forEach(function (details) {
                 details.open = true;
             });
 
+            setMode('expand');
             requestAnimationFrame(function () {
                 // Re-run thumb handling in case some groups were collapsed before.
                 setupSpeciesThumbLoading(card);
@@ -359,10 +410,28 @@
             groups.forEach(function (details) {
                 details.open = false;
             });
+            setMode('collapse');
         }
 
         if (expandBtn) expandBtn.addEventListener('click', expandAll);
         if (collapseBtn) collapseBtn.addEventListener('click', collapseAll);
+
+        function onDesktopBreakpointChange() {
+            if (!desktopMq.matches) return;
+            groups.forEach(function (details) {
+                details.open = true;
+            });
+            setMode('expand');
+            requestAnimationFrame(function () {
+                setupSpeciesThumbLoading(card);
+            });
+        }
+
+        if (desktopMq.addEventListener) {
+            desktopMq.addEventListener('change', onDesktopBreakpointChange);
+        } else if (desktopMq.addListener) {
+            desktopMq.addListener(onDesktopBreakpointChange);
+        }
     }
 
     /**
