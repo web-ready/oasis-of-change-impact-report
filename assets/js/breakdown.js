@@ -6,7 +6,7 @@
 
     var state = {
         webReadyTrees: 0,
-        webReadyCo2Tonnes: 0,
+        webReadyCo2Kg: 0,
         partners: [],
         legacyProjects: [],
         verifiedTotal: 0,
@@ -28,7 +28,7 @@
         var webReadyCo2Kg = typeof TreeData.getWebReadyCo2Kg === 'function'
             ? TreeData.getWebReadyCo2Kg()
             : null;
-        state.webReadyCo2Tonnes = Number.isFinite(webReadyCo2Kg) ? (webReadyCo2Kg / 1000) : 0;
+        state.webReadyCo2Kg = Number.isFinite(webReadyCo2Kg) ? webReadyCo2Kg : 0;
 
         var partners = typeof TreeData.getVerifiedPartners === 'function'
             ? TreeData.getVerifiedPartners()
@@ -95,12 +95,20 @@
         setText('bd-goal-progress-text', total.toLocaleString() + ' / 1,000,000 trees');
     }
 
+    function co2KgLineFromTonnes(tonnes) {
+        if (typeof tonnes === 'number' && Number.isFinite(tonnes) && tonnes > 0) {
+            return '<div class="text-xs text-gray-400 mt-0.5">CO\u2082: <span class="tabular-nums text-gray-600 font-medium">' +
+                Math.round(tonnes * 1000).toLocaleString() + '</span> kg</div>';
+        }
+        return '<div class="text-xs text-gray-400 mt-0.5">CO\u2082: <span class="tabular-nums text-gray-500 font-medium">\u2014</span></div>';
+    }
+
     function renderWebReady() {
         setText('bd-webready-count', state.webReadyTrees.toLocaleString());
-        var co2Display = (typeof state.webReadyCo2Tonnes === 'number' && state.webReadyCo2Tonnes > 0)
-            ? state.webReadyCo2Tonnes.toLocaleString(undefined, { maximumFractionDigits: 2 })
+        var co2Display = (typeof state.webReadyCo2Kg === 'number' && state.webReadyCo2Kg > 0)
+            ? Math.round(state.webReadyCo2Kg).toLocaleString()
             : '—';
-        setText('bd-webready-co2-tonnes', co2Display);
+        setText('bd-webready-co2-kg', co2Display);
 
         var tag = document.getElementById('bd-webready-tag');
         if (tag) {
@@ -144,12 +152,7 @@
 
             var card = document.createElement('div');
             card.className = 'forest-card';
-            var co2Html = '';
-            if (typeof p.co2Tonnes === 'number' && p.co2Tonnes > 0) {
-                co2Html = '<div class="text-xs text-gray-400 mt-0.5">CO\u2082: <span class="tabular-nums text-gray-600 font-medium">' + p.co2Tonnes.toLocaleString(undefined, { maximumFractionDigits: 2 }) + '</span> t</div>';
-            } else {
-                co2Html = '<div class="text-xs text-gray-400 mt-0.5">CO\u2082: <span class="tabular-nums text-gray-500 font-medium">\u2014</span></div>';
-            }
+            var co2Html = co2KgLineFromTonnes(p.co2Tonnes);
             card.innerHTML =
                 '<div class="flex items-start justify-between gap-3 mb-1">' +
                     '<div class="flex flex-wrap items-center gap-2 min-w-0">' + nameHtml + tagHtml + '</div>' +
@@ -187,6 +190,12 @@
 
     function renderEquation() {
         setText('eq-webready', state.webReadyTrees.toLocaleString());
+        var webCo2Suffix = document.getElementById('eq-webready-co2-suffix');
+        if (webCo2Suffix) {
+            webCo2Suffix.textContent = (typeof state.webReadyCo2Kg === 'number' && state.webReadyCo2Kg > 0)
+                ? ' (' + Math.round(state.webReadyCo2Kg).toLocaleString() + ' kg CO\u2082)'
+                : '';
+        }
 
         var partnersContainer = document.getElementById('eq-partners-rows');
         if (partnersContainer) {
@@ -196,7 +205,7 @@
                 var row = document.createElement('div');
                 row.className = 'equation-row';
                 var co2Suffix = (typeof p.co2Tonnes === 'number' && p.co2Tonnes > 0)
-                    ? ' <span class="text-xs text-gray-400 tabular-nums">(' + p.co2Tonnes.toLocaleString(undefined, { maximumFractionDigits: 2 }) + ' t CO\u2082)</span>'
+                    ? ' <span class="text-xs text-gray-400 tabular-nums">(' + Math.round(p.co2Tonnes * 1000).toLocaleString() + ' kg CO\u2082)</span>'
                     : '';
                 row.innerHTML =
                     '<span class="equation-operator">+</span>' +
@@ -245,7 +254,7 @@
                 if (wr && !wr.error) {
                     state.webReadyTrees = wr.trees;
                     if (typeof wr.co2Tonnes === 'number' && Number.isFinite(wr.co2Tonnes)) {
-                        state.webReadyCo2Tonnes = wr.co2Tonnes;
+                        state.webReadyCo2Kg = wr.co2Tonnes * 1000;
                     }
                 }
 
