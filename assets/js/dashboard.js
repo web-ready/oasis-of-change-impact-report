@@ -10,7 +10,7 @@ function initializeTreeData() {
     const relEl = document.getElementById('last-updated-relative');
     if (relEl) relEl.textContent = '(' + rel + ')';
 
-    updateUI();
+    updateUI({ deferTreeNationLive: typeof TreeNationAPI !== 'undefined' });
 }
 
 var totalCountAnimToken = 0;
@@ -37,23 +37,26 @@ function safeCall(fn, fallback) {
     try { return typeof fn === 'function' ? fn() : fallback; } catch (e) { return fallback; }
 }
 
-function updateUI() {
+function updateUI(opts) {
+    var deferLive = opts && opts.deferTreeNationLive === true;
     const verified = safeCall(function() { return TreeData.getVerifiedTrees(); }, 0);
     const legacy = safeCall(function() { return TreeData.getLegacyTrees(); }, 0);
     const total = safeCall(function() { return TreeData.getTotalTrees(); }, 0);
 
-    setText('verified-count', verified.toLocaleString());
+    if (!deferLive) {
+        setText('verified-count', verified.toLocaleString());
+        setText('total-count', total.toLocaleString());
+        setText('co2-offset', safeCall(function() { return TreeData.getCo2Captured(); }, 0).toLocaleString() + '+');
+        updateGoalProgress(total);
+    }
+
     setText('legacy-count', legacy.toLocaleString());
-    setText('total-count', total.toLocaleString());
     setText('species-count', safeCall(function() { return TreeData.getSpeciesCount(); }, 0));
     const sites = safeCall(function() { return TreeData.getMapSites(); }, []);
     const countries = [...new Set(sites.map(function(s) { return s.country; }))];
     setText('countries-count', countries.length);
     setText('continents-count', safeCall(function() { return TreeData.getContinentsCount(); }, 0));
     setText('planting-sites-count', safeCall(function() { return TreeData.getPlantingSitesCount(); }, 0));
-    setText('co2-offset', safeCall(function() { return TreeData.getCo2Captured(); }, 0).toLocaleString() + '+');
-
-    updateGoalProgress(total);
 
     populateProjectTables();
     populateSpeciesGrid();
@@ -480,6 +483,8 @@ function loadLiveTreeCountsFromAPI() {
         })
         .catch(function(err) {
             console.warn('[Oasis of Change Dashboard] API failed — using TreeData fallback:', err.message);
+            updateUI();
+            animateCount();
         });
 }
 
@@ -563,7 +568,9 @@ function boot() {
 
     hydratePromise.finally(function () {
         initializeTreeData();
-        animateCount();
+        if (typeof TreeNationAPI === 'undefined') {
+            animateCount();
+        }
         loadLiveTreeCountsFromAPI();
         initPlantingCarousel();
 
