@@ -90,6 +90,10 @@
             speciesIds: [729, 1741, 2072, 1206, 2068, 1519, 1516, 2286, 1374, 1746, 70, 2070, 2071, 1729, 730, 2208, 204, 727, 198, 1520, 3046, 2925, 3590, 3315, 1189, 3031, 3303, 2350, 1367, 1861, 2415, 3596, 3060, 2905, 1730, 3186, 2213, 3061]
         },
         {
+            groupLabel: "West End Seniors' Network (WESN)",
+            speciesIds: [2213]
+        },
+        {
             groupLabel: 'EcoSearch',
             speciesIds: [727]
         }
@@ -100,8 +104,18 @@
         'Stanley Park Ecology Society (SPES)': 'spes',
         'Mittler Senior Technology': 'mst',
         'Denman Place Mall': 'denman-place-mall',
+        'West End Seniors\' Network (WESN)': 'wesn',
         'EcoSearch': 'ecosearch'
     };
+
+    /** Sum of species slots listed per verified forest card (same ID can appear in multiple groups). */
+    function countListedVerifiedSpeciesSlots() {
+        var n = 0;
+        PARTNER_SPECIES_ID_GROUPS.forEach(function (g) {
+            n += (g.speciesIds && g.speciesIds.length) || 0;
+        });
+        return n;
+    }
 
     function initializeSpeciesData() {
         if (typeof TreeData === 'undefined') {
@@ -186,6 +200,19 @@
             });
     }
 
+    function toUniqueNumberList(values) {
+        var seen = {};
+        var out = [];
+        (values || []).forEach(function (value) {
+            var n = Number(value);
+            if (!Number.isFinite(n)) return;
+            if (seen[n]) return;
+            seen[n] = true;
+            out.push(n);
+        });
+        return out;
+    }
+
     function renderVerifiedPartnerSpeciesCard(entriesById) {
         var grid = document.getElementById('species-grid');
         if (!grid) return;
@@ -209,12 +236,27 @@
             });
         }
 
+        function isWesnGroup(g) {
+            return g && g.groupLabel && g.groupLabel.indexOf('WESN') !== -1;
+        }
+
         var sortedGroups = PARTNER_SPECIES_ID_GROUPS.slice().sort(function (a, b) {
-            // Keep Web-Ready pinned first and EcoSearch pinned last.
+            // Keep Web-Ready pinned first; WESN second-to-last (left of EcoSearch); EcoSearch last.
             if (a.groupLabel.indexOf('Web-Ready') !== -1) return -1;
             if (b.groupLabel.indexOf('Web-Ready') !== -1) return 1;
-            if (a.groupLabel === 'EcoSearch') return 1;
-            if (b.groupLabel === 'EcoSearch') return -1;
+
+            var aEco = a.groupLabel === 'EcoSearch';
+            var bEco = b.groupLabel === 'EcoSearch';
+            var aWesn = isWesnGroup(a);
+            var bWesn = isWesnGroup(b);
+
+            if (aEco && bEco) return 0;
+            if (aEco) return 1;
+            if (bEco) return -1;
+
+            if (aWesn && bWesn) return 0;
+            if (aWesn) return 1;
+            if (bWesn) return -1;
 
             // Remaining partners sort by live partner tree totals.
             var aId = PARTNER_GROUP_LABEL_TO_ID[a.groupLabel];
@@ -244,15 +286,23 @@
                 var thumbHtml = imageUrl
                     ? '<button type="button" class="partner-species-thumb-btn js-species-thumb" data-species-id="' + sid + '" aria-label="View larger image of ' + nameSafe + '">' +
                         '<img class="partner-species-thumb is-loading js-partner-species-img" src="' + escapeAttr(imageUrl) + '" alt="' + altSafe + '" loading="lazy" decoding="async" data-fallback-label="' + String(sid) + '">' +
+                        '<span class="partner-species-thumb-loading-text" aria-hidden="true">Loading image...</span>' +
                       '</button>'
                     : '<span class="partner-species-thumb partner-species-thumb--fallback" aria-hidden="true">' + String(sid) + '</span>';
 
-                return '<div class="partner-species-item">' +
-                    thumbHtml +
-                    '<div>' +
+                var detailsButtonHtml = imageUrl
+                    ? '<button type="button" class="partner-species-details-btn js-species-thumb" data-species-id="' + sid + '" aria-label="View larger image and details for ' + nameSafe + '">' +
                         '<div class="partner-species-name">' + nameSafe + (commonSafe ? (' (' + commonSafe + ')') : '') + '</div>' +
                         (meta.length ? '<div class="partner-species-meta">' + meta.join(' \u2022 ') + '</div>' : '') +
-                    '</div>' +
+                      '</button>'
+                    : '<div>' +
+                        '<div class="partner-species-name">' + nameSafe + (commonSafe ? (' (' + commonSafe + ')') : '') + '</div>' +
+                        (meta.length ? '<div class="partner-species-meta">' + meta.join(' \u2022 ') + '</div>' : '') +
+                      '</div>';
+
+                return '<div class="partner-species-item">' +
+                    thumbHtml +
+                    detailsButtonHtml +
                     '</div>';
             }).join('');
 
@@ -316,6 +366,7 @@
                 '<h3 class="text-2xl md:text-3xl font-bold text-deep-forest">Data loading</h3>' +
                 '<p class="text-base md:text-lg text-gray-600 max-w-2xl">Fetching verified tree planting species and thumbnails from Tree-Nation. This can take a moment.</p>' +
                 '<span class="tag" style="border-color:#BBF7D0;color:#166534;background-color:#F0FDF4">Loading from Tree-Nation</span>' +
+                '<p id="verified-partner-loading-status" class="text-xs text-gray-500">Loading species metadata (0/0)...</p>' +
             '</div>' +
             '<div class="partner-group-grid">' +
                 '<details class="partner-group" open>' +
@@ -767,6 +818,72 @@
         });
     }
 
+    function renderFocusTagSummary(entriesById) {
+        var grid = document.getElementById('species-focus-tags-grid');
+        if (!grid) return;
+
+        var byTag = {};
+        var knownCategoryAliases = {
+            'medicine': 'Medicinal',
+            'medicinal': 'Medicinal',
+            'fast growing': 'Fast-growing',
+            'fast-growing': 'Fast-growing'
+        };
+        var totalSpecies = 0;
+
+        Object.keys(entriesById || {}).forEach(function (idKey) {
+            var sp = entriesById[idKey];
+            if (!sp || !sp.name) return;
+            totalSpecies += 1;
+            var rawCategoryName = String((sp.category && sp.category.name) || '').trim();
+            var normalizedCategoryName = rawCategoryName.toLowerCase();
+            var key = knownCategoryAliases[normalizedCategoryName] || rawCategoryName || 'Uncategorized';
+            if (!byTag[key]) byTag[key] = [];
+            byTag[key].push(sp.name);
+        });
+
+        Object.keys(byTag).forEach(function (tagName) {
+            byTag[tagName] = dedupeAndSort(byTag[tagName]);
+        });
+
+        var tagNames = Object.keys(byTag).sort(function (a, b) {
+            var diff = (byTag[b].length || 0) - (byTag[a].length || 0);
+            return diff !== 0 ? diff : a.localeCompare(b);
+        });
+
+        grid.innerHTML = tagNames.map(function (tagName) {
+            var species = byTag[tagName] || [];
+            return (
+                '<div class="focus-tag-summary-card">' +
+                    '<div class="flex items-start justify-between gap-3">' +
+                        '<span class="focus-tag-summary-pill">' + tagName + '</span>' +
+                        '<span class="text-lg font-semibold text-brand-green tabular-nums">' + species.length + '</span>' +
+                    '</div>' +
+                '</div>'
+            );
+        }).join('');
+
+        var meta = document.getElementById('species-focus-tags-meta');
+        if (meta) {
+            var listed = countListedVerifiedSpeciesSlots();
+            meta.textContent =
+                listed + ' species listed across verified forests below (' + totalSpecies + ' unique after overlap).';
+        }
+    }
+
+    function dedupeAndSort(values) {
+        var seen = {};
+        var out = [];
+        (values || []).forEach(function (value) {
+            var key = String(value || '').trim();
+            if (!key || seen[key]) return;
+            seen[key] = true;
+            out.push(key);
+        });
+        out.sort(function (a, b) { return a.localeCompare(b); });
+        return out;
+    }
+
     function applyFilter(filter) {
         var speciesCards = document.querySelectorAll('.species-card');
         speciesCards.forEach(function (card) {
@@ -776,6 +893,14 @@
                 card.style.display = 'none';
             }
         });
+    }
+
+    function updateVerifiedPartnerLoadingStatus(doneCount, totalCount) {
+        var statusEl = document.getElementById('verified-partner-loading-status');
+        if (!statusEl) return;
+        var done = Number(doneCount) || 0;
+        var total = Number(totalCount) || 0;
+        statusEl.textContent = 'Loading species metadata (' + done + '/' + total + ')...';
     }
 
     function setupFilters() {
@@ -800,16 +925,13 @@
         // Immediately show a skeleton for the API-backed "Verified Tree Planting" section.
         renderVerifiedPartnerSpeciesSkeleton();
 
-        var allIds = [];
+        var configuredIds = [];
         PARTNER_SPECIES_ID_GROUPS.forEach(function (group) {
-            (group.speciesIds || []).forEach(function (sid) { allIds.push(sid); });
+            (group.speciesIds || []).forEach(function (sid) { configuredIds.push(sid); });
         });
-        // De-dup for fewer API calls.
-        allIds = allIds.filter(function (x, i, arr) { return arr.indexOf(x) === i; });
+        configuredIds = toUniqueNumberList(configuredIds);
 
-        if (!allIds.length) return;
-
-        function mapWithConcurrency(items, concurrency, mapper) {
+        function mapWithConcurrency(items, concurrency, mapper, onProgress) {
             return new Promise(function (resolve) {
                 var results = new Array(items.length);
                 var nextIndex = 0;
@@ -831,6 +953,9 @@
                                 .then(function () {
                                     inFlight -= 1;
                                     doneCount += 1;
+                                    if (typeof onProgress === 'function') {
+                                        onProgress(doneCount, items.length);
+                                    }
                                     if (doneCount === items.length) resolve(results);
                                     else launchMore();
                                 });
@@ -843,8 +968,10 @@
             });
         }
 
-        // Hydrate from pre-generated cache first; only fetch missing IDs.
-        loadSpeciesCacheFile().finally(function () {
+        function renderFromAllIds(allIds) {
+            allIds = toUniqueNumberList(allIds);
+            if (!allIds.length) return;
+
             var missing = allIds.filter(function (sid) {
                 return !Object.prototype.hasOwnProperty.call(SPECIES_API_CACHE, sid);
             });
@@ -860,26 +987,30 @@
             }
 
             if (!missing.length) {
-                var byId = buildById();
-                renderVerifiedPartnerSpeciesCard(byId);
+                var byIdNoFetch = buildById();
+                renderFocusTagSummary(byIdNoFetch);
+                renderVerifiedPartnerSpeciesCard(byIdNoFetch);
                 setupSpeciesThumbLoading();
-                hideStaticVerifiedCardsIfCovered(byId);
-                setupLightboxInteractions(byId);
-                var activeBtn = document.querySelector('.filter-btn.active');
-                applyFilter(activeBtn ? activeBtn.getAttribute('data-filter') : 'all');
+                hideStaticVerifiedCardsIfCovered(byIdNoFetch);
+                setupLightboxInteractions(byIdNoFetch);
+                var activeBtnNoFetch = document.querySelector('.filter-btn.active');
+                applyFilter(activeBtnNoFetch ? activeBtnNoFetch.getAttribute('data-filter') : 'all');
                 return;
             }
 
             var concurrency = 8;
+            updateVerifiedPartnerLoadingStatus(0, missing.length);
             mapWithConcurrency(missing, concurrency, function (sid) {
                 return fetchSpeciesById(sid).then(function (sp) { return { sid: sid, sp: sp }; });
+            }, function (done, total) {
+                updateVerifiedPartnerLoadingStatus(done, total);
             }).then(function (results) {
-                // fetchSpeciesById already populates SPECIES_API_CACHE; results are only used to preserve ids.
                 results.forEach(function (r) {
                     SPECIES_API_CACHE[r.sid] = r.sp;
                 });
 
                 var byId = buildById();
+                renderFocusTagSummary(byId);
                 renderVerifiedPartnerSpeciesCard(byId);
                 setupSpeciesThumbLoading();
                 hideStaticVerifiedCardsIfCovered(byId);
@@ -887,6 +1018,11 @@
                 var activeBtn = document.querySelector('.filter-btn.active');
                 applyFilter(activeBtn ? activeBtn.getAttribute('data-filter') : 'all');
             });
+        }
+
+        // Hydrate from cache and render only the planted-species registry used below.
+        loadSpeciesCacheFile().finally(function () {
+            renderFromAllIds(configuredIds);
         });
     }
 
