@@ -60,7 +60,7 @@ const TreeData = {
         { id: "ecosearch",         name: "EcoSearch",                                  baseLocation: "Canada",        trees: 101, co2Tonnes: 5.05,  countries: "Madagascar" },
         { id: "denman-place-mall", name: "Denman Place Mall",                          baseLocation: "Canada",        trees: 2,   co2Tonnes: 0,     countries: "Tanzania, Kenya" },
         { id: "gabriel-dalton",    name: "Gabriel Dalton (CEO Personal Forest)",       baseLocation: "Canada",        trees: 2,   co2Tonnes: 0,     countries: "Tanzania" },
-        { id: "wesn",              name: "West End Seniors' Network (WESN)",           baseLocation: "Canada",        trees: 900, co2Tonnes: 45,    countries: "Kenya", isSharedWithWebReady: true, sharedWithLabel: "Web-Ready by Oasis of Change, Inc." }
+        { id: "wesn",              name: "West End Seniors' Network (WESN)",           baseLocation: "Canada",        trees: 900, co2Tonnes: 45,    countries: "Kenya", isSharedWithWebReady: true, sharedWithLabel: "Web-Ready by Oasis of Change, Inc.", partnerSpecies: [{ name: "Persea americana", country: "Kenya", project: "Save the Aberdare Forest" }] }
     ],
 
 
