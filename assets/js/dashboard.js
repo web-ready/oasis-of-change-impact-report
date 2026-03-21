@@ -97,7 +97,7 @@ function populatePartnerSection(partners) {
             var additiveTrees = getAdditiveTrees(p);
             var sharedNote = '';
             if (sharedTrees > 0) {
-                sharedNote = ' <span class="text-xs text-amber-700">[' + sharedTrees.toLocaleString() + ' trees shared with ' + (p.sharedWithLabel || 'Web-Ready by Oasis of Change, Inc.') + ' Forest.]</span>';
+                sharedNote = ' <span class="text-xs text-amber-700">[' + sharedTrees.toLocaleString() + ' trees shared with ' + getSharedForestLabel(p) + ']</span>';
             }
             var nameCell = p.profileUrl
                 ? '<a href="' + p.profileUrl + '" target="_blank" rel="noopener" class="partner-profile-link font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">' + p.name + extIcon + '</a>' + sharedNote
@@ -553,6 +553,14 @@ function getAdditiveCo2Tonnes(partner) {
     if (additiveTrees <= 0) return 0;
     if (additiveTrees >= trees) return co2;
     return co2 * (additiveTrees / trees);
+}
+
+function getSharedForestLabel(partner) {
+    var base = (partner && partner.sharedWithLabel) ? partner.sharedWithLabel : 'Oasis of Change, Inc.';
+    if (base.indexOf('Web-Ready by ') === 0) {
+        return 'Oasis of Change, Inc. Forest.';
+    }
+    return base + ' Forest.';
 }
 
 function boot() {
