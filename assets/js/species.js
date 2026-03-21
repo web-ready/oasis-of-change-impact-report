@@ -139,6 +139,13 @@
         return first ? first.trim() : '';
     }
 
+    function initialsFromName(name) {
+        var parts = String(name || '').trim().split(/\s+/).filter(Boolean);
+        if (!parts.length) return 'NA';
+        if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+        return (parts[0].charAt(0) + parts[1].charAt(0)).toUpperCase();
+    }
+
     function escapeHtml(value) {
         return String(value || '')
             .replace(/&/g, '&amp;')
@@ -269,6 +276,16 @@
             return (b.speciesIds.length || 0) - (a.speciesIds.length || 0);
         });
 
+        // Build a name->image lookup so duplicate species IDs can reuse a working image.
+        var fallbackImageByName = {};
+        Object.keys(entriesById || {}).forEach(function (sid) {
+            var item = entriesById[sid];
+            if (!item || !item.name || !item.image) return;
+            var key = normalizeName(item.name);
+            if (!key) return;
+            if (!fallbackImageByName[key]) fallbackImageByName[key] = String(item.image);
+        });
+
         var content = sortedGroups.map(function (group, idx) {
             var groupSpeciesLines = group.speciesIds.map(function (sid) {
                 var sp = entriesById[sid];
@@ -276,6 +293,9 @@
                 var common = sp && sp.common_names ? firstCommonName(sp.common_names) : '';
                 var category = sp && sp.category && sp.category.name ? sp.category.name : '';
                 var imageUrl = sp && sp.image ? String(sp.image) : '';
+                if (!imageUrl) {
+                    imageUrl = fallbackImageByName[normalizeName(name)] || '';
+                }
                 var meta = [];
                 if (category) meta.push(escapeHtml(category));
 
@@ -285,10 +305,10 @@
 
                 var thumbHtml = imageUrl
                     ? '<button type="button" class="partner-species-thumb-btn js-species-thumb" data-species-id="' + sid + '" aria-label="View larger image of ' + nameSafe + '">' +
-                        '<img class="partner-species-thumb is-loading js-partner-species-img" src="' + escapeAttr(imageUrl) + '" alt="' + altSafe + '" loading="lazy" decoding="async" data-fallback-label="' + String(sid) + '">' +
+                        '<img class="partner-species-thumb is-loading js-partner-species-img" src="' + escapeAttr(imageUrl) + '" alt="' + altSafe + '" loading="lazy" decoding="async" data-fallback-label="' + escapeAttr(initialsFromName(name)) + '">' +
                         '<span class="partner-species-thumb-loading-text" aria-hidden="true">Loading image...</span>' +
                       '</button>'
-                    : '<span class="partner-species-thumb partner-species-thumb--fallback" aria-hidden="true">' + String(sid) + '</span>';
+                    : '<span class="partner-species-thumb partner-species-thumb--fallback" aria-hidden="true">' + escapeHtml(initialsFromName(name)) + '</span>';
 
                 var detailsButtonHtml = imageUrl
                     ? '<button type="button" class="partner-species-details-btn js-species-thumb" data-species-id="' + sid + '" aria-label="View larger image and details for ' + nameSafe + '">' +
