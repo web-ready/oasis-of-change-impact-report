@@ -13,7 +13,7 @@ Update `assets/js/tree-data.js`:
   - `trees` (fallback tree count)
   - `co2Tonnes` (fallback CO2 estimate in tonnes)
   - `countries` (comma-separated display list)
-- Update `totals.verifiedTrees` and `totals.totalTrees`.
+- Update `totals.webReadyTrees`, `totals.webReadyCo2Kg` (forest total CO₂ in kg from Tree-Nation), `totals.verifiedTrees`, and `totals.totalTrees`.
 - Update `lastUpdated`.
 
 ## 2) Enable live tree counts

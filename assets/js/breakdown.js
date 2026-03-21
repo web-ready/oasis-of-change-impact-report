@@ -45,7 +45,7 @@
                 trees: p.trees,
                 co2Tonnes: p.co2Tonnes || 0,
                 isSharedWithWebReady: p.isSharedWithWebReady === true,
-                sharedWithLabel: p.sharedWithLabel || 'Web-Ready',
+                sharedWithLabel: p.sharedWithLabel || 'Web-Ready by Oasis of Change, Inc.',
                 isLive: false
             };
         });
@@ -139,9 +139,6 @@
         grid.innerHTML = '';
 
         var sorted = state.partners.slice().sort(function (a, b) {
-            if (a.isSharedWithWebReady !== b.isSharedWithWebReady) {
-                return a.isSharedWithWebReady ? 1 : -1;
-            }
             return (b.trees || 0) - (a.trees || 0);
         });
 
@@ -152,7 +149,7 @@
                 ? '<span class="live-tag"><span class="live-dot"></span> Live</span>'
                 : '<span class="cached-tag">Cached</span>';
             if (p.isSharedWithWebReady) {
-                tagHtml += '<span class="shared-tag">Shared with ' + p.sharedWithLabel + '</span>';
+                tagHtml += '<span class="shared-tag">Overlaps ' + p.sharedWithLabel + '</span>';
             }
 
             var nameHtml = profileUrl
@@ -180,7 +177,7 @@
                 '<div class="text-xs text-gray-400">Based in ' + (p.baseLocation || '—') + '</div>' +
                 co2Html +
                 (p.isSharedWithWebReady
-                    ? '<div class="text-xs text-amber-700 mt-1">Count is shown for transparency but not added to totals to avoid double counting.</div>'
+                    ? '<div class="text-xs text-amber-700 mt-1">These trees were gifted to the ' + p.sharedWithLabel + ' forest and are already reflected in its total. Displayed here for full transparency; excluded from additive totals to prevent double counting.</div>'
                     : '') +
                 countriesHtml;
 
@@ -223,9 +220,6 @@
         if (partnersContainer) {
             partnersContainer.innerHTML = '';
             var sorted = state.partners.slice().sort(function (a, b) {
-                if (a.isSharedWithWebReady !== b.isSharedWithWebReady) {
-                    return a.isSharedWithWebReady ? 1 : -1;
-                }
                 return (b.trees || 0) - (a.trees || 0);
             });
             sorted.forEach(function (p) {
@@ -235,7 +229,7 @@
                     ? ' <span class="text-xs text-gray-400 tabular-nums">(' + Math.round(p.co2Tonnes * 1000).toLocaleString() + ' kg CO\u2082)</span>'
                     : '';
                 var sharedSuffix = p.isSharedWithWebReady
-                    ? ' <span class="text-xs text-amber-700">[shared with ' + p.sharedWithLabel + '; excluded from total]</span>'
+                    ? ' <span class="text-xs text-amber-700">[overlaps ' + p.sharedWithLabel + '; excluded from total]</span>'
                     : '';
                 row.innerHTML =
                     '<span class="equation-operator">' + (p.isSharedWithWebReady ? '\u2261' : '+') + '</span>' +

@@ -1,6 +1,6 @@
 const TreeData = {
 
-    lastUpdated: "March 17th, 2026",
+    lastUpdated: "March 20th, 2026",
 
     /* ────────────────────────────────────────────────
        TOTALS — Fallback only. Live verified/total counts come from the
@@ -8,10 +8,11 @@ const TreeData = {
        the API is unavailable (e.g. CORS). Legacy is always from here.
        ──────────────────────────────────────────────── */
     totals: {
-        webReadyTrees: 8068,    // fallback: Oasis web-ready forest
-        verifiedTrees: 8700,    // fallback: web-ready + partners
+        webReadyTrees: 8987,    // fallback: Oasis web-ready forest (Tree-Nation)
+        webReadyCo2Kg: 476000,  // fallback: full forest CO₂ on Tree-Nation (incl. seeds / non-cert lines)
+        verifiedTrees: 9640,    // fallback: web-ready + additive partners (excl. overlap gifts)
         legacyTrees:   7338,    // fixed: Tero + Refoorest (no API)
-        totalTrees:    16038,   // fallback: verified + legacy
+        totalTrees:    16978,   // fallback: verified + legacy
         goalTrees:     1000000,
         goalYear:      2030
     },
@@ -54,13 +55,13 @@ const TreeData = {
        here are fallback when API unavailable; live counts from API.
        ──────────────────────────────────────────────── */
     verifiedPartners: [
-        { id: "spes",              name: "Stanley Park Ecology Society",               baseLocation: "Canada",        trees: 233, co2Tonnes: 21.49, countries: "Madagascar, Tanzania, Senegal, Kenya" },
+        { id: "spes",              name: "Stanley Park Ecology Society",               baseLocation: "Canada",        trees: 234, co2Tonnes: 21.55, countries: "Madagascar, Tanzania, Senegal, Kenya" },
         { id: "sustainable-www",   name: "Sustainable WWW",                            baseLocation: "Sweden",        trees: 170, co2Tonnes: 24.56, countries: "Tanzania, Kenya, Madagascar, Uganda, India, United States" },
         { id: "mst",               name: "Mittler Senior Technology",                  baseLocation: "United States", trees: 124, co2Tonnes: 16.25, countries: "Tanzania, Senegal, Madagascar, Indonesia, Uganda, Nepal" },
         { id: "ecosearch",         name: "EcoSearch",                                  baseLocation: "Canada",        trees: 101, co2Tonnes: 5.05,  countries: "Madagascar" },
-        { id: "denman-place-mall", name: "Denman Place Mall",                          baseLocation: "Canada",        trees: 2,   co2Tonnes: 0,     countries: "Tanzania, Kenya" },
-        { id: "gabriel-dalton",    name: "Gabriel Dalton (CEO Personal Forest)",       baseLocation: "Canada",        trees: 2,   co2Tonnes: 0,     countries: "Tanzania" },
-        { id: "wesn",              name: "West End Seniors' Network (WESN)",           baseLocation: "Canada",        trees: 900, co2Tonnes: 45,    countries: "Multiple", isSharedWithWebReady: true, sharedWithLabel: "Oasis of Change (Web-Ready)" }
+        { id: "denman-place-mall", name: "Denman Place Mall",                          baseLocation: "Canada",        trees: 22,  co2Tonnes: 1.1,   countries: "Tanzania, Kenya" },
+        { id: "gabriel-dalton",    name: "Gabriel Dalton (CEO Personal Forest)",       baseLocation: "Canada",        trees: 2,   co2Tonnes: 0.1,   countries: "Tanzania" },
+        { id: "wesn",              name: "West End Seniors' Network (WESN)",           baseLocation: "Canada",        trees: 900, co2Tonnes: 45,    countries: "Kenya", isSharedWithWebReady: true, sharedWithLabel: "Web-Ready by Oasis of Change, Inc.", partnerSpecies: [{ name: "Persea americana", country: "Kenya", project: "Save the Aberdare Forest" }] }
     ],
 
 
@@ -145,7 +146,7 @@ const TreeData = {
         { id: "nepal-eden",      name: "Eden Reforestation Projects", country: "Nepal", type: "confirmed", source: "Tree-Nation", trees: 0, lat: 27.775871, lng: 84.103767, description: "Planted by Oasis of Change (historical) and Mittler Senior Technology (planting partner).", note: "Eden Reforestation Projects was completed after reaching full planting capacity. All trees planted through the project remain verified and tracked via Tree-Nation certificates.", noteLink: "/news#eden-completed", exactCoordinatesVerified: true },
         { id: "nepal-refoorest", name: "Refoorest", country: "Nepal", type: "supported", source: "Legacy Partner (Refoorest)", trees: 2000, lat: 28.3949, lng: 84.1240, description: "" },
         { id: "kenya-bore",   name: "Bore",                          country: "Kenya", type: "confirmed", source: "Tree-Nation", trees: 0, lat: -3.0939, lng: 39.918999, description: "Planted by Oasis of Change and Sustainable WWW (planting partner).", exactCoordinatesVerified: true },
-        { id: "kenya-aberdare", name: "Save the Aberdare Forest",    country: "Kenya", type: "confirmed", source: "Tree-Nation", trees: 0, lat: -0.39104, lng: 36.730492, description: "Planted by Sustainable WWW (planting partner).", exactCoordinatesVerified: true },
+        { id: "kenya-aberdare", name: "Save the Aberdare Forest",    country: "Kenya", type: "confirmed", source: "Tree-Nation", trees: 0, lat: -0.39104, lng: 36.730492, description: "Planted by Sustainable WWW and West End Seniors' Network (WESN) (planting partners).", exactCoordinatesVerified: true },
         { id: "kenya-swahili", name: "Swahili Coast Mangrove Restoration", country: "Kenya", type: "confirmed", source: "Tree-Nation", trees: 0, lat: -2.390773, lng: 40.782242, description: "Planted by Stanley Park Ecology Society and Sustainable WWW (planting partners).", exactCoordinatesVerified: true },
         { id: "kenya",       name: "Kenya",        country: "Kenya",       type: "supported",  source: "Legacy Partner (Tero)",     trees: 0,    lat: -0.0236,  lng: 37.9062,  description: "" },
         { id: "uganda-forest-gardens", name: "Forest Gardens – Mount Elgon Region", country: "Uganda", type: "confirmed", source: "Tree-Nation", trees: 0, lat: 0.826785, lng: 34.38345, description: "Planted by Sustainable WWW and Mittler Senior Technology (planting partners).", exactCoordinatesVerified: true },
@@ -195,7 +196,8 @@ const TreeData = {
             "Acacia mangium", "Schizolobium amazonicum", "Fagus sylvatica",
             "Mangifera indica", "Quercus petraea", "Prosopis laevigata",
             "Polylepis australis", "Pinus nigra", "Solanum aviculare",
-            "Prunus spinosa", "Pistacia lentiscus", "Rhizophora mucronata"
+            "Prunus spinosa", "Pistacia lentiscus", "Rhizophora mucronata",
+            "Persea americana"
         ],
         legacySpecies: {
             "Nepal":          ["Acacia katechu","Artocarpus heterophyllus","Azadirachta indica","Bauhinia variegata","Citrus limon","Coffea arabica","Ficus cunia","Ficus nemoralis","Leuceana leucocephala","Litsea monopetala","Moringa oleifera","Shorea robusta","Tectona grandis","Terminalia bellerica","Rhododendron arboreum"],
@@ -242,12 +244,19 @@ const TreeData = {
     },
 
     getCo2Captured: function() {
-        var projectKg = this.verifiedProjects.reduce(function(sum, p) { return sum + (p.co2Offset || 0); }, 0);
-        var partnerKg = (this.verifiedPartners || []).reduce(function(sum, p) { return sum + ((p.co2Tonnes || 0) * 1000); }, 0);
-        return projectKg + partnerKg;
+        // Match dashboard live API: Web-Ready forest CO₂ + additive partners only (exclude overlap gifts).
+        var webKg = this.getWebReadyCo2Kg();
+        var partnerKg = (this.verifiedPartners || []).reduce(function(sum, p) {
+            if (p.isSharedWithWebReady) return sum;
+            return sum + ((p.co2Tonnes || 0) * 1000);
+        }, 0);
+        return webKg + partnerKg;
     },
 
     getWebReadyCo2Kg: function() {
+        if (this.totals && typeof this.totals.webReadyCo2Kg === 'number' && Number.isFinite(this.totals.webReadyCo2Kg) && this.totals.webReadyCo2Kg > 0) {
+            return this.totals.webReadyCo2Kg;
+        }
         return this.verifiedProjects.reduce(function(sum, p) { return sum + (p.co2Offset || 0); }, 0);
     },
 

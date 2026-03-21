@@ -39,6 +39,309 @@
         .species-card { transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
         .tag { font-size: 10px; padding: 2px 8px; border-radius: 9999px; color: #111827; background-color: #F3F4F6; }
         .chip { font-size: 10px; padding: 2px 8px; border-radius: 9999px; color: #065F46; background-color: #ECFDF5; }
+        #species-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            align-items: start;
+        }
+        @media (min-width: 1024px) {
+            #species-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        .species-card--partner-verified {
+            grid-column: 1 / -1;
+            border-color: #E5E7EB;
+            background: #FFFFFF;
+        }
+        .partner-group-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.9rem;
+        }
+        @media (min-width: 1024px) {
+            .partner-group-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        /* Mobile: centre partner “tabs” in the column (narrower card, centred). */
+        @media (max-width: 639.98px) {
+            .partner-group-grid {
+                justify-items: center;
+            }
+            .species-card--partner-verified .partner-group {
+                width: 100%;
+                max-width: min(100%, 24rem);
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        .partner-group {
+            border: 1px solid #E5E7EB;
+            border-radius: 0.9rem;
+            /* Clip rounded corners cleanly at the header edges. */
+            overflow: hidden;
+            background: #FFFFFF;
+            box-shadow: none;
+        }
+        .partner-group-toolbar {
+            /* Inline with the card title: don't use 100% width here — in a flex row
+               that steals the whole row and squeezes the heading so "Planting" wraps early. */
+            width: auto;
+            flex-shrink: 0;
+        }
+        /* Verified card: mobile toolbar is a 2-column grid (see species.js). */
+        .partner-group-toolbar--verified-header .partner-accordion-btn {
+            width: 100%;
+            justify-content: center;
+            text-align: center;
+        }
+        @media (min-width: 640px) {
+            .partner-group-toolbar--verified-header .partner-accordion-btn {
+                width: auto;
+                justify-content: center;
+            }
+        }
+        .verified-partner-card__title {
+            word-break: normal;
+            overflow-wrap: anywhere;
+        }
+        .partner-group-title {
+            min-width: 0;
+            overflow-wrap: anywhere;
+            line-height: 1.25;
+        }
+        @media (max-width: 639.98px) {
+            .partner-group > summary {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 0.5rem;
+            }
+            .partner-group-title {
+                text-align: center;
+                width: 100%;
+            }
+            .partner-group-count {
+                align-self: center;
+            }
+            .partner-species-list {
+                max-height: min(22rem, 52vh);
+                padding: 0.6rem;
+            }
+            .partner-species-item {
+                grid-template-columns: 48px 1fr;
+                gap: 0.5rem;
+                padding: 0.45rem;
+            }
+            .partner-species-thumb,
+            .partner-species-thumb-btn {
+                width: 48px !important;
+                height: 48px !important;
+            }
+            .partner-species-name {
+                font-size: 0.82rem;
+            }
+        }
+        .partner-accordion-btn {
+            font-size: 0.75rem;
+            padding: 0.35rem 0.7rem;
+            border-radius: 0.65rem;
+            border: 1px solid #E5E7EB;
+            background: #FFFFFF;
+            color: #0F172A;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .partner-accordion-btn:hover {
+            background: #F9FAFB;
+        }
+        .partner-accordion-btn.is-active {
+            background: var(--color-brand-green) !important;
+            border-color: var(--color-brand-green) !important;
+            color: #FFFFFF !important;
+        }
+        .partner-accordion-btn.is-active:hover {
+            background: var(--color-brand-green) !important;
+        }
+        /* Inactive Expand matches Collapse (neutral border) — avoids odd mint stroke next to green active state. */
+        .partner-accordion-btn--expand:not(.is-active) {
+            border-color: #E5E7EB;
+            color: #0F172A;
+        }
+        .partner-accordion-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .partner-accordion-btn svg {
+            flex: 0 0 auto;
+        }
+        @media (max-width: 639.98px) {
+            .partner-accordion-btn {
+                font-size: 0.7rem;
+                padding: 0.4rem 0.45rem;
+            }
+        }
+        /* Verified Tree Planting skeleton: flat (no shimmer/gradient) */
+        .species-card--partner-verified .skeleton--flat {
+            background: #E5E7EB !important;
+            background-image: none !important;
+            background-size: auto !important;
+            animation: none !important;
+        }
+        .partner-group > summary {
+            cursor: default;
+            list-style: none;
+            padding: 0.8rem 0.9rem;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #0F172A;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            background: #F9FAFB;
+            border-bottom: 1px solid #E5E7EB;
+            border-radius: 0.9rem 0.9rem 0 0;
+            background-clip: padding-box;
+        }
+        @media (max-width: 1023.98px) {
+            .partner-group > summary {
+                cursor: pointer;
+            }
+        }
+        .partner-group > summary::-webkit-details-marker { display: none; }
+        .partner-group-count {
+            font-size: 0.7rem;
+            color: #374151;
+            background: #F3F4F6;
+            border: 1px solid #E5E7EB;
+            border-radius: 9999px;
+            padding: 0.1rem 0.45rem;
+            white-space: nowrap;
+        }
+        .partner-species-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.55rem;
+            padding: 0.75rem;
+            max-height: 28rem;
+            overflow: auto;
+            min-height: 2.5rem;
+        }
+        .partner-species-item {
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            gap: 0.65rem;
+            align-items: center;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.75rem;
+            background: #F9FAFB;
+            padding: 0.5rem;
+        }
+        .partner-species-thumb {
+            width: 56px;
+            height: 56px;
+            border-radius: 0.6rem;
+            object-fit: cover;
+            border: 1px solid #D1D5DB;
+            background: #E5E7EB;
+        }
+        .partner-species-thumb-btn {
+            border: 0;
+            background: #E5E7EB;
+            padding: 0;
+            cursor: zoom-in;
+            border-radius: 0.6rem;
+            width: 56px;
+            height: 56px;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Removed gradient shimmer to keep the verified section visually consistent. */
+        .partner-species-thumb-btn:focus-visible {
+            outline: 2px solid #10B981;
+            outline-offset: 2px;
+        }
+        .species-card--partner-verified .partner-species-thumb--fallback {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #374151;
+            background: #F3F4F6;
+            border: 1px solid #E5E7EB;
+        }
+        .partner-species-name {
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: #0F172A;
+            line-height: 1.22;
+            overflow-wrap: anywhere;
+        }
+        .partner-species-meta {
+            font-size: 0.72rem;
+            color: #6B7280;
+            margin-top: 0.2rem;
+        }
+        .species-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .species-lightbox.hidden { display: none; }
+        .species-lightbox__backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.75);
+            backdrop-filter: blur(2px);
+        }
+        .species-lightbox__panel {
+            position: relative;
+            width: min(980px, 95vw);
+            max-height: 90vh;
+            overflow: auto;
+            border-radius: 1rem;
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 20px 60px rgba(2, 6, 23, 0.35);
+            padding: 1rem;
+        }
+        .species-lightbox__close {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.65rem;
+            border: 0;
+            background: transparent;
+            font-size: 1.6rem;
+            line-height: 1;
+            color: #6B7280;
+            cursor: pointer;
+        }
+        .species-lightbox__img {
+            width: 100%;
+            max-height: 56vh;
+            object-fit: contain;
+            border-radius: 0.75rem;
+            background: #F3F4F6;
+            border: 1px solid #E5E7EB;
+        }
+        .species-lightbox__body { margin-top: 0.9rem; }
+        .species-lightbox__title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0F172A;
+        }
+        .species-lightbox__desc {
+            margin-top: 0.4rem;
+            font-size: 0.92rem;
+            line-height: 1.45;
+            color: #374151;
+            white-space: pre-line;
+        }
     </style>
     <script src="assets/js/rewrite-links.js"></script>
     <!-- Accessibility AI Remediation powered by AccessibilityChecker.org -->
@@ -171,7 +474,7 @@
                 </div>
                 <div>
                     <h3 class="ooc-alert__title">Data Transparency Notice</h3>
-                    <p class="ooc-alert__body">Species marked "Verified" are confirmed through Tree-Nation. Legacy partner species data comes from Refoorest and may not be fully verified.</p>
+                    <p class="ooc-alert__body">Species under Verified are sourced from Tree-Nation. Legacy partner species listings are derived from information provided by Refoorest regarding species associated with its planting programs. Oasis of Change, Inc. does not independently verify species-level attribution within the legacy partnership with Refoorest.</p>
                 </div>
             </div>
             </div>
@@ -179,7 +482,7 @@
         </section>
 
         <section class="mb-8">
-            <div class="flex flex-wrap gap-2 justify-center">
+            <div class="species-filter-bar flex flex-wrap gap-2 justify-center">
                 <button class="filter-btn active px-4 py-2 rounded border border-brand-green bg-brand-green text-white text-sm focus:outline-none"
                     data-filter="all">
                     All Species
@@ -191,10 +494,6 @@
                 <button class="filter-btn px-4 py-2 rounded border border-gray-300 text-gray-700 text-sm bg-white hover:border-brand-green focus:outline-none"
                     data-filter="legacy">
                     Legacy Partners
-                </button>
-                <button class="filter-btn px-4 py-2 rounded border border-gray-300 text-gray-700 text-sm bg-white hover:border-brand-green focus:outline-none"
-                    data-filter="preincorporation">
-                    Pre-incorporation
                 </button>
             </div>
         </section>
@@ -208,64 +507,16 @@
         </style>
 
         <section class="mb-8">
-            <div class="flex items-center justify-between flex-wrap gap-2">
-                <h2 class="text-base font-semibold text-deep-forest">About these categories</h2>
-                <span class="text-xs text-gray-500">Data snapshot &bull; February 2026</span>
-            </div>
-            <p class="mt-2 text-xs text-gray-600">Labels like Agroforestry, Mangrove, or Medicinal are provided by project partners to describe typical uses and habitats.</p>
+            <h2 class="text-base font-semibold text-deep-forest">About these categories</h2>
+            <p class="mt-2 text-xs text-gray-600 leading-relaxed">Labels like Agroforestry, Mangrove, or Medicinal are provided by project partners to describe typical uses and habitats.</p>
         </section>
 
         <section class="mb-8">
-            <div id="species-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="verified" data-country="verified">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-deep-forest">2025-2026 FY Verified</h3>
-                        <span class="tag" style="border-color:#BBF7D0;color:#166534;background-color:#F0FDF4">Verified</span>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <p><strong>Afrocarpus usambarensis</strong> (East African Yellowwood)<span class="block text-xs text-gray-400 mt-0.5">Tanzania</span></p>
-                        <p><strong>Pinus banksiana</strong> (Jack Pine)<span class="block text-xs text-gray-400 mt-0.5">Canada</span></p>
-                        <p><strong>Ceiba speciosa</strong> (Silk Floss Tree)<span class="block text-xs text-gray-400 mt-0.5">Bolivia</span></p>
-                        <p><strong>Acacia mangium</strong> (Mangium)<span class="block text-xs text-gray-400 mt-0.5">Nigeria</span></p>
-                        <p><strong>Schizolobium amazonicum</strong> (Paricá)<span class="block text-xs text-gray-400 mt-0.5">Brazil</span></p>
-                        <p><strong>Fagus sylvatica</strong> (European Beech)<span class="block text-xs text-gray-400 mt-0.5">Romania</span></p>
-                        <p><strong>Mangifera indica</strong> (Mango Tree)<span class="block text-xs text-gray-400 mt-0.5">Zimbabwe</span></p>
-                        <p><strong>Quercus petraea</strong> (Sessile Oak)<span class="block text-xs text-gray-400 mt-0.5">Ireland</span></p>
-                        <p><strong>Prosopis laevigata</strong> (Smooth Mesquite)<span class="block text-xs text-gray-400 mt-0.5">Mexico</span></p>
-                        <p><strong>Polylepis australis</strong> (Tabaquillo)<span class="block text-xs text-gray-400 mt-0.5">Argentina</span></p>
-                        <p><strong>Pinus nigra</strong> (Black Pine)<span class="block text-xs text-gray-400 mt-0.5">France</span></p>
-                        <p><strong>Solanum aviculare</strong> (Kangaroo Apple)<span class="block text-xs text-gray-400 mt-0.5">Australia</span></p>
-                        <p><strong>Prunus spinosa</strong> (Blackthorn)<span class="block text-xs text-gray-400 mt-0.5">United Kingdom</span></p>
-                        <p><strong>Pistacia lentiscus</strong> (Mastic Tree)<span class="block text-xs text-gray-400 mt-0.5">Spain</span></p>
-                    </div>
-                </div>
-
-                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="verified" data-country="madagascar">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-deep-forest">2024-2025 FY Verified</h3>
-                        <span class="tag" style="border-color:#BBF7D0;color:#166534;background-color:#F0FDF4">Verified</span>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <p><strong>Rhizophora mucronata</strong> (Red Mangrove)<span class="block text-xs text-gray-400 mt-0.5">Madagascar</span></p>
-                    </div>
-                </div>
-
-                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="preincorporation" data-country="preincorporation">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-deep-forest">Historical Plantings <a href="#footnote-1" class="align-super text-[10px] text-gray-400 hover:text-gray-600 no-underline" aria-label="Footnote 1">1</a></h3>
-                        <span class="tag" style="border-color:#E5E7EB;color:#6B7280;background-color:#F9FAFB">Pre-incorporation</span>
-                    </div>
-                    <p class="text-xs text-gray-500 mb-3">Species attributed to planting activities prior to the legal incorporation of Oasis of Change, Inc.</p>
-                    <div class="space-y-2 text-sm">
-                        <p><strong>Phyllanthus emblica</strong> (Indian gooseberry / Amla)<span class="block text-xs text-gray-400 mt-0.5">Nepal</span></p>
-                        <p><strong>Pinus strobus</strong> (Eastern white pine)<span class="block text-xs text-gray-400 mt-0.5">United States</span></p>
-                    </div>
-                </div>
-
+            <div id="species-grid">
                 <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="nepal">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-deep-forest">Nepal</h3>
-                        <span class="tag">Legacy partner</span><a href="#footnote-2" class="align-super text-[10px] text-gray-400 hover:text-gray-600 ml-0.5 no-underline" aria-label="Footnote 2">2</a>
+                        <h3 class="text-lg font-semibold text-deep-forest">Nepal <a href="#footnote-1" class="align-super text-[10px] text-gray-400 hover:text-gray-600 no-underline" aria-label="Footnote 1">1</a></h3>
+                        <span class="tag">Legacy partner</span>
                     </div>
                     <div class="space-y-2 text-sm">
                         <p><strong>Acacia katechu</strong> (Khair)</p>
@@ -286,90 +537,10 @@
                     </div>
                 </div>
 
-                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="madagascar">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-deep-forest">Madagascar</h3>
-                        <span class="tag">Legacy partner</span><a href="#footnote-2" class="align-super text-[10px] text-gray-400 hover:text-gray-600 ml-0.5 no-underline" aria-label="Footnote 2">2</a>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <p><strong>Anacardium occidentale</strong> (Cashew)</p>
-                        <p><strong>Carica papaya</strong> (Papaya)</p>
-                        <p><strong>Mangifera indica</strong> (Mango Tree)</p>
-                        <p><strong>Adansonia sp</strong> (Baobab)</p>
-                        <p><strong>Albizia saman</strong> (Rain Tree)</p>
-                        <p><strong>Bismarckia nobilis</strong> (Bismarck Palm)</p>
-                        <p><strong>Ceiba pentandra</strong> (Kapok)</p>
-                        <p><strong>Khaya madagascariensis</strong> (Mahogany)</p>
-                        <p><strong>Moringa oleifera</strong> (Moringa)</p>
-                        <p><strong>Tectona grandis</strong> (Teak)</p>
-                        <p><strong>Terminalia mantaly</strong> (Umbrella Tree)</p>
-                        <p><strong>Avicennia marina</strong> (Grey Mangrove)</p>
-                        <p><strong>Rhizophora mucronata</strong> (Red Mangrove)</p>
-                    </div>
-                </div>
-
-                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="haiti">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-deep-forest">Haiti</h3>
-                        <span class="tag">Legacy partner</span><a href="#footnote-2" class="align-super text-[10px] text-gray-400 hover:text-gray-600 ml-0.5 no-underline" aria-label="Footnote 2">2</a>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <p><strong>Annona muricata</strong> (Soursop)</p>
-                        <p><strong>Avicennia marina</strong> (Grey Mangrove)</p>
-                        <p><strong>Prosopis juliflora</strong> (Mesquite)</p>
-                        <p><strong>Artocarpus altilis</strong> (Breadfruit)</p>
-                        <p><strong>Rhizophora mangle</strong> (Red Mangrove)</p>
-                        <p><strong>Carica papaya</strong> (Papaya)</p>
-                        <p><strong>Cedrela odorata</strong> (Spanish Cedar)</p>
-                        <p><strong>Citrus aurantifolia</strong> (Lime)</p>
-                        <p><strong>Coffea arabica</strong> (Coffee)</p>
-                        <p><strong>Delonix regia</strong> (Flame Tree)</p>
-                        <p><strong>Leucaena leucocephala</strong> (Lead Tree)</p>
-                        <p><strong>Mangifera indica</strong> (Mango Tree)</p>
-                        <p><strong>Theobroma cacao</strong> (Cocoa)</p>
-                    </div>
-                </div>
-
-                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="indonesia">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-deep-forest">Indonesia</h3>
-                        <span class="tag">Legacy partner</span><a href="#footnote-2" class="align-super text-[10px] text-gray-400 hover:text-gray-600 ml-0.5 no-underline" aria-label="Footnote 2">2</a>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <p><strong>Avicennia marina</strong> (Grey Mangrove)</p>
-                        <p><strong>Bruguiera gymnorhiza</strong> (Orange Mangrove)</p>
-                        <p><strong>Nypa fruticans</strong> (Nipa Palm)</p>
-                        <p><strong>Rhizophora</strong> (Red Mangrove)</p>
-                        <p><strong>Sonneratia alba</strong> (Apple Mangrove)</p>
-                        <p><strong>Xylocarpus granatum</strong> (Cannonball Mangrove)</p>
-                    </div>
-                </div>
-
-                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="mozambique">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-deep-forest">Mozambique</h3>
-                        <span class="tag">Legacy partner</span><a href="#footnote-2" class="align-super text-[10px] text-gray-400 hover:text-gray-600 ml-0.5 no-underline" aria-label="Footnote 2">2</a>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <p><strong>Avicennia marina</strong> (Grey Mangrove)</p>
-                        <p><strong>Bruguiera gymnorhiza</strong> (Orange Mangrove)</p>
-                        <p><strong>Rhizophora mucronata</strong> (Red Mangrove)</p>
-                        <p><strong>Acacia karroo</strong> (Sweet Thorn)</p>
-                        <p><strong>Adansonia digitata</strong> (Baobab)</p>
-                        <p><strong>Albizia lebbeck</strong> (Siris)</p>
-                        <p><strong>Anacardium occidentale</strong> (Cashew)</p>
-                        <p><strong>Citrus sinensis</strong> (Orange)</p>
-                        <p><strong>Colophospermum mopane</strong> (Mopane)</p>
-                        <p><strong>Mangifera indica</strong> (Mango Tree)</p>
-                        <p><strong>Moringa oleifera</strong> (Moringa)</p>
-                        <p><strong>Sclerocarya birrea</strong> (Marula)</p>
-                    </div>
-                </div>
-
                 <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="kenya">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-deep-forest">Kenya</h3>
-                        <span class="tag">Legacy partner</span><a href="#footnote-2" class="align-super text-[10px] text-gray-400 hover:text-gray-600 ml-0.5 no-underline" aria-label="Footnote 2">2</a>
+                        <h3 class="text-lg font-semibold text-deep-forest">Kenya <a href="#footnote-1" class="align-super text-[10px] text-gray-400 hover:text-gray-600 no-underline" aria-label="Footnote 1">1</a></h3>
+                        <span class="tag">Legacy partner</span>
                     </div>
                     <div class="space-y-2 text-sm">
                         <p><strong>Acacia gerrardii</strong> (Grey Thorn)</p>
@@ -390,10 +561,69 @@
                     </div>
                 </div>
 
+                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="madagascar">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-deep-forest">Madagascar <a href="#footnote-1" class="align-super text-[10px] text-gray-400 hover:text-gray-600 no-underline" aria-label="Footnote 1">1</a></h3>
+                        <span class="tag">Legacy partner</span>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Anacardium occidentale</strong> (Cashew)</p>
+                        <p><strong>Carica papaya</strong> (Papaya)</p>
+                        <p><strong>Mangifera indica</strong> (Mango Tree)</p>
+                        <p><strong>Adansonia sp</strong> (Baobab)</p>
+                        <p><strong>Albizia saman</strong> (Rain Tree)</p>
+                        <p><strong>Bismarckia nobilis</strong> (Bismarck Palm)</p>
+                        <p><strong>Ceiba pentandra</strong> (Kapok)</p>
+                        <p><strong>Khaya madagascariensis</strong> (Mahogany)</p>
+                        <p><strong>Moringa oleifera</strong> (Moringa)</p>
+                        <p><strong>Tectona grandis</strong> (Teak)</p>
+                        <p><strong>Terminalia mantaly</strong> (Umbrella Tree)</p>
+                        <p><strong>Avicennia marina</strong> (Grey Mangrove)</p>
+                        <p><strong>Rhizophora mucronata</strong> (Red Mangrove)</p>
+                    </div>
+                </div>
+
+                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="haiti">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-deep-forest">Haiti <a href="#footnote-1" class="align-super text-[10px] text-gray-400 hover:text-gray-600 no-underline" aria-label="Footnote 1">1</a></h3>
+                        <span class="tag">Legacy partner</span>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Annona muricata</strong> (Soursop)</p>
+                        <p><strong>Avicennia marina</strong> (Grey Mangrove)</p>
+                        <p><strong>Prosopis juliflora</strong> (Mesquite)</p>
+                        <p><strong>Artocarpus altilis</strong> (Breadfruit)</p>
+                        <p><strong>Rhizophora mangle</strong> (Red Mangrove)</p>
+                        <p><strong>Carica papaya</strong> (Papaya)</p>
+                        <p><strong>Cedrela odorata</strong> (Spanish Cedar)</p>
+                        <p><strong>Citrus aurantifolia</strong> (Lime)</p>
+                        <p><strong>Coffea arabica</strong> (Coffee)</p>
+                        <p><strong>Delonix regia</strong> (Flame Tree)</p>
+                        <p><strong>Leucaena leucocephala</strong> (Lead Tree)</p>
+                        <p><strong>Mangifera indica</strong> (Mango Tree)</p>
+                        <p><strong>Theobroma cacao</strong> (Cocoa)</p>
+                    </div>
+                </div>
+
+                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="indonesia">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-deep-forest">Indonesia <a href="#footnote-1" class="align-super text-[10px] text-gray-400 hover:text-gray-600 no-underline" aria-label="Footnote 1">1</a></h3>
+                        <span class="tag">Legacy partner</span>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Avicennia marina</strong> (Grey Mangrove)</p>
+                        <p><strong>Bruguiera gymnorhiza</strong> (Orange Mangrove)</p>
+                        <p><strong>Nypa fruticans</strong> (Nipa Palm)</p>
+                        <p><strong>Rhizophora</strong> (Red Mangrove)</p>
+                        <p><strong>Sonneratia alba</strong> (Apple Mangrove)</p>
+                        <p><strong>Xylocarpus granatum</strong> (Cannonball Mangrove)</p>
+                    </div>
+                </div>
+
                 <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="central-america">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-deep-forest">Central America</h3>
-                        <span class="tag">Legacy partner</span><a href="#footnote-2" class="align-super text-[10px] text-gray-400 hover:text-gray-600 ml-0.5 no-underline" aria-label="Footnote 2">2</a>
+                        <h3 class="text-lg font-semibold text-deep-forest">Central America <a href="#footnote-1" class="align-super text-[10px] text-gray-400 hover:text-gray-600 no-underline" aria-label="Footnote 1">1</a></h3>
+                        <span class="tag">Legacy partner</span>
                     </div>
                     <div class="space-y-2 text-sm">
                         <p><strong>Liquidambar styraciflua</strong> (Sweetgum)</p>
@@ -402,6 +632,27 @@
                         <p><strong>Acacia</strong> (Acacia species)</p>
                         <p><strong>Samanea saman</strong> (Rain Tree)</p>
                         <p><strong>Swietenia macrophylla</strong> (Big-leaf Mahogany)</p>
+                    </div>
+                </div>
+
+                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="legacy" data-country="mozambique">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-deep-forest">Mozambique <a href="#footnote-1" class="align-super text-[10px] text-gray-400 hover:text-gray-600 no-underline" aria-label="Footnote 1">1</a></h3>
+                        <span class="tag">Legacy partner</span>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Avicennia marina</strong> (Grey Mangrove)</p>
+                        <p><strong>Bruguiera gymnorhiza</strong> (Orange Mangrove)</p>
+                        <p><strong>Rhizophora mucronata</strong> (Red Mangrove)</p>
+                        <p><strong>Acacia karroo</strong> (Sweet Thorn)</p>
+                        <p><strong>Adansonia digitata</strong> (Baobab)</p>
+                        <p><strong>Albizia lebbeck</strong> (Siris)</p>
+                        <p><strong>Anacardium occidentale</strong> (Cashew)</p>
+                        <p><strong>Citrus sinensis</strong> (Orange)</p>
+                        <p><strong>Colophospermum mopane</strong> (Mopane)</p>
+                        <p><strong>Mangifera indica</strong> (Mango Tree)</p>
+                        <p><strong>Moringa oleifera</strong> (Moringa)</p>
+                        <p><strong>Sclerocarya birrea</strong> (Marula)</p>
                     </div>
                 </div>
 
@@ -416,9 +667,9 @@
                     <div class="ooc-footer__notes">
                         <h2 class="ooc-footer__notes-heading">Methodology &amp; notes</h2>
                         <ol class="ooc-footer__notes-list" id="footer-notes">
-                            <li id="footnote-1" class="scroll-mt-20"><sup class="text-white/70 font-medium">1</sup> Certain species listed under Historical Plantings are attributed to planting activities prior to the legal incorporation of Oasis of Change, Inc. (Eden Reforestation Projects, Nepal; National Forest Recovery, United States).</li>
-                            <li id="footnote-2" class="scroll-mt-20"><sup class="text-white/70 font-medium">2</sup> Legacy partner species data is reported by Refoorest and has not been independently verified by Oasis of Change, Inc.</li>
+                            <li id="footnote-1" class="scroll-mt-20"><sup class="text-white/70 font-medium">1</sup> Legacy partner species listings are derived from information provided by Refoorest regarding species associated with its planting programs. Oasis of Change, Inc. does not independently verify species-level attribution within the legacy partnership with Refoorest.</li>
                         </ol>
+                        <p class="mt-3 pt-3 border-t border-white/10 text-xs text-white/55 leading-relaxed">Information on this page is current as of March 2026.</p>
                     </div>
                     <div class="ooc-footer__brand">
                         <p class="ooc-footer__tagline">Planting trees. Building futures.</p>
