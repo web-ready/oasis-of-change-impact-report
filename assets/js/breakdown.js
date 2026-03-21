@@ -352,7 +352,13 @@
     // ── Boot ────────────────────────────────────────────
 
     function boot() {
-        try { init(); } catch (e) { console.error('[Oasis of Change Breakdown] init failed:', e); }
+        var hydratePromise = (typeof TreeDataCache !== 'undefined' && typeof TreeDataCache.loadAndApply === 'function')
+            ? TreeDataCache.loadAndApply(typeof TreeData !== 'undefined' ? TreeData : null)
+            : Promise.resolve(false);
+
+        hydratePromise.finally(function () {
+            try { init(); } catch (e) { console.error('[Oasis of Change Breakdown] init failed:', e); }
+        });
     }
 
     if (document.readyState === 'loading') {

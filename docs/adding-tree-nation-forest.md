@@ -42,6 +42,14 @@ Only if applicable:
 - Open `/home` and confirm partner appears in the partner table.
 - Confirm totals make sense in both fallback and live modes.
 
+## 5) Refresh generated cache
+
+After updating forest mappings or overlap rules:
+
+- Run `node tools/sync-tree-cache.mjs`
+- Commit `assets/data/tree-stats-cache.json`
+- Or trigger the GitHub Action `Sync Tree Cache` manually.
+
 ## API reality today
 
 This site uses public forest counters:

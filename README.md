@@ -59,7 +59,7 @@ This static site provides donors, partners, and the public with full visibility 
 
 ## Data Source
 
-Planting totals, project details, and certificate metadata live in **`assets/js/tree-data.js`**. This file is the single source of truth for:
+Planting totals, project details, and certificate metadata live in **`assets/js/tree-data.js`**. This file is the fallback source of truth for:
 
 - Verified projects (Oasis-funded via Tree-Nation)
 - Partner plantings (SPES, Sustainable WWW, MST, EcoSearch)
@@ -67,6 +67,16 @@ Planting totals, project details, and certificate metadata live in **`assets/js/
 - Certificate paths and metadata
 
 The `lastUpdated` field at the top reflects when data was last synced.
+
+### Automated cache layer (recommended path)
+
+To reduce manual hardcoding drift, the dashboard and breakdown now hydrate from a generated cache file:
+
+- `assets/data/tree-stats-cache.json` (runtime cache applied before first render)
+- `tools/sync-tree-cache.mjs` (fetches Tree-Nation forest counters and writes cache)
+- `.github/workflows/sync-tree-cache.yml` (daily + on-demand cache refresh)
+
+This keeps public pages resilient when live browser API calls are blocked by CORS, while minimizing manual edits.
 
 ---
 

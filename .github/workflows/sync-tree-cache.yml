@@ -1,0 +1,30 @@
+name: Sync Tree Cache
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 11 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Sync cache from Tree-Nation
+        run: node tools/sync-tree-cache.mjs
+
+      - name: Commit cache updates
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore(data): refresh tree stats cache'
+          file_pattern: assets/data/tree-stats-cache.json
