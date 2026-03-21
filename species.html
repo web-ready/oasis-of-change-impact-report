@@ -64,7 +64,8 @@
         .partner-group {
             border: 1px solid #D1E5DD;
             border-radius: 0.9rem;
-            overflow: hidden;
+            /* Avoid clipping <details> disclosure panel (intermittent empty-body glitches in some browsers). */
+            overflow: visible;
             background: #FFFFFF;
             box-shadow: 0 1px 6px rgba(2, 32, 24, 0.05);
         }
@@ -99,6 +100,7 @@
             padding: 0.75rem;
             max-height: 28rem;
             overflow: auto;
+            min-height: 2.5rem;
         }
         .partner-species-item {
             display: grid;

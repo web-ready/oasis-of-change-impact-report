@@ -5,6 +5,10 @@
     var requestOptions = { method: 'GET', redirect: 'follow' };
     var SPECIES_API_CACHE = {};
 
+    // Lightbox: single document listener; species map refreshed after each render.
+    var lightboxSpeciesById = {};
+    var lightboxDocumentClickBound = false;
+
     // Species IDs derived from the species registries / taxonomic indices for
     // the project/forest sources represented on `breakdown.html`.
     var PARTNER_SPECIES_ID_GROUPS = [
@@ -67,6 +71,12 @@
             .replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#39;');
+    }
+
+    function escapeAttr(value) {
+        return String(value || '')
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;');
     }
 
     function fetchSpeciesById(id) {
@@ -135,25 +145,29 @@
                 var category = sp && sp.category && sp.category.name ? sp.category.name : '';
                 var imageUrl = sp && sp.image ? String(sp.image) : '';
                 var meta = [];
-                if (category) meta.push(category);
+                if (category) meta.push(escapeHtml(category));
+
+                var nameSafe = escapeHtml(name);
+                var commonSafe = common ? escapeHtml(common) : '';
+                var altSafe = escapeAttr(name);
 
                 var thumbHtml = imageUrl
-                    ? '<button type="button" class="partner-species-thumb-btn js-species-thumb" data-species-id="' + sid + '" aria-label="View larger image of ' + escapeHtml(name) + '">' +
-                        '<img class="partner-species-thumb is-loading js-partner-species-img" src="' + imageUrl + '" alt="' + escapeHtml(name) + '" loading="lazy" decoding="async" data-fallback-label="' + String(sid) + '">' +
+                    ? '<button type="button" class="partner-species-thumb-btn js-species-thumb" data-species-id="' + sid + '" aria-label="View larger image of ' + nameSafe + '">' +
+                        '<img class="partner-species-thumb is-loading js-partner-species-img" src="' + escapeAttr(imageUrl) + '" alt="' + altSafe + '" loading="eager" decoding="async" data-fallback-label="' + String(sid) + '">' +
                       '</button>'
                     : '<span class="partner-species-thumb partner-species-thumb--fallback" aria-hidden="true">' + String(sid) + '</span>';
 
                 return '<div class="partner-species-item">' +
                     thumbHtml +
                     '<div>' +
-                        '<div class="partner-species-name">' + name + (common ? (' (' + common + ')') : '') + '</div>' +
+                        '<div class="partner-species-name">' + nameSafe + (commonSafe ? (' (' + commonSafe + ')') : '') + '</div>' +
                         (meta.length ? '<div class="partner-species-meta">' + meta.join(' \u2022 ') + '</div>' : '') +
                     '</div>' +
                     '</div>';
             }).join('');
 
             return '<details class="partner-group" open>' +
-                '<summary><span>' + group.groupLabel + '</span><span class="partner-group-count">' + group.speciesIds.length + ' species</span></summary>' +
+                '<summary><span>' + escapeHtml(group.groupLabel) + '</span><span class="partner-group-count">' + group.speciesIds.length + ' species</span></summary>' +
                 '<div class="partner-species-list">' + groupSpeciesLines + '</div>' +
                 '</details>';
         }).join('');
@@ -172,6 +186,59 @@
         } else {
             grid.appendChild(card);
         }
+
+        setupPartnerGroupToggleFix(card);
+    }
+
+    function refreshPartnerGroupPanel(details, fromUserToggle) {
+        if (!details || !details.open) return;
+
+        requestAnimationFrame(function () {
+            var list = details.querySelector('.partner-species-list');
+            if (list) {
+                if (fromUserToggle) list.scrollTop = 0;
+                void list.offsetHeight;
+            }
+            void details.offsetHeight;
+
+            if (!fromUserToggle) return;
+
+            var imgs = details.querySelectorAll('img.js-partner-species-img');
+            imgs.forEach(function (img) {
+                img.loading = 'eager';
+                var src = img.getAttribute('src');
+                if (src && !img.complete) {
+                    img.removeAttribute('data-thumb-handled');
+                    img.src = '';
+                    img.src = src;
+                }
+            });
+
+            setupSpeciesThumbLoading(details);
+        });
+    }
+
+    /**
+     * Browsers can intermittently fail to paint or load content inside <details>.
+     * Nudge layout on first paint; on user open, re-trigger image loads + thumb handlers.
+     */
+    function setupPartnerGroupToggleFix(card) {
+        if (!card) return;
+
+        var groups = card.querySelectorAll('details.partner-group');
+        groups.forEach(function (details) {
+            if (details.getAttribute('data-toggle-fix') === 'true') return;
+            details.setAttribute('data-toggle-fix', 'true');
+
+            details.addEventListener('toggle', function () {
+                if (!details.open) return;
+                refreshPartnerGroupPanel(details, true);
+            });
+
+            if (details.open) {
+                refreshPartnerGroupPanel(details, false);
+            }
+        });
     }
 
     function hideStaticVerifiedCardsIfCovered(entriesById) {
@@ -252,7 +319,11 @@
     }
 
     function setupLightboxInteractions(entriesById) {
+        lightboxSpeciesById = entriesById || {};
         var lightbox = ensureLightbox();
+
+        if (lightboxDocumentClickBound) return;
+        lightboxDocumentClickBound = true;
 
         document.addEventListener('click', function (event) {
             var closeTrigger = event.target.closest('[data-close-lightbox="true"]');
@@ -264,13 +335,15 @@
             var thumb = event.target.closest('.js-species-thumb');
             if (!thumb) return;
             var sid = Number(thumb.getAttribute('data-species-id'));
-            openSpeciesLightbox(entriesById[sid]);
+            openSpeciesLightbox(lightboxSpeciesById[sid]);
         });
     }
 
-    function setupSpeciesThumbLoading() {
-        var thumbs = document.querySelectorAll('.js-partner-species-img');
+    function setupSpeciesThumbLoading(root) {
+        var scope = root && root.querySelectorAll ? root : document;
+        var thumbs = scope.querySelectorAll('.js-partner-species-img:not([data-thumb-handled])');
         thumbs.forEach(function (img) {
+            img.setAttribute('data-thumb-handled', 'true');
             var button = img.closest('.partner-species-thumb-btn');
             if (!button) return;
 
@@ -288,7 +361,18 @@
                 button.replaceWith(fallback);
             };
 
+            var safetyTimer = window.setTimeout(function () {
+                if (img.classList.contains('is-loading')) {
+                    markReady();
+                }
+            }, 10000);
+
+            var clearTimer = function () {
+                window.clearTimeout(safetyTimer);
+            };
+
             if (img.complete) {
+                clearTimer();
                 if (img.naturalWidth > 0) {
                     markReady();
                 } else {
@@ -297,8 +381,14 @@
                 return;
             }
 
-            img.addEventListener('load', markReady, { once: true });
-            img.addEventListener('error', swapToFallback, { once: true });
+            img.addEventListener('load', function () {
+                clearTimer();
+                markReady();
+            }, { once: true });
+            img.addEventListener('error', function () {
+                clearTimer();
+                swapToFallback();
+            }, { once: true });
         });
     }
 
