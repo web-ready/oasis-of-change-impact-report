@@ -84,9 +84,6 @@ function fyBadge(fy) {
 
 function populatePartnerSection(partners) {
     var list = partners.slice().sort(function(a, b) {
-        if (!!a.isSharedWithWebReady !== !!b.isSharedWithWebReady) {
-            return a.isSharedWithWebReady ? 1 : -1;
-        }
         return (b.trees || 0) - (a.trees || 0);
     });
     var extIcon = '<span class="partner-link-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span>';
@@ -97,7 +94,7 @@ function populatePartnerSection(partners) {
             var tr = document.createElement('tr');
             tr.className = 'data-row border-b border-gray-50 transition-all duration-200';
             var sharedNote = p.isSharedWithWebReady
-                ? ' <span class="text-xs text-amber-700">[shared with ' + (p.sharedWithLabel || 'Web-Ready') + '; not additive]</span>'
+                ? ' <span class="text-xs text-amber-700">[overlaps ' + (p.sharedWithLabel || 'Web-Ready by Oasis of Change, Inc.') + '; not additive]</span>'
                 : '';
             var nameCell = p.profileUrl
                 ? '<a href="' + p.profileUrl + '" target="_blank" rel="noopener" class="partner-profile-link font-medium text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">' + p.name + extIcon + '</a>' + sharedNote
@@ -440,7 +437,7 @@ function loadLiveTreeCountsFromAPI() {
                     profileUrl: p.profileUrl,
                     co2Tonnes: co2Tonnes,
                     isSharedWithWebReady: p.isSharedWithWebReady === true,
-                    sharedWithLabel: p.sharedWithLabel || 'Web-Ready'
+                    sharedWithLabel: p.sharedWithLabel || 'Web-Ready by Oasis of Change, Inc.'
                 };
             });
 

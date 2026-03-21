@@ -60,7 +60,7 @@ const TreeData = {
         { id: "ecosearch",         name: "EcoSearch",                                  baseLocation: "Canada",        trees: 101, co2Tonnes: 5.05,  countries: "Madagascar" },
         { id: "denman-place-mall", name: "Denman Place Mall",                          baseLocation: "Canada",        trees: 2,   co2Tonnes: 0,     countries: "Tanzania, Kenya" },
         { id: "gabriel-dalton",    name: "Gabriel Dalton (CEO Personal Forest)",       baseLocation: "Canada",        trees: 2,   co2Tonnes: 0,     countries: "Tanzania" },
-        { id: "wesn",              name: "West End Seniors' Network (WESN)",           baseLocation: "Canada",        trees: 900, co2Tonnes: 45,    countries: "Multiple", isSharedWithWebReady: true, sharedWithLabel: "Oasis of Change (Web-Ready)" }
+        { id: "wesn",              name: "West End Seniors' Network (WESN)",           baseLocation: "Canada",        trees: 900, co2Tonnes: 45,    countries: "Kenya", isSharedWithWebReady: true, sharedWithLabel: "Web-Ready by Oasis of Change, Inc." }
     ],
 
 
@@ -145,7 +145,7 @@ const TreeData = {
         { id: "nepal-eden",      name: "Eden Reforestation Projects", country: "Nepal", type: "confirmed", source: "Tree-Nation", trees: 0, lat: 27.775871, lng: 84.103767, description: "Planted by Oasis of Change (historical) and Mittler Senior Technology (planting partner).", note: "Eden Reforestation Projects was completed after reaching full planting capacity. All trees planted through the project remain verified and tracked via Tree-Nation certificates.", noteLink: "/news#eden-completed", exactCoordinatesVerified: true },
         { id: "nepal-refoorest", name: "Refoorest", country: "Nepal", type: "supported", source: "Legacy Partner (Refoorest)", trees: 2000, lat: 28.3949, lng: 84.1240, description: "" },
         { id: "kenya-bore",   name: "Bore",                          country: "Kenya", type: "confirmed", source: "Tree-Nation", trees: 0, lat: -3.0939, lng: 39.918999, description: "Planted by Oasis of Change and Sustainable WWW (planting partner).", exactCoordinatesVerified: true },
-        { id: "kenya-aberdare", name: "Save the Aberdare Forest",    country: "Kenya", type: "confirmed", source: "Tree-Nation", trees: 0, lat: -0.39104, lng: 36.730492, description: "Planted by Sustainable WWW (planting partner).", exactCoordinatesVerified: true },
+        { id: "kenya-aberdare", name: "Save the Aberdare Forest",    country: "Kenya", type: "confirmed", source: "Tree-Nation", trees: 0, lat: -0.39104, lng: 36.730492, description: "Planted by Sustainable WWW and West End Seniors' Network (WESN) (planting partners).", exactCoordinatesVerified: true },
         { id: "kenya-swahili", name: "Swahili Coast Mangrove Restoration", country: "Kenya", type: "confirmed", source: "Tree-Nation", trees: 0, lat: -2.390773, lng: 40.782242, description: "Planted by Stanley Park Ecology Society and Sustainable WWW (planting partners).", exactCoordinatesVerified: true },
         { id: "kenya",       name: "Kenya",        country: "Kenya",       type: "supported",  source: "Legacy Partner (Tero)",     trees: 0,    lat: -0.0236,  lng: 37.9062,  description: "" },
         { id: "uganda-forest-gardens", name: "Forest Gardens – Mount Elgon Region", country: "Uganda", type: "confirmed", source: "Tree-Nation", trees: 0, lat: 0.826785, lng: 34.38345, description: "Planted by Sustainable WWW and Mittler Senior Technology (planting partners).", exactCoordinatesVerified: true },
@@ -195,7 +195,8 @@ const TreeData = {
             "Acacia mangium", "Schizolobium amazonicum", "Fagus sylvatica",
             "Mangifera indica", "Quercus petraea", "Prosopis laevigata",
             "Polylepis australis", "Pinus nigra", "Solanum aviculare",
-            "Prunus spinosa", "Pistacia lentiscus", "Rhizophora mucronata"
+            "Prunus spinosa", "Pistacia lentiscus", "Rhizophora mucronata",
+            "Persea americana"
         ],
         legacySpecies: {
             "Nepal":          ["Acacia katechu","Artocarpus heterophyllus","Azadirachta indica","Bauhinia variegata","Citrus limon","Coffea arabica","Ficus cunia","Ficus nemoralis","Leuceana leucocephala","Litsea monopetala","Moringa oleifera","Shorea robusta","Tectona grandis","Terminalia bellerica","Rhododendron arboreum"],
