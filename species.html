@@ -39,6 +39,177 @@
         .species-card { transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
         .tag { font-size: 10px; padding: 2px 8px; border-radius: 9999px; color: #111827; background-color: #F3F4F6; }
         .chip { font-size: 10px; padding: 2px 8px; border-radius: 9999px; color: #065F46; background-color: #ECFDF5; }
+        #species-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            align-items: start;
+        }
+        @media (min-width: 1024px) {
+            #species-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        .species-card--partner-verified {
+            grid-column: 1 / -1;
+            border-color: #CFE9E1;
+            background: #FFFFFF;
+        }
+        .partner-group-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.9rem;
+        }
+        @media (min-width: 1024px) {
+            .partner-group-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        .partner-group {
+            border: 1px solid #D1E5DD;
+            border-radius: 0.9rem;
+            overflow: hidden;
+            background: #FFFFFF;
+            box-shadow: 0 1px 6px rgba(2, 32, 24, 0.05);
+        }
+        .partner-group > summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 0.8rem 0.9rem;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #064E3B;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            background: #F9FAFB;
+            border-bottom: 1px solid #D1FAE5;
+        }
+        .partner-group > summary::-webkit-details-marker { display: none; }
+        .partner-group-count {
+            font-size: 0.7rem;
+            color: #065F46;
+            background: #FFFFFF;
+            border: 1px solid #A7F3D0;
+            border-radius: 9999px;
+            padding: 0.1rem 0.45rem;
+            white-space: nowrap;
+        }
+        .partner-species-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.55rem;
+            padding: 0.75rem;
+            max-height: 28rem;
+            overflow: auto;
+        }
+        .partner-species-item {
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            gap: 0.65rem;
+            align-items: center;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.75rem;
+            background: #F9FAFB;
+            padding: 0.5rem;
+        }
+        .partner-species-thumb {
+            width: 56px;
+            height: 56px;
+            border-radius: 0.6rem;
+            object-fit: cover;
+            border: 1px solid #D1D5DB;
+            background: #E5E7EB;
+        }
+        .partner-species-thumb-btn {
+            border: 0;
+            background: transparent;
+            padding: 0;
+            cursor: zoom-in;
+            border-radius: 0.6rem;
+        }
+        .partner-species-thumb-btn:focus-visible {
+            outline: 2px solid #10B981;
+            outline-offset: 2px;
+        }
+        .partner-species-thumb--fallback {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #065F46;
+            background: #ECFDF5;
+            border: 1px solid #A7F3D0;
+        }
+        .partner-species-name {
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: #0F172A;
+            line-height: 1.22;
+            overflow-wrap: anywhere;
+        }
+        .partner-species-meta {
+            font-size: 0.72rem;
+            color: #6B7280;
+            margin-top: 0.2rem;
+        }
+        .species-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .species-lightbox.hidden { display: none; }
+        .species-lightbox__backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.75);
+            backdrop-filter: blur(2px);
+        }
+        .species-lightbox__panel {
+            position: relative;
+            width: min(980px, 95vw);
+            max-height: 90vh;
+            overflow: auto;
+            border-radius: 1rem;
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 20px 60px rgba(2, 6, 23, 0.35);
+            padding: 1rem;
+        }
+        .species-lightbox__close {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.65rem;
+            border: 0;
+            background: transparent;
+            font-size: 1.6rem;
+            line-height: 1;
+            color: #6B7280;
+            cursor: pointer;
+        }
+        .species-lightbox__img {
+            width: 100%;
+            max-height: 56vh;
+            object-fit: contain;
+            border-radius: 0.75rem;
+            background: #F3F4F6;
+            border: 1px solid #E5E7EB;
+        }
+        .species-lightbox__body { margin-top: 0.9rem; }
+        .species-lightbox__title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0F172A;
+        }
+        .species-lightbox__desc {
+            margin-top: 0.4rem;
+            font-size: 0.92rem;
+            line-height: 1.45;
+            color: #374151;
+            white-space: pre-line;
+        }
     </style>
     <script src="assets/js/rewrite-links.js"></script>
     <!-- Accessibility AI Remediation powered by AccessibilityChecker.org -->
@@ -216,40 +387,7 @@
         </section>
 
         <section class="mb-8">
-            <div id="species-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="verified" data-country="verified">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-deep-forest">2025-2026 FY Verified</h3>
-                        <span class="tag" style="border-color:#BBF7D0;color:#166534;background-color:#F0FDF4">Verified</span>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <p><strong>Afrocarpus usambarensis</strong> (East African Yellowwood)<span class="block text-xs text-gray-400 mt-0.5">Tanzania</span></p>
-                        <p><strong>Pinus banksiana</strong> (Jack Pine)<span class="block text-xs text-gray-400 mt-0.5">Canada</span></p>
-                        <p><strong>Ceiba speciosa</strong> (Silk Floss Tree)<span class="block text-xs text-gray-400 mt-0.5">Bolivia</span></p>
-                        <p><strong>Acacia mangium</strong> (Mangium)<span class="block text-xs text-gray-400 mt-0.5">Nigeria</span></p>
-                        <p><strong>Schizolobium amazonicum</strong> (Paricá)<span class="block text-xs text-gray-400 mt-0.5">Brazil</span></p>
-                        <p><strong>Fagus sylvatica</strong> (European Beech)<span class="block text-xs text-gray-400 mt-0.5">Romania</span></p>
-                        <p><strong>Mangifera indica</strong> (Mango Tree)<span class="block text-xs text-gray-400 mt-0.5">Zimbabwe</span></p>
-                        <p><strong>Quercus petraea</strong> (Sessile Oak)<span class="block text-xs text-gray-400 mt-0.5">Ireland</span></p>
-                        <p><strong>Prosopis laevigata</strong> (Smooth Mesquite)<span class="block text-xs text-gray-400 mt-0.5">Mexico</span></p>
-                        <p><strong>Polylepis australis</strong> (Tabaquillo)<span class="block text-xs text-gray-400 mt-0.5">Argentina</span></p>
-                        <p><strong>Pinus nigra</strong> (Black Pine)<span class="block text-xs text-gray-400 mt-0.5">France</span></p>
-                        <p><strong>Solanum aviculare</strong> (Kangaroo Apple)<span class="block text-xs text-gray-400 mt-0.5">Australia</span></p>
-                        <p><strong>Prunus spinosa</strong> (Blackthorn)<span class="block text-xs text-gray-400 mt-0.5">United Kingdom</span></p>
-                        <p><strong>Pistacia lentiscus</strong> (Mastic Tree)<span class="block text-xs text-gray-400 mt-0.5">Spain</span></p>
-                    </div>
-                </div>
-
-                <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="verified" data-country="madagascar">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-deep-forest">2024-2025 FY Verified</h3>
-                        <span class="tag" style="border-color:#BBF7D0;color:#166534;background-color:#F0FDF4">Verified</span>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <p><strong>Rhizophora mucronata</strong> (Red Mangrove)<span class="block text-xs text-gray-400 mt-0.5">Madagascar</span></p>
-                    </div>
-                </div>
-
+            <div id="species-grid">
                 <div class="species-card bg-white rounded-lg p-5 border border-gray-200" data-category="preincorporation" data-country="preincorporation">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-deep-forest">Historical Plantings <a href="#footnote-1" class="align-super text-[10px] text-gray-400 hover:text-gray-600 no-underline" aria-label="Footnote 1">1</a></h3>
