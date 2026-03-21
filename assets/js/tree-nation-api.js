@@ -16,7 +16,8 @@ var TreeNationAPI = (function () {
         { slug: 'mittler-senior-technology',      label: 'Mittler Senior Technology',                  forestId: 702493 },
         { slug: 'ecosearch',                      label: 'EcoSearch',                                  forestId: 786435 },
         { slug: 'denman-place-mall',              label: 'Denman Place Mall',                          forestId: 954402 },
-        { slug: 'gabriel-dalton',                 label: 'Gabriel Dalton (CEO Personal Forest)', forestId: 955445 }
+        { slug: 'gabriel-dalton',                 label: 'Gabriel Dalton (CEO Personal Forest)',       forestId: 955445 },
+        { slug: 'west-end-seniors-network',       label: "West End Seniors' Network (WESN)",           forestId: 955812 }
     ];
 
     var PARTNER_SLUG_TO_ID = {
@@ -25,7 +26,8 @@ var TreeNationAPI = (function () {
         'mittler-senior-technology':    'mst',
         'ecosearch':                    'ecosearch',
         'denman-place-mall':            'denman-place-mall',
-        'gabriel-dalton':               'gabriel-dalton'
+        'gabriel-dalton':               'gabriel-dalton',
+        'west-end-seniors-network':     'wesn'
     };
 
     var API_BASE = 'https://tree-nation.com/api';

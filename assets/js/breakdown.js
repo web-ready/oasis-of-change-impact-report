@@ -10,6 +10,8 @@
         partners: [],
         legacyProjects: [],
         verifiedTotal: 0,
+        additivePartnerTotal: 0,
+        sharedPartnerTotal: 0,
         legacyTotal: 0,
         grandTotal: 0,
         isLive: false
@@ -42,6 +44,8 @@
                 countries: p.countries,
                 trees: p.trees,
                 co2Tonnes: p.co2Tonnes || 0,
+                isSharedWithWebReady: p.isSharedWithWebReady === true,
+                sharedWithLabel: p.sharedWithLabel || 'Web-Ready',
                 isLive: false
             };
         });
@@ -64,8 +68,15 @@
     }
 
     function recalculate() {
-        var partnerTrees = state.partners.reduce(function (sum, p) { return sum + (p.trees || 0); }, 0);
-        state.verifiedTotal = state.webReadyTrees + partnerTrees;
+        var additivePartnerTrees = state.partners.reduce(function (sum, p) {
+            return p.isSharedWithWebReady ? sum : sum + (p.trees || 0);
+        }, 0);
+        var sharedPartnerTrees = state.partners.reduce(function (sum, p) {
+            return p.isSharedWithWebReady ? sum + (p.trees || 0) : sum;
+        }, 0);
+        state.additivePartnerTotal = additivePartnerTrees;
+        state.sharedPartnerTotal = sharedPartnerTrees;
+        state.verifiedTotal = state.webReadyTrees + additivePartnerTrees;
         state.legacyTotal = state.legacyProjects.reduce(function (sum, p) { return sum + (p.trees || 0); }, 0);
         state.grandTotal = state.verifiedTotal + state.legacyTotal;
     }
@@ -127,7 +138,12 @@
         if (!grid) return;
         grid.innerHTML = '';
 
-        var sorted = state.partners.slice().sort(function (a, b) { return (b.trees || 0) - (a.trees || 0); });
+        var sorted = state.partners.slice().sort(function (a, b) {
+            if (a.isSharedWithWebReady !== b.isSharedWithWebReady) {
+                return a.isSharedWithWebReady ? 1 : -1;
+            }
+            return (b.trees || 0) - (a.trees || 0);
+        });
 
         sorted.forEach(function (p) {
             var slug = getSlugForPartner(p.id);
@@ -135,6 +151,9 @@
             var tagHtml = p.isLive
                 ? '<span class="live-tag"><span class="live-dot"></span> Live</span>'
                 : '<span class="cached-tag">Cached</span>';
+            if (p.isSharedWithWebReady) {
+                tagHtml += '<span class="shared-tag">Shared with ' + p.sharedWithLabel + '</span>';
+            }
 
             var nameHtml = profileUrl
                 ? '<a href="' + profileUrl + '" target="_blank" rel="noopener" class="profile-link font-semibold text-deep-forest hover:text-brand-green underline-offset-2 hover:underline">' + p.name + EXT_ICON + '</a>'
@@ -160,13 +179,16 @@
                 '</div>' +
                 '<div class="text-xs text-gray-400">Based in ' + (p.baseLocation || '—') + '</div>' +
                 co2Html +
+                (p.isSharedWithWebReady
+                    ? '<div class="text-xs text-amber-700 mt-1">Count is shown for transparency but not added to totals to avoid double counting.</div>'
+                    : '') +
                 countriesHtml;
 
             grid.appendChild(card);
         });
 
-        var partnerTotal = state.partners.reduce(function (sum, p) { return sum + (p.trees || 0); }, 0);
-        setText('bd-partner-subtotal', partnerTotal.toLocaleString());
+        setText('bd-partner-subtotal', state.additivePartnerTotal.toLocaleString());
+        setText('bd-shared-partner-subtotal', state.sharedPartnerTotal.toLocaleString());
     }
 
     function renderLegacy() {
@@ -200,16 +222,24 @@
         var partnersContainer = document.getElementById('eq-partners-rows');
         if (partnersContainer) {
             partnersContainer.innerHTML = '';
-            var sorted = state.partners.slice().sort(function (a, b) { return (b.trees || 0) - (a.trees || 0); });
+            var sorted = state.partners.slice().sort(function (a, b) {
+                if (a.isSharedWithWebReady !== b.isSharedWithWebReady) {
+                    return a.isSharedWithWebReady ? 1 : -1;
+                }
+                return (b.trees || 0) - (a.trees || 0);
+            });
             sorted.forEach(function (p) {
                 var row = document.createElement('div');
                 row.className = 'equation-row';
                 var co2Suffix = (typeof p.co2Tonnes === 'number' && p.co2Tonnes > 0)
                     ? ' <span class="text-xs text-gray-400 tabular-nums">(' + Math.round(p.co2Tonnes * 1000).toLocaleString() + ' kg CO\u2082)</span>'
                     : '';
+                var sharedSuffix = p.isSharedWithWebReady
+                    ? ' <span class="text-xs text-amber-700">[shared with ' + p.sharedWithLabel + '; excluded from total]</span>'
+                    : '';
                 row.innerHTML =
-                    '<span class="equation-operator">+</span>' +
-                    '<span class="equation-label text-gray-700">' + p.name + co2Suffix + '</span>' +
+                    '<span class="equation-operator">' + (p.isSharedWithWebReady ? '\u2261' : '+') + '</span>' +
+                    '<span class="equation-label text-gray-700">' + p.name + co2Suffix + sharedSuffix + '</span>' +
                     '<span class="equation-value font-medium text-deep-forest">' + (p.trees || 0).toLocaleString() + '</span>';
                 partnersContainer.appendChild(row);
             });
