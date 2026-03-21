@@ -30,6 +30,14 @@
         }
     ];
 
+    var PARTNER_GROUP_LABEL_TO_ID = {
+        'Web-Ready by Oasis of Change, Inc.': 'web-ready',
+        'Stanley Park Ecology Society (SPES)': 'spes',
+        'Mittler Senior Technology': 'mittler',
+        'Denman Place Mall': 'denman-place-mall',
+        'EcoSearch': 'ecosearch'
+    };
+
     function initializeSpeciesData() {
         if (typeof TreeData === 'undefined') {
             console.warn('[Oasis of Change Species] TreeData not loaded');
@@ -94,7 +102,28 @@
         card.setAttribute('data-category', 'verified');
         card.setAttribute('data-country', 'partner-verified');
 
-        var content = PARTNER_SPECIES_ID_GROUPS.map(function (group) {
+        var partnerTreesById = {};
+        if (typeof TreeData !== 'undefined' && typeof TreeData.getVerifiedPartners === 'function') {
+            TreeData.getVerifiedPartners().forEach(function (p) {
+                partnerTreesById[p.id] = p.trees || 0;
+            });
+        }
+
+        var sortedGroups = PARTNER_SPECIES_ID_GROUPS.slice().sort(function (a, b) {
+            // Keep Web-Ready pinned first, then sort by live partner tree totals.
+            if (a.groupLabel.indexOf('Web-Ready') !== -1) return -1;
+            if (b.groupLabel.indexOf('Web-Ready') !== -1) return 1;
+            var aId = PARTNER_GROUP_LABEL_TO_ID[a.groupLabel];
+            var bId = PARTNER_GROUP_LABEL_TO_ID[b.groupLabel];
+            var aTrees = aId && partnerTreesById[aId] ? partnerTreesById[aId] : 0;
+            var bTrees = bId && partnerTreesById[bId] ? partnerTreesById[bId] : 0;
+            if (aTrees !== bTrees) return bTrees - aTrees;
+
+            // Stable fallback when tree counts are unavailable/equal.
+            return (b.speciesIds.length || 0) - (a.speciesIds.length || 0);
+        });
+
+        var content = sortedGroups.map(function (group) {
             var groupSpeciesLines = group.speciesIds.map(function (sid) {
                 var sp = entriesById[sid];
                 var name = sp && sp.name ? sp.name : ('Species ID ' + sid);
