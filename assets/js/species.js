@@ -855,7 +855,7 @@
             var species = byTag[tagName] || [];
             return (
                 '<div class="focus-tag-summary-card">' +
-                    '<div class="flex items-start justify-between gap-3">' +
+                    '<div class="w-full flex items-center justify-between gap-3">' +
                         '<span class="focus-tag-summary-pill">' + tagName + '</span>' +
                         '<span class="text-lg font-semibold text-brand-green tabular-nums">' + species.length + '</span>' +
                     '</div>' +
