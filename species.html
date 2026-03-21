@@ -75,6 +75,54 @@
             width: auto;
             flex-shrink: 0;
         }
+        /* Verified card: mobile toolbar is a 2-column grid (see species.js). */
+        .partner-group-toolbar--verified-header .partner-accordion-btn {
+            width: 100%;
+            justify-content: center;
+            text-align: center;
+        }
+        @media (min-width: 640px) {
+            .partner-group-toolbar--verified-header .partner-accordion-btn {
+                width: auto;
+                justify-content: center;
+            }
+        }
+        .verified-partner-card__title {
+            word-break: normal;
+            overflow-wrap: anywhere;
+        }
+        .partner-group-title {
+            min-width: 0;
+            overflow-wrap: anywhere;
+            line-height: 1.25;
+        }
+        @media (max-width: 639.98px) {
+            .partner-group > summary {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            .partner-group-count {
+                align-self: flex-start;
+            }
+            .partner-species-list {
+                max-height: min(22rem, 52vh);
+                padding: 0.6rem;
+            }
+            .partner-species-item {
+                grid-template-columns: 48px 1fr;
+                gap: 0.5rem;
+                padding: 0.45rem;
+            }
+            .partner-species-thumb,
+            .partner-species-thumb-btn {
+                width: 48px !important;
+                height: 48px !important;
+            }
+            .partner-species-name {
+                font-size: 0.82rem;
+            }
+        }
         .partner-accordion-btn {
             font-size: 0.75rem;
             padding: 0.35rem 0.7rem;
@@ -107,6 +155,12 @@
         }
         .partner-accordion-btn svg {
             flex: 0 0 auto;
+        }
+        @media (max-width: 639.98px) {
+            .partner-accordion-btn {
+                font-size: 0.7rem;
+                padding: 0.4rem 0.45rem;
+            }
         }
         /* Verified Tree Planting skeleton: flat (no shimmer/gradient) */
         .species-card--partner-verified .skeleton--flat {
@@ -410,7 +464,7 @@
         </section>
 
         <section class="mb-8">
-            <div class="flex flex-wrap gap-2 justify-center">
+            <div class="species-filter-bar flex flex-wrap gap-2 justify-center">
                 <button class="filter-btn active px-4 py-2 rounded border border-brand-green bg-brand-green text-white text-sm focus:outline-none"
                     data-filter="all">
                     All Species
@@ -439,11 +493,8 @@
         </style>
 
         <section class="mb-8">
-            <div class="flex items-center justify-between flex-wrap gap-2">
-                <h2 class="text-base font-semibold text-deep-forest">About these categories</h2>
-                <span class="text-xs text-gray-500">Data snapshot &bull; February 2026</span>
-            </div>
-            <p class="mt-2 text-xs text-gray-600">Labels like Agroforestry, Mangrove, or Medicinal are provided by project partners to describe typical uses and habitats.</p>
+            <h2 class="text-base font-semibold text-deep-forest">About these categories</h2>
+            <p class="mt-2 text-xs text-gray-600 leading-relaxed">Labels like Agroforestry, Mangrove, or Medicinal are provided by project partners to describe typical uses and habitats.</p>
         </section>
 
         <section class="mb-8">
@@ -617,6 +668,7 @@
                             <li id="footnote-1" class="scroll-mt-20"><sup class="text-white/70 font-medium">1</sup> Certain species listed under Historical Plantings are attributed to planting activities prior to the legal incorporation of Oasis of Change, Inc. (Eden Reforestation Projects, Nepal; National Forest Recovery, United States).</li>
                             <li id="footnote-2" class="scroll-mt-20"><sup class="text-white/70 font-medium">2</sup> Legacy partner species data is reported by Refoorest and has not been independently verified by Oasis of Change, Inc.</li>
                         </ol>
+                        <p class="mt-3 pt-3 border-t border-white/10 text-xs text-white/55 leading-relaxed">Information on this page is current as of March 2026.</p>
                     </div>
                     <div class="ooc-footer__brand">
                         <p class="ooc-footer__tagline">Planting trees. Building futures.</p>

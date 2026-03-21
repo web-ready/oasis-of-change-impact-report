@@ -111,7 +111,7 @@
 
         var card = document.createElement('div');
         card.id = 'verified-partner-species-card';
-        card.className = 'species-card species-card--partner-verified bg-white rounded-lg p-5 border border-gray-200';
+        card.className = 'species-card species-card--partner-verified bg-white rounded-lg p-4 sm:p-5 border border-gray-200';
         card.setAttribute('data-category', 'verified');
         card.setAttribute('data-country', 'partner-verified');
 
@@ -172,19 +172,16 @@
             // Default: expand everything so we never render partially-hidden/white sections.
             var openAttr = ' open';
             return '<details class="partner-group' + openAttr + '">' +
-                '<summary><span>' + escapeHtml(group.groupLabel) + '</span><span class="partner-group-count">' + group.speciesIds.length + ' species</span></summary>' +
+                '<summary><span class="partner-group-title">' + escapeHtml(group.groupLabel) + '</span><span class="partner-group-count">' + group.speciesIds.length + ' species</span></summary>' +
                 '<div class="partner-species-list">' + groupSpeciesLines + '</div>' +
                 '</details>';
         }).join('');
 
         card.innerHTML =
-            // Title + toolbar: on small screens stack (full-width title). On sm+, use a row
-            // with flex-wrap so if the buttons need space, the toolbar wraps instead of
-            // squeezing the heading (which had sm:flex-1 + min-w-0 and forced "Planting"
-            // onto a second line while leaving empty space on line 1).
-            '<div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between mb-4">' +
-                '<h3 class="text-lg font-semibold text-deep-forest w-full sm:w-auto shrink-0">Verified Tree Planting</h3>' +
-                '<div class="partner-group-toolbar flex justify-end gap-2 shrink-0 sm:ml-auto">' +
+            // Mobile: stacked title + full-width 2-col toolbar. sm+: title and buttons on one row when space allows.
+            '<div class="verified-partner-card__header flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-x-4 mb-4">' +
+                '<h3 class="verified-partner-card__title text-lg font-semibold text-deep-forest leading-tight w-full min-w-0 sm:w-auto sm:shrink-0">Verified Tree Planting</h3>' +
+                '<div class="partner-group-toolbar partner-group-toolbar--verified-header w-full grid grid-cols-2 gap-2 sm:flex sm:w-auto sm:shrink-0 sm:justify-end sm:gap-2 sm:ml-auto">' +
                     '<button type="button" class="partner-accordion-btn partner-accordion-btn--expand" data-partner-accordion="expand-all">' +
                         '<span>Expand all</span>' +
                         '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
@@ -200,7 +197,7 @@
                     '</button>' +
                 '</div>' +
             '</div>' +
-            '<p class="text-xs text-gray-500 mb-3">Species for partner forests shown on the Breakdown page.</p>' +
+            '<p class="text-xs text-gray-500 mb-3 leading-relaxed">Species for partner forests shown on the Breakdown page.</p>' +
             '<div class="partner-group-grid">' + content + '</div>';
 
         var insertBefore = grid.firstElementChild;
@@ -222,7 +219,7 @@
 
         var card = document.createElement('div');
         card.id = 'verified-partner-species-skeleton';
-        card.className = 'species-card species-card--partner-verified skeleton-card';
+        card.className = 'species-card species-card--partner-verified skeleton-card p-4 sm:p-5';
         card.setAttribute('data-category', 'verified');
         card.setAttribute('data-country', 'partner-verified');
 
