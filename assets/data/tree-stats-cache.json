@@ -1,12 +1,12 @@
 {
-  "updatedAtIso": "2026-03-21T11:27:41.264Z",
-  "lastUpdated": "March 21st, 2026",
+  "updatedAtIso": "2026-03-22T11:28:28.112Z",
+  "lastUpdated": "March 22nd, 2026",
   "totals": {
     "webReadyTrees": 8987,
     "webReadyCo2Kg": 476000,
-    "verifiedTrees": 9660,
+    "verifiedTrees": 9662,
     "legacyTrees": 7338,
-    "totalTrees": 16998
+    "totalTrees": 17000
   },
   "partnersById": {
     "spes": {
@@ -26,12 +26,12 @@
       "co2Tonnes": 5.05
     },
     "denman-place-mall": {
-      "trees": 22,
-      "co2Tonnes": 1.1
+      "trees": 23,
+      "co2Tonnes": 1.2
     },
     "gabriel-dalton": {
-      "trees": 2,
-      "co2Tonnes": 0.1
+      "trees": 3,
+      "co2Tonnes": 0.15
     },
     "wesn": {
       "trees": 920,
