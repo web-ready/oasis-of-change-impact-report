@@ -1,12 +1,12 @@
 {
-  "updatedAtIso": "2026-03-24T11:49:19.116Z",
-  "lastUpdated": "March 24th, 2026",
+  "updatedAtIso": "2026-03-25T11:45:27.053Z",
+  "lastUpdated": "March 25th, 2026",
   "totals": {
     "webReadyTrees": 8987,
     "webReadyCo2Kg": 476000,
-    "verifiedTrees": 9663,
+    "verifiedTrees": 9664,
     "legacyTrees": 7338,
-    "totalTrees": 17001
+    "totalTrees": 17002
   },
   "partnersById": {
     "spes": {
@@ -18,8 +18,8 @@
       "co2Tonnes": 24.56
     },
     "mst": {
-      "trees": 124,
-      "co2Tonnes": 16.25
+      "trees": 125,
+      "co2Tonnes": 16.35
     },
     "ecosearch": {
       "trees": 101,
