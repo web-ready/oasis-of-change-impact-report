@@ -15,9 +15,9 @@ const TreeData = {
         totalTrees:    16998,   // fallback: verified + legacy
         // Species transparency model for homepage reporting:
         // combined "up to" figure = verified unique + legacy-only unique (no double-counting overlap).
-        verifiedSpeciesUnique: 46,
+        verifiedSpeciesUnique: 56,
         legacySpeciesOnlyUnique: 50,
-        combinedSpeciesUpTo: 96,
+        combinedSpeciesUpTo: 106,
         goalTrees:     1000000,
         goalYear:      2030
     },
@@ -204,7 +204,12 @@ const TreeData = {
             "Mangifera indica", "Quercus petraea", "Prosopis laevigata",
             "Polylepis australis", "Pinus nigra", "Solanum aviculare",
             "Prunus spinosa", "Pistacia lentiscus", "Rhizophora mucronata",
-            "Persea americana"
+            "Persea americana",
+            "Copaifera pubiflora", "Cinnamomum camphora", "Gmelina arborea",
+            "Albizia gummifera", "Croton megalocarpus", "Prunus africana",
+            "Anacardium occidentale", "Tamarindus indica", "Croton macrostachyus",
+            "Olea welwitschii", "Mimusops elengi", "Samanea saman",
+            "Pinus lambertiana", "Abies concolor", "Afzelia quanzensis"
         ],
         legacySpecies: {
             "Nepal":          ["Acacia katechu","Artocarpus heterophyllus","Azadirachta indica","Bauhinia variegata","Citrus limon","Coffea arabica","Ficus cunia","Ficus nemoralis","Leuceana leucocephala","Litsea monopetala","Moringa oleifera","Shorea robusta","Tectona grandis","Terminalia bellerica","Rhododendron arboreum"],
