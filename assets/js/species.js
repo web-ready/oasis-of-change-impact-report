@@ -78,6 +78,10 @@
             speciesIds: [3022, 1729, 2070, 727, 2071, 2208, 198, 2996, 1517, 730, 1730]
         },
         {
+            groupLabel: 'Sustainable WWW',
+            speciesIds: [729, 197, 2208, 727, 70, 10, 198, 2996, 3042, 1251, 3037, 3039, 3, 69, 2587, 2837, 1368, 2079, 3287, 203, 2831, 221, 3133, 3284]
+        },
+        {
             groupLabel: 'Denman Place Mall',
             speciesIds: [1730, 2924, 184]
         },
@@ -102,6 +106,7 @@
     var PARTNER_GROUP_LABEL_TO_ID = {
         'Web-Ready by Oasis of Change, Inc.': 'web-ready',
         'Stanley Park Ecology Society (SPES)': 'spes',
+        'Sustainable WWW': 'sustainable-www',
         'Mittler Senior Technology': 'mst',
         'Denman Place Mall': 'denman-place-mall',
         'West End Seniors\' Network (WESN)': 'wesn',

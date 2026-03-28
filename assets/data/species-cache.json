@@ -1,7 +1,7 @@
 {
   "note": "Generated snapshot for fast species-page hydration.",
-  "updatedAtIso": "2026-03-21T05:53:37.175Z",
-  "lastUpdated": "March 21st, 2026",
+  "updatedAtIso": "2026-03-28T20:05:40.000Z",
+  "lastUpdated": "March 28, 2026",
   "speciesById": {
     "70": {
       "average_natural_life_span": 100,
@@ -1611,6 +1611,671 @@
       "price": 5,
       "price_per_tonne": "250.00000000000000000000",
       "project_id": 425,
+      "stock": 0
+    },
+    "3": {
+      "id": 3,
+      "name": "Copaifera pubiflora",
+      "common_names": "Diesel tree, Kerosene tree, Aceite, White Copaiba, Copaiba",
+      "family": "Caesalpiniaceae",
+      "category": {
+        "id": 6,
+        "name": "Medicinal"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "height": "25,30",
+      "average_natural_life_span": 150,
+      "co2_offset": 2,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 20,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-7b2fc679d32b482c2e0a952dc577475e.jpg",
+      "particularities": "This tree is a natural for inclusion in the Sacred Seeds gardens, because it has a wide range of medicinal properties. The yellowish bark makes it readily identifiable, which explains its frequent ornamental use. It is also a majestic tree that catches the eye. The wood is prized for boat and dock building, because it has water resistant qualities. Besides its many medicinal uses, the tree's oil can be used for bio-fuel in combustion engines, causing its English and German name of Diesel tree. Historically, the bark provided a strong fiber frequently used to secure joists and beams in traditional housing. The oil served as a component in skin paints used by indigenous peoples.",
+      "planter_likes": "We like it for its multiple uses. The Aceite or Copaifera publiflora has a long history of medicinal use. The trunk when perforated will exude an oil that was used as a tetanus remedy, with 3 drops in a panela tea applied to the wound. The best oil flow is believed to be during the growing moon. Historic records show the oil being shipped to Europe as a tetanus remedy as late as 1905, packaged in 10 kilogram ceramic jars. At present the oil is still used for disinfecting and sealing wounds in the Orinoco River basin. In cattle the oil is also used to drive off flies from wounds. Other uses for the oil include a balsamic property that alleviates bronchitis symptoms, as a laxative, a stimulant, and a diuretic. It is also a powerful remedy for inflammations, including hemorrhoids, chronic diarrhea and bladder infections like cystitis.",
+      "price": 4,
+      "price_per_tonne": "200.00000000000000000000",
+      "project_id": 4,
+      "stock": 0
+    },
+    "10": {
+      "id": 10,
+      "name": "Cinnamomum camphora",
+      "common_names": "Camphre de Madagascar, baume anglais. Camphor laurel, Camphor tree, Camphorwood.",
+      "family": "Lauraceae",
+      "category": {
+        "id": 6,
+        "name": "Medicinal"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "height": "20,40",
+      "average_natural_life_span": 30,
+      "co2_offset": 16,
+      "co2_offset_period": "0,20",
+      "life_time_CO2": 320,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-573310788e94d.jpg",
+      "particularities": "Le Ravintsara est un arbre à croissance rapide qui peut atteindre entre 20 et 40 mètres de hauteur. Son feuillage est persistant, coriace, dense, et son tronc est épais.\r\nC’est un arbre au tronc vigoureux à écorce crevassée. Le Cinnamomum camphora se trouve souvent à l’altitude au environ de 3000 m. Cet arbre pousse bien dans les endroits à pluviométrie entre 1520 à 2540 mm. Il peut supporter pendant une courte période la basse température (environ 0°C). A Madagascar, la floraison se passe entre le mois d’Octobre et Novembre le mûrissement se passe entre le mois d’Avril et Mai. Concernant le sol, cet arbre n’a pas d’exigences particulières mais il pousse bien sur du sol fertile et du sol sablo – argileux.",
+      "planter_likes": "Il est planté pour l’huile essentielle extraite à partir de la distillation à la vapeur de ses feuilles. L’huile essentielle de Ravintsara (voulant dire « bonnes feuilles » en malgache) est en effet l’un des meilleurs antiviraux naturels, et elle est classée parmi les plantes phares en aromathérapie.Le Ravintsara est conseillé pour la grippe, le rhume, les bronchites et les sinusites.\r\nLe Ravintsara est une bonne alternative à l'activité agricole face au changement climatique. La plante n'a pas besoin de beaucoup d'eau pour se développer : l'insuffisance de pluie ne fait pas souffrir le ravintsara et elle demande de l’eau seulement au début de la plantation.\r\nEn raison des vertus miraculeuses du Ravintsara, il n’existe plus à l’état sauvage, et l’aire qu’elle occupe s’est depuis quelques années réduite au dixième de sa surface.",
+      "price": 6,
+      "price_per_tonne": "18.75000000000000000000",
+      "project_id": 5,
+      "stock": 0
+    },
+    "69": {
+      "id": 69,
+      "name": "Gmelina arborea",
+      "common_names": "Beechwood, Gmelina, Melina, Peuplier d Afrique, Gumar-Teak",
+      "family": "Lamiaceae",
+      "category": {
+        "id": 1,
+        "name": "Fast-growing"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "height": "15,30",
+      "average_natural_life_span": 50,
+      "co2_offset": 20,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 200,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-6107ff768b4c0.jpg",
+      "particularities": "Beechwood is a fast growing tree, excellent for carbon sequestration. The wood and lumber find numerous applications, from instruments to toys, and from carpentry to construction. Besides lumber, it is used for pulp and paper, a large number of traditional medicines and as a source of cattle fodder. The best feature of Gmelina Arborea is that it grows into a very hard timber that can be used in construction and when it is used in this way, its absorbed carbon is retained for a very long time. It is grown largely for its timber which is hard, strong and resistant to termite attack. It is mostly used in construction and furniture making but is also useful for providing good shade in the hot season.",
+      "planter_likes": "In Africa this timber is highly prized because of this durability which stems from its resistance to termites. Arborea is a fast growing tree which can cope with arid soils and does very well in this part of Kenya.",
+      "price": 1,
+      "price_per_tonne": "5.00000000000000000000",
+      "project_id": 6,
+      "stock": 31389
+    },
+    "197": {
+      "id": 197,
+      "name": "Albizia gummifera",
+      "common_names": "gummifera",
+      "family": "Mimoosoideae",
+      "category": {
+        "id": 5,
+        "name": "Agroforestry"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "height": "5,20",
+      "average_natural_life_span": 50,
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 50,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-fbf1f7be9e5e131d7029e39bd0e5c7fe.jpg",
+      "particularities": "Albizia gummifera is a nitrogen fixing tree that can be used for soil stabilization. It is a good shade tree. It is recommended for alley farming systems, mixed cropping, and for plantation crop plantings with coffee and bananas. \r\n\r\nIts wood is useful as a general purpose timber and is used to make beehives, mortars, water troughs, and boats.",
+      "planter_likes": "The best for agroforestry.",
+      "price": 0.35,
+      "price_per_tonne": "7.00000000000000000000",
+      "project_id": 41,
+      "stock": 0
+    },
+    "203": {
+      "id": 203,
+      "name": "Croton megalocarpus",
+      "common_names": "Croton / Croton tree; Musine (trade name); Mukinduri; Msenefu (Swahili)",
+      "family": "Euophorbiaceae",
+      "category": {
+        "id": 1,
+        "name": "Fast-growing"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "height": "15,35",
+      "average_natural_life_span": 70,
+      "co2_offset": 25,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 250,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-fc95d06ff443977a7cdf5ffc8d8df5dc.jpg",
+      "particularities": "A large East African pioneer tree with a broad, flat/spreading crown; monoecious (sometimes dioecious) with conspicuous but short-lived flowers and many woody capsules (“large-fruited”). Typically found/planted across East–Central Africa in forest margins, secondary forests, and farms (often retained as a canopy/shade tree).",
+      "planter_likes": "Fast establishment and strong multifunctionality: provides light shade, biomass for mulch, and supports bees (noted for strong-flavoured honey). Nuts/seeds can generate value chains (oil/biofuel and protein-rich by-products), making it attractive for farmer-led agroforestry.",
+      "price": 1,
+      "price_per_tonne": "4.00000000000000000000",
+      "project_id": 41,
+      "stock": 6234
+    },
+    "221": {
+      "id": 221,
+      "name": "Prunus africana",
+      "common_names": "African cherry, Red stinkwood, Pygeum, African plum",
+      "family": "Rosaceae",
+      "category": {
+        "id": 7,
+        "name": "Endangered"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "height": "10,40",
+      "average_natural_life_span": 100,
+      "co2_offset": 15,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 150,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-c03f50de4f054a1f6067d7d37a0c95d5.webp",
+      "particularities": "Medium to large evergreen tree native to Afromontane forests of sub-Saharan Africa, typically occurring at higher elevations; characterized by a straight bole, dark fissured bark, and small white flowers, with slow natural regeneration in undisturbed forests. \r\nThe demand for its bark has led to concerns about the sustainability of its populations in the wild. Efforts have been made to promote sustainable harvesting practices and protect the species.",
+      "planter_likes": "It is evergreen and easy o grow in favourable weather. The tree has local medicinal uses and provides a good quality wood mainly used locally. The tree can also be used for erosion control, shade, windbreak and as an ornamental.",
+      "price": 0.5,
+      "price_per_tonne": "3.33333333333330000000",
+      "project_id": 32,
+      "stock": 0
+    },
+    "227": {
+      "id": 227,
+      "name": "Anacardium occidentale",
+      "common_names": "Cashew, cashew nut.",
+      "family": "Anacardiaceae",
+      "category": {
+        "id": 2,
+        "name": "Nutritional"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "height": "5,15",
+      "average_natural_life_span": 20,
+      "co2_offset": 2,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 20,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-58358cd41ccc0.jpg",
+      "particularities": "Is an evergreen medium-sized tree that can reach up to 15 meters high at a slow rate; it has a spreading crown and a crooked trunk, that can reach from 20 to 40 cm in diameter. It’s native to South America and is widely grown in tropical areas. It grows in warm and humid climates, and it can adapt to very dry conditions. The cashew apple can be eaten raw or cooked, mixed in fruit salads, as juice, sweets, and jams. The bark contains 3-5% tannin and is used in the tanning industry; it also contains a resin that is used as indelible ink in marking and printing linens and cottons. Pulp from the wood can be used to fabricate cardboard boxes. The wood is popular for firewood and charcoal; it’s light in weight and fairly hard, used sometimes for general carpentry, furniture, and boxes.",
+      "planter_likes": "It’s cultivated for its nuts, in fact, the cashew apple is botanically considered to be a false fruit or pseudocarp and the nut is the fruit. The seeds kernels are extracted by shelling the roasted nuts.",
+      "price": 0.5,
+      "price_per_tonne": "25.00000000000000000000",
+      "project_id": 11,
+      "stock": 0
+    },
+    "1251": {
+      "id": 1251,
+      "name": "Tamarindus indica",
+      "common_names": "Tamarind, Puli, Chinch, Indian tamarind",
+      "family": "Fabaceae",
+      "category": {
+        "id": 2,
+        "name": "Nutritional"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "height": "12,30",
+      "average_natural_life_span": 100,
+      "co2_offset": 15,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 150,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-5c7f1e22fee7cf863ee0ce10f54f8b62.jpg",
+      "particularities": "Tamarindus indica is a long lived and beautiful fruiting tree. This very large tree has a wide geographical distribution. The name tamarind comes from the Arabic language, meaning date of India, despite the fact that this tree originated in Africa. The fruit is in bean pods, and its sweet and sour flavor makes it a favorite for candies, chutneys, refreshing drinks, and as a key ingredient in a number of ethnic cuisines. In fact, it is the basis for many steak sauces, such as HP or A-One. It also has many medicinal uses, besides being good for the soil. Tamarinds will grow in places with poor soils.",
+      "planter_likes": "The immature pods are used in a variety of ways, being eaten fresh mixed with spices, pickled like green mango, or added whole to soups, stews and sauce. When fully mature, the pods contain a sticky paste which can be eaten raw, used to make drinks, jellies, syrups etc, and, mixed with salt, is a favourite flavouring in the curries of India. The bark is astringent and tonic and its ash may be given internally as a digestive. Tamarind trees have deep root systems that can help prevent soil erosion and improve soil structure. It provides habitat and food for various bird and insect species, contributing to local biodiversity.",
+      "price": 2,
+      "price_per_tonne": "13.33333333333300000000",
+      "project_id": 200,
+      "stock": 2202
+    },
+    "1368": {
+      "id": 1368,
+      "name": "Croton megalocarpus",
+      "common_names": "Croton / Croton tree; Musine (trade name); Mukinduri; Msenefu (Swahili)",
+      "family": "Euphorbiaceae",
+      "category": {
+        "id": 1,
+        "name": "Fast-growing"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 2,
+        "name": "Semi-deciduous"
+      },
+      "foliage_type": {
+        "id": 2,
+        "name": "Semi-deciduous"
+      },
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "height": "15,35",
+      "average_natural_life_span": 70,
+      "co2_offset": 15,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 50,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-21ea5ed7bb8886c9b3aa3283bd6211a7.jpg",
+      "particularities": "A large East African pioneer tree with a broad, flat/spreading crown; monoecious (sometimes dioecious) with conspicuous but short-lived flowers and many woody capsules (“large-fruited”). Typically found/planted across East–Central Africa in forest margins, secondary forests, and farms (often retained as a canopy/shade tree).",
+      "planter_likes": "Fast establishment and strong multifunctionality: provides light shade, biomass for mulch, and supports bees (noted for strong-flavoured honey). Nuts/seeds can generate value chains (oil/biofuel and protein-rich by-products), making it attractive for farmer-led agroforestry.",
+      "price": 0.35,
+      "price_per_tonne": "7.00000000000000000000",
+      "project_id": 269,
+      "stock": 0
+    },
+    "2079": {
+      "id": 2079,
+      "name": "Croton megalocarpus",
+      "common_names": "Croton / Croton tree; Musine (trade name); Mukinduri; Msenefu (Swahili)",
+      "family": "Euphorbiaceae",
+      "category": {
+        "id": 1,
+        "name": "Fast-growing"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 2,
+        "name": "Semi-deciduous"
+      },
+      "foliage_type": {
+        "id": 2,
+        "name": "Semi-deciduous"
+      },
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "height": "15,35",
+      "average_natural_life_span": 70,
+      "co2_offset": 5,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 50,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-e31aa51aa0009951b26a04f97d8dba81.jpg",
+      "particularities": "A large East African pioneer tree with a broad, flat/spreading crown; monoecious (sometimes dioecious) with conspicuous but short-lived flowers and many woody capsules (“large-fruited”). Typically found/planted across East–Central Africa in forest margins, secondary forests, and farms (often retained as a canopy/shade tree).",
+      "planter_likes": "Fast establishment and strong multifunctionality: provides light shade, biomass for mulch, and supports bees (noted for strong-flavoured honey). Nuts/seeds can generate value chains (oil/biofuel and protein-rich by-products), making it attractive for farmer-led agroforestry.",
+      "price": 0.5,
+      "price_per_tonne": "10.00000000000000000000",
+      "project_id": 32,
+      "stock": 5947
+    },
+    "2587": {
+      "id": 2587,
+      "name": "Croton megalocarpus",
+      "common_names": "Croton / Croton tree; Musine (trade name); Mukinduri; Msenefu (Swahili)",
+      "family": "Euphorbiaceae",
+      "category": {
+        "id": 1,
+        "name": "Fast-growing"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 2,
+        "name": "Semi-deciduous"
+      },
+      "foliage_type": {
+        "id": 2,
+        "name": "Semi-deciduous"
+      },
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "height": "15,35",
+      "average_natural_life_span": 70,
+      "co2_offset": 15,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 150,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-4db30fd8b18d0f0246d6692eb494793f.jpg",
+      "particularities": "A large East African pioneer tree with a broad, flat/spreading crown; monoecious (sometimes dioecious) with conspicuous but short-lived flowers and many woody capsules (“large-fruited”). Typically found/planted across East–Central Africa in forest margins, secondary forests, and farms (often retained as a canopy/shade tree).",
+      "planter_likes": "Fast establishment and strong multifunctionality: provides light shade, biomass for mulch, and supports bees (noted for strong-flavoured honey). Nuts/seeds can generate value chains (oil/biofuel and protein-rich by-products), making it attractive for farmer-led agroforestry.",
+      "price": 2,
+      "price_per_tonne": "13.33333333333300000000",
+      "project_id": 574,
+      "stock": 34025
+    },
+    "2831": {
+      "id": 2831,
+      "name": "Mimusops elengi",
+      "common_names": "Spanish cherry, Indian medlar",
+      "family": "Sapotaceae",
+      "category": {
+        "id": 5,
+        "name": "Agroforestry"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "height": "10,25",
+      "average_natural_life_span": 100,
+      "co2_offset": 20,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 200,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-c28313054dac507905e90b2e8ebca66a.jpg",
+      "particularities": "Mimusops elengi, commonly known as the Spanish cherry, is an evergreen tree belonging to the family Sapotaceae. It is native to South and Southeast Asia. The tree thrives in tropical and subtropical regions, often found in forests, gardens, and parks. Mimusops elengi has a long history of use in traditional medicine, particularly in Ayurveda.  Due to its fragrant flowers and attractive appearance, Mimusops elengi is often planted as an ornamental tree. The fruit pulp is edible and can be eaten fresh or used in traditional recipes.",
+      "planter_likes": "The fruit can be eaten raw, preserved, or pickled. They are said to taste like dates but to be drier. The bark is astringent, bitter, and tonic. It is used in the treatment of diarrhea and dysentery. A decoction of the bark, sometimes mixed with the flowers, is used as a gargle to treat gum inflammation, toothache, etc. It is also used to treat gonorrhoea, snakebites, fevers, wounds, scabies, and eczema. The flowers are very aromatic and retain their fragrance for a long time after being dried. They are used as a filling in pillows, strung in garlands or necklaces for decoration, or placed in linen cupboards.",
+      "price": 2,
+      "price_per_tonne": "10.00000000000000000000",
+      "project_id": 200,
+      "stock": 0
+    },
+    "2837": {
+      "id": 2837,
+      "name": "Samanea saman",
+      "common_names": "Rain Tree",
+      "family": "Fabaceae",
+      "category": {
+        "id": 5,
+        "name": "Agroforestry"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 2,
+        "name": "Semi-deciduous"
+      },
+      "foliage_type": {
+        "id": 2,
+        "name": "Semi-deciduous"
+      },
+      "origin_type": {
+        "id": 2,
+        "name": "Exotic"
+      },
+      "height": "15,30",
+      "average_natural_life_span": 100,
+      "co2_offset": 15,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 150,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-79a96610958ddf97ab34b5004efa2ddf.jpg",
+      "particularities": "Samanea saman, commonly known as the rain tree or monkeypod tree, is a tropical tree native to Central and South America. It is a semi-deciduous tree. In regions with consistently warm temperatures, it may appear to be evergreen. However, in areas with more pronounced seasonal changes, it can shed some of its leaves seasonally. The massive canopy provides shade and habitat for various wildlife species. The tree can help with carbon sequestration, reducing erosion, and improving soil fertility.",
+      "planter_likes": "Children eat the pods, which contain a brownish, sticky, licorice-like, sweet-flavored pulp. A lemon-like fruit drink is also made from the pulp. A decoction of the inner bark and fresh leaves is used as a treatment for diarrhea. A brew of small sections of the bark is taken to treat stomachache. The tree is grown to provide shade for other crops, including cocoa, coffee, tea, and peppers. The bark is an abundant source of gums and resins. The seeds are chewed for treating a sore throat. It's native to Central and South America although it has been naturalized and is home to local biodiversity such as birds, insects, and rodents. Local communities utilize these plants majorly for fodder purposes.",
+      "price": 2,
+      "price_per_tonne": "13.33333333333300000000",
+      "project_id": 200,
+      "stock": 252
+    },
+    "3037": {
+      "id": 3037,
+      "name": "Pinus lambertiana",
+      "common_names": "Sugar pine",
+      "family": "Pinaceae",
+      "category": {
+        "id": 8,
+        "name": "Fauna protection"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "height": "30,80",
+      "average_natural_life_span": 250,
+      "co2_offset": 20,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 200,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-178c5153535cca873a5ca795e885d099.webp",
+      "particularities": "Pinus lambertiana, commonly known as the sugar pine, is a distinctive and remarkable tree species found in western North America. Sugar pines are commonly found at higher elevations in western North America, particularly in the mountainous regions of California, Oregon, and Washington. They thrive in montane and subalpine ecosystems. Sugar pines are known for their enormous size. They can grow to be one of the largest pine species in the world, with some individuals reaching heights of over 200 feet (60 meters) and diameters of 3 to 6 feet (1 to 2 meters). Sugar pines have a long life span, a slow to moderate growth rate, and their lifespan depends on factors such as environmental conditions and disease pressures.",
+      "planter_likes": "Sugar pine forests provide essential habitat for a variety of wildlife species, including birds, squirrels, and other mammals. The large cones are an important food source for many animals. Sugar pine seeds, often called \"pine nuts\", are the largest of any pine species. They are edible and have been an important food source for Indigenous peoples and wildlife in the region.",
+      "price": 1.5,
+      "price_per_tonne": "7.50000000000000000000",
+      "project_id": 698,
+      "stock": 844
+    },
+    "3039": {
+      "id": 3039,
+      "name": "Abies concolor",
+      "common_names": "White fir",
+      "family": "Pinaceae",
+      "category": {
+        "id": 8,
+        "name": "Fauna protection"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "height": "20,40",
+      "average_natural_life_span": 150,
+      "co2_offset": 20,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 200,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-8e15873ba700684dafcaf55ffdc1caa8.webp",
+      "particularities": "Abies concolor, commonly known as the white fir, is a large evergreen tree species native to western North America.  White firs are sizable trees that can reach heights of up to 160 feet (50 meters) or more. White firs are adaptable trees that can be found in a variety of habitats, including mixed conifer forests, montane, and subalpine regions, and sometimes even at lower elevations.  White fir wood is relatively lightweight and has been used for a variety of purposes, including construction lumber, plywood, and paper pulp.",
+      "planter_likes": "The seeds of white fir cones are an important food source for various wildlife species, including birds and mammals. The dense foliage also provides habitat and cover for animals. \r\nWhite fir forests contribute to overall biodiversity and ecosystem health, as they provide valuable wildlife habitat and play a role in nutrient cycling. \r\nWhite fir is a fire-adapted species. While the young trees are vulnerable to fire, mature white firs have thick bark that provides protection against wildfires.",
+      "price": 1.5,
+      "price_per_tonne": "7.50000000000000000000",
+      "project_id": 698,
+      "stock": 0
+    },
+    "3042": {
+      "id": 3042,
+      "name": "Ceriops tagal",
+      "common_names": "Yellow mangrove",
+      "family": "Rhizophoraceae",
+      "category": {
+        "id": 4,
+        "name": "Plant"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "height": "2,9",
+      "average_natural_life_span": 25,
+      "co2_offset": 2,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 20,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-c01d759b07a0ca2d9fed4d2af4c9442b.jpg",
+      "particularities": "Ceriops tagal is a small tree with a distinctive root growth. It´s a compact branched tree with thin breathing roots. It occurs in estuaries, swamps and lagoons in the coastal areas of the Indian Ocean from Africa to Asia, Australia and the Pacific. Ceriops tagal was once used as a source of tannins and dyes. Nowadays it is still used as a source of these products and as well as medicines, once numerous applications in traditional medicine have been reported. Ceriops tagal and other mangrove species support rich biodiversity by providing nesting and foraging grounds for various bird species and serving as a home to unique and often endangered flora and fauna.",
+      "planter_likes": "Ceriops tagal has an extensive root system that helps stabilize coastal soil and prevent erosion. Mangrove roots filter and trap sediments and pollutants, improving water quality in coastal areas. This benefits both marine ecosystems and communities relying on clean water sources. Planting Ceriops tagal can provide sustainable livelihoods for local communities. Mangroves are often used for traditional resource extraction activities, such as fishing and collecting honey and wood.",
+      "price": 0.5,
+      "price_per_tonne": "25.00000000000000000000",
+      "project_id": 704,
+      "stock": 166237
+    },
+    "3133": {
+      "id": 3133,
+      "name": "Afzelia quanzensis",
+      "common_names": "Pod Mahogany",
+      "family": "Fabaceae",
+      "category": {
+        "id": 5,
+        "name": "Agroforestry"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "height": "12,25",
+      "average_natural_life_span": 50,
+      "co2_offset": 10,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 100,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-17d7e2132ba82514be3bacbb52a480d1.jpg",
+      "particularities": "Pod mahogany is a medium to large, deciduous tree with a very spreading crown. Afzelia quanzensis is a species of tree native to sub-Saharan Africa. A plant of moist areas of the tropics, where it is found at elevations from near sea level to around 1,800 meters. The species has a symbiotic relationship with certain soil bacteria, forming nodules on the roots and fixing atmospheric nitrogen. Some of this nitrogen is utilized by the growing plant but some can also be used by other plants growing nearby.",
+      "planter_likes": "The tree produces valuable wood and has been extensively exploited for this. It also provides edible leaves, medicines, and beads for local use. It is planted as an ornamental in gardens and parks, where the crown provides good shade, and is also often used in bonsai. A good shade tree due to its short bole and large leaves.",
+      "price": 0.5,
+      "price_per_tonne": "5.00000000000000000000",
+      "project_id": 398,
+      "stock": 7552
+    },
+    "3284": {
+      "id": 3284,
+      "name": "Croton macrostachyus",
+      "common_names": "Woodland croton, Forest fever tree, Broad-leaved croton",
+      "family": "Euphorbiaceae",
+      "category": {
+        "id": 1,
+        "name": "Fast-growing"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "foliage_type": {
+        "id": 1,
+        "name": "Deciduous"
+      },
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "height": "10,25",
+      "average_natural_life_span": 50,
+      "co2_offset": 50,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 500,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-69d444af65b7313c1ea4c9fa8461184d.jpg",
+      "particularities": "Croton macrostachyus is a deciduous tree native to various regions in East and East-Central Africa. Croton macrostachyus is a versatile tree with ecological, medicinal, and economic significance in the regions where it occurs. Its adaptability to various environmental conditions makes it an important component of local ecosystems and a valuable resource for communities.",
+      "planter_likes": "The tree provides habitat and food for various wildlife species, including birds and insects. It also plays a role in soil stabilization and nutrient cycling. Various parts of Croton macrostachyus are used in traditional medicine. Croton macrostachyus is adaptable to various ecological zones, from arid and semi-arid areas to more humid regions. It can tolerate seasonal drought and is well-suited for reforestation and afforestation efforts.",
+      "price": 2,
+      "price_per_tonne": "4.00000000000000000000",
+      "project_id": 716,
+      "stock": 25861
+    },
+    "3287": {
+      "id": 3287,
+      "name": "Olea welwitschii",
+      "common_names": "African olive, Black ironwood",
+      "family": "Oleaceae",
+      "category": {
+        "id": 3,
+        "name": "Majestic"
+      },
+      "foliage": {
+        "deprecated": "This field will be removed in future versions, please use the field 'foliage_type'",
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "foliage_type": {
+        "id": 4,
+        "name": "Evergreen"
+      },
+      "origin_type": {
+        "id": 1,
+        "name": "Native"
+      },
+      "height": "10,25",
+      "average_natural_life_span": 50,
+      "co2_offset": 20,
+      "co2_offset_period": "0,10",
+      "life_time_CO2": 200,
+      "image": "https://treenation-uploads.s3.eu-central-1.amazonaws.com/specie-249349e728520ca93dda914a3b47786b.jpg",
+      "particularities": "Olea welwitschii, commonly known as the African olive or black ironwood, is a tree species found in tropical Africa, primarily in rainforests and montane forests across Central and East Africa, from Uganda and Kenya to Angola. Olea welwitschii provides habitat and food for various species of birds, insects, and mammals. Produces small, olive-like, bluish-black drupes that are edible for wildlife and assist in seed dispersal.",
+      "planter_likes": "Olea welwitschii is an ecologically significant tree that contributes to forest stability, carbon storage, and biodiversity. Its high-quality timber makes it valuable economically, but slow growth and habitat loss necessitate sustainable management to conserve this valuable species.",
+      "price": 1,
+      "price_per_tonne": "5.00000000000000000000",
+      "project_id": 716,
       "stock": 0
     }
   }
