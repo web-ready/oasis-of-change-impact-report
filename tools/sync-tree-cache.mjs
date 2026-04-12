@@ -43,6 +43,15 @@ async function fetchForest(id) {
   return res.json();
 }
 
+async function loadExistingCache() {
+  try {
+    const raw = await fs.readFile(OUT_PATH, 'utf8');
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
 async function run() {
   const fetched = await Promise.all(
     FORESTS.map(async (f) => ({ ...f, data: await fetchForest(f.id) }))
@@ -68,10 +77,14 @@ async function run() {
   const verifiedTrees = webReadyTrees + additivePartnerTrees;
   const totalTrees = verifiedTrees + LEGACY_TREES;
 
+  // Only update the "last updated" timestamp when tree counts actually change
+  const existing = await loadExistingCache();
+  const treesChanged = !existing || existing.totals?.totalTrees !== totalTrees;
+
   const now = new Date();
   const cache = {
-    updatedAtIso: now.toISOString(),
-    lastUpdated: toDisplayDate(now),
+    updatedAtIso: treesChanged ? now.toISOString() : existing.updatedAtIso,
+    lastUpdated: treesChanged ? toDisplayDate(now) : existing.lastUpdated,
     totals: {
       webReadyTrees,
       webReadyCo2Kg,
@@ -93,7 +106,11 @@ async function run() {
   await fs.mkdir(path.dirname(OUT_PATH), { recursive: true });
   await fs.writeFile(OUT_PATH, JSON.stringify(cache, null, 2) + '\n', 'utf8');
 
-  console.log('[sync-tree-cache] Updated', OUT_PATH);
+  if (treesChanged) {
+    console.log('[sync-tree-cache] Tree count changed — timestamp updated to', cache.lastUpdated);
+  } else {
+    console.log('[sync-tree-cache] No tree count change — kept timestamp at', cache.lastUpdated);
+  }
   console.log('[sync-tree-cache] Totals:', cache.totals);
 }
 
