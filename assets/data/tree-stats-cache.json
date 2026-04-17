@@ -1,12 +1,12 @@
 {
-  "updatedAtIso": "2026-04-16T12:00:38.532Z",
-  "lastUpdated": "April 16th, 2026",
+  "updatedAtIso": "2026-04-17T11:54:37.004Z",
+  "lastUpdated": "April 17th, 2026",
   "totals": {
-    "webReadyTrees": 8987,
-    "webReadyCo2Kg": 476000,
-    "verifiedTrees": 9666,
+    "webReadyTrees": 8988,
+    "webReadyCo2Kg": 476050,
+    "verifiedTrees": 9667,
     "legacyTrees": 7338,
-    "totalTrees": 17004
+    "totalTrees": 17005
   },
   "partnersById": {
     "spes": {
