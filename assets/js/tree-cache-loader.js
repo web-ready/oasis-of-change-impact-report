@@ -1,9 +1,12 @@
 /* Runtime cache hydration for static pages.
-   Loads pre-synced totals when available and applies them to TreeData before UI render. */
+   Tries the live serverless endpoint first (edge-cached, ~10 min freshness),
+   then falls back to the daily-cron-refreshed static JSON, then to the
+   compiled-in TreeData fallback. All three layers share the same payload shape. */
 var TreeDataCache = (function () {
     'use strict';
 
-    var CACHE_PATH = 'assets/data/tree-stats-cache.json';
+    var LIVE_PATH = '/api/trees';
+    var CACHE_PATH = '/assets/data/tree-stats-cache.json';
 
     function toNumber(value, fallback) {
         var n = Number(value);
@@ -38,25 +41,39 @@ var TreeDataCache = (function () {
         return true;
     }
 
-    function loadAndApply(treeData) {
-        if (typeof fetch === 'undefined') return Promise.resolve(false);
-        return fetch(CACHE_PATH, { cache: 'no-store' })
+    function fetchJson(url) {
+        return fetch(url, { cache: 'no-store' })
             .then(function (response) {
                 if (!response.ok) throw new Error('HTTP ' + response.status);
                 return response.json();
-            })
-            .then(function (cache) {
-                var applied = applyCacheToTreeData(cache, treeData);
-                if (applied && typeof console !== 'undefined' && console.log) {
-                    console.log('[TreeDataCache] Applied cached snapshot:', cache.lastUpdated || 'unknown date');
-                }
-                return applied;
-            })
-            .catch(function (err) {
+            });
+    }
+
+    function applyFrom(url, label, treeData) {
+        return fetchJson(url).then(function (cache) {
+            var applied = applyCacheToTreeData(cache, treeData);
+            if (applied && typeof console !== 'undefined' && console.log) {
+                console.log('[TreeDataCache] Applied ' + label + ' snapshot:', cache.lastUpdated || 'unknown date');
+            }
+            return applied;
+        });
+    }
+
+    function loadAndApply(treeData) {
+        if (typeof fetch === 'undefined') return Promise.resolve(false);
+
+        return applyFrom(LIVE_PATH, 'live API', treeData)
+            .catch(function (liveErr) {
                 if (typeof console !== 'undefined' && console.warn) {
-                    console.warn('[TreeDataCache] Cache not loaded, using bundled fallback:', err.message || err);
+                    console.warn('[TreeDataCache] Live API unavailable, falling back to static cache:', liveErr.message || liveErr);
                 }
-                return false;
+                return applyFrom(CACHE_PATH, 'static cache', treeData)
+                    .catch(function (cacheErr) {
+                        if (typeof console !== 'undefined' && console.warn) {
+                            console.warn('[TreeDataCache] Static cache not loaded, using bundled fallback:', cacheErr.message || cacheErr);
+                        }
+                        return false;
+                    });
             });
     }
 
