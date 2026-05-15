@@ -1,13 +1,14 @@
-/* Tree-Nation API (public forest counters):
-   - GET /api/forests/{id} -> { id, tree_count, co2_compensated_tons } (preferred when forest ID is known)
-   - GET /api/forests/{slug}/tree_counter -> { count }
-   TreeData remains the fallback source when API calls are unavailable. */
+/* Tree-Nation forest list and partner mapping.
+   Per-forest counts are hydrated into TreeData upstream by
+   tree-cache-loader.js (which prefers /api/trees, then the cron'd static
+   JSON, then bundled TreeData). This module just reshapes that hydrated
+   data into the { forests, totalTrees } envelope that dashboard.js and
+   breakdown.js consume — preserving their existing contract while
+   eliminating cross-origin requests that were CORS-blocked anyway. */
 var TreeNationAPI = (function () {
     'use strict';
 
     var LOG_PREFIX = '[TreeNationAPI]';
-
-    // ── Configuration ──────────────────────────────────
 
     var FORESTS = [
         { slug: 'web-ready',                      label: 'Oasis of Change (Web-Ready)',               forestId: 583310 },
@@ -30,128 +31,69 @@ var TreeNationAPI = (function () {
         'west-end-seniors-network':     'wesn'
     };
 
-    var API_BASE = 'https://tree-nation.com/api';
-    var requestOptions = { method: 'GET', redirect: 'follow' };
-
-    // ── Forest tree counts ─────────────────────────────
-
-    function fetchForestBySlug(slug) {
-        return fetch(API_BASE + '/forests/' + slug + '/tree_counter', requestOptions)
-            .then(function (response) {
-                if (!response.ok) throw new Error('Forest ' + slug + ': HTTP ' + response.status);
-                return response.json();
-            });
-    }
-
-    function fetchForestById(forestId) {
-        return fetch(API_BASE + '/forests/' + forestId, requestOptions)
-            .then(function (response) {
-                if (!response.ok) throw new Error('Forest ID ' + forestId + ': HTTP ' + response.status);
-                return response.json();
-            });
-    }
-
     function toNumberOrNull(value) {
         var num = Number(value);
         return Number.isFinite(num) ? num : null;
     }
 
-    function normalizeForestResult(forest, treeData, co2Data) {
-        var trees = toNumberOrNull(treeData && (treeData.tree_count != null ? treeData.tree_count : treeData.count));
-        var co2Tonnes = null;
+    function buildForestsFromTreeData(treeData) {
+        var partnersById = {};
+        (treeData.verifiedPartners || []).forEach(function (p) {
+            partnersById[p.id] = p;
+        });
 
-        if (co2Data && co2Data.co2_compensated_tons != null) {
-            co2Tonnes = toNumberOrNull(co2Data.co2_compensated_tons);
-        } else if (co2Data && co2Data.count != null) {
-            co2Tonnes = toNumberOrNull(co2Data.count);
-        } else if (treeData && treeData.co2_compensated_tons != null) {
-            co2Tonnes = toNumberOrNull(treeData.co2_compensated_tons);
-        }
+        return FORESTS.map(function (forest) {
+            var trees = 0;
+            var co2Tonnes = null;
 
-        return {
-            slug: forest.slug,
-            label: forest.label,
-            trees: trees || 0,
-            co2Tonnes: co2Tonnes
-        };
-    }
+            if (forest.slug === 'web-ready') {
+                trees = toNumberOrNull(treeData.totals && treeData.totals.webReadyTrees) || 0;
+                var co2Kg = toNumberOrNull(treeData.totals && treeData.totals.webReadyCo2Kg);
+                co2Tonnes = co2Kg != null ? co2Kg / 1000 : null;
+            } else {
+                var partnerId = PARTNER_SLUG_TO_ID[forest.slug];
+                var partner = partnerId ? partnersById[partnerId] : null;
+                if (partner) {
+                    trees = toNumberOrNull(partner.trees) || 0;
+                    co2Tonnes = toNumberOrNull(partner.co2Tonnes);
+                }
+            }
 
-    function fetchBySlugCounters(forest) {
-        // Keep slug fallback minimal to avoid noisy 422 responses on CO2 endpoints.
-        // Forest IDs are the preferred source for both tree and CO2 counters.
-        return fetchForestBySlug(forest.slug).then(function (treeData) {
-            return normalizeForestResult(forest, treeData, null);
+            return {
+                slug: forest.slug,
+                label: forest.label,
+                trees: trees,
+                co2Tonnes: co2Tonnes,
+                source: 'tree-data',
+                forestId: forest.forestId
+            };
         });
     }
 
     function fetchAllForests() {
-        if (typeof console !== 'undefined' && console.log) {
-            console.log(LOG_PREFIX, 'fetchAllForests start:', FORESTS.length, 'forests');
-        }
-
-        var promises = FORESTS.map(function (forest) {
-            var preferredFetch = forest.forestId
-                ? fetchForestById(forest.forestId)
-                    .then(function (summary) {
-                        var normalized = normalizeForestResult(forest, summary, summary);
-                        normalized.source = 'id';
-                        normalized.forestId = forest.forestId;
-                        return normalized;
-                    })
-                    .catch(function (idErr) {
-                        if (typeof console !== 'undefined' && console.warn) {
-                            console.warn(LOG_PREFIX, forest.slug, 'ID fetch failed, falling back to slug tree counter:', idErr.message || idErr);
-                        }
-                        return fetchBySlugCounters(forest).then(function (normalized) {
-                            normalized.source = 'slug';
-                            return normalized;
-                        });
-                    })
-                : fetchBySlugCounters(forest).then(function (normalized) {
-                    normalized.source = 'slug';
-                    return normalized;
-                });
-
-            return preferredFetch
-                .catch(function (err) {
-                    if (typeof console !== 'undefined' && console.warn) {
-                        console.warn(LOG_PREFIX, forest.slug, 'fetch failed:', err.message || err);
-                    }
-                    return { slug: forest.slug, label: forest.label, trees: 0, co2Tonnes: null, source: 'fallback-zero', error: err.message };
-                });
+        return new Promise(function (resolve, reject) {
+            try {
+                if (typeof TreeData === 'undefined' || !TreeData || !TreeData.totals) {
+                    throw new Error('TreeData unavailable when reshaping forest data');
+                }
+                var forests = buildForestsFromTreeData(TreeData);
+                var totalTrees = forests.reduce(function (sum, f) { return sum + (f.trees || 0); }, 0);
+                if (typeof console !== 'undefined' && console.log) {
+                    console.log(LOG_PREFIX, 'Built forests view from hydrated TreeData:', {
+                        forests: forests.length,
+                        totalTrees: totalTrees
+                    });
+                }
+                resolve({ forests: forests, totalTrees: totalTrees });
+            } catch (err) {
+                reject(err);
+            }
         });
-
-        return Promise.all(promises).then(aggregate);
-    }
-
-    function aggregate(results) {
-        var totalTrees = 0;
-        var idSources = 0;
-        var slugSources = 0;
-        var fallbackSources = 0;
-        results.forEach(function (r) { totalTrees += r.trees; });
-        results.forEach(function (r) {
-            if (r.source === 'id') idSources += 1;
-            else if (r.source === 'slug') slugSources += 1;
-            else fallbackSources += 1;
-        });
-
-        if (typeof console !== 'undefined' && console.log) {
-            console.log(LOG_PREFIX, 'fetchAllForests done:', {
-                forests: results.length,
-                totalTrees: totalTrees,
-                sources: { id: idSources, slug: slugSources, fallback: fallbackSources }
-            });
-        }
-
-        return { forests: results, totalTrees: totalTrees };
     }
 
     return {
         FORESTS:            FORESTS,
         PARTNER_SLUG_TO_ID: PARTNER_SLUG_TO_ID,
-        fetchForestBySlug:  fetchForestBySlug,
-        fetchForestById:    fetchForestById,
         fetchAllForests:    fetchAllForests
     };
 })();
