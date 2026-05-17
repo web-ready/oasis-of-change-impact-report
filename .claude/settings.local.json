@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "PowerShell(npm *)",
+      "PowerShell(Get-Command *)",
+      "PowerShell($ProgressPreference = 'SilentlyContinue'; $url = 'https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-windows-x64.exe'; $dest = \"$env:TEMP\\\\tailwindcss.exe\"; try { Invoke-WebRequest -Uri $url -OutFile $dest -UseBasicParsing -ErrorAction Stop; Write-Output \"Downloaded to: $dest\"; & $dest --help | Select-Object -First 5 } catch { Write-Output \"ERROR: $\\($_.Exception.Message\\)\" })",
+      "PowerShell($ProgressPreference = 'SilentlyContinue'; $url = 'https://github.com/tailwindlabs/tailwindcss/releases/download/v3.4.17/tailwindcss-windows-x64.exe'; $dest = \"$env:TEMP\\\\tailwindcss-v3.exe\"; try { Invoke-WebRequest -Uri $url -OutFile $dest -UseBasicParsing -ErrorAction Stop; Write-Output \"Downloaded to: $dest\"; & $dest --help 2>&1 | Select-Object -First 5 } catch { Write-Output \"ERROR: $\\($_.Exception.Message\\)\" })",
+      "Bash(sed -n '/tailwind\\\\.config/,/    <\\\\/script>/p' home.html)",
+      "Bash(sed -n '/tailwind\\\\.config/,/    <\\\\/script>/p' species.html)",
+      "PowerShell(& \"$env:TEMP\\\\tailwindcss-v3.exe\" -c tailwind.config.js -i assets/css/tailwind.src.css -o assets/css/tailwind.css --minify 2>&1)",
+      "Bash(git stash *)",
+      "Bash(python -m http.server 8765)",
+      "Bash(echo \"Server PID: $!\")",
+      "Bash(curl -sS -o /tmp/home.html -w \"HTTP %{http_code} | %{size_download} bytes\\\\n\" http://localhost:8765/home.html)",
+      "Bash(curl -sS -o /tmp/tw.css -w \"HTTP %{http_code} | %{size_download} bytes\\\\n\" http://localhost:8765/assets/css/tailwind.css)",
+      "Bash(curl -sS -o /dev/null -w \"HTTP %{http_code} | %{size_download} bytes\\\\n\" http://localhost:8765/assets/data/species-cache.json)",
+      "Bash(kill 1114)"
+    ]
+  }
+}

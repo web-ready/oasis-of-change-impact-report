@@ -65,7 +65,7 @@ function populateCertificates(filterValue) {
                         </svg>
                         <span>View PDF</span>
                     </a>
-                    <button class="download-btn" onclick="downloadCertificate('${certificate.id}')">
+                    <button class="download-btn" data-cert-id="${certificate.id}" data-action="download">
                         <svg xmlns="http://www.w3.org/2000/svg" class="download-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                         </svg>
@@ -92,12 +92,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     document.addEventListener('click', function(e) {
-        if (e.target.closest('.download-btn')) {
-            const button = e.target.closest('.download-btn');
-            button.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                button.style.transform = '';
-            }, 150);
+        const button = e.target.closest('.download-btn');
+        if (!button) return;
+
+        if (button.getAttribute('data-action') === 'download') {
+            const id = button.getAttribute('data-cert-id');
+            if (id) downloadCertificate(id);
         }
+
+        button.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            button.style.transform = '';
+        }, 150);
     });
 });

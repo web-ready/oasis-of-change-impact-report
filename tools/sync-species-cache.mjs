@@ -37,6 +37,48 @@ async function fetchSpeciesById(id) {
   return res.json();
 }
 
+// Defense in depth: even though species.js HTML-escapes every field before
+// rendering, we never want the committed cache file itself to hold HTML/JS
+// payloads. Strip anything ambiguous and length-cap each field.
+const MAX_TEXT = 2000;
+
+function sanitizeText(value) {
+  if (value == null) return '';
+  let s = String(value);
+  // Drop control characters, angle brackets, and any javascript:/data: prefixes.
+  s = s.replace(/[\x00-\x1f\x7f]/g, ' ');
+  s = s.replace(/[<>]/g, '');
+  s = s.replace(/\bjavascript\s*:/gi, '');
+  s = s.replace(/\bon[a-z]+\s*=/gi, '');
+  if (s.length > MAX_TEXT) s = s.slice(0, MAX_TEXT);
+  return s.trim();
+}
+
+function sanitizeHttpsUrl(value) {
+  if (!value) return '';
+  const s = String(value).trim();
+  // Only accept plain https URLs. Reject data:/javascript:/relative/auth-embedded.
+  if (!/^https:\/\/[^\s<>"'\\]+$/i.test(s)) return '';
+  if (s.length > 1024) return '';
+  return s;
+}
+
+function sanitizeSpecies(raw, id) {
+  if (!raw || typeof raw !== 'object') return null;
+  const out = {
+    id: Number(id) || null,
+    name: sanitizeText(raw.name),
+    common_names: sanitizeText(raw.common_names),
+    image: sanitizeHttpsUrl(raw.image),
+    particularities: sanitizeText(raw.particularities),
+    planter_likes: sanitizeText(raw.planter_likes)
+  };
+  if (raw.category && typeof raw.category === 'object') {
+    out.category = { name: sanitizeText(raw.category.name) };
+  }
+  return out;
+}
+
 async function run() {
   const uniq = Array.from(new Set(SPECIES_IDS));
   const now = new Date();
@@ -51,8 +93,9 @@ async function run() {
       const idx = cursor;
       cursor += 1;
       const sid = uniq[idx];
-      const species = await fetchSpeciesById(sid);
-      byId[sid] = species;
+      const raw = await fetchSpeciesById(sid);
+      const clean = sanitizeSpecies(raw, sid);
+      if (clean) byId[sid] = clean;
     }
   }
 

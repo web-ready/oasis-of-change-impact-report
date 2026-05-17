@@ -358,11 +358,21 @@ const GalleryData = {
         bindFilterEvents();
         bindModalEvents();
         bindFeaturedCards();
+        bindEmptyStateActions();
         initScrollAnimations();
         initLazyLoading();
         initHeroStats();
         updateResultsCount(GalleryData.items.length);
         document.getElementById("copyright-year").textContent = new Date().getFullYear();
+    }
+
+    function bindEmptyStateActions() {
+        document.addEventListener("click", function (e) {
+            var btn = e.target.closest('[data-action="reset-filters"]');
+            if (btn && typeof window.galleryResetFilters === "function") {
+                window.galleryResetFilters();
+            }
+        });
     }
 
     function bindFeaturedCards() {
@@ -411,7 +421,7 @@ const GalleryData = {
                 '<path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>' +
                 "</svg>" +
                 "<p>No projects match your current filters.</p>" +
-                '<button onclick="window.galleryResetFilters()" class="gallery-empty-reset">Clear filters</button>' +
+                '<button data-action="reset-filters" class="gallery-empty-reset">Clear filters</button>' +
                 "</div>";
             return;
         }

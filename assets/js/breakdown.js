@@ -364,7 +364,13 @@
             }, 3000);
         } else {
             el.className = 'api-badge api-badge--fallback';
-            el.innerHTML = '<span class="api-dot"></span> Showing cached data from ' + (TreeData ? TreeData.lastUpdated : 'last update');
+            // Build the badge with DOM APIs so that TreeData.lastUpdated
+            // (sourced from a generated cache file) cannot inject HTML.
+            while (el.firstChild) el.removeChild(el.firstChild);
+            var dot = document.createElement('span');
+            dot.className = 'api-dot';
+            el.appendChild(dot);
+            el.appendChild(document.createTextNode(' Showing cached data from ' + (TreeData ? TreeData.lastUpdated : 'last update')));
         }
     }
 
